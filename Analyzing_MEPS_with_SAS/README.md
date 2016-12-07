@@ -1,3 +1,3 @@
-# Analyzing MEPS with SA
+# Analyzing MEPS with SAS
 
-Coming soon!
+Example code coming soon!
