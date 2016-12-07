@@ -5,5 +5,3 @@ This repository is intended to provide example R code for those interested in an
 [loading_MEPS.R](loading_MEPS.R) provides example code to download MEPS files from <a href = "https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp" target = "_blank">the MEPS website</a>
 
 Additional examples of analyzing MEPS data are coming soon!
-
-Please email me at emily.mitchell@ahrq.hhs.gov if you find any bugs.
