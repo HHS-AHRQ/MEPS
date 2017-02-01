@@ -2,17 +2,12 @@
 title: "Analyzing MEPS data using R"
 author: "Emily Mitchell"
 date: "October 26, 2016"
-output:
-  word_document:
-    fig_height: 4
-    fig_width: 6.5
-    reference_docx: word-styles-reference.docx
-  pdf_document: default
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("C:/Users/emily.mitchell/Desktop/Programming/R Tutorials (mine)/MEPS with R")
+#setwd("C:/Users/emily.mitchell/Desktop/Programming/R Tutorials (mine)/MEPS with R")
 ```
 
 ##  LOADING MEPS DATA
@@ -30,7 +25,7 @@ To load MEPS data, we will use the **foreign** package, which allows R to read S
 # Option 1.  Download SAS transport file to computer
 1. Download and extract the SAS transport format zip file into 'C:/MEPS/SASDATA'
 
-![](Figures/Option1_Fig2.png)
+![](Analyzing_MEPS_with_R_files/Option1_Fig2.png)
 
 2. Use **read.xport** function to load file
 \
@@ -41,7 +36,7 @@ FYC2013 = read.xport("C:/MEPS/SASDATA/h163.ssp")
 1. Use **download.file** function to save zip file from MEPS website to temporary file **temp** (Hint: get file location by right-clicking ZIP link on website, then click 'Copy link address')
 2. Use **unzip** and **read.xport** to unzip and load SAS transport data.
 \
-```{r eval = FALSE}  
+```{r eval = TRUE}  
 download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip",
               temp <- tempfile())
     
@@ -66,8 +61,8 @@ unlink(temp) # Unlink to delete temporary file
 
 
 ```{r echo = FALSE}
-  # load fake data 
-load("C:/MEPS/FYC2013.RData")
+# load fake data  -- this was for editing purposes to save time
+# load("C:/MEPS/FYC2013.RData")
 
 #save(FYC2013,file = "C:/MEPS/FYC2013.RData")
 
