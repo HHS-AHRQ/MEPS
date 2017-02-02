@@ -39,15 +39,9 @@ Loading Packages
 
 To load MEPS data, we will use the foreign package, which allows R to read SAS transport files. The `install.packages` function only needs to be run once (to download the package from the internet and store it on your computer). Typically, this is done with the command `install.packages("foreign")`. The `library` function needs to be run every time you re-start your R session.
 
-
-<div class="panel panel-info">
-  <div class="panel-heading">
-  <h3 class="panel-title">Installing and Loading Packages</h3>
-  </div>
-  <div class="panel-body">
-  <p>Packages are sets of R functions that are downloaded and installed into the R system. A library only needs to be installed once per R installation. However, the `library` function needs to be run every time you re-start your R session to load the package. Packages are tailor made to help perform certain statistical, graphical, or data tasks. Since R is used by many analysts, it is typical for only some packages to be loaded for each analysis.</p>
-  </div>
-</div>
+| Installing and Loading Packages |
+| ------------------------------- |
+| Packages are sets of R functions that are downloaded and installed into the R system. A library only needs to be installed once per R installation. However, the `library` function needs to be run every time you re-start your R session to load the package. Packages are tailor made to help perform certain statistical, graphical, or data tasks. Since R is used by many analysts, it is typical for only some packages to be loaded for each analysis |
 
 
 ``` r
@@ -79,11 +73,9 @@ FYC2013 = read.xport("C:/MEPS/SASDATA/h163.ssp")
 ```
 The object **FYC2013** is now loaded into R's memory as a data frame. 
 
-<div class="alert alert-warning">
-  <h4>Warning!</h4>
-  <p>Be aware the directory names need to be separated by a slash ("/") or a double backslash ("\\\\"). This is because the single backslash is almost universally used as an string escape character in computing</p>
-</div>
-<br>
+| Warning! |
+| ------------------------------- |
+| Be aware the directory names need to be separated by a slash ("/") or a double backslash ("\\\\"). This is because the single backslash is almost universally used as an string escape character in computing |
 
 Load data directly from the MEPS website
 ----------------------------------------
@@ -113,6 +105,10 @@ unlink(temp) # Unlink to delete temporary file
   ![](images/copy_link_address.png)
   </div>
 </div>
+
+| Getting the stored file location |
+| ------------------------------- |
+| To get the file location for a specific dataset, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard.  ![](images/copy_link_address.png) |
 
 
 
@@ -194,6 +190,12 @@ FYC2013$any_expense = (FYC2013$TOTEXP13 > 0)*1
    <p>If we try to run `svymean`, we will get an error, since we added a variable to the data set after defining the survey design object, `mepsdsgn`. </p>
   </div>
 </div>
+
+| Adding data after defining design produces an error! |
+| ------------------------------- |
+| If we try to run `svymean`, we will get an error, since we added a variable to the data set after defining the survey design object, `mepsdsgn`.  |
+
+
 
 First, we need to re-run the code defining `mepsdsgn` to include the dataset with the new variable. Then we can run the `svymean` function, since the `mepsdsgn` object now includes the version of the dataset that contains the new variable `any\_expense`.
 
