@@ -1,42 +1,49 @@
 ---
 title: "Analyzing MEPS data using R"
-author: "Emily Mitchell"
-date: "October 26, 2016"
-output: github_document
+author: "Emily Mitchell and James Durant"
+date: "February 2, 2017"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 2
 ---
+
+
+
+
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 #setwd("C:/Users/emily.mitchell/Desktop/Programming/R Tutorials (mine)/MEPS with R")
 ```
 
-##  LOADING MEPS DATA
+#  Loading MEPS Data
 
-To load MEPS data, we will use the **foreign** package, which allows R to read SAS transport files. The **install.packages** function only needs to be run once (to download the package from the internet and store it on your computer). The **library** function needs to be run every time you re-start your R session.
+To load MEPS data, we will use the foreign package, which allows R to read SAS transport files. The `install.packages` function only needs to be run once (to download the package from the internet and store it on your computer). Typically, this is done with the command `install.packages("foreign")`.  The `library` function needs to be run every time you re-start your R session.
 
 
 ```{r eval = FALSE}
  install.packages("foreign")  # Only need to run this once
-```
-```{r}
  library(foreign)             # Run this every time you re-start R
 ```
 
-# Option 1.  Download SAS transport file to computer
+## Option 1.  Download SAS transport file to computer
 1. Download and extract the SAS transport format zip file into 'C:/MEPS/SASDATA'
-
-![](Analyzing_MEPS_with_R_files/Option1_Fig2.png)
-
+\
+![](images/Option1_Fig2.png)
+\
 2. Use **read.xport** function to load file
 \
 ```{r eval=FALSE}
 FYC2013 = read.xport("C:/MEPS/SASDATA/h163.ssp")
 ```
-# Option 2. Load data directly from website
+## Option 2. Load data directly from website
 1. Use **download.file** function to save zip file from MEPS website to temporary file **temp** (Hint: get file location by right-clicking ZIP link on website, then click 'Copy link address')
 2. Use **unzip** and **read.xport** to unzip and load SAS transport data.
 \
-```{r eval = TRUE}  
+```{r eval = FALSE}  
 download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip",
               temp <- tempfile())
     
@@ -48,24 +55,22 @@ unlink(temp) # Unlink to delete temporary file
 ```
 
 
-##  SURVEY PACKAGE
+#  Survey Package
 
-# Install and load **survey** package
+## Install and load **survey** package
 
 ```{r eval = FALSE}    
   install.packages("survey")
-``` 
-```{r message=FALSE}
   library(survey)
-```  
+``` 
 
 
-```{r echo = FALSE}
+```{r echo = FALSE, message = FALSE}
 # load fake data  -- this was for editing purposes to save time
-# load("C:/MEPS/FYC2013.RData")
-
-#save(FYC2013,file = "C:/MEPS/FYC2013.RData")
-
+ library(survey)
+ library(foreign)
+ load("C:/MEPS/FYC2013.RData")
+ #save(FYC2013,file = "C:/MEPS/FYC2013.RData")
 ```
 
 Functions available in **survey** package
@@ -77,7 +82,7 @@ Functions available in **survey** package
 * *svyglm*: generalized linear regression
 * *svyby*: run other survey functions by group
   
-# Define survey design object
+## Define survey design object
 ```{r}  
 mepsdsgn = svydesign(id = ~VARPSU, 
                      strata = ~VARSTR, 
@@ -88,15 +93,18 @@ mepsdsgn = svydesign(id = ~VARPSU,
 
 
 
-## EXPENSES PER PERSON, BY SOURCE OF PAYMENT [(TABLE 1)](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=): 
+# Expenses per person, by source of payment
 
-# Total population
+
+[(TABLE 1)](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=): 
+
+## Total population
 Total population = sum of survey weights (PERWT13F). We don't need to use a **svy** function here, since standard errors are not applicable to population control totals.
 ```{r}
 sum(FYC2013$PERWT13F) 
 ```
 
-# Total expenses
+## Total expenses
 To use the **svytotal** function, we can use the '$' notation to indicate that we want to use dataset FYC2013 and variable TOTEXP13.
 ```{r error=TRUE}
 svytotal(FYC2013$TOTEXP13, design = mepsdsgn)  
@@ -106,7 +114,7 @@ Or we can use the formula notation '~', to tell R that we want to look in the de
 svytotal(~TOTEXP13,design = mepsdsgn)  
 ```
   
-# Percent with expense
+## Percent with expense
 
 To calculate the percent of people with any expense, first create a new indicator variable for persons with an expense.
 ```{r error = TRUE} 
@@ -132,7 +140,7 @@ Now **svymean** will work, since the **mepsdsgn** object now includes the versio
 svymean(~any_expense,design = mepsdsgn) 
 ```
 
-# Mean and median, per person with an expense
+## Mean and median, per person with an expense
 
 To get expenses per person with an expense, we want to limit the dataset to persons that have an expense (i.e. any_expense == 1), using the **subset** function.
 
@@ -144,7 +152,7 @@ svymean(~TOTEXP13, design = subset(mepsdsgn,any_expense==1))
 svyquantile(~TOTEXP13, design = subset(mepsdsgn,any_expense==1),quantiles = 0.5) 
 ```
     
-# Distribution of expenses by source of payment
+## Distribution of expenses by source of payment
 For percent of total, we need to use the **svyratio** function, and specify the numerator and denominator. First, we'll estimate the percent for out-of-pocket payments (TOTSLF13).    
 ```{r error=TRUE}    
 svyratio(~TOTSLF13, denominator = ~TOTEXP13, design = mepsdsgn)
@@ -167,7 +175,9 @@ mepsdsgn <- update(mepsdsgn, tototh13 = TOTVA13 + TOTWCP13 + TOTOTH13)
 svyratio(~tototh13, denominator = ~TOTEXP13, design = mepsdsgn)
 ```
 
-## PERCENTAGE DISTRIBUTION BY TYPE OF SERVICE [(STAT BRIEF #491)](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml)
+# Percent distribution by type of service 
+
+[(STAT BRIEF #491)](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml)
 
 Now we will re-create the data table for Figure 1 in Stat brief #491: "National Health Care Expenses in the U.S. Civilian Noninstitutionalized Population, Distributions by Type of Service and Source of Payment, 2013" by Marie Stagnitti.
 
@@ -228,14 +238,14 @@ colnames(pct_matrix) = c("Total","<65 years","65+ years")
 print(pct_matrix)
 ```
 
-# Export table to Excel (csv file)
+## Export table to Excel (csv file)
 
 If we are happy with our table, now we can export it to a .csv file, to make a barchart in excel.
 ```{r error = TRUE}
 write.csv(pct_matrix,file = "C:/MEPS/figure1.csv")
 ```
   
-# Create a barplot in R
+## Create a barplot in R
 
 Alternatively, we can make a bar chart in R instead!
 
@@ -270,7 +280,7 @@ text(x = bp, y = t(pct_matrix)+2,
 
 
 
-## Saving your data
+# Saving your data
 
 We've done all of this hard work to load in the MEPS files and calculate estimates, so how can we save it to use next time?
 
@@ -291,9 +301,9 @@ load(file = "C:/MEPS/SASDATA/PUF_h163.RData")
 ```
 
 
-## BONUS MATERIAL
+# Bonus Material
 
-# svyby
+## svyby
 The **svyby** function can be used to calculate estimates for all levels of a subgroup. For instance, previously we calculated the percent distribution of expenditures by type of service separately for persons aged 65 and older and those under age 65, by using the **subset** function.
 
 ```{r error = TRUE}
@@ -311,7 +321,7 @@ svyby(~IPTEXP13+ambexp13,
         FUN = svyratio)
 ```
 
-# ggplot2
+## ggplot2
  
 ```{r eval=FALSE}  
 install.packages("reshape2")
