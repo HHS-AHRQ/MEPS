@@ -24,7 +24,8 @@ svytotal(~TOTEXP13,design = mepsdsgn)
 # To calculate the percent of people with any expense, first create a new indicator variable for persons with an expense:
 FYC2013$any_expense = (FYC2013$TOTEXP13 > 0)*1
 
-# Note: If we try to run 'svymean' now, we will get an error, since we added a variable to the data set after defining the survey design object, 'mepsdsgn'. First, re-run the code defining `mepsdsgn` to include the dataset with the new variable. Then run the 'svymean'
+# Note: If we try to run 'svymean' now, we will get an error, since we added a variable to the data set after defining the survey design
+# object, 'mepsdsgn'. First, re-run the code defining `mepsdsgn` to include the dataset with the new variable. Then run the 'svymean'
 # function, since the `mepsdsgn` object now includes the version of the dataset that contains the new variable.
 mepsdsgn <- svydesign(id = ~VARPSU, 
     strata = ~VARSTR, 
