@@ -4,10 +4,9 @@ This repository is intended to provide example R code for those interested in an
 
 [loading_MEPS.R](loading_MEPS.R) provides example code to download MEPS files from <a href = "https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp" target = "_blank">the MEPS website</a>
 
-example1.R provides example code to re-create some of the estimates from the [MEPS summary table for health expenditures in 2013](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=):
+[example1.R](example_1.R) provides example code to re-create some of the estimates from the [MEPS summary table for health expenditures in 2013](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=):
 
-
-example2.R provides example code to re-create the data and plot for Figure 1 in [Statistical brief \#491: "National Health Care Expenses in the U.S. Civilian Noninstitutionalized Population, Distributions by Type of Service and Source of Payment, 2013" by Marie Stagnitti](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
+[example2.R](example_2.R) provides example code to re-create the data and plot for Figure 1 in [Statistical brief \#491: "National Health Care Expenses in the U.S. Civilian Noninstitutionalized Population, Distributions by Type of Service and Source of Payment, 2013" by Marie Stagnitti](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
 
 
 ## Survey package in R
@@ -81,9 +80,7 @@ FYC2013 = read.xport("C:/MEPS/SASDATA/h163.ssp")
 ```
 The object **FYC2013** is now loaded into R's memory as a data frame. 
 
-| Warning! |
-| ------------------------------- |
-| Be aware the directory names need to be separated by a slash ("/") or a double backslash ("\\\\"). This is because the single backslash is almost universally used as an string escape character in computing |
+> Warning! Be aware the directory names need to be separated by a slash ("/") or a double backslash ("\\\\"). This is because the single backslash is almost universally used as an string escape character in computing
 
 ### Load data directly from the MEPS website
 
@@ -103,18 +100,5 @@ FYC2013 = read.xport(unzipped_file)
 unlink(temp) # Unlink to delete temporary file
 ```
 
-<div class="panel panel-info">
-  <div class="panel-heading">
-  <h3 class="panel-title">Getting the stored file location</h3>
-  </div>
-  <div class="panel-body">
-  <p>To get the file location for a specific dataset, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard. </p>
-  
-  ![](images/copy_link_address.png)
-  </div>
-</div>
-
-| Getting the stored file location |
-| ------------------------------- |
-| To get the file location for a specific dataset, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard.  ![](images/copy_link_address.png) |
+> To get the file location for a specific dataset, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard.  ![](images/copy_link_address.png) |
 
