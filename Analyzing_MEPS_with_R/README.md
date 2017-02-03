@@ -2,11 +2,12 @@
 
 This repository is intended to provide example R code for those interested in analyzing data from the Agency for Healthcare Research and Quality's (AHRQ) Medical Expenditure Panel Survey (MEPS).
 
-[loading_MEPS.R](loading_MEPS.R) provides example code to download MEPS files from <a href = "https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp" target = "_blank">the MEPS website</a>
-
-[example1.R](example_1.R) provides example code to re-create some of the estimates from the [MEPS summary table for health expenditures in 2013](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=):
-
-[example2.R](example_2.R) provides example code to re-create the data and plot for Figure 1 in [Statistical brief \#491: "National Health Care Expenses in the U.S. Civilian Noninstitutionalized Population, Distributions by Type of Service and Source of Payment, 2013" by Marie Stagnitti](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
+### [loading_MEPS.R](loading_MEPS.R) 
+example code to download MEPS files from <a href = "https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp" target = "_blank">the MEPS website</a>
+### [example1.R](example_1.R) 
+code to re-create some of the estimates from the [MEPS summary table for health expenditures in 2013](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=)
+### [example2.R](example_2.R) 
+code to re-create the data and plot for Figure 1 in [Statistical brief \#491: "National Health Care Expenses in the U.S. Civilian Noninstitutionalized Population, Distributions by Type of Service and Source of Payment, 2013" by Marie Stagnitti](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
 
 
 ## Survey package in R
