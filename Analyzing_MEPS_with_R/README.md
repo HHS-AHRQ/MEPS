@@ -100,5 +100,6 @@ FYC2013 = read.xport(unzipped_file)
 unlink(temp) # Unlink to delete temporary file
 ```
 
-> To get the file location for a specific dataset, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard.  ![](images/copy_link_address.png) |
+> To get the file location for a specific dataset, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard.  
+![](images/copy_link_address.png) 
 
