@@ -13,6 +13,8 @@ This repository provides example code for loading and analyzing data from the <b
 
 [Analyzing_MEPS_with_Stata](Analyzing_MEPS_with_Stata) has example code for analyzing MEPS data using Stata.
 
+> Note to User: The provided code is intended as examples of using common software packages to load and analyze MEPS data. AHRQ cannot certify the quality of your analysis. You are responsible for ensuring appropriateness of sample sizes, statistical significance, and overall reasonableness.
+
 ## Additional Survey Components
 MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees.  Includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size). 
 
