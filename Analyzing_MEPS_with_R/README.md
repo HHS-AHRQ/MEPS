@@ -97,9 +97,9 @@ mepsdsgn = svydesign(id = ~VARPSU,
                      data = FYC2013, 
                      nest = TRUE)  
 ```
-Once the survey design object is defined, population estimates can be calculated using functions from the suvey package. For example, the following code will calculate the average healthcare expenditure per person in 2013:
+Once the survey design object is defined, population estimates can be calculated using functions from the suvey package. For example, the following code will calculate total healthcare expenditures for the U.S. civilian non-institutionalized population in 2013:
 ```r
-svymean(~TOTEXP13,design = mepsdsgn)  
+svytotal(~TOTEXP13,design = mepsdsgn)  
 ```
 Additional examples of using these survey functions are provided in [example_1.R](example_1.R) and [example_2.R](example_2.R).
 
