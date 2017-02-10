@@ -1,30 +1,23 @@
 # Example 2: Re-producing estimates for Figure 1 of Stat brief #491
 
 # After downloading MEPS data (see 'loading_MEPS.R' for instructions to do so) define the survey object:
-
 mepsdsgn <- svydesign(id = ~VARPSU, 
     strata = ~VARSTR, 
     weights = ~PERWT13F, 
     data = FYC2013, 
     nest = TRUE)  
 
-
 # To get ambulatory (OB+OP) and home health/other expenditures, add variables to the mepsdsgn object.
-
 mepsdsgn <- update(mepsdsgn, 
                    ambexp13 = OBVEXP13 + OPTEXP13 + ERTEXP13,
                    hhexp13  = HHAEXP13 + HHNEXP13 + VISEXP13 + OTHEXP13)
 
-
 # Use svyratio to calculate percentage distribution of spending by type of service: 
-
 pct_TOS = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13, 
                    denominator = ~TOTEXP13, 
                    design = mepsdsgn)
 
-
 # Now do the same thing by age group (<65, 65+), using the `subset` function.
-
 pct_TOS_lt65 = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13, 
                     denominator = ~TOTEXP13, 
                     design = subset(mepsdsgn,AGELAST < 65))
@@ -33,29 +26,22 @@ pct_TOS_ge65 = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13,
                     denominator = ~TOTEXP13, 
                     design = subset(mepsdsgn,AGELAST >= 65))
 
-
 # Create output tables
-
 pct_matrix = cbind(coef(pct_TOS),
                    coef(pct_TOS_lt65),
                    coef(pct_TOS_ge65))*100
 print(pct_matrix)
 
-
 # Clean it up:
-
 rownames(pct_matrix) <- c("Hospital IP", "Ambulatory", "RX", "Dental", "HH and Other")
 colnames(pct_matrix) <- c("Total","<65 years","65+ years")
 print(pct_matrix)
 
 # Optional: output table to .csv file
-
 write.csv(pct_matrix,file = "C:/MEPS/figure1.csv")
 
 
-## Graphics - Barplot Example
-
-# Use barplot function to recreate Figure 1
+## Graphics - barplot Example to recreate Figure 1
 bp <- barplot(
   t(pct_matrix),        # 't' transposes the matrix, so the x-axis represents type of service 
   beside=TRUE,          # make bars side-by-side, not stacked
@@ -69,7 +55,6 @@ text(x = bp, y = t(pct_matrix)+2,  # add text labels to end points of bars
 
 
 ## Graphics example with ggplot2: 
-
 install.packages("reshape2")
 install.packages("ggplot2")
 
