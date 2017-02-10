@@ -1,4 +1,4 @@
-# Example 1: Re-producing estimates from MEPS summary table
+# Example 1: Re-producing estimates from MEPS summary table for 2013 data
 
 # After downloading MEPS data (see 'loading_MEPS.R' for instructions to do so) define the survey object:
 mepsdsgn <- svydesign(id = ~VARPSU, 
