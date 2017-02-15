@@ -1,0 +1,23 @@
+---
+title: "MEPS_puf_names"
+date: "February 14, 2017"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r echo=FALSE, message=FALSE}
+library(knitr)
+
+source("meps_puf_names.R")
+
+#update_files()
+
+load("meps_puf_names.Rdata")
+
+kable(out,format="markdown")
+
+```
