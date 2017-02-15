@@ -129,5 +129,11 @@ update_files <- function(){
 
 # Knit to markdown file
 
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("..")
 ezknit(file = "code/meps_puf_names.Rmd", out_dir = ".",keep_html = FALSE)
+
+# library(knitr); opts_knit$set(base.dir = "/code", output.dir = "..");
+# rmarkdown::render("meps_puf_names.Rmd")
+
 
