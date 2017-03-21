@@ -1,74 +1,74 @@
 
 ### Utilization and Expenditure Variables
 
-To complete the variable name in the following table, replace 'YY' with the two-digit code for year (e.g. '14' for data year 2014) and replace '**\*' with a particular source of payment category as identified in the '[Source of Payment Keys](#source-of-payment-keys)' table.
+To complete the variable name in the following table, replace 'yy' with the two-digit code for year (e.g. '14' for data year 2014) and replace '**\*' with a particular source of payment category as identified in the '[Source of Payment Keys](#source-of-payment-keys)' table.
 
 
 Health Service Category |Utilization Variable|Expenditure Variable
 ------------------------|--------------------|--------------------
-<b>All Health Services</b>|--|TOT**\*YY
+<b>All Health Services</b>|--|TOT**\*yy
  | | 
 <b>Office Based Visits</b>
-Total Office Based Visits (Physician + Non-physician + Unknown)|OBTOTVYY|OBV**\*YY
-&nbsp;&nbsp;&nbsp;Office Based Visits to Physicians|OBDRVYY|OBD**\*YY
-&nbsp;&nbsp;&nbsp;Office Based Visits to Non-Physicians|OBOTHVYY|OBO**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Visits to Chiropractors|OBCHIRYY|OBC**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Nurse or Nurse Practitioner Visits|OBNURSYY|OBN**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Visits to Optometrists|OBOPTOYY|OBE**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Physician Assistant Visits|OBASSTYY|OBA**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Physical or Occupational Therapist Visits|OBTHERYY|OBT**\*YY
+Total Office Based Visits (Physician + Non-physician + Unknown)|OBTOTVyy|OBV**\*yy
+&nbsp;&nbsp;&nbsp;Office Based Visits to Physicians|OBDRVyy|OBD**\*yy
+&nbsp;&nbsp;&nbsp;Office Based Visits to Non-Physicians|OBOTHVyy|OBO**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Visits to Chiropractors|OBCHIRyy|OBC**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Nurse or Nurse Practitioner Visits|OBNURSyy|OBN**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Visits to Optometrists|OBOPTOyy|OBE**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Physician Assistant Visits|OBASSTyy|OBA**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Based Physical or Occupational Therapist Visits|OBTHERyy|OBT**\*yy
  | | 
 <b>Hospital Outpatient Visits</b>
-Total Outpatient Visits (Physician + Non-physician + Unknown)|OPTOTVYY|--
-&nbsp;&nbsp;&nbsp;Sum of Facility and SBD Expenses|--|OPT**\*YY
-&nbsp;&nbsp;&nbsp;Facility Expense|--|OPF**\*YY
-&nbsp;&nbsp;&nbsp;SBD Expense|--|OPD**\*YY
-Outpatient Visits to Physicians|OPDRVYY|--
-&nbsp;&nbsp;&nbsp;Facility Expense|--|OPV**\*YY
-&nbsp;&nbsp;&nbsp;SBD Expense|--|OPS**\*YY
-Outpatient Visits to Non-Physicians|OPOTHVYY|--
-&nbsp;&nbsp;&nbsp;Facility Expense|--|OPO**\*YY
-&nbsp;&nbsp;&nbsp;SBD Expense|--|OPP**\*YY
+Total Outpatient Visits (Physician + Non-physician + Unknown)|OPTOTVyy|--
+&nbsp;&nbsp;&nbsp;Sum of Facility and SBD Expenses|--|OPT**\*yy
+&nbsp;&nbsp;&nbsp;Facility Expense|--|OPF**\*yy
+&nbsp;&nbsp;&nbsp;SBD Expense|--|OPD**\*yy
+Outpatient Visits to Physicians|OPDRVyy|--
+&nbsp;&nbsp;&nbsp;Facility Expense|--|OPV**\*yy
+&nbsp;&nbsp;&nbsp;SBD Expense|--|OPS**\*yy
+Outpatient Visits to Non-Physicians|OPOTHVyy|--
+&nbsp;&nbsp;&nbsp;Facility Expense|--|OPO**\*yy
+&nbsp;&nbsp;&nbsp;SBD Expense|--|OPP**\*yy
  | | 
 <b>Office Based Plus Outpatient Visits</b>
-Chiropractor Visits|AMCHIRYY|AMC**\*YY
-Ambulatory Nurse/Practitioner Visits|AMNURSYY|AMN**\*YY
-Ambulatory Optometrist Visits|AMOPTYY|AME**\*YY
-Physician Assistant Visits|AMASSTYY|AMA**\*YY
-Ambulatory PT/OT Therapy Visits|AMTHERYY|AMT**\*YY
+Chiropractor Visits|AMCHIRyy|AMC**\*yy
+Ambulatory Nurse/Practitioner Visits|AMNURSyy|AMN**\*yy
+Ambulatory Optometrist Visits|AMOPTyy|AME**\*yy
+Physician Assistant Visits|AMASSTyy|AMA**\*yy
+Ambulatory PT/OT Therapy Visits|AMTHERyy|AMT**\*yy
  | | 
 <b>Emergency Room Visits</b>
-Total Emergency Room Visits|ERTOTYY|--
-Sum of Facility and SBD Expenses|--|ERT**\*YY
-&nbsp;&nbsp;&nbsp;Facility Expense|--|ERF**\*YY
-&nbsp;&nbsp;&nbsp;SBD Expense|--|ERD**\*YY
+Total Emergency Room Visits|ERTOTyy|--
+Sum of Facility and SBD Expenses|--|ERT**\*yy
+&nbsp;&nbsp;&nbsp;Facility Expense|--|ERF**\*yy
+&nbsp;&nbsp;&nbsp;SBD Expense|--|ERD**\*yy
  | | 
 <b>Inpatient Hospital Stays (Including Zero Night Stays)</b>
-Total Inpatient Stays (Including Zero Night Stays)|IPDISYY| IPNGTDYY|--
-&nbsp;&nbsp;&nbsp;Sum of Facility and SBD Expenses|--|IPT**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facility Expense|--|IPF**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SBD Expense|--|IPD**\*YY
-Zero night Hospital Stays|IPZEROYY|--
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facility Expense|--|ZIF**\*YY
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SBD Expense|--|ZID**\*YY
+Total Inpatient Stays (Including Zero Night Stays)|IPDISyy| IPNGTDyy|--
+&nbsp;&nbsp;&nbsp;Sum of Facility and SBD Expenses|--|IPT**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facility Expense|--|IPF**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SBD Expense|--|IPD**\*yy
+Zero night Hospital Stays|IPZEROyy|--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facility Expense|--|ZIF**\*yy
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SBD Expense|--|ZID**\*yy
  | | 
 <b>Prescription Medicines</b>
- Total Prescription Medicines|RXTOTYY|RX**\*YY
+ Total Prescription Medicines|RXTOTyy|RX**\*yy
  | | 
 <b>Dental Visits</b>
-Total Dental Visits|DVTOTYY|DVT**\*YY
-&nbsp;&nbsp;&nbsp;General Dental Visits|DVGENYY|DVG**\*YY
-&nbsp;&nbsp;&nbsp;Orthodontist Visits|DVORTHYY|DVO**\*YY
+Total Dental Visits|DVTOTyy|DVT**\*yy
+&nbsp;&nbsp;&nbsp;General Dental Visits|DVGENyy|DVG**\*yy
+&nbsp;&nbsp;&nbsp;Orthodontist Visits|DVORTHyy|DVO**\*yy
  | | 
 <b>Home Health Care</b>
-Total Home Health Care|HHTOTDYY|--
-&nbsp;&nbsp;&nbsp;Agency Sponsored|HHAGDYY|HHA**\*YY
-&nbsp;&nbsp;&nbsp;Paid Independent Providers|HHINDDYY|HHN**\*YY
-&nbsp;&nbsp;&nbsp;Informal|HHINFDYY|--
+Total Home Health Care|HHTOTDyy|--
+&nbsp;&nbsp;&nbsp;Agency Sponsored|HHAGDyy|HHA**\*yy
+&nbsp;&nbsp;&nbsp;Paid Independent Providers|HHINDDyy|HHN**\*yy
+&nbsp;&nbsp;&nbsp;Informal|HHINFDyy|--
  | | 
 <b>Other Medical Expenses</b>
-Vision Aids|--|VIS**\*YY
-Other Medical Supplies and Equipment|--|OTH**\*YY
+Vision Aids|--|VIS**\*yy
+Other Medical Supplies and Equipment|--|OTH**\*yy
 
 
 ### Source of Payment Keys
