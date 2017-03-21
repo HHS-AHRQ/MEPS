@@ -90,6 +90,7 @@ Workers Compensation		| WCP
 Other Private	| 	OPR
 Other Public		| OPU
 Other Unclassified Sources		| OSR
+
 Collapsed Source of Payment Category	| **\*
 -------------------------------------|-----
 Private and TRICARE |	PRT
