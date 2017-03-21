@@ -1,0 +1,250 @@
+1                                           The SAS System            13:29 Tuesday, February 21, 2017
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M2) 
+      Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+NOTE: This session is executing on the X64_7PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 13.2
+
+NOTE: Additional host information:
+
+ X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+
+NOTE: SAS initialization used:
+      real time           0.31 seconds
+      cpu time            0.37 seconds
+      
+
+NOTE: AUTOEXEC processing beginning; file is \\source.ahrq.local\source\MEPS\_PUFINFO\autoexec.sas.
+
+local directory autoexec processed
+
+NOTE: AUTOEXEC processing completed.
+
+1          /**********************************************************************************
+2          
+3          PROGRAM:      C:\MEPS\SAS\PROG\EXERCISE6.SAS
+4          
+5          DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO POOL MEPS DATA FILES FROM DIFFERENT YEARS
+6                        THE EXAMPLE USED IS POPULATION AGE 26-30 WHO ARE UNINSURED BUT HAVE HIGH INCOME
+7          
+8          	         DATA FROM 2013 AND 2014 ARE POOLED.
+9          
+10                       VARIABLES WITH YEAR-SPECIFIC NAMES MUST BE RENAMED BEFORE COMBINING FILES.
+11                       IN THIS PROGRAM THE INSURANCE COVERAGE VARIABLES 'INSCOV13' AND 'INSCOV14' ARE RENAMED TO 'INSCOV'.
+12         
+13         	         SEE HC-036 (1996-2014 POOLED ESTIMATION FILE) FOR
+14                       INSTRUCTIONS ON POOOLING AND CONSIDERATIONS FOR VARIANCE
+15         	         ESTIMATION FOR PRE-2002 DATA.
+16         
+17         INPUT FILE:   (1) C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FULL-YEAR FILE)
+18         	            (2) C:\MEPS\SAS\DATA\H163.SAS7BDAT (2013 FULL-YEAR FILE)
+19         
+20         *********************************************************************************/;
+21         
+22         *LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+23         LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: \\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data
+24         
+25         OPTIONS NODATE;
+26         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+27         TITLE2 'EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)';
+28         
+29         PROC FORMAT;
+30         	
+30       !  VALUE POVCAT
+31             1 = '1 POOR/NEGATIVE'
+32             2 = '2 NEAR POOR'
+33             3 = '3 LOW INCOME'
+34             4 = '4 MIDDLE INCOME'
+35             5 = '5 HIGH INCOME'
+36             ;
+NOTE: Format POVCAT has been output.
+37         
+38         	
+38       !  VALUE INSF
+39         	1 = '1 ANY PRIVATE'
+40         	2 = '2 PUBLIC ONLY'
+41         	3 = '3 UNINSURED';
+NOTE: Format INSF has been output.
+42         
+43             VALUE AGE
+44             26-30='26-30'
+2                                                          The SAS System
+
+45             0-25='0-25'
+46             31-HIGH='31+';
+NOTE: Format AGE has been output.
+47         run;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+48         
+49         /* FREQUENCY OF 2013 */
+50         DATA YR1;
+51         	SET CDATA.H163 (KEEP= DUPERSID INSCOV13 PERWT13F VARSTR VARPSU POVCAT13 AGELAST TOTSLF13);
+52              IF PERWT13F>0;
+53         RUN;
+
+NOTE: There were 36940 observations read from the data set CDATA.H163.
+NOTE: The data set WORK.YR1 has 35068 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           22.68 seconds
+      cpu time            2.93 seconds
+      
+
+54         
+55         TITLE3 'UNWEIGHTED FREQUENCY FOR 2013 FY PERSONS WITH AGE 26-30';
+56         PROC FREQ DATA= YR1 (WHERE=(26 LE AGELAST LE 30));
+57         	TABLES POVCAT13*INSCOV13/ LIST MISSING ;
+58         	FORMAT INSCOV13 INSF.  POVCAT13 POVCAT.;
+59         RUN;
+
+NOTE: There were 2403 observations read from the data set WORK.YR1.
+      WHERE (AGELAST>=26 and AGELAST<=30);
+NOTE: The PROCEDURE FREQ printed page 1.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.12 seconds
+      
+
+60         
+61         /* FREQUENCY OF 2014*/
+62         DATA YR2;
+63         	SET CDATA.H171 (KEEP= DUPERSID INSCOV14 PERWT14F VARSTR VARPSU POVCAT14 AGELAST TOTSLF14);
+64              IF PERWT14F>0;
+65         run;
+
+NOTE: There were 34875 observations read from the data set CDATA.H171.
+NOTE: The data set WORK.YR2 has 33162 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           4.78 seconds
+      cpu time            1.99 seconds
+      
+
+66         
+67         TITLE3 'UNWEIGHTED FREQUENCY FOR 2014 FY PERSONS WITH AGE 26-30';
+68         PROC FREQ DATA= YR2 (WHERE=(26 LE AGELAST LE 30));
+69         	TABLES POVCAT14*INSCOV14/ LIST MISSING ;
+70         	FORMAT INSCOV14 INSF.  POVCAT14 POVCAT.;
+71         RUN;
+
+NOTE: There were 2311 observations read from the data set WORK.YR2.
+      WHERE (AGELAST>=26 and AGELAST<=30);
+NOTE: The PROCEDURE FREQ printed page 2.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+72         
+73         
+74         /* RENAME YEAR SPECIFIC VARIABLES PRIOR TO COMBINING FILES */
+75         DATA YR1X;
+76         	SET YR1 (RENAME=(INSCOV13=INSCOV PERWT13F=PERWT POVCAT13=POVCAT TOTSLF13=TOTSLF));
+77         RUN;
+
+NOTE: There were 35068 observations read from the data set WORK.YR1.
+NOTE: The data set WORK.YR1X has 35068 observations and 8 variables.
+3                                                          The SAS System
+
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+78         
+79         DATA YR2X;
+80         	SET YR2 (RENAME=(INSCOV14=INSCOV PERWT14F=PERWT POVCAT14=POVCAT TOTSLF14=TOTSLF));
+81         RUN;
+
+NOTE: There were 33162 observations read from the data set WORK.YR2.
+NOTE: The data set WORK.YR2X has 33162 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+82         
+83         DATA POOL;
+84              LENGTH INSCOV AGELAST POVCAT VARSTR VARPSU 8;
+85         	SET YR1X YR2X;
+86              POOLWT = PERWT/2 ;
+87         
+88              IF 26 LE AGELAST LE 30 AND POVCAT=5 AND INSCOV=3 THEN SUBPOP=1;
+89              ELSE SUBPOP=2;
+90         
+91              LABEL SUBPOP='POPULATION WITH AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME'
+92                    TOTSLF='TOTAL AMT PAID BY SELF/FAMILY';
+93         RUN;
+
+NOTE: There were 35068 observations read from the data set WORK.YR1X.
+NOTE: There were 33162 observations read from the data set WORK.YR2X.
+NOTE: The data set WORK.POOL has 68230 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+94         
+95         TITLE3 "CHECK MISSING VALUES ON THE COMBINED DATA";
+96         PROC MEANS DATA=POOL N NMISS;
+97         RUN;
+
+NOTE: Multiple concurrent threads will be used to summarize data.
+NOTE: There were 68230 observations read from the data set WORK.POOL.
+NOTE: The PROCEDURE MEANS printed page 3.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.12 seconds
+      
+
+98         
+99         TITLE3 'SUPPORTING CROSSTAB FOR THE CREATION OF THE SUBPOP FLAG';
+100        PROC FREQ DATA=POOL;
+101        	TABLES SUBPOP SUBPOP*AGELAST*POVCAT*INSCOV/ LIST MISSING ;
+102        	FORMAT  AGELAST AGE. ;
+103        RUN;
+
+NOTE: There were 68230 observations read from the data set WORK.POOL.
+NOTE: The PROCEDURE FREQ printed page 4.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+104        
+105        TITLE3 'WEIGHTED ESTIMATE ON TOTSLF FOR COMBINED DATA W/AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME';
+106        PROC SURVEYMEANS DATA=POOL NOBS MEAN STDERR;
+107        	STRATUM VARSTR ;
+108        	CLUSTER VARPSU ;
+109        	WEIGHT  POOLWT;
+110        	DOMAIN  SUBPOP;
+111        	VAR  TOTSLF;
+112        RUN;
+
+NOTE: Only one cluster in a stratum in domain POPULATION WITH AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME for variable(s) 
+      TOTSLF. The estimate of variance for TOTSLF will omit this stratum.
+4                                                          The SAS System
+
+NOTE: The PROCEDURE SURVEYMEANS printed pages 5-6.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.34 seconds
+      cpu time            0.32 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           29.89 seconds
+      cpu time            6.55 seconds
+      

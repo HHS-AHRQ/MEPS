@@ -1,0 +1,326 @@
+{\rtf1\ansi\deff0 
+{\fonttbl {\f0\fmodern Courier New;}
+{\colortbl;\red0\green0\blue0;}
+}
+\deflang1033\margl610\margr360\margt810\margb360\fs14\sl-180\slmult0\paperw12240\paperh15840
+1                                           The SAS System            13:44 Tuesday, February 21, 2017
+\par 
+\par NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA.
+\par NOTE: SAS (r) Proprietary Software 9.4 (TS1M2)
+\par       Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+\par NOTE: This session is executing on the X64_7PRO  platform.
+\par 
+\par 
+\par 
+\par NOTE: Updated analytical products:
+\par 
+\par       SAS/STAT 13.2
+\par 
+\par NOTE: Additional host information:
+\par 
+\par  X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+\par 
+\par NOTE: SAS initialization used:
+\par       real time           0.39 seconds
+\par       cpu time            0.46 seconds
+\par 
+\par 
+\par NOTE: AUTOEXEC processing beginning; file is \\\\source.ahrq.local\\source\\MEPS\\_PUFINFO\\autoexec.sas.
+\par 
+\par local directory autoexec processed
+\par 
+\par NOTE: AUTOEXEC processing completed.
+\par 
+\par 1          /**********************************************************************************
+\par 2
+\par 3          PROGRAM:      C:\\MEPS\\SAS\\PROG\\EXERCISE8.SAS
+\par 4
+\par 5          DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO POOL MEPS LONGITUDINAL DATA FILES FROM DIFFERENT PANELS
+\par 6                        THE EXAMPLE USED IS PANELS 15-17 POPULATION AGE 26-30 WHO ARE UNINSURED BUT HAVE HIGH INCOME IN THE FIRST
+\par 6        ! YEAR
+\par 7
+\par 8          	            DATA FROM PANELS 15, 16, AND 17 ARE POOLED.
+\par 9
+\par 10         INPUT FILE:   (1) C:\\MEPS\\SAS\\DATA\\H172.SAS7BDAT (PANEL 18 LONGITUDINAL FILE)
+\par 11         	            (2) C:\\MEPS\\SAS\\DATA\\H164.SAS7BDAT (PANEL 17 LONGITUDINAL FILE)
+\par 12         	            (3) C:\\MEPS\\SAS\\DATA\\H156.SAS7BDAT (PANEL 16 LONGITUDINAL FILE)
+\par 13
+\par 14         *********************************************************************************/;
+\par 15         *LIBNAME CDATA 'C:\\MEPS\\SAS\\DATA';
+\par 16         LIBNAME CDATA "\\\\programs.ahrq.local\\programs\\meps\\AHRQ4_CY2\\B_CFACT\\BJ001DVK\\Workshop_2017\\SAS\\Data";
+\par NOTE: Libref CDATA was successfully assigned as follows:
+\par       Engine:        V9
+\par       Physical Name: \\\\programs.ahrq.local\\programs\\meps\\AHRQ4_CY2\\B_CFACT\\BJ001DVK\\Workshop_2017\\SAS\\Data
+\par 17
+\par 18         OPTIONS NODATE;
+\par 19         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+\par 20         TITLE2 'EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 16, 17, 18)';
+\par 21
+\par 22         PROC FORMAT;
+\par 23         	
+\par 23       !  VALUE POVCAT
+\par 24             1 = '1 POOR/NEGATIVE'
+\par 25             2 = '2 NEAR POOR'
+\par 26             3 = '3 LOW INCOME'
+\par 27             4 = '4 MIDDLE INCOME'
+\par 28             5 = '5 HIGH INCOME'
+\par 29             ;
+\par NOTE: Format POVCAT has been output.
+\par 30
+\par 31         	
+\par 31       !  VALUE INSF
+\par 32         	-1= '-1 INAPPLICABLE'
+\par 33         	1 = '1 ANY PRIVATE'
+\par 34         	2 = '2 PUBLIC ONLY'
+\par 35         	3 = '3 UNINSURED';
+\par NOTE: Format INSF has been output.
+\par 36
+\par 37             VALUE AGE
+\par 38             26-30='26-30'
+\par 39             0-25, 31-HIGH='0-25, 31+';
+\par NOTE: Format AGE has been output.
+\par 40         run;
+\par 
+\par NOTE: PROCEDURE FORMAT used (Total process time):
+\par \page 2                                                          The SAS System
+\par 
+\par       real time           0.01 seconds
+\par       cpu time            0.01 seconds
+\par 
+\par 
+\par 41
+\par 42         /* RENAME YEAR SPECIFIC VARIABLES PRIOR TO COMBINING FILES */
+\par 43         DATA POOL;
+\par 44              LENGTH INSCOVY1 INSCOVY2 PANEL AGEY1X POVCATY1 VARSTR VARPSU 8;
+\par 45         	   SET CDATA.H156 (KEEP=DUPERSID INSCOVY1 INSCOVY2 LONGWT VARSTR VARPSU POVCATY1 AGEY1X PANEL)
+\par 46         	       CDATA.H164 (KEEP=DUPERSID INSCOVY1 INSCOVY2 LONGWT VARSTR VARPSU POVCATY1 AGEY1X PANEL)
+\par 47         	       CDATA.H172 (KEEP=DUPERSID INSCOVY1 INSCOVY2 LONGWT VARSTR VARPSU POVCATY1 AGEY1X PANEL);
+\par 48              POOLWT = LONGWT/3 ;
+\par 49
+\par 50              IF INSCOVY1=3 AND 26 LE AGEY1X LE 30 AND POVCATY1=5 THEN SUBPOP=1;
+\par 51              ELSE SUBPOP=2;
+\par 52
+\par 53              LABEL SUBPOP='POPULATION WITH AGE=26-30, UNINSURED, AND HIGH INCOME IN FIRST YEAR'
+\par 54                    INSCOVY2="HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2";
+\par 55         RUN;
+\par 
+\par NOTE: There were 18512 observations read from the data set CDATA.H156.
+\par NOTE: There were 17923 observations read from the data set CDATA.H164.
+\par NOTE: There were 16714 observations read from the data set CDATA.H172.
+\par NOTE: The data set WORK.POOL has 53149 observations and 11 variables.
+\par NOTE: DATA statement used (Total process time):
+\par       real time           27.95 seconds
+\par       cpu time            5.52 seconds
+\par 
+\par 
+\par 56
+\par 57         TITLE3 "CHECK MISSING VALUES ON THE COMBINED DATA";
+\par 58         PROC MEANS DATA=POOL N NMISS;
+\par 59         RUN;
+\par 
+\par NOTE: Multiple concurrent threads will be used to summarize data.
+\par NOTE: There were 53149 observations read from the data set WORK.POOL.
+\par NOTE: The PROCEDURE MEANS printed page 1.
+\par NOTE: PROCEDURE MEANS used (Total process time):
+\par       real time           0.23 seconds
+\par       cpu time            0.20 seconds
+\par 
+\par 
+\par 60
+\par 61         TITLE3 'SUPPORTING CROSSTAB FOR THE CREATION OF THE SUBPOP FLAG';
+\par 62         PROC FREQ DATA=POOL;
+\par 63         TABLES SUBPOP SUBPOP*PANEL SUBPOP*INSCOVY1*AGEY1X*POVCATY1/LIST MISSING;
+\par 64         FORMAT AGEY1X AGE. POVCATY1 POVCAT. INSCOVY1 INSF.;
+\par 65         RUN;
+\par 
+\par NOTE: There were 53149 observations read from the data set WORK.POOL.
+\par NOTE: The PROCEDURE FREQ printed page 2.
+\par NOTE: PROCEDURE FREQ used (Total process time):
+\par       real time           0.07 seconds
+\par       cpu time            0.07 seconds
+\par 
+\par 
+\par 66
+\par 67
+\par 68         TITLE3 'INSURANCE STATUS IN THE SECOND YEAR FOR THOSE W/ AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME IN THE FIRST
+\par 68       ! YEAR';
+\par 69         PROC SURVEYMEANS DATA=POOL NOBS MEAN STDERR;
+\par 70         	STRATUM VARSTR ;
+\par 71         	CLUSTER VARPSU ;
+\par 72         	WEIGHT  POOLWT;
+\par 73         	DOMAIN  SUBPOP;
+\par 74         	VAR  INSCOVY2;
+\par 75         	CLASS INSCOVY2;
+\par 76         	FORMAT INSCOVY2 INSF.;
+\par 77         RUN;
+\par 
+\par NOTE: Only one cluster in a stratum in domain POPULATION WITH AGE=26-30, UNINSURED, AND HIGH INCOME IN FIRST YEAR for variable(s)
+\par       INSCOVY2. The estimate of variance for INSCOVY2 will omit this stratum.
+\par NOTE: The PROCEDURE SURVEYMEANS printed pages 3-4.
+\par NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+\par       real time           0.43 seconds
+\par       cpu time            0.43 seconds
+\par 
+\par \page 3                                                          The SAS System
+\par 
+\par 
+\par 78
+\par 
+\par NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+\par NOTE: The SAS System used:
+\par       real time           30.15 seconds
+\par       cpu time            7.12 seconds
+\par 
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                1
+\par                            EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 16, 17, 18)
+\par                                              CHECK MISSING VALUES ON THE COMBINED DATA
+\par 
+\par                                                         The MEANS Procedure
+\par 
+\par                                                                                                                  N
+\par                  Variable    Label                                                                      N     Miss
+\par                  -------------------------------------------------------------------------------------------------
+\par                  INSCOVY1    HEALTH INSURANCE COVERAGE INDICATOR 11                                 53149        0
+\par                  INSCOVY2    HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2                          53149        0
+\par                  PANEL       PANEL NUMBER                                                           53149        0
+\par                  AGEY1X      AGE AS OF 12/31/11 (EDITED/IMPUTED)                                    53149        0
+\par                  POVCATY1    FAMLY INC AS % OF POVERTY LINE-CATEGO 11                               53149        0
+\par                  VARSTR      VARIANCE ESTIMATION STRATUM                                            53149        0
+\par                  VARPSU      VARIANCE ESTIMATION PSU                                                53149        0
+\par                  LONGWT      LONGITUDINAL WEIGHT - PANEL 16                                         53149        0
+\par                  POOLWT                                                                             53149        0
+\par                  SUBPOP      POPULATION WITH AGE=26-30, UNINSURED, AND HIGH INCOME IN FIRST YEAR    53149        0
+\par                  -------------------------------------------------------------------------------------------------
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                2
+\par                            EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 16, 17, 18)
+\par                                       SUPPORTING CROSSTAB FOR THE CREATION OF THE SUBPOP FLAG
+\par 
+\par                                                          The FREQ Procedure
+\par 
+\par                                 POPULATION WITH AGE=26-30, UNINSURED, AND HIGH INCOME IN FIRST YEAR
+\par 
+\par                                                                        Cumulative    Cumulative
+\par                                     SUBPOP    Frequency     Percent     Frequency      Percent
+\par                                     -----------------------------------------------------------
+\par                                          1          94        0.18            94         0.18
+\par                                          2       53055       99.82         53149       100.00
+\par 
+\par 
+\par                                                                             Cumulative    Cumulative
+\par                                 SUBPOP    PANEL    Frequency     Percent     Frequency      Percent
+\par                                 --------------------------------------------------------------------
+\par                                      1       16          31        0.06            31         0.06
+\par                                      1       17          41        0.08            72         0.14
+\par                                      1       18          22        0.04            94         0.18
+\par                                      2       16       18481       34.77         18575        34.95
+\par                                      2       17       17882       33.65         36457        68.59
+\par                                      2       18       16692       31.41         53149       100.00
+\par 
+\par 
+\par                                                                                                  Cumulative    Cumulative
+\par            SUBPOP           INSCOVY1       AGEY1X           POVCATY1    Frequency     Percent     Frequency      Percent
+\par            --------------------------------------------------------------------------------------------------------------
+\par                 1    3 UNINSURED        26-30        5 HIGH INCOME            94        0.18            94         0.18
+\par                 2    -1 INAPPLICABLE           -1                 -1         722        1.36           816         1.54
+\par                 2    1 ANY PRIVATE             -1    1 POOR/NEGATIVE          19        0.04           835         1.57
+\par                 2    1 ANY PRIVATE             -1    2 NEAR POOR              11        0.02           846         1.59
+\par                 2    1 ANY PRIVATE             -1    3 LOW INCOME             24        0.05           870         1.64
+\par                 2    1 ANY PRIVATE             -1    4 MIDDLE INCOME          29        0.05           899         1.69
+\par                 2    1 ANY PRIVATE             -1    5 HIGH INCOME            35        0.07           934         1.76
+\par                 2    1 ANY PRIVATE      0-25, 31+    1 POOR/NEGATIVE        1536        2.89          2470         4.65
+\par                 2    1 ANY PRIVATE      0-25, 31+    2 NEAR POOR             761        1.43          3231         6.08
+\par                 2    1 ANY PRIVATE      0-25, 31+    3 LOW INCOME           3281        6.17          6512        12.25
+\par                 2    1 ANY PRIVATE      0-25, 31+    4 MIDDLE INCOME        8760       16.48         15272        28.73
+\par                 2    1 ANY PRIVATE      0-25, 31+    5 HIGH INCOME         10114       19.03         25386        47.76
+\par                 2    1 ANY PRIVATE      26-30        1 POOR/NEGATIVE         124        0.23         25510        48.00
+\par                 2    1 ANY PRIVATE      26-30        2 NEAR POOR              58        0.11         25568        48.11
+\par                 2    1 ANY PRIVATE      26-30        3 LOW INCOME            283        0.53         25851        48.64
+\par                 2    1 ANY PRIVATE      26-30        4 MIDDLE INCOME         673        1.27         26524        49.90
+\par                 2    1 ANY PRIVATE      26-30        5 HIGH INCOME           628        1.18         27152        51.09
+\par                 2    2 PUBLIC ONLY             -1    1 POOR/NEGATIVE          59        0.11         27211        51.20
+\par                 2    2 PUBLIC ONLY             -1    2 NEAR POOR              15        0.03         27226        51.23
+\par                 2    2 PUBLIC ONLY             -1    3 LOW INCOME             33        0.06         27259        51.29
+\par                 2    2 PUBLIC ONLY             -1    4 MIDDLE INCOME          40        0.08         27299        51.36
+\par                 2    2 PUBLIC ONLY             -1    5 HIGH INCOME            27        0.05         27326        51.41
+\par                 2    2 PUBLIC ONLY      0-25, 31+    1 POOR/NEGATIVE        8005       15.06         35331        66.48
+\par                 2    2 PUBLIC ONLY      0-25, 31+    2 NEAR POOR            1785        3.36         37116        69.83
+\par                 2    2 PUBLIC ONLY      0-25, 31+    3 LOW INCOME           3151        5.93         40267        75.76
+\par                 2    2 PUBLIC ONLY      0-25, 31+    4 MIDDLE INCOME        2351        4.42         42618        80.19
+\par                 2    2 PUBLIC ONLY      0-25, 31+    5 HIGH INCOME           821        1.54         43439        81.73
+\par                 2    2 PUBLIC ONLY      26-30        1 POOR/NEGATIVE         342        0.64         43781        82.37
+\par                 2    2 PUBLIC ONLY      26-30        2 NEAR POOR              69        0.13         43850        82.50
+\par                 2    2 PUBLIC ONLY      26-30        3 LOW INCOME             98        0.18         43948        82.69
+\par                 2    2 PUBLIC ONLY      26-30        4 MIDDLE INCOME          66        0.12         44014        82.81
+\par                 2    2 PUBLIC ONLY      26-30        5 HIGH INCOME            20        0.04         44034        82.85
+\par                 2    3 UNINSURED               -1    1 POOR/NEGATIVE          48        0.09         44082        82.94
+\par                 2    3 UNINSURED               -1    2 NEAR POOR               5        0.01         44087        82.95
+\par                 2    3 UNINSURED               -1    3 LOW INCOME             16        0.03         44103        82.98
+\par                 2    3 UNINSURED               -1    4 MIDDLE INCOME          19        0.04         44122        83.02
+\par                 2    3 UNINSURED               -1    5 HIGH INCOME             8        0.02         44130        83.03
+\par                 2    3 UNINSURED        0-25, 31+    1 POOR/NEGATIVE        2508        4.72         46638        87.75
+\par                 2    3 UNINSURED        0-25, 31+    2 NEAR POOR             732        1.38         47370        89.13
+\par                 2    3 UNINSURED        0-25, 31+    3 LOW INCOME           1949        3.67         49319        92.79
+\par                 2    3 UNINSURED        0-25, 31+    4 MIDDLE INCOME        2051        3.86         51370        96.65
+\par                 2    3 UNINSURED        0-25, 31+    5 HIGH INCOME           687        1.29         52057        97.95
+\par                 2    3 UNINSURED        26-30        1 POOR/NEGATIVE         354        0.67         52411        98.61
+\par                 2    3 UNINSURED        26-30        2 NEAR POOR             133        0.25         52544        98.86
+\par                 2    3 UNINSURED        26-30        3 LOW INCOME            299        0.56         52843        99.42
+\par                 2    3 UNINSURED        26-30        4 MIDDLE INCOME         306        0.58         53149       100.00
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                3
+\par                            EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 16, 17, 18)
+\par         INSURANCE STATUS IN THE SECOND YEAR FOR THOSE W/ AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME IN THE FIRST YEAR
+\par 
+\par                                                      The SURVEYMEANS Procedure
+\par 
+\par                                                             Data Summary
+\par 
+\par                                                 Number of Strata                 165
+\par                                                 Number of Clusters               369
+\par                                                 Number of Observations         53149
+\par                                                 Sum of Weights             319121123
+\par 
+\par 
+\par                                                       Class Level Information
+\par 
+\par  CLASS
+\par  Variable    Label                                              Levels    Values
+\par 
+\par  INSCOVY2    HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2           4    -1 INAPPLICABLE 1 ANY PRIVATE 2 PUBLIC ONLY 3 UNINSURED
+\par 
+\par 
+\par                                                              Statistics
+\par 
+\par                                                                                                                        Std Error
+\par     Variable    Level              Label                                                       N            Mean         of Mean
+\par     ----------------------------------------------------------------------------------------------------------------------------
+\par     INSCOVY2    -1 INAPPLICABLE    HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2             512        0.010224        0.000694
+\par                 1 ANY PRIVATE      HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2           26984        0.639916        0.007740
+\par                 2 PUBLIC ONLY      HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2           17263        0.231158        0.005570
+\par                 3 UNINSURED        HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2            8390        0.118702        0.003852
+\par     ----------------------------------------------------------------------------------------------------------------------------
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                4
+\par                            EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 16, 17, 18)
+\par         INSURANCE STATUS IN THE SECOND YEAR FOR THOSE W/ AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME IN THE FIRST YEAR
+\par 
+\par                                                      The SURVEYMEANS Procedure
+\par 
+\par                                                      Domain Statistics in SUBPOP
+\par 
+\par POPULATION
+\par       WITH
+\par AGE=26-30,
+\par UNINSURED,
+\par   AND HIGH
+\par  INCOME IN                                                                                                                 Std Error
+\par FIRST YEAR   Variable   Level             Label                                                      N           Mean        of Mean
+\par ------------------------------------------------------------------------------------------------------------------------------------
+\par          1   INSCOVY2   -1 INAPPLICABLE   HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2              0              0              0
+\par                         1 ANY PRIVATE     HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2             17       0.172932       0.053056
+\par                         2 PUBLIC ONLY     HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2              5       0.064069       0.035329
+\par                         3 UNINSURED       HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2             72       0.762999       0.060304
+\par          2   INSCOVY2   -1 INAPPLICABLE   HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2            512       0.010243       0.000695
+\par                         1 ANY PRIVATE     HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2          26967       0.640779       0.007773
+\par                         2 PUBLIC ONLY     HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2          17258       0.231467       0.005582
+\par                         3 UNINSURED       HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2           8318       0.117510       0.003834
+\par ------------------------------------------------------------------------------------------------------------------------------------
+}

@@ -1,0 +1,171 @@
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                1
+                              EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)
+                                      UNWEIGHTED FREQUENCY FOR 2013 FY PERSONS WITH AGE 26-30
+
+                                                         The FREQ Procedure
+
+                                                                                    Cumulative    Cumulative
+                              POVCAT13         INSCOV13    Frequency     Percent     Frequency      Percent
+                       -------------------------------------------------------------------------------------
+                       1 POOR/NEGATIVE    1 ANY PRIVATE          66        2.75            66         2.75  
+                       1 POOR/NEGATIVE    2 PUBLIC ONLY         211        8.78           277        11.53  
+                       1 POOR/NEGATIVE    3 UNINSURED           239        9.95           516        21.47  
+                       2 NEAR POOR        1 ANY PRIVATE          43        1.79           559        23.26  
+                       2 NEAR POOR        2 PUBLIC ONLY          42        1.75           601        25.01  
+                       2 NEAR POOR        3 UNINSURED            81        3.37           682        28.38  
+                       3 LOW INCOME       1 ANY PRIVATE         177        7.37           859        35.75  
+                       3 LOW INCOME       2 PUBLIC ONLY          87        3.62           946        39.37  
+                       3 LOW INCOME       3 UNINSURED           190        7.91          1136        47.27  
+                       4 MIDDLE INCOME    1 ANY PRIVATE         488       20.31          1624        67.58  
+                       4 MIDDLE INCOME    2 PUBLIC ONLY          53        2.21          1677        69.79  
+                       4 MIDDLE INCOME    3 UNINSURED           204        8.49          1881        78.28  
+                       5 HIGH INCOME      1 ANY PRIVATE         441       18.35          2322        96.63  
+                       5 HIGH INCOME      2 PUBLIC ONLY          14        0.58          2336        97.21  
+                       5 HIGH INCOME      3 UNINSURED            67        2.79          2403       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                2
+                              EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)
+                                      UNWEIGHTED FREQUENCY FOR 2014 FY PERSONS WITH AGE 26-30
+
+                                                         The FREQ Procedure
+
+                                                                                    Cumulative    Cumulative
+                              POVCAT14         INSCOV14    Frequency     Percent     Frequency      Percent
+                       -------------------------------------------------------------------------------------
+                       1 POOR/NEGATIVE    1 ANY PRIVATE          78        3.38            78         3.38  
+                       1 POOR/NEGATIVE    2 PUBLIC ONLY         232       10.04           310        13.41  
+                       1 POOR/NEGATIVE    3 UNINSURED           189        8.18           499        21.59  
+                       2 NEAR POOR        1 ANY PRIVATE          44        1.90           543        23.50  
+                       2 NEAR POOR        2 PUBLIC ONLY          39        1.69           582        25.18  
+                       2 NEAR POOR        3 UNINSURED            60        2.60           642        27.78  
+                       3 LOW INCOME       1 ANY PRIVATE         209        9.04           851        36.82  
+                       3 LOW INCOME       2 PUBLIC ONLY          95        4.11           946        40.93  
+                       3 LOW INCOME       3 UNINSURED           127        5.50          1073        46.43  
+                       4 MIDDLE INCOME    1 ANY PRIVATE         490       21.20          1563        67.63  
+                       4 MIDDLE INCOME    2 PUBLIC ONLY          67        2.90          1630        70.53  
+                       4 MIDDLE INCOME    3 UNINSURED           163        7.05          1793        77.59  
+                       5 HIGH INCOME      1 ANY PRIVATE         456       19.73          2249        97.32  
+                       5 HIGH INCOME      2 PUBLIC ONLY          15        0.65          2264        97.97  
+                       5 HIGH INCOME      3 UNINSURED            47        2.03          2311       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                3
+                              EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)
+                                             CHECK MISSING VALUES ON THE COMBINED DATA
+
+                                                        The MEANS Procedure
+
+                                                                                                                N
+                   Variable    Label                                                                   N     Miss
+                   ----------------------------------------------------------------------------------------------
+                   INSCOV      HEALTH INSURANCE COVERAGE INDICATOR 13                              68230        0
+                   AGELAST     PERSON'S AGE LAST TIME ELIGIBLE                                     68230        0
+                   POVCAT      FAMILY INC AS % OF POVERTY LINE - CATEGO                            68230        0
+                   VARSTR      VARIANCE ESTIMATION STRATUM - 2013                                  68230        0
+                   VARPSU      VARIANCE ESTIMATION PSU - 2013                                      68230        0
+                   TOTSLF      TOTAL AMT PAID BY SELF/FAMILY                                       68230        0
+                   PERWT       FINAL PERSON WEIGHT, 2013                                           68230        0
+                   POOLWT                                                                          68230        0
+                   SUBPOP      POPULATION WITH AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME    68230        0
+                   ----------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                4
+                              EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)
+                                      SUPPORTING CROSSTAB FOR THE CREATION OF THE SUBPOP FLAG
+
+                                                         The FREQ Procedure
+
+                                  POPULATION WITH AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME
+ 
+                                                                       Cumulative    Cumulative
+                                    SUBPOP    Frequency     Percent     Frequency      Percent
+                                    -----------------------------------------------------------
+                                         1         114        0.17           114         0.17  
+                                         2       68116       99.83         68230       100.00  
+
+
+                                                                                       Cumulative    Cumulative
+                     SUBPOP    AGELAST    POVCAT    INSCOV    Frequency     Percent     Frequency      Percent
+                     ------------------------------------------------------------------------------------------
+                          1    26-30           5         3         114        0.17           114         0.17  
+                          2    0-25            1         1         939        1.38          1053         1.54  
+                          2    0-25            1         2        7218       10.58          8271        12.12  
+                          2    0-25            1         3         885        1.30          9156        13.42  
+                          2    0-25            2         1         365        0.53          9521        13.95  
+                          2    0-25            2         2        1321        1.94         10842        15.89  
+                          2    0-25            2         3         253        0.37         11095        16.26  
+                          2    0-25            3         1        1639        2.40         12734        18.66  
+                          2    0-25            3         2        2603        3.82         15337        22.48  
+                          2    0-25            3         3         697        1.02         16034        23.50  
+                          2    0-25            4         1        4353        6.38         20387        29.88  
+                          2    0-25            4         2        1477        2.16         21864        32.04  
+                          2    0-25            4         3         733        1.07         22597        33.12  
+                          2    0-25            5         1        3801        5.57         26398        38.69  
+                          2    0-25            5         2         236        0.35         26634        39.04  
+                          2    0-25            5         3         212        0.31         26846        39.35  
+                          2    26-30           1         1         144        0.21         26990        39.56  
+                          2    26-30           1         2         443        0.65         27433        40.21  
+                          2    26-30           1         3         428        0.63         27861        40.83  
+                          2    26-30           2         1          87        0.13         27948        40.96  
+                          2    26-30           2         2          81        0.12         28029        41.08  
+                          2    26-30           2         3         141        0.21         28170        41.29  
+                          2    26-30           3         1         386        0.57         28556        41.85  
+                          2    26-30           3         2         182        0.27         28738        42.12  
+                          2    26-30           3         3         317        0.46         29055        42.58  
+                          2    26-30           4         1         978        1.43         30033        44.02  
+                          2    26-30           4         2         120        0.18         30153        44.19  
+                          2    26-30           4         3         367        0.54         30520        44.73  
+                          2    26-30           5         1         897        1.31         31417        46.05  
+                          2    26-30           5         2          29        0.04         31446        46.09  
+                          2    31+             1         1         986        1.45         32432        47.53  
+                          2    31+             1         2        3598        5.27         36030        52.81  
+                          2    31+             1         3        1946        2.85         37976        55.66  
+                          2    31+             2         1         537        0.79         38513        56.45  
+                          2    31+             2         2        1048        1.54         39561        57.98  
+                          2    31+             2         3         578        0.85         40139        58.83  
+                          2    31+             3         1        2432        3.56         42571        62.39  
+                          2    31+             3         2        1947        2.85         44518        65.25  
+                          2    31+             3         3        1585        2.32         46103        67.57  
+                          2    31+             4         1        7114       10.43         53217        78.00  
+                          2    31+             4         2        1866        2.73         55083        80.73  
+                          2    31+             4         3        1720        2.52         56803        83.25  
+                          2    31+             5         1        9876       14.47         66679        97.73  
+                          2    31+             5         2         959        1.41         67638        99.13  
+                          2    31+             5         3         592        0.87         68230       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                5
+                              EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)
+                  WEIGHTED ESTIMATE ON TOTSLF FOR COMBINED DATA W/AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                                Number of Strata                 165
+                                                Number of Clusters               368
+                                                Number of Observations         68230
+                                                Sum of Weights             317081202
+
+
+                                                            Statistics
+ 
+                                                                                                     Std Error
+                     Variable    Label                                       N            Mean         of Mean
+                     -----------------------------------------------------------------------------------------
+                     TOTSLF      TOTAL AMT PAID BY SELF/FAMILY           68230      598.230442       12.570863
+                     -----------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                6
+                              EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2013 and 2014)
+                  WEIGHTED ESTIMATE ON TOTSLF FOR COMBINED DATA W/AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME
+
+                                                     The SURVEYMEANS Procedure
+
+                                                    Domain Statistics in SUBPOP
+ 
+              POPULATION
+                    WITH
+              AGE=26-30,
+               UNINSURED
+                   WHOLE
+               YEAR, AND
+                    HIGH                                                                                    Std Error
+                  INCOME    Variable    Label                                       N            Mean         of Mean
+              -------------------------------------------------------------------------------------------------------
+                       1    TOTSLF      TOTAL AMT PAID BY SELF/FAMILY             114      198.784372       64.222238
+                       2    TOTSLF      TOTAL AMT PAID BY SELF/FAMILY           68116      598.996523       12.600578
+              -------------------------------------------------------------------------------------------------------

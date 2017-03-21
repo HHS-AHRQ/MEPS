@@ -1,0 +1,344 @@
+1                                           The SAS System            12:54 Tuesday, February 21, 2017
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M2) 
+      Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+NOTE: This session is executing on the X64_7PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 13.2
+
+NOTE: Additional host information:
+
+ X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+
+NOTE: SAS initialization used:
+      real time           0.35 seconds
+      cpu time            0.42 seconds
+      
+
+NOTE: AUTOEXEC processing beginning; file is \\source.ahrq.local\source\MEPS\_PUFINFO\autoexec.sas.
+
+local directory autoexec processed
+
+NOTE: AUTOEXEC processing completed.
+
+1          **********************************************************************************
+2          
+3          PROGRAM:      C:\MEPS\SAS\PROG\EXERCISE1.SAS
+4          
+5          DESCRIPTION:  THIS PROGRAM GENERATES THE FOLLOWING ESTIMATES ON NATIONAL HEALTH CARE EXPENSES BY TYPE OF SERVICE, 2014:
+6          
+7          	           (1) PERCENTAGE DISTRIBUTION OF EXPENSES BY TYPE OF SERVICE
+8          	           (2) PERCENTAGE OF PERSONS WITH AN EXPENSE, BY TYPE OF SERVIC
+9          	           (3) MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE
+10         
+11                      DEFINED SERVICE CATEGORIES ARE:
+12                         HOSPITAL INPATIENT
+13                         AMBULATORY SERVICE: OFFICE-BASED & HOSPITAL OUTPATIENT VISITS
+14                         PRESCRIBED MEDICINES
+15                         DENTAL VISITS
+16                         EMERGENCY ROOM
+17                         HOME HEALTH CARE (AGENCY & NON-AGENCY) AND OTHER (TOTAL EXPENDITURES - ABOVE EXPENDITURE CATEGORIES)
+18         
+19                     NOTE: EXPENSES INCLUDE BOTH FACILITY AND PHYSICIAN EXPENSES.
+20         
+21         INPUT FILE:   C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FULL-YEAR FILE)
+22         
+23         *********************************************************************************;
+24         OPTIONS LS=132 PS=79 NODATE;
+25         
+26         *LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+27         LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: \\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data
+28         
+29         PROC FORMAT;
+30           VALUE AGEF
+31              0-  64 = '0-64'
+32              65-HIGH = '65+'
+33         	          ;
+NOTE: Format AGEF has been output.
+34         
+35           VALUE AGECAT
+36         	   1 = '0-64'
+37         	   2 = '65+'
+38         	     ;
+NOTE: Format AGECAT has been output.
+39         
+40           VALUE GTZERO
+41              0         = '0'
+42              0 <- HIGH = '>0'
+43                        ;
+NOTE: Format GTZERO is already on the library WORK.FORMATS.
+NOTE: Format GTZERO has been output.
+44         RUN;
+2                                                          The SAS System
+
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+45         
+46         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+47         TITLE2 "EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014";
+48         
+49         /* READ IN DATA FROM 2014 CONSOLIDATED DATA FILE (HC-163) */
+50         DATA PUF171;
+51           SET CDATA.H171 (KEEP= TOTEXP14 IPDEXP14 IPFEXP14 OBVEXP14 RXEXP14
+52         	                      OPDEXP14 OPFEXP14 DVTEXP14 ERDEXP14 ERFEXP14
+53         	                      HHAEXP14 HHNEXP14 OTHEXP14 VISEXP14 AGE14X AGE42X AGE31X
+54         	                      VARSTR   VARPSU   PERWT14F );
+55         
+56           /* Define expenditure variables by type of service  */
+57         
+58           TOTAL                = TOTEXP14;
+59           HOSPITAL_INPATIENT   = IPDEXP14 + IPFEXP14;
+60           AMBULATORY           = OBVEXP14 + OPDEXP14 + OPFEXP14 + ERDEXP14 + ERFEXP14;
+61           PRESCRIBED_MEDICINES = RXEXP14;
+62           DENTAL               = DVTEXP14;
+63           HOME_HEALTH_OTHER    = HHAEXP14 + HHNEXP14 + OTHEXP14 + VISEXP14;
+64         
+65          /*QC CHECK IF THE SUM OF EXPENDITURES BY TYPE OF SERVICE IS EQUAL TO TOTAL*/
+66         
+67           DIFF = TOTAL-HOSPITAL_INPATIENT - AMBULATORY   - PRESCRIBED_MEDICINES
+68                       - DENTAL            - HOME_HEALTH_OTHER        ;
+69         
+70          /* CREATE FLAG (1/0) VARIABLES FOR PERSONS WITH AN EXPENSE, BY TYPE OF SERVICE  */
+71         
+72           ARRAY EXX  (6) TOTAL     HOSPITAL_INPATIENT   AMBULATORY     PRESCRIBED_MEDICINES
+73                          DENTAL    HOME_HEALTH_OTHER      ;
+74         
+75           ARRAY ANYX (6) X_ANYSVCE X_HOSPITAL_INPATIENT X_AMBULATORY    X_PRESCRIBED_MEDICINES
+76                          X_DENTAL  X_HOME_HEALTH_OTHER    ;
+77         
+78           DO II=1 TO 6;
+79             ANYX(II) = 0;
+80             IF EXX(II) > 0 THEN ANYX(II) = 1;
+81           END;
+82           DROP II;
+83         
+84           /* CREATE A SUMMARY VARIABLE FROM END OF YEAR, 42, AND 31 VARIABLES*/
+85         
+86                IF AGE14X >= 0 THEN AGE = AGE14X ;
+87           ELSE IF AGE42X >= 0 THEN AGE = AGE42X ;
+88           ELSE IF AGE31X >= 0 THEN AGE = AGE31X ;
+89         
+90                IF 0 LE AGE LE 64 THEN AGECAT=1 ;
+91           ELSE IF      AGE  > 64 THEN AGECAT=2 ;
+92         RUN;
+
+NOTE: There were 34875 observations read from the data set CDATA.H171.
+NOTE: The data set WORK.PUF171 has 34875 observations and 35 variables.
+NOTE: DATA statement used (Total process time):
+      real time           4.49 seconds
+      cpu time            1.20 seconds
+      
+
+93         
+94         TITLE3 "Supporting crosstabs for the flag variables";
+95         PROC FREQ DATA=PUF171;
+96            TABLES X_ANYSVCE              * TOTAL
+97                   X_HOSPITAL_INPATIENT   * HOSPITAL_INPATIENT
+98                   X_AMBULATORY           * AMBULATORY
+99                   X_PRESCRIBED_MEDICINES * PRESCRIBED_MEDICINES
+100                  X_DENTAL               * DENTAL
+101                  X_HOME_HEALTH_OTHER    * HOME_HEALTH_OTHER
+102                  AGECAT*AGE
+103                  DIFF/LIST MISSING;
+104           FORMAT TOTAL
+105                  HOSPITAL_INPATIENT
+106                  AMBULATORY
+107                  PRESCRIBED_MEDICINES
+3                                                          The SAS System
+
+108                  DENTAL
+109                  HOME_HEALTH_OTHER         gtzero.
+110                  AGE            agef.
+111             ;
+112        RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.PUF171.
+NOTE: The PROCEDURE FREQ printed page 1.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.31 seconds
+      cpu time            0.28 seconds
+      
+
+113        
+114        TITLE3 'PERCENTAGE DISTRIBUTION OF EXPENSES BY TYPE OF SERVICE (STAT BRIEF #491 FIGURE 1)';
+115        PROC SURVEYMEANS DATA=PUF171 SUM STD;
+116        	STRATUM VARSTR;
+117        	CLUSTER VARPSU;
+118        	WEIGHT PERWT14F;
+119        	VAR   HOSPITAL_INPATIENT
+120                AMBULATORY
+121                PRESCRIBED_MEDICINES
+122        	      DENTAL
+123                HOME_HEALTH_OTHER
+124                TOTAL ;
+125        	RATIO  HOSPITAL_INPATIENT
+126                 AMBULATORY
+127                 PRESCRIBED_MEDICINES
+128        	       DENTAL
+129                 HOME_HEALTH_OTHER   / TOTAL ;
+130        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: The PROCEDURE SURVEYMEANS printed page 2.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.82 seconds
+      cpu time            0.45 seconds
+      
+
+131        
+132        TITLE3 'PERCENTAGE OF PERSONS WITH AN EXPENSE, BY TYPE OF SERVICE';
+133        PROC SURVEYMEANS DATA= PUF171 MEAN STDERR SUM STD;
+134        	STRATUM VARSTR ;
+135        	CLUSTER VARPSU ;
+136        	WEIGHT  PERWT14F ;
+137        	VAR X_ANYSVCE
+138        	    X_HOSPITAL_INPATIENT
+139        	    X_AMBULATORY
+140        	    X_PRESCRIBED_MEDICINES
+141        	    X_DENTAL
+142        	    X_HOME_HEALTH_OTHER;
+143        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: The PROCEDURE SURVEYMEANS printed page 3.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.20 seconds
+      
+
+144        
+145        TITLE3 'MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+';
+146        PROC SURVEYMEANS DATA= PUF171 MEAN NOBS SUMWGT STDERR SUM STD;
+147        	STRATUM VARSTR ;
+148        	CLUSTER VARPSU ;
+149        	WEIGHT  PERWT14F ;	
+150        	VAR  TOTAL;
+151        	DOMAIN  X_ANYSVCE X_ANYSVCE*AGECAT ;
+152        	FORMAT  AGECAT agecat.;
+153        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain X_ANYSVCE*AGECAT for variable(s) TOTAL. The estimate of variance for TOTAL will omit 
+      this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 4-5.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.31 seconds
+4                                                          The SAS System
+
+      cpu time            0.29 seconds
+      
+
+154        
+155        PROC SURVEYMEANS DATA= PUF171 MEAN NOBS SUMWGT STDERR SUM STD;
+156        	STRATUM VARSTR ;
+157        	CLUSTER VARPSU ;
+158        	WEIGHT  PERWT14F ;	
+159        	VAR  HOSPITAL_INPATIENT;
+160        	DOMAIN  X_HOSPITAL_INPATIENT X_HOSPITAL_INPATIENT*AGECAT ;
+161        	FORMAT  AGECAT agecat.;
+162        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain X_HOSPITAL_INPATIENT*AGECAT for variable(s) HOSPITAL_INPATIENT. The estimate of 
+      variance for HOSPITAL_INPATIENT will omit this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 6-7.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.27 seconds
+      cpu time            0.28 seconds
+      
+
+163        
+164        PROC SURVEYMEANS DATA= PUF171 MEAN NOBS SUMWGT STDERR SUM STD;
+165        	STRATUM VARSTR ;
+166        	CLUSTER VARPSU ;
+167        	WEIGHT  PERWT14F ;	
+168        	VAR  AMBULATORY;
+169        	DOMAIN  X_AMBULATORY  X_AMBULATORY*AGECAT ;
+170        	FORMAT  AGECAT agecat.;
+171        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain X_AMBULATORY*AGECAT for variable(s) AMBULATORY. The estimate of variance for 
+      AMBULATORY will omit this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 8-9.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.29 seconds
+      cpu time            0.29 seconds
+      
+
+172        
+173        PROC SURVEYMEANS DATA= PUF171 MEAN NOBS SUMWGT STDERR SUM STD;
+174        	STRATUM VARSTR ;
+175        	CLUSTER VARPSU ;
+176        	WEIGHT  PERWT14F ;	
+177        	VAR  PRESCRIBED_MEDICINES;
+178        	DOMAIN  X_PRESCRIBED_MEDICINES X_PRESCRIBED_MEDICINES*AGECAT ;
+179        	FORMAT  AGECAT agecat.;
+180        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain X_PRESCRIBED_MEDICINES*AGECAT for variable(s) PRESCRIBED_MEDICINES. The estimate of 
+      variance for PRESCRIBED_MEDICINES will omit this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 10-11.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.31 seconds
+      cpu time            0.31 seconds
+      
+
+181        
+182        PROC SURVEYMEANS DATA= PUF171 MEAN NOBS SUMWGT STDERR SUM STD;
+183        	STRATUM VARSTR ;
+184        	CLUSTER VARPSU ;
+185        	WEIGHT  PERWT14F ;	
+186        	VAR  DENTAL;
+187        	DOMAIN   X_DENTAL X_DENTAL*AGECAT ;
+188        	FORMAT  AGECAT agecat.;
+189        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain X_DENTAL*AGECAT for variable(s) DENTAL. The estimate of variance for DENTAL will omit 
+      this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 12-13.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.29 seconds
+      cpu time            0.29 seconds
+5                                                          The SAS System
+
+      
+
+190        
+191        PROC SURVEYMEANS DATA= PUF171 MEAN NOBS SUMWGT STDERR SUM STD;
+192        	STRATUM VARSTR ;
+193        	CLUSTER VARPSU ;
+194        	WEIGHT  PERWT14F ;	
+195        	VAR  HOME_HEALTH_OTHER;
+196        	DOMAIN  X_HOME_HEALTH_OTHER X_HOME_HEALTH_OTHER*AGECAT ;
+197        	FORMAT  AGECAT agecat.;
+198        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain X_HOME_HEALTH_OTHER*AGECAT for variable(s) HOME_HEALTH_OTHER. The estimate of 
+      variance for HOME_HEALTH_OTHER will omit this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 14-15.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.31 seconds
+      cpu time            0.31 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           9.42 seconds
+      cpu time            4.82 seconds
+      

@@ -1,0 +1,203 @@
+-----------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise8.log
+  log type:  text
+ opened on:  22 Feb 2017, 14:53:08
+
+. cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+\\files.s-3.com\HPDA\AHRQ\Fang\bj001
+
+. 
+. // pool three panels of data to get sufficient sample size
+. use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using h172
+
+. tempfile panel18
+
+. save "`panel18'"
+file C:\Users\ggrodsky\AppData\Local\Temp\ST_04000001.tmp saved
+
+. 
+. use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using h164
+
+. tempfile panel17
+
+. save "`panel17'"
+file C:\Users\ggrodsky\AppData\Local\Temp\ST_04000002.tmp saved
+
+. 
+. use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using h156
+
+. 
+. append using "`panel18'" "`panel17'"
+
+. 
+. gen poolwt=longwt/3
+
+. gen subpop=(agey1x>=26 & agey1x<=30 & inscovy1==3 & povcaty1==5)
+
+. label define insf -1 "NA" 1 "1 Any private" 2 "2 Public only" 3 "3 Uninsured"
+
+. label define povcat 1 "1 Poor/negative" 2 "2 Near poor" 3 "3 Low income" 4 "4 Midlle income" 5 "5 H
+> igh income"
+
+. label value inscovy1 inscovy2 insf
+
+. label value povcaty1 povcat
+
+. 
+. tab1 agey1x inscovy1 inscovy2 povcaty1 panel if subpop==1
+
+-> tabulation of agey1x if subpop==1 
+
+  AGE AS OF |
+   12/31/11 |
+(EDITED/IMP |
+      UTED) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         26 |         21       22.34       22.34
+         27 |         17       18.09       40.43
+         28 |         24       25.53       65.96
+         29 |         15       15.96       81.91
+         30 |         17       18.09      100.00
+------------+-----------------------------------
+      Total |         94      100.00
+
+-> tabulation of inscovy1 if subpop==1 
+
+       HEALTH |
+    INSURANCE |
+     COVERAGE |
+ INDICATOR 11 |      Freq.     Percent        Cum.
+--------------+-----------------------------------
+  3 Uninsured |         94      100.00      100.00
+--------------+-----------------------------------
+        Total |         94      100.00
+
+-> tabulation of inscovy2 if subpop==1 
+
+       HEALTH |
+    INSURANCE |
+     COVERAGE |
+ INDICATOR 12 |      Freq.     Percent        Cum.
+--------------+-----------------------------------
+1 Any private |         17       18.09       18.09
+2 Public only |          5        5.32       23.40
+  3 Uninsured |         72       76.60      100.00
+--------------+-----------------------------------
+        Total |         94      100.00
+
+-> tabulation of povcaty1 if subpop==1 
+
+ FAMLY INC AS % |
+     OF POVERTY |
+ LINE-CATEGO 11 |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+  5 High income |         94      100.00      100.00
+----------------+-----------------------------------
+          Total |         94      100.00
+
+-> tabulation of panel if subpop==1 
+
+      PANEL |
+     NUMBER |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         16 |         31       32.98       32.98
+         17 |         41       43.62       76.60
+         18 |         22       23.40      100.00
+------------+-----------------------------------
+      Total |         94      100.00
+
+. tab subpop
+
+     subpop |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     53,055       99.82       99.82
+          1 |         94        0.18      100.00
+------------+-----------------------------------
+      Total |     53,149      100.00
+
+. summarize  if subpop==1
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    dupersid |          0
+       panel |         94    16.90426    .7487502         16         18
+      agey1x |         94    27.89362    1.402518         26         30
+    povcaty1 |         94           5           0          5          5
+    inscovy1 |         94           3           0          3          3
+-------------+---------------------------------------------------------
+    inscovy2 |         94    2.585106    .7816384          1          3
+      longwt |         94    18800.07    17577.64   2469.102   103511.6
+      varpsu |         94    1.765957    .6944563          1          3
+      varstr |         94    1080.234    52.86673       1003       1165
+      poolwt |         94    6266.689    5859.213   823.0341   34503.88
+-------------+---------------------------------------------------------
+      subpop |         94           1           0          1          1
+
+. tabmiss
+    Variable |     Obs       Missings   Feq.Missings    NonMiss   Feq.NonMiss
+-------------+---------------------------------------------------------------
+    dupersid |   53149           0            0          53149          100
+       panel |   53149           0            0          53149          100
+      agey1x |   53149           0            0          53149          100
+    povcaty1 |   53149           0            0          53149          100
+    inscovy1 |   53149           0            0          53149          100
+    inscovy2 |   53149           0            0          53149          100
+      longwt |   53149           0            0          53149          100
+      varpsu |   53149           0            0          53149          100
+      varstr |   53149           0            0          53149          100
+      poolwt |   53149           0            0          53149          100
+      subpop |   53149           0            0          53149          100
+
+. 
+. svyset [pweight=poolwt], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+      pweight: poolwt
+          VCE: linearized
+  Single unit: missing
+     Strata 1: varstr
+         SU 1: varpsu
+        FPC 1: <zero>
+
+. 
+. // weighted estimate on totslf for combined data w/age=26-30, uninsured whole year, and high income
+. // in the first year
+. svy, subpop(subpop): tabulate inscovy2, cell se obs
+(running tabulate on estimation sample)
+
+Number of strata   =        62                Number of obs     =       24,203
+Number of PSUs     =       144                Population size   =  129,988,880
+                                              Subpop. no. obs   =           94
+                                              Subpop. size      = 589,068.7491
+                                              Design df         =           82
+
+----------------------------------------------
+HEALTH    |
+INSURANCE |
+COVERAGE  |
+INDICATOR |
+12        | proportion          se         obs
+----------+-----------------------------------
+       NA |          0           0           0
+ 1 Any pr |      .1729       .0531          17
+ 2 Public |      .0641       .0353           5
+ 3 Uninsu |       .763       .0603          72
+          | 
+    Total |          1                      94
+----------------------------------------------
+  Key:  proportion  =  cell proportion
+        se          =  linearized standard error of cell proportion
+        obs         =  number of observations
+
+  Table contains a zero in the marginals.
+  Statistics cannot be computed.
+
+Note: 103 strata omitted because they contain no subpopulation members.
+
+. 
+. log close  
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise8.log
+  log type:  text
+ closed on:  22 Feb 2017, 14:57:45
+-----------------------------------------------------------------------------------------------------

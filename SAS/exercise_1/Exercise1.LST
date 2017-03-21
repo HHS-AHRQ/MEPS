@@ -1,0 +1,426 @@
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                1
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                                            Supporting crosstabs for the flag variables
+
+                                                         The FREQ Procedure
+
+                                                                             Cumulative    Cumulative
+                              X_ANYSVCE    TOTAL    Frequency     Percent     Frequency      Percent
+                              -----------------------------------------------------------------------
+                                      0    0            7225       20.72          7225        20.72  
+                                      1    >0          27650       79.28         34875       100.00  
+
+
+                          X_HOSPITAL_           HOSPITAL_                             Cumulative    Cumulative
+                            INPATIENT           INPATIENT    Frequency     Percent     Frequency      Percent
+                     -----------------------------------------------------------------------------------------
+                                    0    0                      32682       93.71         32682        93.71  
+                                    1    >0                      2193        6.29         34875       100.00  
+
+
+                                                                                 Cumulative    Cumulative
+                          X_AMBULATORY    AMBULATORY    Frequency     Percent     Frequency      Percent
+                          -------------------------------------------------------------------------------
+                                     0    0                10531       30.20         10531        30.20  
+                                     1    >0               24344       69.80         34875       100.00  
+
+
+                        X_PRESCRIBED_         PRESCRIBED_                             Cumulative    Cumulative
+                            MEDICINES           MEDICINES    Frequency     Percent     Frequency      Percent
+                     -----------------------------------------------------------------------------------------
+                                    0    0                      15948       45.73         15948        45.73  
+                                    1    >0                     18927       54.27         34875       100.00  
+
+
+                                                                             Cumulative    Cumulative
+                              X_DENTAL    DENTAL    Frequency     Percent     Frequency      Percent
+                              -----------------------------------------------------------------------
+                                     0    0            22831       65.47         22831        65.47  
+                                     1    >0           12044       34.53         34875       100.00  
+
+
+                       X_HOME_HEALTH_        HOME_HEALTH_                             Cumulative    Cumulative
+                                OTHER               OTHER    Frequency     Percent     Frequency      Percent
+                     -----------------------------------------------------------------------------------------
+                                    0    0                      28936       82.97         28936        82.97  
+                                    1    >0                      5939       17.03         34875       100.00  
+
+
+                                                                           Cumulative    Cumulative
+                                AGECAT     AGE    Frequency     Percent     Frequency      Percent
+                                -------------------------------------------------------------------
+                                     1    0-64       30770       88.23         30770        88.23  
+                                     2    65+         4105       11.77         34875       100.00  
+
+
+                                                                      Cumulative    Cumulative
+                                     DIFF    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                       -2          28        0.08            28         0.08  
+                                       -1         767        2.20           795         2.28  
+                                        0       33384       95.72         34179        98.00  
+                                        1         675        1.94         34854        99.94  
+                                        2          21        0.06         34875       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                2
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                         PERCENTAGE DISTRIBUTION OF EXPENSES BY TYPE OF SERVICE (STAT BRIEF #491 FIGURE 1)
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                        Variable                         Sum         Std Dev
+                                        ----------------------------------------------------
+                                        HOSPITAL_INPATIENT      381931705906     23767974432
+                                        AMBULATORY              577377169652     19826398136
+                                        PRESCRIBED_MEDICINES    350168374408     19061262593
+                                        DENTAL                   91879148804      3229964982
+                                        HOME_HEALTH_OTHER        98009520416      9493004317
+                                        TOTAL                   1.4993648E12     49778703162
+                                        ----------------------------------------------------
+
+
+                                                          Ratio Analysis
+ 
+                                   Numerator            Denominator        Ratio         Std Err
+                                   -------------------------------------------------------------
+                                   HOSPITAL_INPATIENT   TOTAL           0.254729        0.011742
+                                   AMBULATORY           TOTAL           0.385081        0.009225
+                                   PRESCRIBED_MEDICINES TOTAL           0.233544        0.009555
+                                   DENTAL               TOTAL           0.061279        0.002108
+                                   HOME_HEALTH_OTHER    TOTAL           0.065367        0.005681
+                                   -------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                3
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                                     PERCENTAGE OF PERSONS WITH AN EXPENSE, BY TYPE OF SERVICE
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                                                    Std Error
+                       Variable                          Mean         of Mean             Sum         Std Dev
+                       --------------------------------------------------------------------------------------
+                       X_ANYSVCE                     0.851228        0.003537       271065295         6398483
+                       X_HOSPITAL_INPATIENT          0.065778        0.002147        20946347          817948
+                       X_AMBULATORY                  0.759086        0.004381       241723564         5690996
+                       X_PRESCRIBED_MEDICINES        0.613518        0.004953       195368984         4599196
+                       X_DENTAL                      0.414358        0.005953       131948483         3810714
+                       X_HOME_HEALTH_OTHER           0.204091        0.004229        64990677         2066317
+                       --------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                4
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                                Sum of                       Std Error
+              Variable               N         Weights            Mean         of Mean             Sum         Std Dev
+              --------------------------------------------------------------------------------------------------------
+              TOTAL              33162       318440423     4708.462654      118.427048    1.4993648E12     49778703162
+              --------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                5
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                   Domain Statistics in X_ANYSVCE
+ 
+                                                      Sum of                       Std Error
+       X_ANYSVCE    Variable               N         Weights            Mean         of Mean             Sum         Std Dev
+       ---------------------------------------------------------------------------------------------------------------------
+               0    TOTAL               6497        47375127               0               0               0               0
+               1    TOTAL              26665       271065295     5531.378835      137.926572    1.4993648E12     49778703162
+       ---------------------------------------------------------------------------------------------------------------------
+
+
+                                               Domain Statistics in X_ANYSVCE*AGECAT
+ 
+                                                           Sum of                       Std Error
+  X_ANYSVCE    AGECAT    Variable               N         Weights            Mean         of Mean             Sum         Std Dev
+  -------------------------------------------------------------------------------------------------------------------------------
+          0    0-64      TOTAL               6310        45631216               0               0               0               0
+               65+       TOTAL                187         1743911               0               0               0               0
+          1    0-64      TOTAL              22850       224848055     4429.921466      149.960906    996059224082     43204037675
+               65+       TOTAL               3815        46217241           10890      302.614176    503305614189     20478482561
+  -------------------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                6
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                                     Sum of                       Std Error
+         Variable                         N         Weights            Mean         of Mean             Sum         Std Dev
+         ------------------------------------------------------------------------------------------------------------------
+         HOSPITAL_INPATIENT           33162       318440423     1199.381983       71.836027    381931705906     23767974432
+         ------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                7
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                             Domain Statistics in X_HOSPITAL_INPATIENT
+ 
+ X_HOSPITAL_                                                Sum of                       Std Error
+   INPATIENT    Variable                         N         Weights            Mean         of Mean             Sum         Std Dev
+ ---------------------------------------------------------------------------------------------------------------------------------
+           0    HOSPITAL_INPATIENT           31081       297494076               0               0               0               0
+           1    HOSPITAL_INPATIENT            2081        20946347           18234      857.976853    381931705906     23767974432
+ ---------------------------------------------------------------------------------------------------------------------------------
+
+
+                                          Domain Statistics in X_HOSPITAL_INPATIENT*AGECAT
+ 
+X_HOSPITAL_                                                      Sum of                     Std Error
+  INPATIENT   AGECAT   Variable                        N        Weights           Mean        of Mean            Sum        Std Dev
+-----------------------------------------------------------------------------------------------------------------------------------
+          0   0-64     HOSPITAL_INPATIENT          27717      257356350              0              0              0              0
+              65+      HOSPITAL_INPATIENT           3364       40137726              0              0              0              0
+          1   0-64     HOSPITAL_INPATIENT           1443       13122921          17663    1263.520952   231791233434    21167276880
+              65+      HOSPITAL_INPATIENT            638        7823426          19191    1131.909957   150140472472    11563537223
+-----------------------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                8
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                                 Sum of                       Std Error
+             Variable                 N         Weights            Mean         of Mean             Sum         Std Dev
+             ----------------------------------------------------------------------------------------------------------
+             AMBULATORY           33162       318440423     1813.140319       48.356227    577377169652     19826398136
+             ----------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                9
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                  Domain Statistics in X_AMBULATORY
+ 
+                                                         Sum of                       Std Error
+     X_AMBULATORY    Variable                 N         Weights            Mean         of Mean             Sum         Std Dev
+     --------------------------------------------------------------------------------------------------------------------------
+                0    AMBULATORY            9626        76716859               0               0               0               0
+                1    AMBULATORY           23536       241723564     2388.584550       62.539836    577377169652     19826398136
+     --------------------------------------------------------------------------------------------------------------------------
+
+
+                                              Domain Statistics in X_AMBULATORY*AGECAT
+ 
+                                                              Sum of                       Std Error
+X_AMBULATORY    AGECAT    Variable                 N         Weights            Mean         of Mean             Sum         Std Dev
+------------------------------------------------------------------------------------------------------------------------------------
+           0    0-64      AMBULATORY            9288        73376755               0               0               0               0
+                65+       AMBULATORY             338         3340104               0               0               0               0
+           1    0-64      AMBULATORY           19872       197102516     2055.609924       66.807116    405165888163     16697035188
+                65+       AMBULATORY            3664        44621048     3859.418163      168.755818    172211281489      9380985966
+------------------------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                               10
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                                      Sum of                       Std Error
+        Variable                           N         Weights            Mean         of Mean             Sum         Std Dev
+        --------------------------------------------------------------------------------------------------------------------
+        PRESCRIBED_MEDICINES           33162       318440423     1099.635440       53.361257    350168374408     19061262593
+        --------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                               11
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                             Domain Statistics in X_PRESCRIBED_MEDICINES
+ 
+   X_PRESCRIBED_                                               Sum of                     Std Error
+       MEDICINES   Variable                          N        Weights           Mean        of Mean            Sum        Std Dev
+   ------------------------------------------------------------------------------------------------------------------------------
+               0   PRESCRIBED_MEDICINES          14851      123071439              0              0              0              0
+               1   PRESCRIBED_MEDICINES          18311      195368984    1792.343735      83.786140   350168374408    19061262593
+   ------------------------------------------------------------------------------------------------------------------------------
+
+
+                                         Domain Statistics in X_PRESCRIBED_MEDICINES*AGECAT
+ 
+  X_PRESCRIBED_                                                    Sum of                   Std Error
+      MEDICINES  AGECAT  Variable                         N       Weights          Mean       of Mean           Sum       Std Dev
+  -------------------------------------------------------------------------------------------------------------------------------
+              0  0-64    PRESCRIBED_MEDICINES         14426     118536015             0             0             0             0
+                 65+     PRESCRIBED_MEDICINES           425       4535423             0             0             0             0
+              1  0-64    PRESCRIBED_MEDICINES         14734     151943256   1560.906204    106.332651  237169170444   18063146175
+                 65+     PRESCRIBED_MEDICINES          3577      43425728   2602.125708    100.741310  112999203964    5372396358
+  -------------------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                               12
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                             Statistics
+ 
+                                                Sum of                       Std Error
+              Variable               N         Weights            Mean         of Mean             Sum         Std Dev
+              --------------------------------------------------------------------------------------------------------
+              DENTAL             33162       318440423      288.528535        7.591448     91879148804      3229964982
+              --------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                               13
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                    Domain Statistics in X_DENTAL
+ 
+                                                      Sum of                       Std Error
+        X_DENTAL    Variable               N         Weights            Mean         of Mean             Sum         Std Dev
+        --------------------------------------------------------------------------------------------------------------------
+               0    DENTAL             21387       186491940               0               0               0               0
+               1    DENTAL             11775       131948483      696.325922       15.445198     91879148804      3229964982
+        --------------------------------------------------------------------------------------------------------------------
+
+
+                                                Domain Statistics in X_DENTAL*AGECAT
+ 
+                                                           Sum of                       Std Error
+   X_DENTAL    AGECAT    Variable               N         Weights            Mean         of Mean             Sum         Std Dev
+   ------------------------------------------------------------------------------------------------------------------------------
+          0    0-64      DENTAL             18882       160532434               0               0               0               0
+               65+       DENTAL              2505        25959506               0               0               0               0
+          1    0-64      DENTAL             10278       109946837      657.049957       17.344158     72240564280      2789849929
+               65+       DENTAL              1497        22001646      892.596154       44.612067     19638584524      1387703916
+   ------------------------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                               14
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                        Number of Strata                                 165
+                                        Number of Clusters                               366
+                                        Number of Observations                         34875
+                                        Number of Observations Used                    33162
+                                        Number of Obs with Nonpositive Weights          1713
+                                        Sum of Weights                             318440423
+
+
+                                                            Statistics
+ 
+                                                    Sum of                       Std Error
+         Variable                        N         Weights            Mean         of Mean             Sum         Std Dev
+         -----------------------------------------------------------------------------------------------------------------
+         HOME_HEALTH_OTHER           33162       318440423      307.779771       28.787831     98009520416      9493004317
+         -----------------------------------------------------------------------------------------------------------------
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                               15
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2014
+                  MEAN EXPENSE PER PERSON WITH AN EXPENSE, BY TYPE OF SERVICE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+                                                     The SURVEYMEANS Procedure
+
+                                              Domain Statistics in X_HOME_HEALTH_OTHER
+ 
+    X_HOME_
+    HEALTH_                                               Sum of                       Std Error
+      OTHER    Variable                        N         Weights            Mean         of Mean             Sum         Std Dev
+   -----------------------------------------------------------------------------------------------------------------------------
+          0    HOME_HEALTH_OTHER           27401       253449746               0               0               0               0
+          1    HOME_HEALTH_OTHER            5761        64990677     1508.055077      139.499831     98009520416      9493004317
+   -----------------------------------------------------------------------------------------------------------------------------
+
+
+                                          Domain Statistics in X_HOME_HEALTH_OTHER*AGECAT
+ 
+   X_HOME_
+   HEALTH_                                                     Sum of                     Std Error
+     OTHER   AGECAT   Variable                       N        Weights           Mean        of Mean            Sum        Std Dev
+  -------------------------------------------------------------------------------------------------------------------------------
+         0   0-64     HOME_HEALTH_OTHER          24736      222012930              0              0              0              0
+             65+      HOME_HEALTH_OTHER           2665       31436816              0              0              0              0
+         1   0-64     HOME_HEALTH_OTHER           4424       48466341    1025.308031     161.521984    49692928396     8113693385
+             65+      HOME_HEALTH_OTHER           1337       16524336    2923.965677     209.732773    48316592020     3776132962
+  -------------------------------------------------------------------------------------------------------------------------------

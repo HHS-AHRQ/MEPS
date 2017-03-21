@@ -1,0 +1,171 @@
+-----------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise6.log
+  log type:  text
+ opened on:  22 Feb 2017, 14:39:43
+
+. cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+\\files.s-3.com\HPDA\AHRQ\Fang\bj001
+
+. 
+. // rename year specific variables prior to combining files
+. use dupersid inscov13 perwt13f varstr varpsu povcat13 agelast totslf13 using h163
+
+. rename inscov13 inscov
+
+. rename perwt13f perwt 
+
+. rename povcat13 povcat 
+
+. rename totslf13 totslf
+
+. tempfile yr1
+
+. save "`yr1'"
+file C:\Users\ggrodsky\AppData\Local\Temp\ST_04000001.tmp saved
+
+. 
+. use dupersid inscov14 perwt14f varstr varpsu povcat14 agelast totslf14 using h171
+
+. rename inscov14 inscov
+
+. rename perwt14f perwt 
+
+. rename povcat14 povcat 
+
+. rename totslf14 totslf
+
+. 
+. append using "`yr1'", generate(yearnum)
+
+. 
+. gen poolwt=perwt/2
+
+. gen subpop=(agelast>=26 & agelast<=30 & inscov==3 & povcat==5)
+
+. 
+. tab1 agelast inscov povcat if subpop==1
+
+-> tabulation of agelast if subpop==1 
+
+   PERSON'S |
+   AGE LAST |
+       TIME |
+   ELIGIBLE |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         26 |         29       20.86       20.86
+         27 |         39       28.06       48.92
+         28 |         23       16.55       65.47
+         29 |         31       22.30       87.77
+         30 |         17       12.23      100.00
+------------+-----------------------------------
+      Total |        139      100.00
+
+-> tabulation of inscov if subpop==1 
+
+     HEALTH |
+  INSURANCE |
+   COVERAGE |
+  INDICATOR |
+         14 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          3 |        139      100.00      100.00
+------------+-----------------------------------
+      Total |        139      100.00
+
+-> tabulation of povcat if subpop==1 
+
+ FAMILY INC |
+    AS % OF |
+    POVERTY |
+     LINE - |
+     CATEGO |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          5 |        139      100.00      100.00
+------------+-----------------------------------
+      Total |        139      100.00
+
+. tab subpop yearnum
+
+           |        yearnum
+    subpop |         0          1 |     Total
+-----------+----------------------+----------
+         0 |    34,815     36,861 |    71,676 
+         1 |        60         79 |       139 
+-----------+----------------------+----------
+     Total |    34,875     36,940 |    71,815 
+
+
+. summarize
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    dupersid |          0
+     agelast |     71,815      34.882     22.4086          0         85
+      povcat |     71,815    3.208243    1.496595          1          5
+      inscov |     71,815    1.661505    .7396724          1          3
+      totslf |     71,815    421.1674    1447.036          0     108389
+-------------+---------------------------------------------------------
+       perwt |     71,815    8830.501    8581.434          0   94410.39
+      varstr |     71,815    1084.443    48.94023       1001       1165
+      varpsu |     71,815    1.637569    .6163208          1          3
+     yearnum |     71,815    .5143772    .4997967          0          1
+      poolwt |     71,815     4415.25    4290.717          0    47205.2
+-------------+---------------------------------------------------------
+      subpop |     71,815    .0019355    .0439524          0          1
+
+. tabmiss
+    Variable |     Obs       Missings   Feq.Missings    NonMiss   Feq.NonMiss
+-------------+---------------------------------------------------------------
+    dupersid |   71815           0            0          71815          100
+     agelast |   71815           0            0          71815          100
+      povcat |   71815           0            0          71815          100
+      inscov |   71815           0            0          71815          100
+      totslf |   71815           0            0          71815          100
+       perwt |   71815           0            0          71815          100
+      varstr |   71815           0            0          71815          100
+      varpsu |   71815           0            0          71815          100
+     yearnum |   71815           0            0          71815          100
+      poolwt |   71815           0            0          71815          100
+      subpop |   71815           0            0          71815          100
+
+. 
+. svyset [pweight=poolwt], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+      pweight: poolwt
+          VCE: linearized
+  Single unit: missing
+     Strata 1: varstr
+         SU 1: varpsu
+        FPC 1: <zero>
+
+. 
+. // weighted estimate on totslf for combined data w/age=26-30, uninsured whole year, and high income
+. svy, subpop(subpop): mean totslf
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =      73      Number of obs   =       37,121
+Number of PSUs   =     169      Population size =  152,825,959
+                                Subpop. no. obs =          114
+                                Subpop. size    = 606,952.6488
+                                Design df       =           96
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+      totslf |   198.7844   64.22224      71.30424    326.2645
+--------------------------------------------------------------
+Note: 92 strata omitted because they contain no subpopulation
+      members.
+
+. 
+. 
+. log close  
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise6.log
+  log type:  text
+ closed on:  22 Feb 2017, 14:42:37
+-----------------------------------------------------------------------------------------------------

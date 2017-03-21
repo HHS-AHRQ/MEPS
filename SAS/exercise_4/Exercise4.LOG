@@ -1,0 +1,314 @@
+1                                           The SAS System            13:11 Tuesday, February 21, 2017
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M2) 
+      Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+NOTE: This session is executing on the X64_7PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 13.2
+
+NOTE: Additional host information:
+
+ X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+
+NOTE: SAS initialization used:
+      real time           0.54 seconds
+      cpu time            0.43 seconds
+      
+
+NOTE: AUTOEXEC processing beginning; file is \\source.ahrq.local\source\MEPS\_PUFINFO\autoexec.sas.
+
+local directory autoexec processed
+
+NOTE: AUTOEXEC processing completed.
+
+1          /**********************************************************************************
+2          
+3          PROGRAM:      C:\MEPS\SAS\PROG\EXERCISE4.SAS
+4          
+5          DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO IDENTIFY PERSONS WITH A CONDITION AND
+6                        CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH THE CONDITION
+7          
+8                        THE CONDITION USED IN THIS EXERCISE IS DIABETES (CCS CODE=049 OR 050)
+9          
+10         DEFINITION OF 61 CONDITIONS BASED ON THE CCS CODE
+11         
+12           1  Infectious diseases                                           : CCS CODE = 1-9
+13           2  Cancer                                                        : CCS CODE = 11-45
+14           3  Non-malignant neoplasm                                        : CCS CODE = 46, 47
+15           4  Thyroid disease                                               : CCS CODE = 48
+16           5  Diabetes mellitus                                             : CCS CODE = 49,50
+17           6  Other endocrine, nutritional & immune disorder                : CCS CODE = 51, 52, 54 - 58
+18           7  Hyperlipidemia                                                : CCS CODE = 53
+19           8  Anemia and other deficiencies                                 : CCS CODE = 59
+20           9  Hemorrhagic, coagulation, and disorders of White Blood cells  : CCS CODE = 60-64
+21           10 Mental disorders                                              : CCS CODE = 650-670
+22           11 CNS infection                                                 : CCS CODE = 76-78
+23           12 Hereditary, degenerative and other nervous system disorders   : CCS CODE = 79-81
+24           13 Paralysis                                                     : CCS CODE = 82
+25           14 Headache                                                      : CCS CODE = 84
+26           15 Epilepsy and convulsions                                      : CCS CODE = 83
+27           16 Coma, brain damage                                            : CCS CODE = 85
+28           17 Cataract                                                      : CCS CODE = 86
+29           18 Glaucoma                                                      : CCS CODE = 88
+30           19 Other eye disorders                                           : CCS CODE = 87, 89-91
+31           20 Otitis media                                                  : CCS CODE = 92
+32           21 Other CNS disorders                                           : CCS CODE = 93-95
+33           22 Hypertension                                                  : CCS CODE = 98,99
+34           23 Heart disease                                                 : CCS CODE = 96, 97, 100-108
+35           24 Cerebrovascular disease                                       : CCS CODE = 109-113
+36           25 Other circulatory conditions arteries, veins, and lymphatics  : CCS CODE = 114 -121
+37           26 Pneumonia                                                     : CCS CODE = 122
+38           27 Influenza                                                     : CCS CODE = 123
+39           28 Tonsillitis                                                   : CCS CODE = 124
+40           29 Acute Bronchitis and URI                                      : CCS CODE = 125 , 126
+41           30 COPD, asthma                                                  : CCS CODE = 127-134
+42           31 Intestinal infection                                          : CCS CODE = 135
+43           32 Disorders of teeth and jaws                                   : CCS CODE = 136
+44           33 Disorders of mouth and esophagus                              : CCS CODE = 137
+45           34 Disorders of the upper GI                                     : CCS CODE = 138-141
+46           35 Appendicitis                                                  : CCS CODE = 142
+47           36 Hernias                                                       : CCS CODE = 143
+48           37 Other stomach and intestinal disorders                        : CCS CODE = 144- 148
+49           38 Other GI                                                      : CCS CODE = 153-155
+50           39 Gallbladder, pancreatic, and liver disease                    : CCS CODE = 149-152
+51           40 Kidney Disease                                                : CCS CODE = 156-158, 160, 161
+2                                                          The SAS System                           13:11 Tuesday, February 21, 2017
+
+52           41 Urinary tract infections                                      : CCS CODE = 159
+53           42 Other urinary                                                 : CCS CODE = 162,163
+54           43 Male genital disorders                                        : CCS CODE = 164-166
+55           44 Non-malignant breast disease                                  : CCS CODE = 167
+56           45 Female genital disorders, and contraception                   : CCS CODE = 168-176
+57           46 Complications of pregnancy and birth                          : CCS CODE = 177-195
+58           47 Normal birth/live born                                        : CCS CODE = 196, 218
+59           48 Skin disorders                                                : CCS CODE = 197-200
+60           49 Osteoarthritis and other non-traumatic joint disorders        : CCS CODE = 201-204
+61           50 Back problems                                                 : CCS CODE = 205
+62           51 Other bone and musculoskeletal  disease                       : CCS CODE = 206-209, 212
+63           52 Systemic lupus and connective tissues disorders               : CCS CODE = 210-211
+64           53 Congenital anomalies                                          : CCS CODE = 213-217
+65           54 Perinatal Conditions                                          : CCS CODE = 219-224
+66           55 Trauma-related disorders                                      : CCS CODE = 225-236, 239, 240, 244
+67           56 Complications of surgery or device                            : CCS CODE = 237, 238
+68           57 Poisoning by medical and non-medical substances               : CCS CODE = 241 - 243
+69           58 Residual Codes                                                : CCS CODE = 259
+70           59 Other care and screening                                      : CCS CODE = 10, 254-258
+71           60 Symptoms                                                      : CCS CODE = 245-252
+72           61 Allergic reactions                                            : CCS CODE = 253
+73         
+74         
+75         INPUT FILES:  1) C:\MEPS\SAS\DATA\H170.SAS7BDAT (2014 CONDITION PUF DATA)
+76                       2) C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FY PUF DATA)
+77         
+78         *********************************************************************************/;
+79         OPTIONS LS=132 PS=79 NODATE;
+80         
+81         *LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+82         LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: \\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data
+83         
+84         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+85         TITLE2 'EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)';
+86         
+87         
+88         PROC FORMAT;
+89           VALUE SEX
+90              . = 'OVERALL'
+91              1 = '1 MALE'
+92              2 = '2 FEMALE'
+93                ;
+NOTE: Format SEX is already on the library WORK.FORMATS.
+NOTE: Format SEX has been output.
+94         
+95           VALUE YESNO
+96              1 = '1 YES'
+97              2 = '2 NO'
+98                ;
+NOTE: Format YESNO is already on the library WORK.FORMATS.
+NOTE: Format YESNO has been output.
+99         RUN;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+100        
+101        
+102        /*1) PULL OUT CONDITIONS WITH DIABETES (CCS CODE='049', '050') FROM 2014 CONDITION PUF - HC162*/
+103        
+104        DATA DIAB;
+105         SET CDATA.H170;
+106            IF CCCODEX IN ('049', '050');
+107        RUN;
+
+NOTE: There were 116679 observations read from the data set CDATA.H170.
+NOTE: The data set WORK.DIAB has 3091 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.37 seconds
+      cpu time            0.38 seconds
+      
+
+3                                                          The SAS System
+
+108        
+109        TITLE3 "CHECK CCS CODES FOR DIABETIC CONDITIONS";
+110        PROC FREQ DATA=DIAB;
+111          TABLES CCCODEX / LIST MISSING;
+112        RUN;
+
+NOTE: There were 3091 observations read from the data set WORK.DIAB.
+NOTE: The PROCEDURE FREQ printed page 1.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.14 seconds
+      
+
+113        
+114        
+115        /*2) IDENTIFY PERSONS WHO REPORTED DIABETES*/
+116        
+117        PROC SORT DATA=DIAB OUT=DIABPERS (KEEP=DUPERSID) NODUPKEY;
+118          BY DUPERSID;
+119        RUN;
+
+NOTE: There were 3091 observations read from the data set WORK.DIAB.
+NOTE: SAS sort was used.
+NOTE: 209 observations with duplicate key values were deleted.
+NOTE: The data set WORK.DIABPERS has 2882 observations and 1 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+120        
+121        
+122        /*3) CREATE A FLAG FOR PERSONS WITH DIABETES IN THE 2014 FY DATA*/
+123        
+124        DATA  FY1;
+125        MERGE CDATA.H171 (IN=AA)
+126              DIABPERS   (IN=BB) ;
+127           BY DUPERSID;
+128        
+129              LABEL DIABPERS='PERSONS WHO REPORTED DIABETES';
+130        
+131              IF AA AND BB THEN DIABPERS = 1 ;
+132                           ELSE DIABPERS = 2 ;
+133        
+134        RUN;
+
+NOTE: There were 34875 observations read from the data set CDATA.H171.
+NOTE: There were 2882 observations read from the data set WORK.DIABPERS.
+NOTE: The data set WORK.FY1 has 34875 observations and 1839 variables.
+NOTE: DATA statement used (Total process time):
+      real time           10.14 seconds
+      cpu time            6.17 seconds
+      
+
+135        
+136        TITLE3 "UNWEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2014";
+137        PROC FREQ DATA=FY1;
+138          TABLES DIABPERS
+139                 DIABPERS * SEX / LIST MISSING;
+140          FORMAT SEX      sex.
+141                 DIABPERS yesno.
+142            ;
+143        RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.FY1.
+NOTE: The PROCEDURE FREQ printed page 2.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.49 seconds
+      cpu time            0.49 seconds
+      
+
+144        
+145        TITLE3 "WEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2014";
+146        PROC FREQ DATA=FY1;
+147          TABLES DIABPERS
+148                 DIABPERS * SEX /LIST MISSING;
+149          WEIGHT PERWT14F ;
+4                                                          The SAS System
+
+150          FORMAT SEX      sex.
+151                 DIABPERS yesno.
+152            ;
+153        RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.FY1.
+NOTE: The PROCEDURE FREQ printed page 3.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.49 seconds
+      cpu time            0.49 seconds
+      
+
+154        
+155        
+156        /*4) CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES*/
+157        
+158        ODS LISTING CLOSE;
+159        PROC SURVEYMEANS DATA=FY1 NOBS SUMWGT SUM STD MEAN STDERR;
+160        	STRATA  VARSTR ;
+161        	CLUSTER VARPSU ;
+162        	WEIGHT PERWT14F ;
+163        	DOMAIN DIABPERS
+164        	       DIABPERS * SEX ;
+165        	VAR    TOTEXP14 TOTSLF14 OBTOTV14;
+166             ODS OUTPUT DOMAIN=OUT1 ;
+167        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain PERSONS WHO REPORTED DIABETES*SEX for variable(s) TOTEXP14, TOTSLF14, OBTOTV14. The 
+      estimate of variance for TOTEXP14, TOTSLF14, OBTOTV14 will omit this stratum.
+NOTE: The data set WORK.OUT1 has 18 observations and 11 variables.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           1.12 seconds
+      cpu time            0.95 seconds
+      
+
+168        ODS LISTING;
+169        
+170        PROC SORT DATA=OUT1;
+171          BY DIABPERS SEX;
+172        RUN;
+
+NOTE: There were 18 observations read from the data set WORK.OUT1.
+NOTE: SAS sort was used.
+NOTE: The data set WORK.OUT1 has 18 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+173        
+174        TITLE3 "ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES, 2014";
+175        PROC PRINT DATA=OUT1  NOOBS LABEL;
+176        VAR SEX VARNAME /*VARLABEL*/ N SUMWGT SUM STDDEV MEAN STDERR;
+177        BY DIABPERS;
+178        FORMAT N                      comma6.0
+179               SUMWGT   SUM    STDDEV comma17.0
+180               MEAN     STDERR        comma9.2
+181               DIABPERS               yesno.
+182               SEX                    sex.
+183           ;
+184        RUN;
+
+NOTE: There were 18 observations read from the data set WORK.OUT1.
+NOTE: The PROCEDURE PRINT printed page 4.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           15.61 seconds
+      cpu time            9.67 seconds
+      

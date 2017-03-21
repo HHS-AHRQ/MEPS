@@ -1,0 +1,532 @@
+-----------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise7.log
+  log type:  text
+ opened on:  22 Feb 2017, 14:48:03
+
+. cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+\\files.s-3.com\HPDA\AHRQ\Fang\bj001
+
+. 
+. use dupersid varstr varpsu perwt14f racethx peg??14 pou??14 pdk??14 png??14 pog??14 prs??14 pri??14
+>  ins??14x mcd??14x mcr??14x tri??14x opa??14 opb??14 using h171
+
+. 
+. local opalist opaja14 opafe14 opama14 opaap14 opamy14 opaju14 opajl14 opaau14 opase14 opaoc14 opano
+> 14 opade14
+
+. local opblist opbja14 opbfe14 opbma14 opbap14 opbmy14 opbju14 opbjl14 opbau14 opbse14 opboc14 opbno
+> 14 opbde14
+
+. local peglist pegja14 pegfe14 pegma14 pegap14 pegmy14 pegju14 pegjl14 pegau14 pegse14 pegoc14 pegno
+> 14 pegde14
+
+. local trilist trija14x trife14x trima14x triap14x trimy14x triju14x trijl14x triau14x trise14x trio
+> c14x trino14x tride14x
+
+. local poulist pouja14 poufe14 pouma14 pouap14 poumy14 pouju14 poujl14 pouau14 pouse14 pouoc14 pouno
+> 14 poude14
+
+. local pdklist pdkja14 pdkfe14 pdkma14 pdkap14 pdkmy14 pdkju14 pdkjl14 pdkau14 pdkse14 pdkoc14 pdkno
+> 14 pdkde14
+
+. local pnglist pngja14 pngfe14 pngma14 pngap14 pngmy14 pngju14 pngjl14 pngau14 pngse14 pngoc14 pngno
+> 14 pngde14
+
+. local poglist pogja14 pogfe14 pogma14 pogap14 pogmy14 pogju14 pogjl14 pogau14 pogse14 pogoc14 pogno
+> 14 pogde14
+
+. local prslist prsja14 prsfe14 prsma14 prsap14 prsmy14 prsju14 prsjl14 prsau14 prsse14 prsoc14 prsno
+> 14 prsde14
+
+. local mcrlist mcrja14x mcrfe14x mcrma14x mcrap14x mcrmy14x mcrju14x mcrjl14x mcrau14x mcrse14x mcro
+> c14x mcrno14x mcrde14x
+
+. local mcdlist mcdja14x mcdfe14x mcdma14x mcdap14x mcdmy14x mcdju14x mcdjl14x mcdau14x mcdse14x mcdo
+> c14x mcdno14x mcdde14x
+
+. local prilist prija14 prife14 prima14 priap14 primy14 priju14 prijl14 priau14 prise14 prioc14 prino
+> 14 pride14
+
+. local inslist insja14x insfe14x insma14x insap14x insmy14x insju14x insjl14x insau14x insse14x inso
+> c14x insno14x insde14x
+
+. 
+. /*1) count # of months with insurance*/
+. egen pri_n=anycount(`prilist'), v(1)
+
+. egen ins_n=anycount(`inslist'), v(1)
+
+. egen unins_n=anycount(`inslist'), v(2)
+
+. egen mcd_n=anycount(`mcdlist'), v(1)
+
+. egen mcr_n=anycount(`mcrlist'), v(1)
+
+. egen tri_n=anycount(`trilist'), v(1)
+
+. egen ref_n=anycount(`inslist'), v(1 2)
+
+. 
+. /*2) create flags for various types of insu*/
+. forval i=1/12 {
+  2.        local opa=word("`opalist'",`i')
+  3.        local opb=word("`opblist'",`i')
+  4.        gen op`i'=(`opa'==1 | `opb'==1)
+  5.        }
+
+. egen opab_n=anycount(op1-op12), v(1)
+
+. 
+. forval i=1/12 {
+  2.        local peg=word("`peglist'",`i')
+  3.        local tri=word("`trilist'",`i')
+  4.        local pou=word("`poulist'",`i')
+  5.        local pdk=word("`pdklist'",`i')
+  6.        gen grp`i'=(`peg'==1 | `tri'==1 |`pou'==1 | `pdk'==1 )
+  7.        }
+
+. egen grp_n=anycount(grp1-grp12), v(1)
+
+. 
+. forval i=1/12 {
+  2.        local png=word("`pnglist'",`i')
+  3.        local pog=word("`poglist'",`i')
+  4.        local prs=word("`prslist'",`i')
+  5.        gen ng`i'=(`png'==1 | `pog'==1 |`prs'==1)
+  6.        }
+
+. egen ng_n=anycount(ng1-ng12), v(1)
+
+. 
+. forval i=1/12 {
+  2.        local mcr=word("`mcrlist'",`i')
+  3.        local mcd=word("`mcdlist'",`i')
+  4.        local opa=word("`opalist'",`i')
+  5.        local opb=word("`opblist'",`i')
+  6.        gen pub`i'=(`mcr'==1 | `mcd'==1 |`opa'==1 | `opb'==1 )
+  7.        }
+
+. egen pub_n=anycount(pub1-pub12), v(1)
+
+. 
+. gen full_insu=(unins_n==0)
+
+. gen group_ins1=(grp_n>0)
+
+. gen group_ins2=(grp_n>0 & grp_n==ref_n)
+
+. gen ng_ins=(ng_n>0)
+
+. 
+. label define racethx 1 "1 Hispanic" 2 "2 White" 3 "3 Black" 4 "4 Asian" 5 "5 Other"
+
+. label value racethx racethx
+
+. 
+. tab1 pri_n ins_n unins_n mcd_n mcr_n tri_n opab_n grp_n ng_n pub_n ref_n 
+
+-> tabulation of pri_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     17,530       50.27       50.27
+          1 |        163        0.47       50.73
+          2 |        173        0.50       51.23
+          3 |        253        0.73       51.95
+          4 |        289        0.83       52.78
+          5 |        319        0.91       53.70
+          6 |        311        0.89       54.59
+          7 |        301        0.86       55.45
+          8 |        354        1.02       56.47
+          9 |        436        1.25       57.72
+         10 |        416        1.19       58.91
+         11 |        386        1.11       60.02
+         12 |     13,944       39.98      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of ins_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      4,968       14.25       14.25
+          1 |        194        0.56       14.80
+          2 |        274        0.79       15.59
+          3 |        316        0.91       16.49
+          4 |        407        1.17       17.66
+          5 |        503        1.44       19.10
+          6 |        504        1.45       20.55
+          7 |        456        1.31       21.86
+          8 |        634        1.82       23.67
+          9 |        703        2.02       25.69
+         10 |        692        1.98       27.67
+         11 |        687        1.97       29.64
+         12 |     24,537       70.36      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of unins_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     25,534       73.22       73.22
+          1 |        682        1.96       75.17
+          2 |        656        1.88       77.05
+          3 |        679        1.95       79.00
+          4 |        578        1.66       80.66
+          5 |        403        1.16       81.81
+          6 |        415        1.19       83.00
+          7 |        437        1.25       84.26
+          8 |        306        0.88       85.13
+          9 |        251        0.72       85.85
+         10 |        206        0.59       86.44
+         11 |        170        0.49       86.93
+         12 |      4,558       13.07      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of mcd_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     23,593       67.65       67.65
+          1 |        148        0.42       68.07
+          2 |        212        0.61       68.68
+          3 |        266        0.76       69.45
+          4 |        333        0.95       70.40
+          5 |        332        0.95       71.35
+          6 |        366        1.05       72.40
+          7 |        317        0.91       73.31
+          8 |        393        1.13       74.44
+          9 |        413        1.18       75.62
+         10 |        405        1.16       76.78
+         11 |        337        0.97       77.75
+         12 |      7,760       22.25      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of mcr_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     29,963       85.92       85.92
+          1 |         27        0.08       85.99
+          2 |         39        0.11       86.10
+          3 |         38        0.11       86.21
+          4 |         50        0.14       86.36
+          5 |         59        0.17       86.53
+          6 |         44        0.13       86.65
+          7 |         34        0.10       86.75
+          8 |         42        0.12       86.87
+          9 |         36        0.10       86.97
+         10 |         60        0.17       87.15
+         11 |         61        0.17       87.32
+         12 |      4,422       12.68      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of tri_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     34,074       97.70       97.70
+          1 |         12        0.03       97.74
+          2 |         14        0.04       97.78
+          3 |         19        0.05       97.83
+          4 |         24        0.07       97.90
+          5 |         21        0.06       97.96
+          6 |         32        0.09       98.05
+          7 |         15        0.04       98.10
+          8 |         17        0.05       98.14
+          9 |         15        0.04       98.19
+         10 |         28        0.08       98.27
+         11 |         19        0.05       98.32
+         12 |        585        1.68      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of opab_n  
+
+op1 op2 op3 |
+op4 op5 op6 |
+op7 op8 op9 |
+  op10 op11 |
+  op12 == 1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     34,456       98.80       98.80
+          1 |         18        0.05       98.85
+          2 |         30        0.09       98.94
+          3 |         23        0.07       99.00
+          4 |         27        0.08       99.08
+          5 |         54        0.15       99.23
+          6 |         40        0.11       99.35
+          7 |         22        0.06       99.41
+          8 |         38        0.11       99.52
+          9 |         20        0.06       99.58
+         10 |         19        0.05       99.63
+         11 |         14        0.04       99.67
+         12 |        114        0.33      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of grp_n  
+
+  grp1 grp2 |
+  grp3 grp4 |
+  grp5 grp6 |
+  grp7 grp8 |
+ grp9 grp10 |
+grp11 grp12 |
+       == 1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     18,558       53.21       53.21
+          1 |        178        0.51       53.72
+          2 |        198        0.57       54.29
+          3 |        272        0.78       55.07
+          4 |        300        0.86       55.93
+          5 |        296        0.85       56.78
+          6 |        287        0.82       57.60
+          7 |        268        0.77       58.37
+          8 |        288        0.83       59.20
+          9 |        320        0.92       60.11
+         10 |        330        0.95       61.06
+         11 |        302        0.87       61.93
+         12 |     13,278       38.07      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of ng_n  
+
+ng1 ng2 ng3 |
+ng4 ng5 ng6 |
+ng7 ng8 ng9 |
+  ng10 ng11 |
+  ng12 == 1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     33,556       96.22       96.22
+          1 |         31        0.09       96.31
+          2 |         26        0.07       96.38
+          3 |         39        0.11       96.49
+          4 |         32        0.09       96.58
+          5 |         78        0.22       96.81
+          6 |         64        0.18       96.99
+          7 |         54        0.15       97.15
+          8 |         45        0.13       97.28
+          9 |         40        0.11       97.39
+         10 |         54        0.15       97.55
+         11 |         50        0.14       97.69
+         12 |        806        2.31      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of pub_n  
+
+  pub1 pub2 |
+  pub3 pub4 |
+  pub5 pub6 |
+  pub7 pub8 |
+ pub9 pub10 |
+pub11 pub12 |
+       == 1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     19,689       56.46       56.46
+          1 |        166        0.48       56.93
+          2 |        233        0.67       57.60
+          3 |        268        0.77       58.37
+          4 |        346        0.99       59.36
+          5 |        356        1.02       60.38
+          6 |        357        1.02       61.41
+          7 |        317        0.91       62.31
+          8 |        423        1.21       63.53
+          9 |        432        1.24       64.77
+         10 |        421        1.21       65.97
+         11 |        368        1.06       67.03
+         12 |     11,499       32.97      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of ref_n  
+
+  see notes |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         87        0.25        0.25
+          2 |        125        0.36        0.61
+          3 |        135        0.39        0.99
+          4 |        154        0.44        1.44
+          5 |        134        0.38        1.82
+          6 |        170        0.49        2.31
+          7 |        168        0.48        2.79
+          8 |        149        0.43        3.22
+          9 |        137        0.39        3.61
+         10 |        145        0.42        4.03
+         11 |        142        0.41        4.43
+         12 |     33,329       95.57      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+. tab1 full_ins group_ins1 group_ins2 ng_ins
+
+-> tabulation of full_insu  
+
+  full_insu |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      9,341       26.78       26.78
+          1 |     25,534       73.22      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of group_ins1  
+
+ group_ins1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     18,558       53.21       53.21
+          1 |     16,317       46.79      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of group_ins2  
+
+ group_ins2 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     21,214       60.83       60.83
+          1 |     13,661       39.17      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of ng_ins  
+
+     ng_ins |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     33,556       96.22       96.22
+          1 |      1,319        3.78      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+. tab full_insu unins_n
+
+           |                                  see notes
+ full_insu |         0          1          2          3          4          5          6 |     Total
+-----------+-----------------------------------------------------------------------------+----------
+         0 |         0        682        656        679        578        403        415 |     9,341 
+         1 |    25,534          0          0          0          0          0          0 |    25,534 
+-----------+-----------------------------------------------------------------------------+----------
+     Total |    25,534        682        656        679        578        403        415 |    34,875 
+
+
+           |                             see notes
+ full_insu |         7          8          9         10         11         12 |     Total
+-----------+------------------------------------------------------------------+----------
+         0 |       437        306        251        206        170      4,558 |     9,341 
+         1 |         0          0          0          0          0          0 |    25,534 
+-----------+------------------------------------------------------------------+----------
+     Total |       437        306        251        206        170      4,558 |    34,875 
+
+
+. tab group_ins1 grp_n
+
+           |     grp1 grp2 grp3 grp4 grp5 grp6 grp7 grp8 grp9 grp10 grp11 grp12 == 1
+group_ins1 |         0          1          2          3          4          5          6 |     Total
+-----------+-----------------------------------------------------------------------------+----------
+         0 |    18,558          0          0          0          0          0          0 |    18,558 
+         1 |         0        178        198        272        300        296        287 |    16,317 
+-----------+-----------------------------------------------------------------------------+----------
+     Total |    18,558        178        198        272        300        296        287 |    34,875 
+
+
+           | grp1 grp2 grp3 grp4 grp5 grp6 grp7 grp8 grp9 grp10 grp11 grp12 ==
+           |                                 1
+group_ins1 |         7          8          9         10         11         12 |     Total
+-----------+------------------------------------------------------------------+----------
+         0 |         0          0          0          0          0          0 |    18,558 
+         1 |       268        288        320        330        302     13,278 |    16,317 
+-----------+------------------------------------------------------------------+----------
+     Total |       268        288        320        330        302     13,278 |    34,875 
+
+
+. tab ng_ins ng_n
+
+           |           ng1 ng2 ng3 ng4 ng5 ng6 ng7 ng8 ng9 ng10 ng11 ng12 == 1
+    ng_ins |         0          1          2          3          4          5          6 |     Total
+-----------+-----------------------------------------------------------------------------+----------
+         0 |    33,556          0          0          0          0          0          0 |    33,556 
+         1 |         0         31         26         39         32         78         64 |     1,319 
+-----------+-----------------------------------------------------------------------------+----------
+     Total |    33,556         31         26         39         32         78         64 |    34,875 
+
+
+           |      ng1 ng2 ng3 ng4 ng5 ng6 ng7 ng8 ng9 ng10 ng11 ng12 == 1
+    ng_ins |         7          8          9         10         11         12 |     Total
+-----------+------------------------------------------------------------------+----------
+         0 |         0          0          0          0          0          0 |    33,556 
+         1 |        54         45         40         54         50        806 |     1,319 
+-----------+------------------------------------------------------------------+----------
+     Total |        54         45         40         54         50        806 |    34,875 
+
+
+. 
+. /*3) calculate % of persons covered by insu*/
+. svyset [pweight=perwt14f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+      pweight: perwt14f
+          VCE: linearized
+  Single unit: missing
+     Strata 1: varstr
+         SU 1: varpsu
+        FPC 1: <zero>
+
+. svy: mean full_insu group_ins1 group_ins2 ng_ins, over(racethx)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Design df       =          201
+
+    _subpop_1: racethx = 1 Hispanic
+    _subpop_2: racethx = 2 White
+    _subpop_3: racethx = 3 Black
+    _subpop_4: racethx = 4 Asian
+    _subpop_5: racethx = 5 Other
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+full_insu    |
+   _subpop_1 |   .6304874   .0108498      .6090935    .6518814
+   _subpop_2 |   .8454039   .0058808       .833808    .8569998
+   _subpop_3 |   .7587175   .0076738       .743586    .7738489
+   _subpop_4 |   .8169587   .0124951      .7923204     .841597
+   _subpop_5 |   .8143359   .0182126      .7784238    .8502481
+-------------+------------------------------------------------
+group_ins1   |
+   _subpop_1 |   .3954937   .0129272      .3700033     .420984
+   _subpop_2 |   .6641125   .0090081        .64635     .681875
+   _subpop_3 |   .4831186   .0127436      .4579903    .5082469
+   _subpop_4 |   .6730659   .0196512      .6343169    .7118149
+   _subpop_5 |   .5968621   .0303489       .537019    .6567052
+-------------+------------------------------------------------
+group_ins2   |
+   _subpop_1 |   .3210509   .0111361      .2990923    .3430095
+   _subpop_2 |   .5841479   .0096911      .5650386    .6032572
+   _subpop_3 |   .4074334   .0117647      .3842353    .4306315
+   _subpop_4 |   .5891631   .0205922      .5485586    .6297677
+   _subpop_5 |    .524075   .0311888      .4625758    .5855743
+-------------+------------------------------------------------
+ng_ins       |
+   _subpop_1 |   .0196489   .0023906       .014935    .0243629
+   _subpop_2 |   .0802808   .0045847      .0712405    .0893212
+   _subpop_3 |   .0196147   .0024064      .0148696    .0243598
+   _subpop_4 |   .0512339     .00804      .0353804    .0670875
+   _subpop_5 |   .0341041   .0081471      .0180392    .0501689
+--------------------------------------------------------------
+
+. 
+. log close  
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise7.log
+  log type:  text
+ closed on:  22 Feb 2017, 14:49:32
+-----------------------------------------------------------------------------------------------------

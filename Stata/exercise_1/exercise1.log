@@ -1,0 +1,526 @@
+-----------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise1.log
+  log type:  text
+ opened on:  22 Feb 2017, 14:18:17
+
+. cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+\\files.s-3.com\HPDA\AHRQ\Fang\bj001
+
+. 
+. 
+. /* read in data from 2014 consolidated data file (hc-171) */
+. use totexp14 ipdexp14 ipfexp14 obvexp14 rxexp14 opdexp14 opfexp14 dvtexp14 erdexp14 erfexp14 hhaexp
+> 14 hhnexp14 othexp14 visexp14 age14x age42x age31x varstr varpsu perwt14f using h171.dta
+
+.     
+. /* define expenditure variables by type of service  */
+. gen total=totexp14
+
+. gen hospital_inpatient   = ipdexp14 + ipfexp14
+
+. gen ambulatory           = obvexp14 + opdexp14 + opfexp14 + erdexp14 + erfexp14
+
+. gen prescribed_medicines = rxexp14
+
+. gen dental               = dvtexp14
+
+. gen home_health_other    = hhaexp14 + hhnexp14 + othexp14 + visexp14
+
+. gen diff                 = total-hospital_inpatient - ambulatory   - prescribed_medicines - dental 
+> - home_health_other
+
+. 
+. /* create flag (1/0) variables for persons with an expense, by type of service  */
+. foreach var in total hospital_inpatient ambulatory prescribed_medicines dental home_health_other {
+  2. gen x_`var'=(`var'>0)
+  3. }
+
+. 
+. /* create a summary variable from end of year, 42, and 31 variables*/
+. gen age=age14x if age14x>=0
+(209 missing values generated)
+
+. replace age=age42x if age42x>=0 & missing(age)
+(136 real changes made)
+
+. replace age=age31x if age31x>=0 & missing(age)
+(73 real changes made)
+
+. 
+. gen agecat=1 if age>=0 & age<=64
+(4,105 missing values generated)
+
+. replace agecat=2 if age>64
+(4,105 real changes made)
+
+. 
+. /* qc check on new variables*/
+. tab1  x_total x_hospital_inpatient  x_ambulatory  x_prescribed_medicines  x_dental  x_home_health_o
+> ther
+
+-> tabulation of x_total  
+
+    x_total |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      7,225       20.72       20.72
+          1 |     27,650       79.28      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of x_hospital_inpatient  
+
+x_hospital_ |
+  inpatient |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,682       93.71       93.71
+          1 |      2,193        6.29      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of x_ambulatory  
+
+x_ambulator |
+          y |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     10,531       30.20       30.20
+          1 |     24,344       69.80      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of x_prescribed_medicines  
+
+x_prescribe |
+d_medicines |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     15,948       45.73       45.73
+          1 |     18,927       54.27      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of x_dental  
+
+   x_dental |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     22,831       65.47       65.47
+          1 |     12,044       34.53      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+-> tabulation of x_home_health_other  
+
+x_home_heal |
+   th_other |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     28,936       82.97       82.97
+          1 |      5,939       17.03      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+. sum total if total>0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       total |     27,650    4938.678    14269.34          1     491858
+
+. sum hospital_inpatient if hospital_inpatient>0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+hospital_i~t |      2,193    17536.95    27716.47          3     414748
+
+. sum ambulatory if ambulatory>0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+  ambulatory |     24,344    2069.085    6894.936          1     488881
+
+. sum prescribed_medicines if prescribed_medicines>0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+prescribed~s |     18,927    1608.024    5659.345          1     269756
+
+. sum dental if dental>0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      dental |     12,044    654.5071    1349.928          3      38432
+
+. sum home_health_other if home_health_other>0
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+home_healt~r |      5,939    1584.149    6493.048          4     172462
+
+. 
+. list age age14x age42x age31x in 1/20, table
+
+     +--------------------------------+
+     | age   age14x   age42x   age31x |
+     |--------------------------------|
+  1. |  36       36       36       35 |
+  2. |  36       36       36       36 |
+  3. |  15       15       14       14 |
+  4. |   8        8        8        7 |
+  5. |  85       85       85       85 |
+     |--------------------------------|
+  6. |  34       34       33       33 |
+  7. |  32       32       31       31 |
+  8. |  15       15       14       14 |
+  9. |  11       11       10       10 |
+ 10. |   9        9        8        8 |
+     |--------------------------------|
+ 11. |   4        4        4        3 |
+ 12. |   8        8        8        7 |
+ 13. |  20       -1       20       19 |
+ 14. |  79       79       78       78 |
+ 15. |  47       47       46       46 |
+     |--------------------------------|
+ 16. |  35       35       35       34 |
+ 17. |  36       36       36       36 |
+ 18. |  11       11       11       10 |
+ 19. |   7        7        7        7 |
+ 20. |  26       26       25       25 |
+     +--------------------------------+
+
+. 
+. tab agecat
+
+     agecat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |     30,770       88.23       88.23
+          2 |      4,105       11.77      100.00
+------------+-----------------------------------
+      Total |     34,875      100.00
+
+. sum age if age>64
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         age |      4,105    73.80682     6.66308         65         85
+
+. 
+. /* identify the survey design characteristics */
+. svyset [pweight= perwt14f], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+      pweight: perwt14f
+          VCE: linearized
+  Single unit: missing
+     Strata 1: varstr
+         SU 1: varpsu
+        FPC 1: <zero>
+
+. 
+. // percentage distribution of expenses by type of service (stat brief #491 figure 1)
+. svy: ratio ( hospital_inpatient: hospital_inpatient/total) ///
+>            ( ambulatory: ambulatory/ total) ///
+>            ( prescribed_medicines: prescribed_medicines/total) ///
+>            ( dental: dental/total) ///
+>            ( home_health_other: home_health_other/total)
+(running ratio on estimation sample)
+
+Survey: Ratio estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Design df       =          201
+
+ hospital_i~t: hospital_inpatient/total
+   ambulatory: ambulatory/total
+ prescribed~s: prescribed_medicines/total
+       dental: dental/total
+ home_healt~r: home_health_other/total
+
+----------------------------------------------------------------------
+                     |             Linearized
+                     |      Ratio   Std. Err.     [95% Conf. Interval]
+---------------------+------------------------------------------------
+  hospital_inpatient |    .254729   .0117416      .2315764    .2778816
+          ambulatory |   .3850812   .0092253      .3668904    .4032719
+prescribed_medicines |   .2335445   .0095548      .2147041    .2523849
+              dental |   .0612787   .0021079      .0571223    .0654352
+   home_health_other |   .0653674   .0056807       .054166    .0765687
+----------------------------------------------------------------------
+
+.            
+. // percentage of persons with an expense, by type of service
+. svy: mean  x_total x_hospital_inpatient x_ambulatory x_prescribed_medicines x_dental x_home_health_
+> other
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Design df       =          201
+
+------------------------------------------------------------------------
+                       |             Linearized
+                       |       Mean   Std. Err.     [95% Conf. Interval]
+-----------------------+------------------------------------------------
+               x_total |   .8512277   .0035374      .8442524    .8582029
+  x_hospital_inpatient |   .0657779   .0021471      .0615441    .0700117
+          x_ambulatory |   .7590857   .0043806      .7504479    .7677235
+x_prescribed_medicines |   .6135182   .0049526      .6037524    .6232839
+              x_dental |   .4143585   .0059531      .4026199     .426097
+   x_home_health_other |   .2040905   .0042286      .1957524    .2124287
+------------------------------------------------------------------------
+
+.            
+. // mean expense per person with an expense, by type of service     
+. svy, subpop(x_total): mean total
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       26,665
+                                Subpop. size    =  271,065,295
+                                Design df       =          201
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+       total |   5531.379   137.9266       5259.41    5803.347
+--------------------------------------------------------------
+
+. svy, subpop(x_hospital_inpatient): mean hospital_inpatient
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =        2,081
+                                Subpop. size    = 20,946,346.5
+                                Design df       =          201
+
+--------------------------------------------------------------------
+                   |             Linearized
+                   |       Mean   Std. Err.     [95% Conf. Interval]
+-------------------+------------------------------------------------
+hospital_inpatient |   18233.81   857.9769      16542.02     19925.6
+--------------------------------------------------------------------
+
+. svy, subpop(x_ambulatory): mean ambulatory
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       23,536
+                                Subpop. size    =  241,723,564
+                                Design df       =          201
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+  ambulatory |   2388.585   62.53984      2265.266    2511.903
+--------------------------------------------------------------
+
+. svy, subpop(x_prescribed_medicines): mean prescribed_medicines
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       18,311
+                                Subpop. size    =  195,368,984
+                                Design df       =          201
+
+----------------------------------------------------------------------
+                     |             Linearized
+                     |       Mean   Std. Err.     [95% Conf. Interval]
+---------------------+------------------------------------------------
+prescribed_medicines |   1792.344   83.78614      1627.131    1957.556
+----------------------------------------------------------------------
+
+. svy, subpop(x_dental): mean dental
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       11,775
+                                Subpop. size    =  131,948,483
+                                Design df       =          201
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+      dental |   696.3259    15.4452      665.8705    726.7813
+--------------------------------------------------------------
+
+. svy, subpop(x_home_health_other): mean home_health_other
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =        5,761
+                                Subpop. size    =   64,990,677
+                                Design df       =          201
+
+-------------------------------------------------------------------
+                  |             Linearized
+                  |       Mean   Std. Err.     [95% Conf. Interval]
+------------------+------------------------------------------------
+home_health_other |   1508.055   139.4998      1232.984    1783.126
+-------------------------------------------------------------------
+
+. 
+. // mean expense per person with an expense, by type of service and age category
+. svy, subpop(x_total): mean total, over(agecat)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       26,665
+                                Subpop. size    =  271,065,295
+                                Design df       =          201
+
+            1: agecat = 1
+            2: agecat = 2
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+total        |
+           1 |   4429.921   149.9609      4134.223     4725.62
+           2 |      10890   302.6142      10293.29     11486.7
+--------------------------------------------------------------
+
+. svy, subpop(x_hospital_inpatient): mean hospital_inpatient, over(agecat)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =        2,081
+                                Subpop. size    = 20,946,346.5
+                                Design df       =          201
+
+            1: agecat = 1
+            2: agecat = 2
+
+--------------------------------------------------------------------
+                   |             Linearized
+              Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------------+------------------------------------------------
+hospital_inpatient |
+                 1 |   17663.08   1263.521      15171.63    20154.54
+                 2 |   19191.14    1131.91       16959.2    21423.08
+--------------------------------------------------------------------
+
+. svy, subpop(x_ambulatory): mean ambulatory, over(agecat)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       23,536
+                                Subpop. size    =  241,723,564
+                                Design df       =          201
+
+            1: agecat = 1
+            2: agecat = 2
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+ambulatory   |
+           1 |    2055.61   66.80712      1923.877    2187.343
+           2 |   3859.418   168.7558      3526.659    4192.177
+--------------------------------------------------------------
+
+. svy, subpop(x_prescribed_medicines): mean prescribed_medicines, over(agecat)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       18,311
+                                Subpop. size    =  195,368,984
+                                Design df       =          201
+
+            1: agecat = 1
+            2: agecat = 2
+
+----------------------------------------------------------------------
+                     |             Linearized
+                Over |       Mean   Std. Err.     [95% Conf. Interval]
+---------------------+------------------------------------------------
+prescribed_medicines |
+                   1 |   1560.906   106.3327      1351.236    1770.577
+                   2 |   2602.126   100.7413       2403.48    2800.771
+----------------------------------------------------------------------
+
+. svy, subpop(x_dental): mean dental, over(agecat)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =       11,775
+                                Subpop. size    =  131,948,483
+                                Design df       =          201
+
+            1: agecat = 1
+            2: agecat = 2
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+dental       |
+           1 |     657.05   17.34416      622.8501    691.2498
+           2 |   892.5962   44.61207      804.6285    980.5639
+--------------------------------------------------------------
+
+. svy, subpop(x_home_health_other): mean home_health_other, over(agecat)
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =        5,761
+                                Subpop. size    =   64,990,677
+                                Design df       =          201
+
+            1: agecat = 1
+            2: agecat = 2
+
+-------------------------------------------------------------------
+                  |             Linearized
+             Over |       Mean   Std. Err.     [95% Conf. Interval]
+------------------+------------------------------------------------
+home_health_other |
+                1 |   1025.308    161.522      706.8131    1343.803
+                2 |   2923.966   209.7328      2510.407    3337.524
+-------------------------------------------------------------------
+
+. 
+. log close
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise1.log
+  log type:  text
+ closed on:  22 Feb 2017, 14:19:49
+-----------------------------------------------------------------------------------------------------

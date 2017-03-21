@@ -1,0 +1,91 @@
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                1
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                                              CHECK CCS CODES FOR DIABETIC CONDITIONS
+
+                                                         The FREQ Procedure
+
+                                               CLINICAL CLASSIFICATION CODE - EDITED
+ 
+                                                                        Cumulative    Cumulative
+                                    CCCODEX    Frequency     Percent     Frequency      Percent
+                                    ------------------------------------------------------------
+                                    049            3009       97.35          3009        97.35  
+                                    050              82        2.65          3091       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                2
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                                        UNWEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2014
+
+                                                         The FREQ Procedure
+
+                                                   PERSONS WHO REPORTED DIABETES
+ 
+                                                                        Cumulative    Cumulative
+                                   DIABPERS    Frequency     Percent     Frequency      Percent
+                                   -------------------------------------------------------------
+                                      1 YES        2882        8.26          2882         8.26  
+                                      2 NO        31993       91.74         34875       100.00  
+
+
+                                                                              Cumulative    Cumulative
+                             DIABPERS         SEX    Frequency     Percent     Frequency      Percent
+                             -------------------------------------------------------------------------
+                             1 YES       1 MALE          1281        3.67          1281         3.67  
+                             1 YES       2 FEMALE        1601        4.59          2882         8.26  
+                             2 NO        1 MALE         15387       44.12         18269        52.38  
+                             2 NO        2 FEMALE       16606       47.62         34875       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                3
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                                         WEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2014
+
+                                                         The FREQ Procedure
+
+                                                   PERSONS WHO REPORTED DIABETES
+ 
+                                                                        Cumulative    Cumulative
+                                   DIABPERS    Frequency     Percent     Frequency      Percent
+                                   -------------------------------------------------------------
+                                      1 YES    26820740        8.42      26820740         8.42  
+                                      2 NO     2.9162E8       91.58      3.1844E8       100.00  
+
+
+                                                                              Cumulative    Cumulative
+                             DIABPERS         SEX    Frequency     Percent     Frequency      Percent
+                             -------------------------------------------------------------------------
+                             1 YES       1 MALE      12945517        4.07      12945517         4.07  
+                             1 YES       2 FEMALE    13875223        4.36      26820740         8.42  
+                             2 NO        1 MALE      1.4292E8       44.88      1.6974E8        53.30  
+                             2 NO        2 FEMALE     1.487E8       46.70      3.1844E8       100.00  
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                4
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                             ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES, 2014
+
+----------------------------------------------- PERSONS WHO REPORTED DIABETES=1 YES ------------------------------------------------
+
+                  Variable
+        SEX         Name           N               SumWgt                  Sum               StdDev         Mean       StdErr
+
+      OVERALL     TOTEXP14     2,801           26,820,740      368,103,562,876       22,531,870,533    13,724.59       686.40
+      OVERALL     TOTSLF14     2,801           26,820,740       31,682,608,229        1,740,345,789     1,181.27        50.75
+      OVERALL     OBTOTV14     2,801           26,820,740          329,056,783           15,492,009        12.27         0.41
+      1 MALE      TOTEXP14     1,249           12,945,517      179,461,032,481       17,579,742,606    13,862.79     1,179.96
+      1 MALE      TOTSLF14     1,249           12,945,517       15,534,634,884        1,221,272,934     1,200.00        75.63
+      1 MALE      OBTOTV14     1,249           12,945,517          148,107,408           11,193,823        11.44         0.66
+      2 FEMALE    TOTEXP14     1,552           13,875,223      188,642,530,396       13,932,538,932    13,595.64       851.81
+      2 FEMALE    TOTSLF14     1,552           13,875,223       16,147,973,344        1,186,121,898     1,163.80        70.90
+      2 FEMALE    OBTOTV14     1,552           13,875,223          180,949,375            9,291,257        13.04         0.54
+
+
+------------------------------------------------ PERSONS WHO REPORTED DIABETES=2 NO ------------------------------------------------
+
+                  Variable
+        SEX         Name           N               SumWgt                  Sum               StdDev         Mean       StdErr
+
+      OVERALL     TOTEXP14    30,361          291,619,683    1,131,261,275,395       39,611,489,907     3,879.23       104.65
+      OVERALL     TOTSLF14    30,361          291,619,683      154,754,108,953        5,347,940,348       530.67        13.29
+      OVERALL     OBTOTV14    30,361          291,619,683        1,547,535,080           47,348,042         5.31         0.12
+      1 MALE      TOTEXP14    14,541          142,920,831      505,099,797,334       27,031,256,967     3,534.12       171.23
+      1 MALE      TOTSLF14    14,541          142,920,831       66,617,295,673        2,940,603,106       466.11        17.30
+      1 MALE      OBTOTV14    14,541          142,920,831          613,380,314           25,137,337         4.29         0.14
+      2 FEMALE    TOTEXP14    15,820          148,698,852      626,161,478,062       23,103,164,148     4,210.94       121.64
+      2 FEMALE    TOTSLF14    15,820          148,698,852       88,136,813,279        3,311,785,740       592.72        17.15
+      2 FEMALE    OBTOTV14    15,820          148,698,852          934,154,767           28,599,777         6.28         0.14

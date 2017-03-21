@@ -1,0 +1,151 @@
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                1
+                                          EXERCISE3.SAS: CALCULATE FAMILY-LEVEL ESTIMATES
+                                                     SAMPLE DUMP FOR FAMILY IDS
+
+------------------------------------------------------ DWELLING UNIT ID=40001 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                                1    101      36       1        A         6540.86       A        6540.86
+                                2    102      36       2        A         6540.86       A        6540.86
+                                3    103      15       2        A         6540.86       A        6540.86
+                                4    104       8       1        A         6540.86       A        6540.86
+
+
+------------------------------------------------------ DWELLING UNIT ID=40002 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                                5    101      85       2        A         8828.00       A        8828.00
+
+
+------------------------------------------------------ DWELLING UNIT ID=40004 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                                6    101       34      1        A         3883.96       A        3883.96
+                                7    102       32      2        A         3883.96       A        3883.96
+                                8    103       15      2        A         3883.96       A        3883.96
+                                9    104       11      1        A         3883.96       A        3883.96
+                               10    105        9      1        A         3883.96       A        3883.96
+                               11    106        4      1        A         3883.96       A        3883.96
+                               12    107        8      1        A         3883.96       A        3883.96
+                               13    108       -1      1        A            0.00       A        3883.96
+
+
+------------------------------------------------------ DWELLING UNIT ID=40005 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                               14    101      79       2        A         4676.87       A        4676.87
+
+
+------------------------------------------------------ DWELLING UNIT ID=40009 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                               15    101      47       1        A         5826.47       A        5826.47
+
+
+------------------------------------------------------ DWELLING UNIT ID=40010 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                               16    101      35       1        A         7601.44       A        7601.44
+                               17    102      36       2        A         7601.44       A        7601.44
+                               18    103      11       2        A         7601.44       A        7601.44
+                               19    104       7       1        A         7601.44       A        7601.44
+
+
+------------------------------------------------------ DWELLING UNIT ID=40011 ------------------------------------------------------
+
+                              Obs    PID    AGE14X    SEX    CPSFAMID    FAMWT14C    FAMIDYR    FAMWT14F
+
+                               20    101      26       1        A         4748.00       A        4748.00
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                2
+                                          EXERCISE3.SAS: CALCULATE FAMILY-LEVEL ESTIMATES
+                                 A SAMPLE DUMP TO CHECK THE CREATION OF THE FAMILY-LEVEL VARIABLES
+
+------------------------------------------------ DWELLING UNIT ID=40001 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                  1    40001101     12000        165       6540.86     1144        2         1         165      12000
+                  2    40001102     56000        152       6540.86     1144        2         2         317      68000
+                  3    40001103         0        135       6540.86     1144        2         3         452      68000
+                  4    40001104         0         89       6540.86     1144        2         4         541      68000
+
+
+------------------------------------------------ DWELLING UNIT ID=40002 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                  5    40002101     27030         2        8828.00     1097        1         1          2       27030
+
+
+------------------------------------------------ DWELLING UNIT ID=40004 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                  6    40004101     12000          0       3883.96     1056        2         1           0      12000
+                  7    40004102         0         12       3883.96     1056        2         2          12      12000
+                  8    40004103         0         80       3883.96     1056        2         3          92      12000
+                  9    40004104         0        159       3883.96     1056        2         4         251      12000
+                 10    40004105         0          0       3883.96     1056        2         5         251      12000
+                 11    40004106         0          0       3883.96     1056        2         6         251      12000
+                 12    40004107         0        141       3883.96     1056        2         7         392      12000
+                 13    40004108         0          0          0.00     1056        2         8         392      12000
+
+
+------------------------------------------------ DWELLING UNIT ID=40005 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                 14    40005101     39945       2919       4676.87     1129        2         1        2919      39945
+
+
+------------------------------------------------ DWELLING UNIT ID=40009 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                 15    40009101     34031        52        5826.47     1085        1         1         52       34031
+
+
+------------------------------------------------ DWELLING UNIT ID=40010 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                 16    40010101     84000        614       7601.44     1127        2         1         614      84000
+                 17    40010102     56000         40       7601.44     1127        2         2         654     140000
+                 18    40010103         0         56       7601.44     1127        2         3         710     140000
+                 19    40010104         0        210       7601.44     1127        2         4         920     140000
+
+
+------------------------------------------------ DWELLING UNIT ID=40011 CPSFAMID=A -------------------------------------------------
+
+                Obs    DUPERSID    TTLP14X    TOTSLF14    FAMWT14C    VARSTR    VARPSU    FAMSIZE    FAMOOP    FAMINC
+
+                 20    40011101      1500         0        4748.00     1062        2         1          0       1500 
+                                                 2017 AHRQ MEPS DATA USERS WORKSHOP                                                3
+                                          EXERCISE3.SAS: CALCULATE FAMILY-LEVEL ESTIMATES
+                           CPS FAMILY-LEVEL ESTIMATES ON FAMILY SIZE, OUT-OF-POCKET EXP, AND INCOME, 2014
+
+                                                     The SURVEYMEANS Procedure
+
+                                                            Data Summary
+
+                                                Number of Strata                 165
+                                                Number of Clusters               365
+                                                Number of Observations         14133
+                                                Sum of Weights             140282371
+
+
+                                                            Statistics
+ 
+                                                                                          Sum of                       Std Error
+   Variable    Label                                                           N         Weights            Mean         of Mean
+   -----------------------------------------------------------------------------------------------------------------------------
+   FAMSIZE     # OF PERSONS PER CPS FAMILY                                 14133       140282371        2.221791        0.020501
+   FAMOOP      TOTAL OUT-OF-POCKET EXP (TOTSLF14) PER CPS FAMILY           14133       140282371     1279.595044       28.960320
+   FAMINC      TOTAL INCOME (TTLP14X) PER CPS FAMILY                       14133       140282371           63374     1015.977796
+   -----------------------------------------------------------------------------------------------------------------------------

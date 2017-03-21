@@ -1,0 +1,181 @@
+1                                           The SAS System            13:06 Tuesday, February 21, 2017
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M2) 
+      Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+NOTE: This session is executing on the X64_7PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 13.2
+
+NOTE: Additional host information:
+
+ X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+
+NOTE: SAS initialization used:
+      real time           0.40 seconds
+      cpu time            0.51 seconds
+      
+
+NOTE: AUTOEXEC processing beginning; file is \\source.ahrq.local\source\MEPS\_PUFINFO\autoexec.sas.
+
+local directory autoexec processed
+
+NOTE: AUTOEXEC processing completed.
+
+1          /**********************************************************************************
+2          
+3          PROGRAM:      C:\MEPS\SAS\PROG\EXERCISE3.SAS
+4          
+5          DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO CONSTRUCT FAMILY-LEVEL VARIABLES FROM PERSON-LEVEL DATA
+6          
+7                        THERE ARE TWO DEFINITIONS OF FAMILY UNIT IN MEPS.
+8                           1) CPS FAMILY:  ID IS DUID + CPSFAMID.  CORRESPONDING WEIGHT IS FAMWT14C.
+9                           2) MEPS FAMILY: ID IS DUID + FAMIDYR.   CORRESPONDING WEIGHT IS FAMWT14F.
+10         
+11                       THE CPS FAMILY IS USED IN THIS EXERCISE.
+12         
+13         INPUT FILE:   C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FY PUF DATA)
+14         
+15         *********************************************************************************/;
+16         OPTIONS LS=132 PS=79 NODATE;
+17         
+18         *LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+19         LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: \\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data
+20         
+21         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+22         TITLE2 "EXERCISE3.SAS: CALCULATE FAMILY-LEVEL ESTIMATES";
+23         
+24         TITLE3 "SAMPLE DUMP FOR FAMILY IDS";
+25         PROC PRINT DATA=CDATA.H171 (OBS=20);
+26           VAR PID AGE14X SEX CPSFAMID FAMWT14C FAMIDYR FAMWT14F;
+27           BY DUID;
+28         RUN;
+
+NOTE: There were 20 observations read from the data set CDATA.H171.
+NOTE: The PROCEDURE PRINT printed page 1.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.09 seconds
+      
+
+29         
+30         PROC SORT DATA=CDATA.H171 (KEEP=DUPERSID DUID CPSFAMID FAMWT14C VARSTR VARPSU TOTSLF14 TTLP14X)  OUT=PERS;
+31           BY DUID CPSFAMID;
+32         RUN;
+
+NOTE: There were 34875 observations read from the data set CDATA.H171.
+NOTE: SAS sort was used.
+NOTE: The data set WORK.PERS has 34875 observations and 8 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           2.27 seconds
+      cpu time            1.07 seconds
+      
+2                                                          The SAS System
+
+
+33         
+34         DATA PERS2
+35              FAM (KEEP=DUID CPSFAMID FAMSIZE FAMOOP FAMINC);
+36          SET PERS;
+37           BY DUID CPSFAMID;
+38         
+39              LABEL FAMSIZE = '# OF PERSONS PER CPS FAMILY'
+40                    FAMOOP  = 'TOTAL OUT-OF-POCKET EXP (TOTSLF14) PER CPS FAMILY'
+41                    FAMINC  = 'TOTAL INCOME (TTLP14X) PER CPS FAMILY';
+42         
+43              IF FIRST.CPSFAMID THEN DO;
+44                 FAMSIZE = 0 ;
+45                 FAMOOP  = 0 ;
+46                 FAMINC  = 0 ;
+47              END;
+48         
+49              FAMSIZE + 1        ;
+50              FAMOOP  + TOTSLF14 ;
+51              FAMINC  + TTLP14X  ;
+52         
+53              OUTPUT PERS2;
+54              IF LAST.CPSFAMID THEN OUTPUT FAM;
+55         RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.PERS.
+NOTE: The data set WORK.PERS2 has 34875 observations and 11 variables.
+NOTE: The data set WORK.FAM has 15000 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+56         
+57         TITLE3 "A SAMPLE DUMP TO CHECK THE CREATION OF THE FAMILY-LEVEL VARIABLES";
+58         PROC PRINT DATA=PERS2 (OBS=20);
+59           BY DUID CPSFAMID;
+60         RUN;
+
+NOTE: There were 20 observations read from the data set WORK.PERS2.
+NOTE: The PROCEDURE PRINT printed page 2.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+61         
+62         /*ADD WEIGHT, VARSTR, AND VARPSU TO THE FAMILY-LEVEL ANALYTIC DATA*/
+63         
+64         PROC SORT DATA=PERS (WHERE=(FAMWT14C>0)) OUT=FAMWT (KEEP=DUID CPSFAMID FAMWT14C VARSTR VARPSU) NODUPKEY;
+65           BY DUID CPSFAMID;
+66         RUN;
+
+NOTE: There were 33270 observations read from the data set WORK.PERS.
+      WHERE FAMWT14C>0;
+NOTE: SAS sort was used.
+NOTE: 19137 observations with duplicate key values were deleted.
+NOTE: The data set WORK.FAMWT has 14133 observations and 5 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+67         
+68         DATA FAM2;
+69           MERGE FAM (IN=AA) FAMWT (IN=BB);
+70           BY DUID CPSFAMID;
+71           IF AA AND BB;
+72         RUN;
+
+NOTE: There were 15000 observations read from the data set WORK.FAM.
+NOTE: There were 14133 observations read from the data set WORK.FAMWT.
+NOTE: The data set WORK.FAM2 has 14133 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+3                                                          The SAS System
+
+
+73         
+74         TITLE3 "CPS FAMILY-LEVEL ESTIMATES ON FAMILY SIZE, OUT-OF-POCKET EXP, AND INCOME, 2014";
+75         PROC SURVEYMEANS DATA=FAM2 NOBS SUMWGT MEAN STDERR;
+76         	STRATA  VARSTR ;
+77         	CLUSTER VARPSU ;
+78         	WEIGHT  FAMWT14C ;
+79         	VAR FAMSIZE FAMOOP FAMINC;
+80         RUN;
+
+NOTE: The PROCEDURE SURVEYMEANS printed page 3.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.09 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           4.71 seconds
+      cpu time            2.24 seconds
+      

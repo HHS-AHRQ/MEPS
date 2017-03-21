@@ -1,0 +1,394 @@
+{\rtf1\ansi\deff0 
+{\fonttbl {\f0\fmodern Courier New;}
+{\colortbl;\red0\green0\blue0;}
+}
+\deflang1033\margl610\margr360\margt810\margb360\fs14\sl-180\slmult0\paperw12240\paperh15840
+1                                           The SAS System            13:02 Tuesday, February 21, 2017
+\par 
+\par NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA.
+\par NOTE: SAS (r) Proprietary Software 9.4 (TS1M2)
+\par       Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+\par NOTE: This session is executing on the X64_7PRO  platform.
+\par 
+\par 
+\par 
+\par NOTE: Updated analytical products:
+\par 
+\par       SAS/STAT 13.2
+\par 
+\par NOTE: Additional host information:
+\par 
+\par  X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+\par 
+\par NOTE: SAS initialization used:
+\par       real time           0.27 seconds
+\par       cpu time            0.32 seconds
+\par 
+\par 
+\par NOTE: AUTOEXEC processing beginning; file is \\\\source.ahrq.local\\source\\MEPS\\_PUFINFO\\autoexec.sas.
+\par 
+\par local directory autoexec processed
+\par 
+\par NOTE: AUTOEXEC processing completed.
+\par 
+\par 1          /*********************************************************************\\
+\par 2
+\par 3          PROGRAM: 	C:\\MEPS\\SAS\\PROG\\EXERCISE2.SAS
+\par 4
+\par 5          PURPOSE:	THIS PROGRAM GENERATES SELECTED ESTIMATES FOR A 2014 VERSION OF THE
+\par 6                          MEPS STATISTICS BRIEF # 275: "Trends in Antipsychotics Purchases and Expenses for the U.S. Civilian
+\par 7                                                        Noninstitutionalized Population, 1997 and 2007"
+\par 8
+\par 9              (1) FIGURE 1: TOTAL EXPENSE FOR ANTIPSYCHOTICS
+\par 10
+\par 11             (2) FIGURE 2: TOTAL NUMBER OF PURCHASES OF ANTIPSYCHOTICS
+\par 12
+\par 13             (3) FIGURE 3: TOTAL NUMBER OF PERSONS PURCHASING ONE OR MORE ANTIPSYCHOTICS
+\par 14
+\par 15             (4) FIGURE 4: AVERAGE TOTAL, OUT OF POCKET, AND THIRD PARTY PAYER EXPENSE
+\par 16                           FOR ANTIPSYCHOTICS PER PERSON WITH AN ANTIPSYCHOTIC MEDICINE PURCHASE
+\par 17
+\par 18         INPUT FILES:  (1) C:\\MEPS\\SAS\\DATA\\H1171.SAS7BDAT (2014 FULL-YEAR CONSOLIDATED PUF)
+\par 19                       (2) C:\\MEPS\\SAS\\DATA\\H168A.SAS7BDAT (2014 PRESCRIBED MEDICINES PUF)
+\par 20
+\par 21         \\*********************************************************************/
+\par 22
+\par 23         OPTIONS LS=132 PS=79 NODATE;
+\par 24
+\par 25         *LIBNAME CDATA 'C:\\MEPS\\SAS\\DATA';
+\par 26         LIBNAME CDATA "\\\\programs.ahrq.local\\programs\\meps\\AHRQ4_CY2\\B_CFACT\\BJ001DVK\\Workshop_2017\\SAS\\Data";
+\par NOTE: Libref CDATA was successfully assigned as follows:
+\par       Engine:        V9
+\par       Physical Name: \\\\programs.ahrq.local\\programs\\meps\\AHRQ4_CY2\\B_CFACT\\BJ001DVK\\Workshop_2017\\SAS\\Data
+\par 27
+\par 28         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+\par 29         TITLE2 "EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2014";
+\par 30
+\par 31         PROC FORMAT;
+\par 32           VALUE GTZERO
+\par 33              0         = '0'
+\par 34              0 <- HIGH = '>0'
+\par 35              ;
+\par NOTE: Format GTZERO is already on the library WORK.FORMATS.
+\par NOTE: Format GTZERO has been output.
+\par 36         RUN;
+\par 
+\par NOTE: PROCEDURE FORMAT used (Total process time):
+\par       real time           0.00 seconds
+\par       cpu time            0.00 seconds
+\par 
+\par 
+\par 37
+\par 38         /*1) IDENTIFY ANTIPSYCHOTIC DRUGS USING THERAPEUTIC CLASSIFICATION (TC) CODES*/
+\par 39
+\par 40         DATA DRUG;
+\par \page 2                                                          The SAS System
+\par 
+\par 41           SET CDATA.H168A;
+\par 42           IF TC1=242 AND TC1S1=251; /*definition of ANTIPSYCHOTIC DRUGS*/
+\par 43         RUN;
+\par 
+\par NOTE: There were 319467 observations read from the data set CDATA.H168A.
+\par NOTE: The data set WORK.DRUG has 3547 observations and 69 variables.
+\par NOTE: DATA statement used (Total process time):
+\par       real time           8.65 seconds
+\par       cpu time            1.07 seconds
+\par 
+\par 
+\par 44
+\par 45         TITLE3 "A SAMPLE DUMP FOR PMED RECORDS WITH ANTIPSYCHOTIC DRUGS";
+\par 46         PROC PRINT DATA=DRUG (OBS=30);
+\par 47         VAR RXRECIDX LINKIDX TC1 TC1S1 	RXXP14X RXSF14X;
+\par 48          BY DUPERSID;
+\par 49         RUN;
+\par 
+\par NOTE: There were 30 observations read from the data set WORK.DRUG.
+\par NOTE: The PROCEDURE PRINT printed page 1.
+\par NOTE: PROCEDURE PRINT used (Total process time):
+\par       real time           0.07 seconds
+\par       cpu time            0.07 seconds
+\par 
+\par 
+\par 50
+\par 51
+\par 52         /*2) SUM DATA TO PERSON-LEVEL*/
+\par 53
+\par 54         PROC SUMMARY DATA=DRUG NWAY;
+\par 55           CLASS DUPERSID;
+\par 56           VAR RXXP14X RXSF14X;
+\par 57           OUTPUT OUT=PERDRUG (DROP=_TYPE_) sum=TOT OOP;
+\par 58         RUN;
+\par 
+\par NOTE: Multiple concurrent threads will be used to summarize data.
+\par NOTE: There were 3547 observations read from the data set WORK.DRUG.
+\par NOTE: The data set WORK.PERDRUG has 454 observations and 4 variables.
+\par NOTE: PROCEDURE SUMMARY used (Total process time):
+\par       real time           0.03 seconds
+\par       cpu time            0.03 seconds
+\par 
+\par 
+\par 59
+\par 60         TITLE3 "A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR ANTIPSYCHOTIC DRUGS";
+\par 61         PROC PRINT DATA=PERDRUG (OBS=30);
+\par 62         RUN;
+\par 
+\par NOTE: There were 30 observations read from the data set WORK.PERDRUG.
+\par NOTE: The PROCEDURE PRINT printed page 2.
+\par NOTE: PROCEDURE PRINT used (Total process time):
+\par       real time           0.00 seconds
+\par       cpu time            0.00 seconds
+\par 
+\par 
+\par 63
+\par 64         DATA PERDRUG2;
+\par 65          SET PERDRUG;
+\par 66              RENAME _FREQ_ = N_PHRCHASE ;
+\par 67              THIRD_PAYER   = TOT - OOP;
+\par 68         RUN;
+\par 
+\par NOTE: There were 454 observations read from the data set WORK.PERDRUG.
+\par NOTE: The data set WORK.PERDRUG2 has 454 observations and 5 variables.
+\par NOTE: DATA statement used (Total process time):
+\par       real time           0.01 seconds
+\par       cpu time            0.01 seconds
+\par 
+\par 
+\par 69
+\par 70         /*3) MERGE THE PERSON-LEVEL EXPENDITURES TO THE FY PUF*/
+\par 71
+\par 72         DATA  FY;
+\par 73         MERGE CDATA.H171 (IN=AA KEEP=DUPERSID VARSTR VARPSU PERWT14F)
+\par 74               PERDRUG2  (IN=BB KEEP=DUPERSID N_PHRCHASE TOT OOP THIRD_PAYER);
+\par 75            BY DUPERSID;
+\par 76
+\par \page 3                                                          The SAS System
+\par 
+\par 77               IF AA AND BB THEN DO;
+\par 78                  SUB      = 1 ;
+\par 79               END;
+\par 80
+\par 81               ELSE IF NOT BB THEN DO;   /*FOR PERSONS WITHOUT ANY PURCHASE OF ANTIPSYCHOTIC DRUGS*/
+\par 82                  SUB         = 2 ;
+\par 83                  N_PHRCHASE  = 0 ;
+\par 84                  THIRD_PAYER = 0 ;
+\par 85                  TOT         = 0 ;
+\par 86                  OOP         = 0 ;
+\par 87               END;
+\par 88
+\par 89               IF AA;
+\par 90
+\par 91               LABEL
+\par 92                     THIRD_PAYER = 'TOTAL-OOP'
+\par 93                     N_PHRCHASE  = '# OF PURCHASES PER PERSON'
+\par 94                     SUB         = 'POPULATION FLAG FOR PERSONS WITH 1+ ANTIPSYCHOTIC DRUGS'
+\par 95                                 ;
+\par 96         RUN;
+\par 
+\par NOTE: There were 34875 observations read from the data set CDATA.H171.
+\par NOTE: There were 454 observations read from the data set WORK.PERDRUG2.
+\par NOTE: The data set WORK.FY has 34875 observations and 9 variables.
+\par NOTE: DATA statement used (Total process time):
+\par       real time           5.03 seconds
+\par       cpu time            1.49 seconds
+\par 
+\par 
+\par 97
+\par 98         TITLE3 "SUPPORTING CROSSTABS FOR NEW VARIABLES";
+\par 99         PROC FREQ DATA=FY;
+\par 100          TABLES  SUB * N_PHRCHASE * TOT * OOP * THIRD_PAYER / LIST MISSING ;
+\par 101          FORMAT N_PHRCHASE TOT OOP THIRD_PAYER gtzero. ;
+\par 102        RUN;
+\par 
+\par NOTE: There were 34875 observations read from the data set WORK.FY.
+\par NOTE: The PROCEDURE FREQ printed page 3.
+\par NOTE: PROCEDURE FREQ used (Total process time):
+\par       real time           0.06 seconds
+\par       cpu time            0.06 seconds
+\par 
+\par 
+\par 103
+\par 104
+\par 105        /*4) CALCULATE ESTIMATES ON EXPENDITURES AND USE*/
+\par 106
+\par 107        ODS LISTING CLOSE;
+\par 108        TITLE3 "PERSON-LEVEL ESTIMATES ON EXPENDITURES AND USE FOR ANTIPSYCHOTIC DRUGS, 2014";
+\par 109        PROC SURVEYMEANS DATA=FY NOBS SUMWGT SUM STD MEAN STDERR;
+\par 110          STRATA  VARSTR ;
+\par 111          CLUSTER VARPSU;
+\par 112          WEIGHT  PERWT14F;
+\par 113          DOMAIN  SUB ;
+\par 114          VAR TOT N_PHRCHASE  OOP THIRD_PAYER ;
+\par 115          ODS OUTPUT DOMAIN=OUT1;
+\par 116        RUN;
+\par 
+\par NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+\par NOTE: Only one cluster in a stratum in domain POPULATION FLAG FOR PERSONS WITH 1+ ANTIPSYCHOTIC DRUGS for variable(s) TOT,
+\par       N_PHRCHASE, OOP, THIRD_PAYER. The estimate of variance for TOT, N_PHRCHASE, OOP, THIRD_PAYER will omit this stratum.
+\par NOTE: The data set WORK.OUT1 has 8 observations and 10 variables.
+\par NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+\par       real time           0.35 seconds
+\par       cpu time            0.35 seconds
+\par 
+\par 
+\par 117        ODS LISTING;
+\par 118
+\par 119        TITLE3 "RESULTS FROM PROC SURVEYMEANS WITH A DOMAIN STATEMENT";
+\par 120        PROC PRINT DATA=OUT1 (DROP=DOMAINLABEL) NOOBS;
+\par 121        FORMAT N COMMA6.0 SUMWGT SUM  STDDEV comma15.0 MEAN STDERR comma9.2  ;
+\par 122        RUN;
+\par 
+\par NOTE: There were 8 observations read from the data set WORK.OUT1.
+\par NOTE: The PROCEDURE PRINT printed page 4.
+\par NOTE: PROCEDURE PRINT used (Total process time):
+\par \page 4                                                          The SAS System
+\par 
+\par       real time           0.00 seconds
+\par       cpu time            0.00 seconds
+\par 
+\par 
+\par 123
+\par 124        TITLE4 "SUBSET THE ESTIMATES FOR PERSONS ONLY WITH 1+ ANTIPSYCHOTIC DRUGS";
+\par 125        PROC PRINT DATA=OUT1 (WHERE=(SUB=1)) NOOBS;
+\par 126        VAR VARNAME VARLABEL N SUMWGT SUM STDDEV MEAN STDERR;
+\par 127        FORMAT N COMMA6.0 SUMWGT SUM  STDDEV comma15.0 MEAN STDERR comma9.2  ;
+\par 128        RUN;
+\par 
+\par NOTE: There were 4 observations read from the data set WORK.OUT1.
+\par       WHERE SUB=1;
+\par NOTE: The PROCEDURE PRINT printed page 5.
+\par NOTE: PROCEDURE PRINT used (Total process time):
+\par       real time           0.00 seconds
+\par       cpu time            0.00 seconds
+\par 
+\par 
+\par NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+\par NOTE: The SAS System used:
+\par       real time           15.91 seconds
+\par       cpu time            4.02 seconds
+\par 
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                1
+\par                                      EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2014
+\par                                       A SAMPLE DUMP FOR PMED RECORDS WITH ANTIPSYCHOTIC DRUGS
+\par 
+\par ------------------------------------------------- PERSON ID (DUID + PID)=40097101 --------------------------------------------------
+\par 
+\par                             Obs       RXRECIDX          LINKIDX       TC1    TC1S1    RXXP14X    RXSF14X
+\par 
+\par                               1    400971010931001    400971010931    242     251      116.84     12.00
+\par                               2    400971010931002    400971010931    242     251      149.11     12.00
+\par                               3    400971010951001    400971010951    242     251       25.21     12.00
+\par                               4    400971010951002    400971010951    242     251       25.71     12.00
+\par                               5    400971010961001    400971010961    242     251        4.27      4.27
+\par                               6    400971010961002    400971010961    242     251        3.00      3.00
+\par                               7    400971011101001    400971011101    242     251      149.11     12.00
+\par                               8    400971011101002    400971011101    242     251      166.58     12.00
+\par                               9    400971011101003    400971011101    242     251      141.40     12.00
+\par                              10    400971011101004    400971011101    242     251      139.76     12.00
+\par                              11    400971011121001    400971011121    242     251       25.21     12.00
+\par                              12    400971011121002    400971011121    242     251       25.21     12.00
+\par                              13    400971011121003    400971011121    242     251       25.71     12.00
+\par                              14    400971011121004    400971011121    242     251       25.71     12.00
+\par                              15    400971011131001    400971011131    242     251        2.84      2.84
+\par                              16    400971011131002    400971011131    242     251        3.76      3.76
+\par                              17    400971011131003    400971011131    242     251        3.76      3.76
+\par                              18    400971011131004    400971011131    242     251        3.76      3.76
+\par                              19    400971011181001    400971011181    242     251      129.09     12.00
+\par                              20    400971011181002    400971011181    242     251      127.34     12.00
+\par                              21    400971011181003    400971011181    242     251      127.50     12.00
+\par                              22    400971011201001    400971011201    242     251       25.21     12.00
+\par                              23    400971011201002    400971011201    242     251       25.21     12.00
+\par                              24    400971011201003    400971011201    242     251       25.71     12.00
+\par                              25    400971011211001    400971011211    242     251        3.75      3.75
+\par                              26    400971011211002    400971011211    242     251        3.75      3.75
+\par                              27    400971011211003    400971011211    242     251        3.75      3.75
+\par 
+\par 
+\par ------------------------------------------------- PERSON ID (DUID + PID)=40209101 --------------------------------------------------
+\par 
+\par                             Obs       RXRECIDX          LINKIDX       TC1    TC1S1    RXXP14X    RXSF14X
+\par 
+\par                              28    402091010121001    402091010121    242     251      998.99       0
+\par 
+\par 
+\par ------------------------------------------------- PERSON ID (DUID + PID)=40224103 --------------------------------------------------
+\par 
+\par                             Obs       RXRECIDX          LINKIDX       TC1    TC1S1    RXXP14X    RXSF14X
+\par 
+\par                              29    402241030181001    402241030181    242     251        10         10
+\par                              30    402241030181002    402241030181    242     251        10         10
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                2
+\par                                      EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2014
+\par                                 A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR ANTIPSYCHOTIC DRUGS
+\par 
+\par                                           Obs    DUPERSID    _FREQ_         TOT       OOP
+\par 
+\par                                             1    40097101      27       1508.26    248.64
+\par                                             2    40209101       1        998.99      0.00
+\par                                             3    40224103       2         20.00     20.00
+\par                                             4    40296102      10       4955.78      0.00
+\par                                             5    40333103      36      14561.24    600.00
+\par                                             6    40338102       1        791.67      0.00
+\par                                             7    40342101       1          8.53      0.00
+\par                                             8    40384102       4         81.40      4.00
+\par                                             9    40481102       4         39.31     39.31
+\par                                            10    40515103      12       6737.38      0.00
+\par                                            11    40605101       7       7632.63     25.40
+\par                                            12    40606101       2       1784.27     30.00
+\par                                            13    40618102       7         57.88     54.34
+\par                                            14    40652101       3        117.90    117.90
+\par                                            15    40669102       7         77.81     51.64
+\par                                            16    40673101       5      21875.25      0.00
+\par                                            17    40736101       2       5258.85     40.00
+\par                                            18    40769101      13         91.13     91.13
+\par                                            19    40789101       1         12.29      5.00
+\par                                            20    40789103      10       8199.90     35.27
+\par                                            21    40802102      12        456.12     18.00
+\par                                            22    40825101      10        232.40      2.40
+\par                                            23    40862101      22       1101.08     16.80
+\par                                            24    41017101       1          4.10      0.00
+\par                                            25    41032103      20      16558.16    390.00
+\par                                            26    41034104       6       5993.94      0.00
+\par                                            27    41043101      13         78.00     78.00
+\par                                            28    41051101       8       2724.29     80.00
+\par                                            29    41113101       8       2310.00     20.40
+\par                                            30    41130101       7        130.04     47.65
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                3
+\par                                      EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2014
+\par                                                SUPPORTING CROSSTABS FOR NEW VARIABLES
+\par 
+\par                                                          The FREQ Procedure
+\par 
+\par                                                                                            Cumulative    Cumulative
+\par                 SUB    N_PHRCHASE    TOT    OOP    THIRD_PAYER    Frequency     Percent     Frequency      Percent
+\par                 ---------------------------------------------------------------------------------------------------
+\par                   1    >0            0      0      0                     1        0.00             1         0.00
+\par                   1    >0            >0     0      >0                  127        0.36           128         0.37
+\par                   1    >0            >0     >0     0                    45        0.13           173         0.50
+\par                   1    >0            >0     >0     >0                  281        0.81           454         1.30
+\par                   2    0             0      0      0                 34421       98.70         34875       100.00
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                4
+\par                                      EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2014
+\par                                        RESULTS FROM PROC SURVEYMEANS WITH A DOMAIN STATEMENT
+\par 
+\par SUB VARNAME     VARLABEL                                      N          SUMWGT             SUM          STDDEV      MEAN    STDERR
+\par 
+\par  1  TOT         SUM OF PAYMENTS RXSF14X-RXOU14X(IMPUTED)    445       4,478,820  11,895,377,978   1,156,964,813  2,655.92    202.57
+\par  1  N_PHRCHASE  # OF PURCHASES PER PERSON                   445       4,478,820      34,695,151       2,737,619      7.75      0.37
+\par  1  OOP         AMOUNT PAID, SELF OR FAMILY (IMPUTED)       445       4,478,820     909,418,096     310,456,107    203.05     70.93
+\par  1  THIRD_PAYER TOTAL-OOP                                   445       4,478,820  10,985,959,882   1,180,157,602  2,452.87    207.28
+\par  2  TOT         SUM OF PAYMENTS RXSF14X-RXOU14X(IMPUTED) 32,717     313,961,603               0               0      0.00      0.00
+\par  2  N_PHRCHASE  # OF PURCHASES PER PERSON                32,717     313,961,603               0               0      0.00      0.00
+\par  2  OOP         AMOUNT PAID, SELF OR FAMILY (IMPUTED)    32,717     313,961,603               0               0      0.00      0.00
+\par  2  THIRD_PAYER TOTAL-OOP                                32,717     313,961,603               0               0      0.00      0.00
+\par \page                                                  2017 AHRQ MEPS DATA USERS WORKSHOP                                                5
+\par                                      EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2014
+\par                                        RESULTS FROM PROC SURVEYMEANS WITH A DOMAIN STATEMENT
+\par                                  SUBSET THE ESTIMATES FOR PERSONS ONLY WITH 1+ ANTIPSYCHOTIC DRUGS
+\par 
+\par   VARNAME     VARLABEL                                      N          SUMWGT             SUM          STDDEV      MEAN    STDERR
+\par 
+\par   TOT         SUM OF PAYMENTS RXSF14X-RXOU14X(IMPUTED)    445       4,478,820  11,895,377,978   1,156,964,813  2,655.92    202.57
+\par   N_PHRCHASE  # OF PURCHASES PER PERSON                   445       4,478,820      34,695,151       2,737,619      7.75      0.37
+\par   OOP         AMOUNT PAID, SELF OR FAMILY (IMPUTED)       445       4,478,820     909,418,096     310,456,107    203.05     70.93
+\par   THIRD_PAYER TOTAL-OOP                                   445       4,478,820  10,985,959,882   1,180,157,602  2,452.87    207.28
+}

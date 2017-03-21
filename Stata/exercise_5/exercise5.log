@@ -1,0 +1,847 @@
+-----------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise5.log
+  log type:  text
+ opened on:  22 Feb 2017, 14:43:26
+
+. cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+\\files.s-3.com\HPDA\AHRQ\Fang\bj001
+
+. 
+. // 1) pull out conditions with diabetes (ccs code='049', '050') from 2014 condition puf - hc162
+. use dupersid cccodex condidx using h170, clear
+
+. keep if cccodex=="049" | cccodex=="050"
+(113,588 observations deleted)
+
+. tab cccodex
+
+   CLINICAL |
+CLASSIFICAT |
+ ION CODE - |
+     EDITED |      Freq.     Percent        Cum.
+------------+-----------------------------------
+        049 |      3,009       97.35       97.35
+        050 |         82        2.65      100.00
+------------+-----------------------------------
+      Total |      3,091      100.00
+
+. sort condidx
+
+. save diab, replace
+file diab.dta saved
+
+. 
+. // 2) get event id for the diabetic conditions from condition-event link file
+. use condidx  evntidx  using h168if1, clear
+
+. sort condidx
+
+. merge m:1 condidx using diab, keep(matches)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                            20,800  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. 
+. // 3) delete duplicate cases per event
+. by evntidx, sort: keep if _n==1
+(130 observations deleted)
+
+. save diab,replace
+file diab.dta saved
+
+. 
+. // 4) sum up pmed purchase-level data to event-level
+. use using h168a, clear
+
+. sort linkidx
+
+. by linkidx: egen sf=sum(rxsf14x)
+
+. by linkidx: egen mr=sum(rxmr14x)
+
+. by linkidx: egen md=sum(rxmd14x)
+
+. by linkidx: egen pv=sum(rxpv14x)
+
+. by linkidx: egen va=sum(rxva14x)
+
+. by linkidx: egen tr=sum(rxtr14x)
+
+. by linkidx: egen of=sum(rxof14x)
+
+. by linkidx: egen sl=sum(rxsl14x)
+
+. by linkidx: egen wc=sum(rxwc14x)
+
+. by linkidx: egen or=sum(rxor14x)
+
+. by linkidx: egen ou=sum(rxou14x)
+
+. by linkidx: egen ot=sum(rxot14x)
+
+. by linkidx: egen xp=sum(rxxp14x)
+
+. list linkidx rxxp14x xp rxmr14x mr in 1/20  
+
+     +------------------------------------------------+
+     |      linkidx   rxxp14x       xp   rxmr14x   mr |
+     |------------------------------------------------|
+  1. | 400011010161    219.76   219.76         0    0 |
+  2. | 400011010171        40       40         0    0 |
+  3. | 400011010181    114.46   114.46         0    0 |
+  4. | 400011010191    219.76   219.76         0    0 |
+  5. | 400011010201     40.29    40.29         0    0 |
+     |------------------------------------------------|
+  6. | 400011020121     56.78    56.78         0    0 |
+  7. | 400011020131         4        4         0    0 |
+  8. | 400011020141      3.86     3.86         0    0 |
+  9. | 400011020151     56.78    56.78         0    0 |
+ 10. | 400011020161      3.86     3.86         0    0 |
+     |------------------------------------------------|
+ 11. | 400011020171     39.47    39.47         0    0 |
+ 12. | 400011020181    269.99   269.99         0    0 |
+ 13. | 400021010091      2.49     2.49         0    0 |
+ 14. | 400041020081         4       12         0    0 |
+ 15. | 400041020081         4       12         0    0 |
+     |------------------------------------------------|
+ 16. | 400041020081         4       12         0    0 |
+ 17. | 400041030051     13.25     79.5         0    0 |
+ 18. | 400041030051     13.25     79.5         0    0 |
+ 19. | 400041030051     13.25     79.5         0    0 |
+ 20. | 400041030051     13.25     79.5         0    0 |
+     +------------------------------------------------+
+
+. gen evntyp="pmed"
+
+. rename linkidx evntidx               
+
+. by evntidx: keep if _n==1
+(183,690 observations deleted)
+
+. keep evntidx sf mr md pv va tr of sl wc or ou ot xp evntyp
+
+. save pmed, replace
+(note: file pmed.dta not found)
+file pmed.dta saved
+
+. 
+. // 5) align exp variables in different events with the same names
+. use h168g, clear
+
+. rename ob*14x *                
+
+. gen evntyp="ambu"
+
+. keep evntid sf mr md pv va tr of sl wc or ou ot xp evntyp
+
+. save ob, replace
+(note: file ob.dta not found)
+file ob.dta saved
+
+. 
+. 
+. use h168h, clear
+
+. rename hh*14x *
+
+. gen evntyp="hvis"
+
+. keep evntid sf mr md pv va tr of sl wc or ou ot xp evntyp
+
+. save hvis, replace
+(note: file hvis.dta not found)
+file hvis.dta saved
+
+. 
+. use h168e, clear
+
+. egen sf=rowtotal(erfsf14x erdsf14x)
+
+. egen mr=rowtotal(erfmr14x erdmr14x)
+
+. egen md=rowtotal(erfmd14x erdmd14x)
+
+. egen pv=rowtotal(erfpv14x erdpv14x)
+
+. egen va=rowtotal(erfva14x erdva14x)
+
+. egen tr=rowtotal(erftr14x erdtr14x)
+
+. egen of=rowtotal(erfof14x erdof14x)
+
+. egen sl=rowtotal(erfsl14x erdsl14x)
+
+. egen wc=rowtotal(erfwc14x erdwc14x)
+
+. egen or=rowtotal(erfor14x erdor14x)
+
+. egen ou=rowtotal(erfou14x erdou14x)
+
+. egen ot=rowtotal(erfot14x erdot14x)
+
+. rename erxp14x xp
+
+. gen evntyp="erom"
+
+. keep evntid sf mr md pv va tr of sl wc or ou ot xp evntyp
+
+. save erom, replace
+(note: file erom.dta not found)
+file erom.dta saved
+
+. 
+. use h168d, clear                                              
+
+. egen sf=rowtotal(ipfsf14x ipdsf14x)                             
+
+. egen mr=rowtotal(ipfmr14x ipdmr14x)                             
+
+. egen md=rowtotal(ipfmd14x ipdmd14x)                             
+
+. egen pv=rowtotal(ipfpv14x ipdpv14x)                             
+
+. egen va=rowtotal(ipfva14x ipdva14x)                             
+
+. egen tr=rowtotal(ipftr14x ipdtr14x)                             
+
+. egen of=rowtotal(ipfof14x ipdof14x)                             
+
+. egen sl=rowtotal(ipfsl14x ipdsl14x)                             
+
+. egen wc=rowtotal(ipfwc14x ipdwc14x)                             
+
+. egen or=rowtotal(ipfor14x ipdor14x)                             
+
+. egen ou=rowtotal(ipfou14x ipdou14x)                             
+
+. egen ot=rowtotal(ipfot14x ipdot14x)                                                          
+
+. rename ipxp14x xp         
+
+. gen evntyp="ipat"                                      
+
+. keep evntid sf mr md pv va tr of sl wc or ou ot xp evntyp  
+
+. save ipat, replace                                                        
+(note: file ipat.dta not found)
+file ipat.dta saved
+
+. 
+. use h168f, clear                                               
+
+. egen sf=rowtotal(opfsf14x opdsf14x)                             
+
+. egen mr=rowtotal(opfmr14x opdmr14x)                             
+
+. egen md=rowtotal(opfmd14x opdmd14x)                             
+
+. egen pv=rowtotal(opfpv14x opdpv14x)                             
+
+. egen va=rowtotal(opfva14x opdva14x)                             
+
+. egen tr=rowtotal(opftr14x opdtr14x)                             
+
+. egen of=rowtotal(opfof14x opdof14x)                             
+
+. egen sl=rowtotal(opfsl14x opdsl14x)                             
+
+. egen wc=rowtotal(opfwc14x opdwc14x)                             
+
+. egen or=rowtotal(opfor14x opdor14x)                             
+
+. egen ou=rowtotal(opfou14x opdou14x)                             
+
+. egen ot=rowtotal(opfot14x opdot14x)                                                          
+
+. rename opxp14x xp              
+
+. gen evntyp="ambu"                                 
+
+. keep evntid sf mr md pv va tr of sl wc or ou ot xp evntyp     
+
+. 
+. // 6)  combine all events into one dataset
+. append using ob erom ipat hvis pmed, generate(filenum)  
+(note: variable sf was float, now double to accommodate using data's values)
+(note: variable mr was float, now double to accommodate using data's values)
+(note: variable md was float, now double to accommodate using data's values)
+(note: variable pv was float, now double to accommodate using data's values)
+(note: variable va was float, now double to accommodate using data's values)
+(note: variable tr was float, now double to accommodate using data's values)
+(note: variable of was float, now double to accommodate using data's values)
+(note: variable sl was float, now double to accommodate using data's values)
+(note: variable wc was float, now double to accommodate using data's values)
+(note: variable or was float, now double to accommodate using data's values)
+(note: variable ou was float, now double to accommodate using data's values)
+(note: variable ot was float, now double to accommodate using data's values)
+
+. keep if xp>=0
+(2,141 observations deleted)
+
+. tab evntyp
+
+     evntyp |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       ambu |    179,798       54.34       54.34
+       erom |      7,236        2.19       56.53
+       hvis |      5,100        1.54       58.07
+       ipat |      2,957        0.89       58.96
+       pmed |    135,777       41.04      100.00
+------------+-----------------------------------
+      Total |    330,868      100.00
+
+. 
+. // 7) subset events to those only with diabetes
+. sort evntidx
+
+. merge 1:m evntidx using diab, keep(matches) 
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                            20,511  (_merge==3)
+    -----------------------------------------
+
+. 
+. // 8) calculate estimates on expenditures and use by type of service
+. sort dupersid evntyp
+
+. by dupersid evntyp: egen sf_evnt=sum(sf)
+
+. by dupersid evntyp: egen mr_evnt=sum(mr)
+
+. by dupersid evntyp: egen md_evnt=sum(md)
+
+. by dupersid evntyp: egen pv_evnt=sum(pv)
+
+. by dupersid evntyp: egen va_evnt=sum(va)
+
+. by dupersid evntyp: egen tr_evnt=sum(tr)
+
+. by dupersid evntyp: egen of_evnt=sum(of)
+
+. by dupersid evntyp: egen sl_evnt=sum(sl)
+
+. by dupersid evntyp: egen wc_evnt=sum(wc)
+
+. by dupersid evntyp: egen or_evnt=sum(or)
+
+. by dupersid evntyp: egen ou_evnt=sum(ou)
+
+. by dupersid evntyp: egen ot_evnt=sum(ot)
+
+. by dupersid evntyp: egen xp_evnt=sum(xp)
+
+. by dupersid evntyp: gen n_visits=_N
+
+. by dupersid evntyp: keep if _n==1
+(15,847 observations deleted)
+
+. keep dupersid evntyp evntidx *_evnt n_visits
+
+. save allevnt, replace
+(note: file allevnt.dta not found)
+file allevnt.dta saved
+
+. 
+. // 9) calculate estimates on expenditures and use, all types of service
+. sort dupersid
+
+. by dupersid: egen sf_per=sum(sf_evnt)
+
+. by dupersid: egen mr_per=sum(mr_evnt)
+
+. by dupersid: egen md_per=sum(md_evnt)
+
+. by dupersid: egen pv_per=sum(pv_evnt)
+
+. by dupersid: egen va_per=sum(va_evnt)
+
+. by dupersid: egen tr_per=sum(tr_evnt)
+
+. by dupersid: egen of_per=sum(of_evnt)
+
+. by dupersid: egen sl_per=sum(sl_evnt)
+
+. by dupersid: egen wc_per=sum(wc_evnt)
+
+. by dupersid: egen or_per=sum(or_evnt)
+
+. by dupersid: egen ou_per=sum(ou_evnt)
+
+. by dupersid: egen ot_per=sum(ot_evnt)
+
+. by dupersid: egen xp_per=sum(xp_evnt)
+
+. by dupersid: keep if _n==1  
+(1,930 observations deleted)
+
+. keep dupersid *_per
+
+. save allper, replace
+(note: file allper.dta not found)
+file allper.dta saved
+
+. 
+. use dupersid varpsu varstr perwt14f using h171, clear
+
+. sort dupersid
+
+. merge 1:m dupersid using allper, generate(merge_per)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                        32,141
+        from master                    32,141  (merge_per==1)
+        from using                          0  (merge_per==2)
+
+    matched                             2,734  (merge_per==3)
+    -----------------------------------------
+
+. foreach var in sf_per mr_per md_per pv_per va_per tr_per of_per sl_per wc_per or_per ou_per ot_per 
+> xp_per {
+  2. recode `var' (missing=0)
+  3. tab `var' if merge_per==1
+  4. }
+(sf_per: 32141 changes made)
+
+     sf_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(mr_per: 32141 changes made)
+
+     mr_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(md_per: 32141 changes made)
+
+     md_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(pv_per: 32141 changes made)
+
+     pv_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(va_per: 32141 changes made)
+
+     va_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(tr_per: 32141 changes made)
+
+     tr_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(of_per: 32141 changes made)
+
+     of_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(sl_per: 32141 changes made)
+
+     sl_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(wc_per: 32141 changes made)
+
+     wc_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(or_per: 32141 changes made)
+
+     or_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(ou_per: 32141 changes made)
+
+     ou_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(ot_per: 32141 changes made)
+
+     ot_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(xp_per: 32141 changes made)
+
+     xp_per |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+
+. 
+. svyset [pweight= perwt14f], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+      pweight: perwt14f
+          VCE: linearized
+  Single unit: missing
+     Strata 1: varstr
+         SU 1: varpsu
+        FPC 1: <zero>
+
+. svy, subpop(if merge_per==3): mean sf_per mr_per md_per pv_per va_per tr_per of_per sl_per wc_per o
+> r_per ou_per ot_per xp_per 
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       34,875
+Number of PSUs   =     366      Population size =  318,440,423
+                                Subpop. no. obs =        2,665
+                                Subpop. size    =   25,635,823
+                                Design df       =          201
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+      sf_per |   278.8041   15.61616      248.0116    309.5966
+      mr_per |   1099.643    78.5683      944.7196    1254.567
+      md_per |   563.4181   80.44117      404.8012    722.0349
+      pv_per |   851.7406   97.99756      658.5055    1044.976
+      va_per |   96.18277    28.0559      40.86112    151.5044
+      tr_per |   25.72068   6.425241      13.05115     38.3902
+      of_per |   7.799357   5.004884     -2.069456    17.66817
+      sl_per |   38.09738   8.835446      20.67533    55.51944
+      wc_per |   2.087832   1.371797     -.6171274    4.792791
+      or_per |   42.64947   10.01163      22.90817    62.39078
+      ou_per |   288.6121   265.1693     -234.2584    811.4825
+      ot_per |   265.1907   248.0991     -224.0202    754.4015
+      xp_per |   3559.946   536.9016      2501.264    4618.628
+--------------------------------------------------------------
+
+. 
+. use dupersid varpsu varstr perwt14f using h171, clear
+
+. sort dupersid 
+
+. merge 1:m dupersid using allevnt, generate(merge_evnt)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                        32,141
+        from master                    32,141  (merge_evnt==1)
+        from using                          0  (merge_evnt==2)
+
+    matched                             4,664  (merge_evnt==3)
+    -----------------------------------------
+
+. foreach var in n_visits sf_evnt mr_evnt md_evnt pv_evnt va_evnt tr_evnt of_evnt sl_evnt wc_evnt or_
+> evnt ou_evnt ot_evnt xp_evnt {
+  2. recode `var' (missing=0)
+  3. tab `var' if merge_evnt==1
+  4. }
+(n_visits: 32141 changes made)
+
+   n_visits |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(sf_evnt: 32141 changes made)
+
+    sf_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(mr_evnt: 32141 changes made)
+
+    mr_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(md_evnt: 32141 changes made)
+
+    md_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(pv_evnt: 32141 changes made)
+
+    pv_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(va_evnt: 32141 changes made)
+
+    va_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(tr_evnt: 32141 changes made)
+
+    tr_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(of_evnt: 32141 changes made)
+
+    of_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(sl_evnt: 32141 changes made)
+
+    sl_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(wc_evnt: 32141 changes made)
+
+    wc_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(or_evnt: 32141 changes made)
+
+    or_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(ou_evnt: 32141 changes made)
+
+    ou_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(ot_evnt: 32141 changes made)
+
+    ot_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+(xp_evnt: 32141 changes made)
+
+    xp_evnt |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     32,141      100.00      100.00
+------------+-----------------------------------
+      Total |     32,141      100.00
+
+. 
+. svyset [pweight= perwt14f], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+      pweight: perwt14f
+          VCE: linearized
+  Single unit: missing
+     Strata 1: varstr
+         SU 1: varpsu
+        FPC 1: <zero>
+
+. svy, subpop(if merge_evnt==3 & evntyp=="ambu"): mean n_visits sf_evnt mr_evnt md_evnt pv_evnt va_ev
+> nt tr_evnt of_evnt sl_evnt wc_evnt or_evnt ou_evnt ot_evnt xp_evnt       
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       36,805
+Number of PSUs   =     366      Population size =  336,346,977
+                                Subpop. no. obs =        1,852
+                                Subpop. size    = 17,848,215.8
+                                Design df       =          201
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+    n_visits |   4.191477   .1439481      3.907635    4.475319
+     sf_evnt |   65.73381   4.601686      56.66004    74.80758
+     mr_evnt |    289.972   27.74364      235.2661    344.6779
+     md_evnt |   97.81119   20.20757      57.96517    137.6572
+     pv_evnt |   342.8642   109.9944      125.9732    559.7552
+     va_evnt |   80.75574   35.18846      11.36985    150.1416
+     tr_evnt |   6.830407   2.674565      1.556602    12.10421
+     of_evnt |   5.021854   3.295263     -1.475866    11.51957
+     sl_evnt |   4.451585   1.512581      1.469023    7.434147
+     wc_evnt |   2.542475   1.928197     -1.259614    6.344564
+     or_evnt |   13.56533    4.39832      4.892561     22.2381
+     ou_evnt |   5.709156   3.263118     -.7251795    12.14349
+     ot_evnt |   16.36808   4.620109      7.257975    25.47818
+     xp_evnt |   931.6259   123.8869      687.3411    1175.911
+--------------------------------------------------------------
+
+. svy, subpop(if merge_evnt==3 & evntyp=="erom"): mean n_visits sf_evnt mr_evnt md_evnt pv_evnt va_ev
+> nt tr_evnt of_evnt sl_evnt wc_evnt or_evnt ou_evnt ot_evnt xp_evnt 
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =      52      Number of obs   =       13,234
+Number of PSUs   =     116      Population size =  116,718,634
+                                Subpop. no. obs =           67
+                                Subpop. size    = 477,937.0675
+                                Design df       =           64
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+    n_visits |   1.393226   .0963805      1.200684    1.585768
+     sf_evnt |   39.59122   13.79889      12.02476    67.15769
+     mr_evnt |   197.9436   60.50128       77.0784    318.8088
+     md_evnt |   246.6821   89.85748      67.17111     426.193
+     pv_evnt |   320.1999   166.4883     -12.39877    652.7985
+     va_evnt |   3.701198   2.969147     -2.230354     9.63275
+     tr_evnt |    3.12256   3.151765     -3.173813    9.418934
+     of_evnt |          0  (omitted)
+     sl_evnt |    17.7782   12.41841     -7.030419    42.58683
+     wc_evnt |          0  (omitted)
+     or_evnt |   50.89736   39.13332     -27.28043    129.0752
+     ou_evnt |    4.99144   5.017151     -5.031472    15.01435
+     ot_evnt |   127.4964   87.35467     -47.01457    302.0074
+     xp_evnt |   1012.404   234.6495      543.6376     1481.17
+--------------------------------------------------------------
+Note: 113 strata omitted because they contain no subpopulation
+      members.
+
+. svy, subpop(if merge_evnt==3 & evntyp=="hvis"): mean n_visits sf_evnt mr_evnt md_evnt pv_evnt va_ev
+> nt tr_evnt of_evnt sl_evnt wc_evnt or_evnt ou_evnt ot_evnt xp_evnt 
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =      70      Number of obs   =       16,370
+Number of PSUs   =     156      Population size =  149,588,132
+                                Subpop. no. obs =          115
+                                Subpop. size    =  866,371.587
+                                Design df       =           86
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+    n_visits |   4.428139   .4778368      3.478231    5.378047
+     sf_evnt |   81.62933   68.46967     -54.48388    217.7425
+     mr_evnt |   2046.387   373.3835      1304.126    2788.649
+     md_evnt |   3468.098   1558.837      369.2328    6566.963
+     pv_evnt |   4.776891   4.589343     -4.346421     13.9002
+     va_evnt |   288.4777   118.6922      52.52533    524.4301
+     tr_evnt |          0  (omitted)
+     of_evnt |   11.90746   11.92957     -11.80775    35.62267
+     sl_evnt |   181.1061   131.4176     -80.14344    442.3556
+     wc_evnt |          0  (omitted)
+     or_evnt |   23.75999    23.4192     -22.79585    70.31583
+     ou_evnt |          0  (omitted)
+     ot_evnt |   47.36189   30.53152     -13.33277    108.0565
+     xp_evnt |   6153.505   1612.992      2946.983    9360.026
+--------------------------------------------------------------
+Note: 95 strata omitted because they contain no subpopulation
+      members.
+
+. svy, subpop(if merge_evnt==3 & evntyp=="ipat"): mean n_visits sf_evnt mr_evnt md_evnt pv_evnt va_ev
+> nt tr_evnt of_evnt sl_evnt wc_evnt or_evnt ou_evnt ot_evnt xp_evnt 
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =      42      Number of obs   =       10,892
+Number of PSUs   =      91      Population size =  101,216,425
+                                Subpop. no. obs =           53
+                                Subpop. size    = 407,570.3146
+                                Design df       =           49
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+    n_visits |   1.856831   .2537833      1.346835    2.366828
+     sf_evnt |   604.9016   273.9459      54.38659    1155.417
+     mr_evnt |    8524.96   2607.056      3285.885    13764.04
+     md_evnt |   3095.489    1142.84      798.8652    5392.113
+     pv_evnt |   7718.273   3547.987       588.325    14848.22
+     va_evnt |   19.04119   18.93141      -19.0029    57.08529
+     tr_evnt |          0  (omitted)
+     of_evnt |          0  (omitted)
+     sl_evnt |          0  (omitted)
+     wc_evnt |          0  (omitted)
+     or_evnt |   575.1636   410.8654     -250.5013    1400.829
+     ou_evnt |   16724.28   14638.89     -12693.67    46142.24
+     ot_evnt |   15681.75   13699.83     -11849.09    43212.58
+     xp_evnt |   52943.86   26160.59      372.1888    105515.5
+--------------------------------------------------------------
+Note: 123 strata omitted because they contain no subpopulation
+      members.
+
+. svy, subpop(if merge_evnt==3 & evntyp=="pmed"): mean n_visits sf_evnt mr_evnt md_evnt pv_evnt va_ev
+> nt tr_evnt of_evnt sl_evnt wc_evnt or_evnt ou_evnt ot_evnt xp_evnt 
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     165      Number of obs   =       36,805
+Number of PSUs   =     366      Population size =  336,346,977
+                                Subpop. no. obs =        2,462
+                                Subpop. size    = 23,942,282.1
+                                Design df       =          201
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+    n_visits |   4.907703   .0864163      4.737304    5.078102
+     sf_evnt |   235.4812   14.08511      207.7077    263.2548
+     mr_evnt |   738.1386   59.50924      620.7961    855.4811
+     md_evnt |    347.241   53.25987      242.2212    452.2607
+     pv_evnt |   518.4403   51.61034      416.6732    620.2075
+     va_evnt |   31.94851   9.562266      13.09328    50.80373
+     tr_evnt |   22.38583   5.857999      10.83481    33.93684
+     of_evnt |   4.176524   2.957347     -1.654882    10.00793
+     sl_evnt |   30.56529   8.096027      14.60125    46.52933
+     wc_evnt |   .3401781   .3207417      -.292272    .9726282
+     or_evnt |   23.88691   7.157076      9.774325    37.99949
+     ou_evnt |   19.97313   8.665382      2.886418    37.05985
+     ot_evnt |   .5370141    .447695     -.3457672    1.419795
+     xp_evnt |   1973.114   103.3012      1769.421    2176.808
+--------------------------------------------------------------
+
+. 
+. log close  
+      name:  <unnamed>
+       log:  \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise5.log
+  log type:  text
+ closed on:  22 Feb 2017, 14:46:52
+-----------------------------------------------------------------------------------------------------

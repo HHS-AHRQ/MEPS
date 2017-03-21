@@ -1,0 +1,263 @@
+1                                           The SAS System            13:35 Tuesday, February 21, 2017
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M2) 
+      Licensed to SOCIAL & SCIENTIFIC SYSTEMS INC/AHRQ4, Site 70109165.
+NOTE: This session is executing on the X64_7PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 13.2
+
+NOTE: Additional host information:
+
+ X64_7PRO WIN 6.1.7601 Service Pack 1 Workstation
+
+NOTE: SAS initialization used:
+      real time           0.35 seconds
+      cpu time            0.46 seconds
+      
+
+NOTE: AUTOEXEC processing beginning; file is \\source.ahrq.local\source\MEPS\_PUFINFO\autoexec.sas.
+
+local directory autoexec processed
+
+NOTE: AUTOEXEC processing completed.
+
+1          /**********************************************************************************
+2          
+3          PROGRAM:      C:\MEPS\SAS\PROG\EXERCISE7.SAS
+4          
+5          DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO CONSTRUCT INSURANCE STATUS VARIABLES FROM
+6                        MONTHLY INSURANCE VARIABLES (see below) IN THE PERSON-LEVEL DATA
+7          
+8          TRImm14X   Covered by TRICARE/CHAMPVA in mm (Ed)
+9          MCRmm14    Covered by Medicare in mm
+10         MCRmm14X   Covered by Medicare in mm (Ed)
+11         MCDmm14    Covered by Medicaid or SCHIP in mm
+12         MCDmm14X   Covered by Medicaid or SCHIP in mm  (Ed)
+13         OPAmm14    Covered by Other Public A Ins in mm
+14         OPBmm14    Covered by Other Public B Ins in mm
+15         PUBmm14X   Covered by Any Public Ins in mm (Ed)
+16         PEGmm14    Covered by Empl Union Ins in mm
+17         PDKmm14    Coverer by Priv Ins (Source Unknown) in mm
+18         PNGmm14    Covered by Nongroup Ins in mm
+19         POGmm14    Covered by Other Group Ins in mm
+20         PRSmm14    Covered by Self-Emp Ins in mm
+21         POUmm14    Covered by Holder Outside of RU in mm
+22         PRImm14    Covered by Private Ins in mm
+23         
+24         where mm = JA-DE  (January - December)
+25         
+26         INPUT FILE:   C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FY PUF DATA)
+27         
+28         *********************************************************************************/;
+29         OPTIONS LS=160 PS=65 NODATE;
+30         
+31         *LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+32         LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: \\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data
+33         
+34         %LET YR=14;
+2                                                                        The SAS System
+
+35         
+36         TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+37         TITLE2 "EXERCISE7.SAS: HOW TO CONSTRUCT INSURANCE STATUS VARIABLES, USING FY &YR DATA";
+38         
+39         PROC FORMAT;
+40         VALUE RACETHX
+41           1 = '1 HISPANIC'
+42           2 = '2 WHITE'
+43           3 = '3 BLACK'
+44           4 = '4 ASIAN'
+45           5 = '5 OTHER RACE'
+46           ;
+NOTE: Format RACETHX has been output.
+47         RUN;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+48         
+49         
+50         /*1) COUNT # OF MONTHS WITH INSURANCE*/
+51         
+52         DATA FY1;
+53           SET CDATA.H171;
+54         
+55         ARRAY PEG (12) PEGJA&YR PEGFE&YR PEGMA&YR PEGAP&YR PEGMY&YR PEGJU&YR PEGJL&YR PEGAU&YR PEGSE&YR PEGOC&YR PEGNO&YR PEGDE&YR;
+56         ARRAY POU (12) POUJA&YR POUFE&YR POUMA&YR POUAP&YR POUMY&YR POUJU&YR POUJL&YR POUAU&YR POUSE&YR POUOC&YR POUNO&YR POUDE&YR;
+57         ARRAY PDK (12) PDKJA&YR PDKFE&YR PDKMA&YR PDKAP&YR PDKMY&YR PDKJU&YR PDKJL&YR PDKAU&YR PDKSE&YR PDKOC&YR PDKNO&YR PDKDE&YR;
+58         ARRAY PNG (12) PNGJA&YR PNGFE&YR PNGMA&YR PNGAP&YR PNGMY&YR PNGJU&YR PNGJL&YR PNGAU&YR PNGSE&YR PNGOC&YR PNGNO&YR PNGDE&YR;
+59         ARRAY POG (12) POGJA&YR POGFE&YR POGMA&YR POGAP&YR POGMY&YR POGJU&YR POGJL&YR POGAU&YR POGSE&YR POGOC&YR POGNO&YR POGDE&YR;
+60         ARRAY PRS (12) PRSJA&YR PRSFE&YR PRSMA&YR PRSAP&YR PRSMY&YR PRSJU&YR PRSJL&YR PRSAU&YR PRSSE&YR PRSOC&YR PRSNO&YR PRSDE&YR;
+61         
+62         ARRAY PRI (12) PRIJA&YR PRIFE&YR PRIMA&YR PRIAP&YR PRIMY&YR PRIJU&YR PRIJL&YR PRIAU&YR PRISE&YR PRIOC&YR PRINO&YR PRIDE&YR;
+63         ARRAY INS (12) INSJA&YR.X INSFE&YR.X INSMA&YR.X INSAP&YR.X INSMY&YR.X INSJU&YR.X INSJL&YR.X INSAU&YR.X INSSE&YR.X INSOC&YR.X INSNO&YR.X INSDE&YR.X;
+64         ARRAY MCD (12) MCDJA&YR.X MCDFE&YR.X MCDMA&YR.X MCDAP&YR.X MCDMY&YR.X MCDJU&YR.X MCDJL&YR.X MCDAU&YR.X MCDSE&YR.X MCDOC&YR.X MCDNO&YR.X MCDDE&YR.X;
+65         ARRAY MCR (12) MCRJA&YR.X MCRFE&YR.X MCRMA&YR.X MCRAP&YR.X MCRMY&YR.X MCRJU&YR.X MCRJL&YR.X MCRAU&YR.X MCRSE&YR.X MCROC&YR.X MCRNO&YR.X MCRDE&YR.X;
+66         ARRAY TRI (12) TRIJA&YR.X TRIFE&YR.X TRIMA&YR.X TRIAP&YR.X TRIMY&YR.X TRIJU&YR.X TRIJL&YR.X TRIAU&YR.X TRISE&YR.X TRIOC&YR.X TRINO&YR.X TRIDE&YR.X;
+67         
+68         ARRAY OPA (12) OPAJA&YR OPAFE&YR OPAMA&YR OPAAP&YR OPAMY&YR OPAJU&YR OPAJL&YR OPAAU&YR OPASE&YR OPAOC&YR OPANO&YR OPADE&YR;
+69         ARRAY OPB (12) OPBJA&YR OPBFE&YR OPBMA&YR OPBAP&YR OPBMY&YR OPBJU&YR OPBJL&YR OPBAU&YR OPBSE&YR OPBOC&YR OPBNO&YR OPBDE&YR;
+70         
+71           PRI_N=0;
+72           INS_N=0;
+73           UNINS_N=0;
+74           MCD_N=0;
+75           MCR_N=0;
+76           TRI_N=0;
+77           OPAB_N=0;
+78           GRP_N=0;
+79           NG_N=0;
+80           PUB_N=0;
+81           REF_N=0;
+82         
+83           DO I=1 TO 12;
+84             IF PRI(I)=1 THEN PRI_N+1;
+85             IF INS(I)=1 THEN INS_N+1;
+86             IF INS(I)=2 THEN UNINS_N+1;
+87             IF MCD(I)=1 THEN MCD_N+1;
+88             IF MCR(I)=1 THEN MCR_N+1;
+89             IF TRI(I)=1 THEN TRI_N+1;
+90             IF OPA(I)=1 OR OPB(I)=1 THEN OPAB_N+1;
+3                                                                        The SAS System
+
+91             IF PEG(I)=1 OR TRI(I)=1 OR POU(I)=1 OR PDK(I)=1 THEN GRP_N + 1;
+92             IF PNG(I)=1 OR POG(I)=1 OR PRS(I)=1 THEN NG_N + 1;
+93             IF MCR(I)=1 OR MCD(I)=1 OR OPA(I)=1 OR OPB(I)=1 THEN PUB_N + 1;
+94             IF INS(I)>0 THEN REF_N+1;
+95           END;
+96           DROP I;
+97         
+98         LABEL
+99           PRI_N  ="# OF MONTHS COV BY PRIVATE INSU"
+100          INS_N  ="# OF MONTHS COV BY ANY INSU"
+101          UNINS_N="# OF MONTHS WITHOUT INSU"
+102          MCD_N  ="# OF MONTHS COV BY MEDICAID"
+103          MCR_N  ="# OF MONTHS COV BY MEDICARE"
+104          TRI_N  ="# OF MONTHS COV BY TRICARE"
+105          OPAB_N ="# OF MONTHS COV BY OTHER PUBLIC A OR B INSU"
+106          GRP_N  ="# OF MONTHS COV BY PRIVATE GROUP INSU"
+107          NG_N   ="# OF MONTHS COV BY PRIVATE NON-GROUP INSU"
+108          PUB_N  ="# OF MONTHS COV BY PUBLIC INSU"
+109          REF_N  ="# OF MONTHS IN MEPS SURVEY" ;
+110        RUN;
+
+NOTE: There were 34875 observations read from the data set CDATA.H171.
+NOTE: The data set WORK.FY1 has 34875 observations and 1849 variables.
+NOTE: DATA statement used (Total process time):
+      real time           7.23 seconds
+      cpu time            3.82 seconds
+      
+
+111        
+112        TITLE3 "CREATE COUNT VARIABLES FOR # OF MONTHS WITH INSURANCE";
+113        PROC FREQ DATA=FY1;
+114          TABLES  PRI_N INS_N UNINS_N MCD_N MCR_N TRI_N OPAB_N GRP_N NG_N PUB_N REF_N /LIST MISSING;
+115        RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.FY1.
+NOTE: The PROCEDURE FREQ printed pages 1-4.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.87 seconds
+      cpu time            0.81 seconds
+      
+
+116        
+117        TITLE3 'SAMPLE DUMP TO CHECK THE COUNT VARIABLES (USING PRI_N AS EXMAPLE)';
+118        PROC PRINT DATA=FY1 (OBS=30) NOOBS;
+119        VAR DUPERSID PRIJA&YR PRIFE&YR PRIMA&YR PRIAP&YR PRIMY&YR PRIJU&YR PRIJL&YR PRIAU&YR PRISE&YR PRIOC&YR PRINO&YR PRIDE&YR PRI_N;
+120        RUN;
+
+NOTE: There were 30 observations read from the data set WORK.FY1.
+NOTE: The PROCEDURE PRINT printed page 5.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+121        
+122        /*2) CREATE FLAGS FOR VARIOUS TYPES OF INSU*/
+123        
+124        DATA FY2;
+125          SET FY1;
+126          LABEL
+127          FULL_INSU='INSURED FOR FULL YEAR'
+128          GROUP_INS1='EVER INSURED BY PRIVATE GROUP'
+129          GROUP_INS2='INSURED BY PRIVATE GROUP FOR FULL YEAR'
+4                                                                        The SAS System
+
+130          NG_INS='EVER INSURED BY PRIVATE NON-GROUP';
+131        
+132          FULL_INSU=0;
+133          GROUP_INS1=0;
+134          GROUP_INS2=0;
+135          NG_INS=0;
+136        
+137          IF UNINS_N=0 THEN FULL_INSU=1;
+138          IF GRP_N>0 THEN GROUP_INS1=1;
+139          IF GRP_N>0 AND GRP_N=REF_N THEN GROUP_INS2=1;
+140          IF NG_N>0 THEN NG_INS=1;
+141        RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.FY1.
+NOTE: The data set WORK.FY2 has 34875 observations and 1853 variables.
+NOTE: DATA statement used (Total process time):
+      real time           3.13 seconds
+      cpu time            3.13 seconds
+      
+
+142        
+143        TITLE3 "SUPPORTING CROSSTABS TO VERIFY THE CREATION OF THE FLAGS";
+144        PROC FREQ DATA=FY2;
+145          TABLES FULL_INSU FULL_INSU*UNINS_N FULL_INSU*INS_N*REF_N
+146                 GROUP_INS1 GROUP_INS1*GRP_N
+147                 GROUP_INS2 GROUP_INS2*GRP_N*REF_N
+148                 NG_INS NG_INS*NG_N/LIST MISSING;
+149        RUN;
+
+NOTE: There were 34875 observations read from the data set WORK.FY2.
+NOTE: The PROCEDURE FREQ printed pages 6-10.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.28 seconds
+      cpu time            0.28 seconds
+      
+
+150        
+151        
+152        /*3) CALCULATE % OF PERSONS COVERED BY INSU*/
+153        
+154        TITLE3 "% AND POPULATION WITH INSU";
+155        PROC SURVEYMEANS DATA=FY2 NOBS SUMWGT SUM STD MEAN STDERR;
+156        	STRATA  VARSTR;
+157        	CLUSTER VARPSU;
+158        	WEIGHT PERWT14F;
+159        	VAR  FULL_INSU GROUP_INS1 GROUP_INS2 NG_INS;
+160        	DOMAIN RACETHX;
+161          FORMAT RACETHX RACETHX.;
+162        RUN;
+
+NOTE: Due to nonpositive weights, 1713 observation(s) were deleted.
+NOTE: Only one cluster in a stratum in domain RACE/ETHNICITY (EDITED/IMPUTED) for variable(s) FULL_INSU, GROUP_INS1, GROUP_INS2, NG_INS. The estimate of 
+      variance for FULL_INSU, GROUP_INS1, GROUP_INS2, NG_INS will omit this stratum.
+NOTE: The PROCEDURE SURVEYMEANS printed pages 11-12.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.51 seconds
+      cpu time            0.51 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           13.63 seconds
+      cpu time            9.53 seconds
+5                                                                        The SAS System
+
+      
