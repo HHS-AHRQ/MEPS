@@ -82,4 +82,18 @@ Out of Pocket	| SLF
 Medicare	| 	MCR
 Medicaid	| 	MCD
 Private Insurance		| PRV
-Veteranb
+Veterans Administration/CHAMPVA		| VA
+TRICARE		| TRI
+Other Federal Sources	| 	OFD
+Other State and Local Sources		| STL
+Workers Compensation		| WCP
+Other Private	| 	OPR
+Other Public		| OPU
+Other Unclassified Sources		| OSR
+Collapsed Source of Payment Category	| **\*
+-------------------------------------|-----
+Private and TRICARE |	PRT
+Other Federal, Other State and Local,<br>Other Private, Other Public, and Other<br>Unclassified Sources  |	OTH
+Total charges	 | TCH
+
+
