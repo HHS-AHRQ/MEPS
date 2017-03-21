@@ -1,3 +1,5 @@
+The following tables provide a quick reference to identify the variable names for utilization and expenditure variables on the MEPS Full Year Consolidated (FYC) Public Use Files (PUFs). Note that not all of the listed variables are available on every FYC file. Data and corresponding documentation are available on [the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_results.jsp?cboDataYear=All&cboDataTypeY=1%2CHousehold+Full+Year+File&buttonYearandDataType=Search&cboPufNumber=All&SearchTitle=Consolidated+Data). 
+
 
 ### Utilization and Expenditure Variables
 
