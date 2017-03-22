@@ -77,26 +77,22 @@ Other Medical Supplies and Equipment|--|OTH**\*yy
 
 To complete variable name in the '[Utilization and Expenditure Variables](#utilization-and-expenditure-variables)' table, replace **\* with a particular source of payment category as identified in the following tables:
 
-Source of Payment Category	| **\*
----------------------------|-----
-Total payments (sum of all sources)	| EXP
-Out of Pocket	| SLF
-Medicare	| 	MCR
-Medicaid	| 	MCD
-Private Insurance		| PRV
-Veterans Administration/CHAMPVA		| VA
+Source of Payment Category	| \*\*\* | Source of Payment Category	| \*\*\* 
+---------------------------|-------|----------------------------|------
+Total payments (sum of all sources)	| EXP | Other Federal Sources	| 	OFD
+Out of Pocket	| SLF| Other State and Local Sources		| STL
+Medicare	| 	MCR| Workers Compensation		| WCP
+Medicaid	| 	MCD| Other Private	| 	OPR
+Private Insurance		| PRV| Other Public		| OPU
+Veterans Administration/CHAMPVA		| VA| Other Unclassified Sources		| OSR
 TRICARE		| TRI
-Other Federal Sources	| 	OFD
-Other State and Local Sources		| STL
-Workers Compensation		| WCP
-Other Private	| 	OPR
-Other Public		| OPU
-Other Unclassified Sources		| OSR
+
+
 
 Collapsed Source of Payment Category	| **\*
 -------------------------------------|-----
 Private and TRICARE |	PRT
-Other Federal, Other State and Local,<br>Other Private, Other Public, and Other<br>Unclassified Sources  |	OTH
+Other Federal, Other State and Local, Other Private, Other Public, and Other Unclassified Sources  |	OTH
 Total charges	 | TCH
 
 
