@@ -5,11 +5,7 @@ The Medical Expenditure Panel Survey, which began in 1996, is a set of large-sca
 ## MEPS-HC
 The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals that provides timely, comprehensive information on the health status of Americans, health insurance coverage, and access, use, and cost of health services. The MEPS-HC includes information on medical expenditures, conditions, and events; demographics (for example, age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times over a two-year period:
 
-
-![MEPS panel image](panel_design.png)
-
-
-
+![MEPS panel image](_images/panel_design.png)
 
 Data from the Household Component are [available to the public](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp).
 
@@ -32,7 +28,7 @@ Several quick reference guides are also provided in this repository for convenie
 * **Condition Codes**: [meps_condition_codes.csv](meps_condition_codes.csv) provides a cross-reference between [collapsed condition categories](https://meps.ahrq.gov/survey_comp/MEPS_condition_data.pdf) commonly used in MEPS analyses and [Clinical Classification Software (CCS) Codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp#download). Information on how CCS codes relate to [ICD-9](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [ICD-10](https://www.hcup-us.ahrq.gov/toolssoftware/ccs10/ccs10.jsp) codes is available on the HCUP website.
 [![preview condition codes](_images/meps_condition_codes.png)](meps_condition_codes.csv)
 
-* ** File Names**: [meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically.
+* **File Names**: [meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically.
 [![preview file names](_images/meps_file_names.png)](meps_file_names.csv)
 
 
