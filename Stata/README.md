@@ -1,4 +1,6 @@
 # Stata Exercises
 
-The examples here provide Stata code to analyze MEPS data. Each exercise contains three files: a Stata 'do' file (.do), a Stata log file (.log), and a text file combining the 'do' and log files (.docx).
-
+The examples here provide Stata code to analyze MEPS data. Each exercise contains three files:
+1. Stata 'do' file (.do)
+2. Stata log file (.log)
+3. Text file combining the 'do' and log files (.docx).
