@@ -1,6 +1,6 @@
 # SAS Exercise 2
 
-This program generates selected estimates for a 2014 version of the meps statistics brief \#275: <i>Trends in Antipsychotics Purchases and Expenses for the U.S. Civilian Noninstitutionalized Population, 1997 and 2007</i>
+This program generates selected estimates for a 2014 version of the meps statistics brief \#275: [<i>Trends in Antipsychotics Purchases and Expenses for the U.S. Civilian Noninstitutionalized Population, 1997 and 2007</i>](https://meps.ahrq.gov/data_files/publications/st275/stat275.shtml)
 
 1. **Figure 1**: Total expense for antipsychotics
 2. **Figure 2**: Total number of purchases of antipsychotics
