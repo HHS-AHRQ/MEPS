@@ -18,7 +18,7 @@
 3. SAS list file containing output (.LST)
 4. Rich text file containing both the log and output files (.rtf).
 
-## MEPS public use files
+## Data files
 
 The MEPS data files listed below used in the exercises. The following steps can be used to access the data sets:
 1. Click on the [provided links](#full-year-files) to download the SAS transport zip files (.zip) (Alternatively, all MEPS public use files can be found at the [MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp)).
