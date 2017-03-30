@@ -3,7 +3,7 @@
 ## Summary of Exercises
 
 [Exercise 1](exercise_1): National health care expenses by type of service
-<br>[Exercise 2](exercise 2): Expenditures and utilization of antipsychotics (from [statistical brief #275](https://meps.ahrq.gov/data_files/publications/st275/stat275.shtml))
+<br>[Exercise 2](exercise_2): Expenditures and utilization of antipsychotics (from [statistical brief #275](https://meps.ahrq.gov/data_files/publications/st275/stat275.shtml))
 <br>[Exercise 3](exercise_3): Constructing family-level estimates
 <br>[Exercise 4](exercise_4): Use and expenditures for persons with diabetes
 <br>[Exercise 5](exercise_5): Expenditures for all events associated with diabetes
@@ -21,7 +21,7 @@
 ## MEPS public use files
 
 The MEPS data files listed below used in the exercises. The following steps can be used to access the data sets:
-1. Click on the [provided links](full-year-files) to download the SAS transport zip files (.zip) (Alternatively, all MEPS public use files can be found at the [MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp)).
+1. Click on the [provided links](#full-year-files) to download the SAS transport zip files (.zip) (Alternatively, all MEPS public use files can be found at the [MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp)).
 
 2. Unzip and save all the .ssp files into a folder on your local computer (e.g. "C:\MEPS\SAS\transfer").
 
