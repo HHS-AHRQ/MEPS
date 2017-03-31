@@ -1,43 +1,35 @@
-# About MEPS
+# Medical Expenditure Panel Survey (MEPS)
 
-The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. MEPS collects data on the specific health services that Americans use, how frequently they use them, the cost of these services, and how they are paid for, as well as data on the cost, scope, and breadth of health insurance held by and available to U.S. workers.
+This repository contains instructions and example code for [loading](#accessing-meps-data) and [analyzing](#analyzing-meps-data) data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
 
-## MEPS-HC
-The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals that provides timely, comprehensive information on the health status of Americans, health insurance coverage, and access, use, and cost of health services. The MEPS-HC includes information on medical expenditures, conditions, and events; demographics (for example, age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times over a two-year period:
+[Survey Background](#survey-background) <br>
+[Accessing MEPS-HC data](#accessing-meps-hc-data) <br>
+[Analyzing MEPS-HC data](#analyzing-meps-hc-data) <br>
+[Additional Survey Components](#additional-survey-components)
 
-![MEPS panel image](_images/panel_design.png)
+## Survey Background
+The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times (rounds) over a two-year period:
 
-Data from the Household Component are [available to the public](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp).
+![panel_design](_images/panel_design.png)
 
-### Programming examples
+The MEPS-HC is designed to produce national and regional estimates of the health care use, expenditures, sources of payment, and insurance coverage of the <b>U.S. civilian noninstitutionalized population</b>. The sample design of the survey includes weighting, stratification, clustering, multiple stages of selection, and disproportionate sampling.
 
-This repository provides example code for loading and analyzing data from the <b>Household Component</b> of MEPS:
+## Accessing MEPS-HC data
 
-* The [R folder](R) has example code for loading and analyzing MEPS data using R.
+Data from the Household Component of MEPS are available for download as [public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). Each dataset contains .zip and .exe files in ASCII and SAS transport format.
 
-* The [SAS folder](SAS) contains example code for analyzing MEPS data using SAS.
+![dataset_website_screenshot](_images/data_documentation_arrow.png)
 
-* The [Stata folder](Stata) has example code for analyzing MEPS data using Stata.
+To download the data, unzip and save the ASCII (.dat) or SAS transport (.ssp) file to your local computer. For example the 2014 full-year-consolidated files <b>h171.dat</b> and <b>h171.ssp</b> can be stored in a local directory <b>'C:\MEPS\data'</b>:
 
-> **Note to User**: The provided code is intended as examples of using common software packages to load and analyze MEPS data. AHRQ cannot certify the quality of your analysis. You are responsible for ensuring appropriateness of sample sizes, statistical significance, and overall reasonableness.
+![irectory](_images/directory.png)
 
-### Quick reference guides
+The steps for loading the .dat or .ssp files depends on the programming language being used. Code for loading .ssp files in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
 
-Several quick reference guides are also provided in this repository for convenience:
+## Analyzing MEPS-HC data
+The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages including R, SAS, and Stata. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided for [R](R), [SAS](SAS), and [Stata](Stata). Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
 
-* **Condition Codes**: [meps_condition_codes.csv](meps_condition_codes.csv) provides a cross-reference between [collapsed condition categories](https://meps.ahrq.gov/survey_comp/MEPS_condition_data.pdf) commonly used in MEPS analyses and [Clinical Classification Software (CCS) Codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp#download). Information on how CCS codes relate to [ICD-9](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [ICD-10](https://www.hcup-us.ahrq.gov/toolssoftware/ccs10/ccs10.jsp) codes is available on the HCUP website.
-[![preview condition codes](_images/meps_condition_codes.png)](meps_condition_codes.csv)
-
-* **File Names**: [meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically.
-[![preview file names](_images/meps_file_names.png)](meps_file_names.csv)
-
-
-* **Programming Statements**: [meps_programming_statements.md](meps_programming_statements.md) offers a quick reference of programming statements needed to analyze MEPS data using survey methods in R, SAS, and Stata.
-[![preview programming statements](_images/meps_programming_statements.png)](meps_programming_statements.md)
-
-* **Variable Names**: [meps_variables.md](meps_variables.md) is a guide for identifying variable names of utilization and  expediture variables by source of payment in the [MEPS Full-Year-Consolidated (FYC) files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_results.jsp?cboDataYear=All&cboDataTypeY=1%2CHousehold+Full+Year+File&buttonYearandDataType=Search&cboPufNumber=All&SearchTitle=Consolidated+Data). For example, 'TOTEXP14' is the variable name for total expenditures per person in 2014, while 'OBVSLF14' is the variable name for out-of-pocket payments for office-based doctor's visits per person in 2014.
-[![preview variable names](_images/meps_variables.png)](meps_variables.md)
-
+> **Note to User**: All code provided in this repository is intended to be used as an example for loading and analyzing MEPS data. AHRQ cannot certify the quality of your analysis. It is the user's responsibility to verify the accuracy of the results.
 
 
 ## Additional Survey Components
