@@ -1,8 +1,9 @@
 # Analyzing MEPS data using R
 
 [Loading R packages](#loading-r-packages)<br>
-[Loading MEPS data manually](#loading-meps-data-manually)<br>
-[Loading MEPS data programmatically](#loading-meps-data-programatically)<br>
+[Loading MEPS data](#loading-meps-data)<br>
+&nbsp; &nbsp; [Manually](#manually)<br>
+&nbsp; &nbsp; [Programmatically](#programatically)<br>
 [Survey Package in R](#survey-package-in-r)<br>
 [R examples](#r-examples)
 
@@ -20,7 +21,12 @@ To load MEPS data into R, we first need to load some additional packages. We wil
 ```
 > **Installing and Loading Packages**: Packages are sets of R functions that are downloaded and installed into the R system. A package only needs to be installed once per R installation. However, the `library` function needs to be run every time you re-start your R session to load the package. Packages are tailor made to help perform certain statistical, graphical, or data tasks. Since R is used by many analysts, it is typical for only some packages to be loaded for each analysis.
 
-## Loading MEPS data manually
+## Loading MEPS data
+Two methods for downloading MEPS transport files are available. The first requires the user to navigate to the website containing the MEPS dataset and manually download and unzip the SAS transport file. The second method uses the R function 'download.file' to automatically download the file by pointing to its location on the website.
+
+> <b>Warning!</b> R does not preserve any SAS formats, labels, or variable types. For instance, a character variable on the SAS dataset could be read as a factor variable in the R dataset. Users are encouraged to be diligent in confirming that variables are stored as the appropriate type before proceeding with analyses.
+
+### Manually
 
 If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](./README.md#accessing-meps-hc-data) for details)
 ``` r
@@ -31,9 +37,9 @@ To save the loaded data as a permanent R dataset (.Rdata), run the following cod
 save(h171, file="C:/MEPS/R/data/h171.Rdata")
 ```
 
-> <b>Warning!</b> Be aware the directory names need to be separated by a slash ("/") or a double backslash ("\\\\"). This is because the single backslash is almost universally used as a string escape character in computing.
+> <b>Note:</b> Directory names need to be separated by a slash ("/") or a double backslash ("\\\\") in R.
 
-## Loading MEPS data programmatically
+### Programmatically
 
 Data downloading tasks can also be automated using R. This offers several advantages when:
 
@@ -51,6 +57,8 @@ download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip", temp 
 unzipped_file = unzip(temp)
 h171 = read.xport(unzipped_file)
 unlink(temp)  # Unlink to delete temporary file
+
+save(h171, file="C:/MEPS/R/data/h171.Rdata")  # save as .Rdata file
 ```
 
 ## Survey package in R
