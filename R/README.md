@@ -3,7 +3,7 @@
 [Loading R packages](#loading-r-packages)<br>
 [Loading MEPS data](#loading-meps-data)<br>
 &nbsp; &nbsp; [Manually](#manually)<br>
-&nbsp; &nbsp; [Programmatically](#programatically)<br>
+&nbsp; &nbsp; [Programmatically](#programmatically)<br>
 &nbsp; &nbsp; [Saving .Rdata file](#saving-rdata-file)<br>
 [Survey Package in R](#survey-package-in-r)<br>
 [R examples](#r-examples)
@@ -91,6 +91,5 @@ svytotal(~TOTEXP14, design = mepsdsgn)
 
 The following codes are provided in this folder (check back regularly for additional exercises):
 
-[loading_MEPS.R](loading_MEPS.R): example code to download MEPS files from [the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp).<br>
 [example_1.R](example_1.R): code to re-create some of the estimates from the [MEPS summary table for 2013 data.](https://meps.ahrq.gov/mepsweb/data_stats/tables_compendia_hh_interactive.jsp?_SERVICE=MEPSSocket0&_PROGRAM=MEPSPGM.TC.SAS&File=HCFY2013&Table=HCFY2013_PLEXP_%40&VAR1=AGE&VAR2=SEX&VAR3=RACETH5C&VAR4=INSURCOV&VAR5=POVCAT13&VAR6=REGION&VAR7=HEALTH&VARO1=4+17+44+64&VARO2=1&VARO3=1&VARO4=1&VARO5=1&VARO6=1&VARO7=1&_Debug=).<br>
 [example_2.R](example_2.R): code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml) (includes [ggplot2](http://www.r-graph-gallery.com/portfolio/ggplot2-package/) example).
