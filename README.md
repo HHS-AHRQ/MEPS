@@ -1,6 +1,6 @@
 # Medical Expenditure Panel Survey (MEPS)
 
-This repository contains instructions and example code for [loading](#accessing-meps-data) and [analyzing](#analyzing-meps-data) data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
+This repository contains instructions and example code for [loading](#accessing-meps-hc-data) and [analyzing](#analyzing-meps-hc-data) data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
 
 [Survey Background](#survey-background) <br>
 [Accessing MEPS-HC data](#accessing-meps-hc-data) <br>
