@@ -9,7 +9,7 @@ The following reference guides are provided for convenience:
 [![preview file names](../_images/meps_file_names.png)](meps_file_names.csv)
 
 
-** Programming Statements**: [meps_programming_statements.md](meps_programming_statements.md) offers a quick reference of programming statements needed to analyze MEPS data using survey methods in R, SAS, and Stata.
+**Programming Statements**: [meps_programming_statements.md](meps_programming_statements.md) offers a quick reference of programming statements needed to analyze MEPS data using survey methods in R, SAS, and Stata.
 [![preview programming statements](../_images/meps_programming_statements.png)](meps_programming_statements.md)
 
 **Variable Names**: [meps_variables.md](meps_variables.md) is a guide for identifying variable names of utilization and  expediture variables by source of payment in the [MEPS Full-Year-Consolidated (FYC) files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_results.jsp?cboDataYear=All&cboDataTypeY=1%2CHousehold+Full+Year+File&buttonYearandDataType=Search&cboPufNumber=All&SearchTitle=Consolidated+Data). For example, 'TOTEXP14' is the variable name for total expenditures per person in 2014, while 'OBVSLF14' is the variable name for out-of-pocket payments for office-based doctor's visits per person in 2014.
