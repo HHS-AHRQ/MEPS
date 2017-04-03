@@ -2,7 +2,7 @@
 
 [Loading R packages](#loading-r-packages)<br>
 [Loading MEPS data manually](#loading-meps-data-manually)<br>
-[Loading MEPS data programmatically](#loading-meps-data-programatically)<br>
+[Loading MEPS data programmatically](#loading-meps-data-programmatically)<br>
 [Survey Package in R](#survey-package-in-r)<br>
 [R examples](#r-examples)
 
@@ -22,7 +22,7 @@ To load MEPS data into R, we first need to load some additional packages. We wil
 
 ## Loading MEPS data manually
 
-If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](./README.md#accessing-meps-hc-data) for details)
+If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details)
 ``` r
 h171 = read.xport("C:/MEPS/data/h171.ssp")
 ```
