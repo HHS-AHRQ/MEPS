@@ -1,29 +1,29 @@
 # Example 2: Re-producing estimates for Figure 1 of Stat brief #491
 
-# After downloading MEPS data (see 'loading_MEPS.R' for instructions to do so) define the survey object:
-mepsdsgn <- svydesign(id = ~VARPSU, 
-    strata = ~VARSTR, 
-    weights = ~PERWT13F, 
-    data = FYC2013, 
-    nest = TRUE)  
+# After downloading MEPS data define the survey object:
+mepsdsgn <- svydesign(id = ~VARPSU,
+    strata = ~VARSTR,
+    weights = ~PERWT13F,
+    data = FYC2013,
+    nest = TRUE)
 
 # To get ambulatory (OB+OP) and home health/other expenditures, add variables to the mepsdsgn object.
-mepsdsgn <- update(mepsdsgn, 
+mepsdsgn <- update(mepsdsgn,
                    ambexp13 = OBVEXP13 + OPTEXP13 + ERTEXP13,
                    hhexp13  = HHAEXP13 + HHNEXP13 + VISEXP13 + OTHEXP13)
 
-# Use svyratio to calculate percentage distribution of spending by type of service: 
-pct_TOS = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13, 
-                   denominator = ~TOTEXP13, 
+# Use svyratio to calculate percentage distribution of spending by type of service:
+pct_TOS = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13,
+                   denominator = ~TOTEXP13,
                    design = mepsdsgn)
 
 # Now do the same thing by age group (<65, 65+), using the `subset` function.
-pct_TOS_lt65 = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13, 
-                    denominator = ~TOTEXP13, 
+pct_TOS_lt65 = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13,
+                    denominator = ~TOTEXP13,
                     design = subset(mepsdsgn,AGELAST < 65))
 
-pct_TOS_ge65 = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13, 
-                    denominator = ~TOTEXP13, 
+pct_TOS_ge65 = svyratio(~IPTEXP13 + ambexp13 + RXEXP13 + DVTEXP13 + hhexp13,
+                    denominator = ~TOTEXP13,
                     design = subset(mepsdsgn,AGELAST >= 65))
 
 # Create output tables
@@ -43,7 +43,7 @@ write.csv(pct_matrix,file = "C:/MEPS/figure1.csv")
 
 ## Graphics - barplot Example to recreate Figure 1
 bp <- barplot(
-  t(pct_matrix),        # 't' transposes the matrix, so the x-axis represents type of service 
+  t(pct_matrix),        # 't' transposes the matrix, so the x-axis represents type of service
   beside=TRUE,          # make bars side-by-side, not stacked
   col   = c("blue","yellow","magenta"),   # change colors of bars
   ylab  = "Percentage", # change y-axis label
@@ -54,7 +54,7 @@ text(x = bp, y = t(pct_matrix)+2,  # add text labels to end points of bars
      xpd=T,col="blue",font=2)
 
 
-## Graphics example with ggplot2: 
+## Graphics example with ggplot2:
 install.packages("reshape2")
 install.packages("ggplot2")
 
@@ -70,9 +70,9 @@ my_magenta <- rgb(99,16,99,maxColorValue=255)
 my_darkblue <- rgb(0,0,173,maxColorValue = 255)
 
 # create plot
-ggplot(long,aes(x=Var1,y=value,fill=Var2)) +    
-  geom_bar(position = "dodge",stat="identity") +                 # make bars side-by-side 
-  scale_fill_manual(values = c(my_blue,my_yellow,my_magenta))+   # change colors of bars  
+ggplot(long,aes(x=Var1,y=value,fill=Var2)) +
+  geom_bar(position = "dodge",stat="identity") +                 # make bars side-by-side
+  scale_fill_manual(values = c(my_blue,my_yellow,my_magenta))+   # change colors of bars
   labs(y = "Percentage",x="") +                                  # change axis labels
   geom_text(aes(x=Var1,y=value,label=round(value)),              # add data labels to end of bars
             position = position_dodge(width = 0.9),vjust = -0.25,
