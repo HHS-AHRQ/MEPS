@@ -41,7 +41,7 @@ Data downloading tasks can also be automated using R. This offers several advant
 2. another researcher needs to verify which files were downloaded (and from where)
 3. data files might be updated periodically
 
-To do this, use the `download.file` function to save the zip file from the MEPS website to the temporary file `temp`. To find the name of the zip file, navigate to the dataset on the MEPS website, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard. (Alternatively, the quick reference guide [meps_file_names.csv](./Quick_Reference_Guides/meps_file_names.csv) contains a table of the names of MEPS data files by type and year.)
+To do this, use the `download.file` function to save the zip file from the MEPS website to the temporary file `temp`. To find the name of the zip file, navigate to the dataset on the MEPS website, right-click on the ZIP link, then select 'Copy link address' to copy the location to your the clipboard. (Alternatively, the quick reference guide [meps_file_names.csv](../Quick_Reference_Guides/meps_file_names.csv) contains a table of the names of MEPS data files by type and year.)
 
 ![](images/copy_link_address.png)
 
