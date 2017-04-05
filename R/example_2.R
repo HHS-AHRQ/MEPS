@@ -1,5 +1,7 @@
 # Example 2: Re-producing estimates for Figure 1 of Stat brief #491
 
+options(survey.lonely.psu='adjust')
+
 # After downloading MEPS data define the survey object:
 mepsdsgn <- svydesign(id = ~VARPSU,
     strata = ~VARSTR,

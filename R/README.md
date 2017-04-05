@@ -76,8 +76,10 @@ To analyze MEPS data using R, the [`survey` package](https://cran.r-project.org/
 *   `svyglm`: generalized linear regression
 *   `svyby`: run other survey functions by group
 
-To use functions in the survey package, the `svydesign` function specifies the primary sampling unit, the strata, and the sampling weights for the data frame. Once the survey design object is defined, population estimates can be calculated using functions from the suvey package. As an example, the following code will estimate total healthcare expenditures in 2014:
+To use functions in the survey package, the `svydesign` function specifies the primary sampling unit, the strata, and the sampling weights for the data frame. The `survey.lonely.psu='adjust'` option ensures accurate standard error estimates when analyzing subsets. Once the survey design object is defined, population estimates can be calculated using functions from the survey package. As an example, the following code will estimate total healthcare expenditures in 2014:
 ``` r
+options(survey.lonely.psu='adjust')
+
 mepsdsgn = svydesign(id = ~VARPSU,
                      strata = ~VARSTR,
                      weights = ~PERWT14F,
