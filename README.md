@@ -41,3 +41,17 @@ The complex survey design of MEPS requires special methods for analyzing MEPS da
 MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees. It also includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size).
 
 Datasets from the MPC and IC components are not available to the public. Access to the MEPS-MPC data can be requested from the [AHRQ data center](https://meps.ahrq.gov/mepsweb/data_stats/onsite_datacenter.jsp). For access to the MEPS-IC data, visit the [Census Bureau's data center website](http://www.census.gov/ces/rdcresearch/).
+
+## Contact MEPS
+
+Please review the [Frequently Asked Questions](https://meps.ahrq.gov/mepsweb/about_meps/faq_results.jsp?ChooseTopic=All+Categories&keyword=&Submit2=Search) on our website before contacting us to see if we already have an answer to your question. Also read our [Privacy Policy](https://meps.ahrq.gov/mepsweb/privacy_policy.jsp) for answers to any questions you may have about the use of your e-mail address.
+
+You can contact us by e-mail, mail, or telephone:
+
+<b>MEPS Project Director</b><br>
+Medical Expenditure Panel Survey<br>
+Agency for Healthcare Research and Quality<br>
+5600 Fishers Lane<br>
+Rockville, MD 20857<br>
+[mepsprojectdirector@ahrq.hhs.gov](mailto:mepsprojectdirector@ahrq.hhs.gov)<br>
+(301) 427-1406<br>
