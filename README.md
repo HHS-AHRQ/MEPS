@@ -1,11 +1,16 @@
 # Medical Expenditure Panel Survey (MEPS)
 
-This repository contains instructions and example code for [loading](#accessing-meps-hc-data) and [analyzing](#analyzing-meps-hc-data) data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
+This repository contains instructions and example code for loading and analyzing data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
 
 [Survey Background](#survey-background) <br>
 [Accessing MEPS-HC data](#accessing-meps-hc-data) <br>
 [Analyzing MEPS-HC data](#analyzing-meps-hc-data) <br>
 [Additional Survey Components](#additional-survey-components)
+
+<b>Example code</b> for loading and analyzing MEPS data in R, SAS, and Stata is available in the following folders:
+ * [R](R) <br>
+ * [SAS](SAS) <br>
+ * [Stata](Stata) <br>
 
 ## Survey Background
 The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times (rounds) over a two-year period:
@@ -35,4 +40,4 @@ The complex survey design of MEPS requires special methods for analyzing MEPS da
 ## Additional Survey Components
 MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees. It also includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size).
 
-These datasets are not available to the public. Access to the MEPS-MPC data can be requested from the [AHRQ data center](https://meps.ahrq.gov/mepsweb/data_stats/onsite_datacenter.jsp). For access to the MEPS-IC data, visit the [Census Bureau's data center website](http://www.census.gov/ces/rdcresearch/).
+Datasets from the MPC and IC components are not available to the public. Access to the MEPS-MPC data can be requested from the [AHRQ data center](https://meps.ahrq.gov/mepsweb/data_stats/onsite_datacenter.jsp). For access to the MEPS-IC data, visit the [Census Bureau's data center website](http://www.census.gov/ces/rdcresearch/).
