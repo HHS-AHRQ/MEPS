@@ -11,7 +11,7 @@ import sasxport "C:\MEPS\data\h171.ssp"
 
 To save the loaded data as a permanent Stata dataset (.dta), run the following code (first create the 'Stata\data' folders if needed):
 ``` Stata
-save 'C:\MEPS\Stata\data\h171.dta';
+save "C:\MEPS\Stata\data\h171.dta"
 ```
 
 ## Stata `svy` commands

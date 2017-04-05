@@ -1,6 +1,25 @@
 # Stata Exercise 4
 
-This program illustrates how to identify persons with a condition and calculate estimates on use and expenditures for persons with the condition.
+## Loading the data
+Use the following links to download the data .zip files, then unzip and save to a local directory (e.g. 'C:\MEPS\data'):
+
+<b>Input Files</b>:
+<br>[H171  (2014 Full year consolidated PUF)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
+<br>[H170 (2014 Condition PUF DATA)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h170ssp.zip)
+
+Next, run the following code to convert the transport files (.ssp) to Stata datasets (.dta) and save to a local directory (first create the target folder 'C:\MEPS\Stata\data' if needed):
+``` stata
+import sasxport "C:\MEPS\data\h171.ssp"
+save "C:\MEPS\Stata\data\h171.dta"
+clear
+
+import sasxport "C:\MEPS\data\h170.ssp"
+save "C:\MEPS\Stata\data\h170.dta"
+clear
+```
+
+## Summary
+This exercise illustrates how to identify persons with a condition and calculate estimates on use and expenditures for persons with the condition.
 
 The condition used in this exercise is diabetes (049 or 050)
 
@@ -69,8 +88,3 @@ No. | Condition | CCS Codes
 59| Other care and screening   | 10, 254-258
 60| Symptoms | 245-252
 61| Allergic reactions   | 253
-
-
-<b>Input Files</b>:  
-1. H170.dta (2014 CONDITION PUF DATA)
-2. H171.dta (2014 FY PUF DATA)
