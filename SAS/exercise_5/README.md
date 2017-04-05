@@ -1,5 +1,7 @@
 # SAS Exercise 5
-Use the following links to download the data .zip files (see ['Loading MEPS data'](../README.md#loading-meps-data) for instructions on loading the .ssp files into SAS):
+
+## Loading the data
+Use the following links to download the data .zip files, then unzip and save to a local directory (e.g. 'C:\MEPS\data'):
 
 **Input Files**:  
 [H171 (2014 Full year consolidated PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
@@ -12,8 +14,35 @@ Use the following links to download the data .zip files (see ['Loading MEPS data
 <br>[H168H (2014 Home Health PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168hssp.zip)
 <br>[H168IF1 (2014 Condition-event link PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168if1ssp.zip)
 
+Next, run the following code to convert the SAS transport file (.ssp) to a SAS dataset (.sas7bdat) and save to a local directory (first create the target folder 'C:\MEPS\SAS\data' if needed):
+``` sas
+LIBNAME SASdata 'C:\MEPS\SAS\data';
 
-This program illustrates how to calculate expenditures for all events associated with a condition.
+FILENAME in_h171 'C:\MEPS\data\h171.ssp';
+FILENAME in_h170 'C:\MEPS\data\h170.ssp';
+FILENAME in_h168a 'C:\MEPS\data\h168a.ssp';
+FILENAME in_h168d 'C:\MEPS\data\h168d.ssp';
+FILENAME in_h168e 'C:\MEPS\data\h168e.ssp';
+FILENAME in_h168f 'C:\MEPS\data\h168f.ssp';
+FILENAME in_h168g 'C:\MEPS\data\h168g.ssp';
+FILENAME in_h168h 'C:\MEPS\data\h168h.ssp';
+FILENAME in_h168if1 'C:\MEPS\data\h168if1.ssp';
+
+proc xcopy in = in_h171 out = SASdata IMPORT; run;
+proc xcopy in = in_h170 out = SASdata IMPORT; run;
+proc xcopy in = in_h168a out = SASdata IMPORT; run;
+proc xcopy in = in_h168d out = SASdata IMPORT; run;
+proc xcopy in = in_h168e out = SASdata IMPORT; run;
+proc xcopy in = in_h168f out = SASdata IMPORT; run;
+proc xcopy in = in_h168g out = SASdata IMPORT; run;
+proc xcopy in = in_h168h out = SASdata IMPORT; run;
+proc xcopy in = in_h168fi1 out = SASdata IMPORT; run;
+```
+> <b>Note</b>: The target directory (e.g. 'C:\MEPS\SAS\data') must be different from the input directory (e.g. 'C:\MEPS\data'). If not, an error may occur.
+
+
+## Summary
+This exercise illustrates how to calculate expenditures for all events associated with a condition.
 
 The condition used in this exercise is diabetes (049 or 050)
 

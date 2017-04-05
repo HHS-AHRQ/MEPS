@@ -1,12 +1,28 @@
 # SAS Exercise 2
 
-Use the following links to download the data .zip files (see ['Loading MEPS data'](../README.md#loading-meps-data) for instructions on loading the .ssp files into SAS):
+
+## Loading the data
+Use the following links to download the data .zip files, then unzip and save to a local directory (e.g. 'C:\MEPS\data'):
 
 <b>Input Files</b>:
 <br>[H171  (2014 Full year consolidated PUF)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
 <br>[H168A (2014 Prescribed medicines PUF)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168assp.zip)
 
-This program generates selected estimates for a 2014 version of the meps statistics brief \#275: [<i>Trends in Antipsychotics Purchases and Expenses for the U.S. Civilian Noninstitutionalized Population, 1997 and 2007</i>](https://meps.ahrq.gov/data_files/publications/st275/stat275.shtml)
+Next, run the following code to convert the SAS transport file (.ssp) to a SAS dataset (.sas7bdat) and save to a local directory (first create the target folder 'C:\MEPS\SAS\data' if needed):
+``` sas
+LIBNAME SASdata 'C:\MEPS\SAS\data';
+
+FILENAME in_h171 'C:\MEPS\data\h171.ssp';
+FILENAME in_h168a 'C:\MEPS\data\h168a.ssp';
+
+proc xcopy in = in_h171 out = SASdata IMPORT; run;
+proc xcopy in = in_h168a out = SASdata IMPORT; run;
+```
+> <b>Note</b>: The target directory (e.g. 'C:\MEPS\SAS\data') must be different from the input directory (e.g. 'C:\MEPS\data'). If not, an error may occur.
+
+
+## Summary
+This exercise generates selected estimates for a 2014 version of the meps statistics brief \#275: [<i>Trends in Antipsychotics Purchases and Expenses for the U.S. Civilian Noninstitutionalized Population, 1997 and 2007</i>](https://meps.ahrq.gov/data_files/publications/st275/stat275.shtml)
 
 1. **Figure 1**: Total expense for antipsychotics
 2. **Figure 2**: Total number of purchases of antipsychotics
