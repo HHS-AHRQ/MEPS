@@ -5,7 +5,8 @@ This repository contains instructions and example code for loading and analyzing
 [Survey Background](#survey-background) <br>
 [Accessing MEPS-HC data](#accessing-meps-hc-data) <br>
 [Analyzing MEPS-HC data](#analyzing-meps-hc-data) <br>
-[Additional Survey Components](#additional-survey-components)
+[Additional Survey Components](#additional-survey-components) <br>
+[Contact MEPS](#contact-meps)
 
 <b>Example code</b> for loading and analyzing MEPS data in R, SAS, and Stata is available in the following folders:
  * [R](R) <br>
