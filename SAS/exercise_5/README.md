@@ -1,4 +1,17 @@
 # SAS Exercise 5
+Use the following links to download the data .zip files (see ['Loading MEPS data'](../README.md#loading-meps-data) for instructions on loading the .ssp files into SAS):
+
+**Input Files**:  
+[H171 (2014 Full year consolidated PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
+<br>[H170 (2014 Condition PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h170ssp.zip)
+<br>[H168A (2014 PMED PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168assp.zip)
+<br>[H168D (2014 Inpatient visits PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168dssp.zip)
+<br>[H168E (2014 ER visits PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168essp.zip)
+<br>[H168F (2014 Outpatient visits PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168fssp.zip)
+<br>[H168G (2014 Office-based visits PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168gssp.zip)
+<br>[H168H (2014 Home Health PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168hssp.zip)
+<br>[H168IF1 (2014 Condition-event link PUF data)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h168if1ssp.zip)
+
 
 This program illustrates how to calculate expenditures for all events associated with a condition.
 
@@ -69,14 +82,3 @@ No. | Condition | CCS Codes
 59| Other care and screening   | 10, 254-258
 60| Symptoms | 245-252
 61| Allergic reactions   | 253
-
-**Input Files**:  
-1. H171.SAS7BDAT (2014 FY PUF data)
-2. H170.SAS7BDAT    (2014 Condition PUF data)
-3. H168A.SAS7BDAT   (2014 PMED PUF data)
-4. H168D.SAS7BDAT   (2014 Inpatient visits PUF data)
-5. H168E.SAS7BDAT   (2014 ER visits PUF data)
-6. H168F.SAS7BDAT   (2014 Outpatient visits PUF data)
-7. H168G.SAS7BDAT   (2014 Office-based visits PUF data)
-8. H168H.SAS7BDAT   (2014 Home Health PUF data)
-9. H168IF1.SAS7BDAT  (2014 Condition-event link PUF data)

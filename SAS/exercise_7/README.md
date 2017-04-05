@@ -1,4 +1,7 @@
 # SAS Exercise 7
+Use the following links to download the data .zip files (see ['Loading MEPS data'](../README.md#loading-meps-data) for instructions on loading the .ssp files into SAS):
+
+<b>Input Files</b>:  [H171 (2014 Full-year file)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
 
 This program illustrates how to construct insurance status variables from monthly insurance variables (see below) in the person level data.
 

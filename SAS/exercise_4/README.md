@@ -1,4 +1,10 @@
 # SAS Exercise 4
+Use the following links to download the data .zip files (see ['Loading MEPS data'](../README.md#loading-meps-data) for instructions on loading the .ssp files into SAS):
+
+<b>Input Files</b>:
+<br>[H171  (2014 Full year consolidated PUF)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
+<br>[H170 (2014 Condition PUF DATA)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h170ssp.zip)
+
 
 This program illustrates how to identify persons with a condition and calculate estimates on use and expenditures for persons with the condition.
 
@@ -69,8 +75,3 @@ No. | Condition | CCS Codes
 59| Other care and screening   | 10, 254-258
 60| Symptoms | 245-252
 61| Allergic reactions   | 253
-
-
-<b>Input Files</b>:  
-1. H170.SAS7BDAT (2014 CONDITION PUF DATA)
-2. H171.SAS7BDAT (2014 FY PUF DATA)
