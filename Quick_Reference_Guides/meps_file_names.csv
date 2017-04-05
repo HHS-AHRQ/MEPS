@@ -1,5 +1,5 @@
 Year,New Panel,Old Panel,Point-in-time,Full-Year-Consolidated,Conditions,Events,Jobs,Person Round Plan,Longitudinal
-1996,1,-,hc001,h12,hc006r,hc10,hc007,h24,h23
+1996,1,-,hc001,h12,h06r,hc10,hc007,h24,h23
 1997,2,1,hc005xf,h20,h18,hc16,hc19,h47,h35
 1998,3,2,hc009xf,h28,h27,h26,h25,h57,h48
 1999,4,3,hc013xf,h38,h37,h33,h32,h66,h58
@@ -20,4 +20,4 @@ Year,New Panel,Old Panel,Point-in-time,Full-Year-Consolidated,Conditions,Events,
 2014,19,18,h159,h171,h170,h168,h166,h169,
 2015,20,19,h167,,,,h176,,
 ,,,,,,,,,
-"* Event letters:",a = RX,b = Dental,c = Other Medical,d = Inpatient,e = ER,f = Outpatient,g = Office-based,h = Home health,
+* Event letters:,a = RX,b = Dental,c = Other Medical,d = Inpatient,e = ER,f = Outpatient,g = Office-based,h = Home health,
