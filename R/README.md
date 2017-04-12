@@ -27,9 +27,9 @@ Two methods for downloading MEPS transport files are available. The first requir
 
 ### Manually
 
-If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details)
+If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h163.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details)
 ``` r
-h171 = read.xport("C:/MEPS/data/h171.ssp")
+h163 = read.xport("C:/MEPS/data/h163.ssp")
 ```
 > <b>Note:</b> Directory names need to be separated by a slash ("/") or a double backslash ("\\\\") in R.
 
@@ -45,23 +45,23 @@ To do this, use the `download.file` function to save the zip file from the MEPS 
 
 ![](images/copy_link_address.png)
 
-Then, paste this address into the R code below. The file location for the full-year-consolidated data from 2013 is: "https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip". Next, use the `unzip` and `read.xport` functions to unzip and load the SAS transport data into R as a data frame. The `unlink` function is used to delete the temporary file, to free up space in memory.
+Then, paste this address into the R code below. The file location for the full-year-consolidated data from 2013 is: "https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip". Next, use the `unzip` and `read.xport` functions to unzip and load the SAS transport data into R as a data frame. The `unlink` function is used to delete the temporary file, to free up space in memory.
 ``` r
-download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip", temp <- tempfile())
+download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip", temp <- tempfile())
 unzipped_file = unzip(temp)
-h171 = read.xport(unzipped_file)
+h163 = read.xport(unzipped_file)
 unlink(temp)  # Unlink to delete temporary file
 ```
 
 ### Saving .Rdata file
 
-Once the MEPS data has been loaded into R using either of the two previous methods, it can be saved as a permanent R dataset (.Rdata) for faster loading. In the following code, the h171 dataset is saved in the 'R\data' folder, (first create the 'R\data' folders if needed):
+Once the MEPS data has been loaded into R using either of the two previous methods, it can be saved as a permanent R dataset (.Rdata) for faster loading. In the following code, the h163 dataset is saved in the 'R\data' folder, (first create the 'R\data' folders if needed):
 ``` r
-save(h171, file="C:/MEPS/R/data/h171.Rdata")
+save(h163, file="C:/MEPS/R/data/h163.Rdata")
 ```
-The h171 dataset can then be loaded into subsequent R sessions using the code:
+The h163 dataset can then be loaded into subsequent R sessions using the code:
 ``` r
-load(file="C:/MEPS/R/data/h171.Rdata")
+load(file="C:/MEPS/R/data/h163.Rdata")
 ```
 
 
@@ -76,17 +76,17 @@ To analyze MEPS data using R, the [`survey` package](https://cran.r-project.org/
 *   `svyglm`: generalized linear regression
 *   `svyby`: run other survey functions by group
 
-To use functions in the survey package, the `svydesign` function specifies the primary sampling unit, the strata, and the sampling weights for the data frame. The `survey.lonely.psu='adjust'` option ensures accurate standard error estimates when analyzing subsets. Once the survey design object is defined, population estimates can be calculated using functions from the survey package. As an example, the following code will estimate total healthcare expenditures in 2014:
+To use functions in the survey package, the `svydesign` function specifies the primary sampling unit, the strata, and the sampling weights for the data frame. The `survey.lonely.psu='adjust'` option ensures accurate standard error estimates when analyzing subsets. Once the survey design object is defined, population estimates can be calculated using functions from the survey package. As an example, the following code will estimate total healthcare expenditures in 2013:
 ``` r
 options(survey.lonely.psu='adjust')
 
 mepsdsgn = svydesign(id = ~VARPSU,
                      strata = ~VARSTR,
-                     weights = ~PERWT14F,
-                     data = h171,
+                     weights = ~PERWT13F,
+                     data = h163,
                      nest = TRUE)  
 
-svytotal(~TOTEXP14, design = mepsdsgn)
+svytotal(~TOTEXP13, design = mepsdsgn)
 ```
 
 ## R examples

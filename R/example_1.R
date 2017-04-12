@@ -6,13 +6,13 @@ options(survey.lonely.psu='adjust')
 mepsdsgn <- svydesign(id = ~VARPSU,
     strata = ~VARSTR,
     weights = ~PERWT13F,
-    data = FYC2013,
+    data = h163,
     nest = TRUE)
 
 # TOTAL POPULATION
 # Standard errors are not applicable to population control totals, so we don't need to use a survey function here.
 # The total population is equal to the sum of survey weights (PERWT13F).
-sum(FYC2013$PERWT13F)
+sum(h163$PERWT13F)
 
 # TOTAL EXPENSES
 # Use the formula notation '~' with specified design object for survey functions

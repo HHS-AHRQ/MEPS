@@ -6,7 +6,7 @@ options(survey.lonely.psu='adjust')
 mepsdsgn <- svydesign(id = ~VARPSU,
     strata = ~VARSTR,
     weights = ~PERWT13F,
-    data = FYC2013,
+    data = h163,
     nest = TRUE)
 
 # To get ambulatory (OB+OP) and home health/other expenditures, add variables to the mepsdsgn object.
