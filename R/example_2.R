@@ -1,6 +1,19 @@
 # Example 2: Re-producing estimates for Figure 1 of Stat brief #491
 
+# Load packages and set options
+install.packages("foreign")  # Only need to run these once
+install.packages("survey")
+
+library(foreign) # Run these every time you re-start R
+library(survey)
+
 options(survey.lonely.psu='adjust')
+
+# Load MEPS data from internet
+download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip", temp <- tempfile())
+unzipped_file = unzip(temp)
+h163 = read.xport(unzipped_file)
+unlink(temp)  # Unlink to delete temporary file
 
 # After downloading MEPS data define the survey object:
 mepsdsgn <- svydesign(id = ~VARPSU,
