@@ -36,7 +36,7 @@ by duid cpsfamid: keep if _n==_N
 
 list duid cpsfamid famwt14c famsize famoop faminc in 1/20
 
-tabmiss famsize famoop faminc
+*tabmiss famsize famoop faminc // user-written command to tabulate missing values
 
 keep if famwt14c>0
 svyset [pweight= famwt14c], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
