@@ -80,11 +80,8 @@
 clear
 set more off
 capture log close
-/*log using c:\meps\stata\prog\exercise4.log, replace
-cd c:\meps\stata\data*/
-
-log using \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise4.log, replace
-cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+log using c:\meps\stata\prog\exercise4.log, replace
+cd c:\meps\stata\data
 
 // 1) pull out conditions with diabetes (ccs code='049', '050') from 2014 condition puf - hc170
 use dupersid cccodex using h170
