@@ -13,11 +13,11 @@ Next, run the following code to convert the transport files (.ssp) to Stata data
 ``` stata
 clear
 import sasxport "C:\MEPS\data\h171.ssp"
-save "C:\MEPS\Stata\data\h171.dta"
+save "C:\MEPS\Stata\data\h171.dta", replace
 clear
 
 import sasxport "C:\MEPS\data\h168a.ssp"
-save "C:\MEPS\Stata\data\h168a.dta"
+save "C:\MEPS\Stata\data\h168a.dta", replace
 clear
 ```
 
