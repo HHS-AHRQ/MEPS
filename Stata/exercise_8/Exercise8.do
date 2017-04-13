@@ -16,11 +16,8 @@
 clear
 set more off
 capture log close
-/*log using c:\meps\stata\prog\exercise8.log, replace
-cd c:\meps\stata\data*/
-
-log using \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise8.log, replace
-cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+log using c:\meps\stata\prog\exercise8.log, replace
+cd c:\meps\stata\data
 
 // pool three panels of data to get sufficient sample size
 use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using h172
