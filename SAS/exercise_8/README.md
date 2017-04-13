@@ -1,7 +1,7 @@
 # SAS Exercise 8
 
 ## Loading the data
-Use the following links to download the data .zip files, then unzip and save to a local directory (e.g. 'C:\MEPS\data'):
+Use the following links to download the data .zip files, then unzip and save to a local directory. Create the folder 'C:\MEPS\data' on your hard drive if it is not there:
 
 **Input Files**:
 <br>[H172 (Panel 18 Longitudinal File)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h172ssp.zip)
