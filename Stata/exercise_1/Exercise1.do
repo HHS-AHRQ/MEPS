@@ -25,12 +25,8 @@
 clear
 set more off
 capture log close
-/*log using c:\meps\stata\prog\exercise1.log, replace
-cd c:\meps\stata\data*/
-
-log using \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise1.log, replace
-cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
-
+log using c:\meps\stata\prog\exercise1.log, replace
+cd c:\meps\stata\data
 
 /* read in data from 2014 consolidated data file (hc-171) */
 use totexp14 ipdexp14 ipfexp14 obvexp14 rxexp14 opdexp14 opfexp14 dvtexp14 erdexp14 erfexp14 hhaexp14 hhnexp14 othexp14 visexp14 age14x age42x age31x varstr varpsu perwt14f using h171.dta
