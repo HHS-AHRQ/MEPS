@@ -18,25 +18,25 @@ Next, run the following code to convert the SAS transport file (.ssp) to a SAS d
 ``` sas
 LIBNAME SASdata 'C:\MEPS\SAS\data';
 
-FILENAME in_h171 'C:\MEPS\data\h171.ssp';
-FILENAME in_h170 'C:\MEPS\data\h170.ssp';
-FILENAME in_h168a 'C:\MEPS\data\h168a.ssp';
-FILENAME in_h168d 'C:\MEPS\data\h168d.ssp';
-FILENAME in_h168e 'C:\MEPS\data\h168e.ssp';
-FILENAME in_h168f 'C:\MEPS\data\h168f.ssp';
-FILENAME in_h168g 'C:\MEPS\data\h168g.ssp';
-FILENAME in_h168h 'C:\MEPS\data\h168h.ssp';
-FILENAME in_h168if1 'C:\MEPS\data\h168if1.ssp';
+FILENAME h171 'C:\MEPS\data\h171.ssp';
+FILENAME h170 'C:\MEPS\data\h170.ssp';
+FILENAME h168a 'C:\MEPS\data\h168a.ssp';
+FILENAME h168d 'C:\MEPS\data\h168d.ssp';
+FILENAME h168e 'C:\MEPS\data\h168e.ssp';
+FILENAME h168f 'C:\MEPS\data\h168f.ssp';
+FILENAME h168g 'C:\MEPS\data\h168g.ssp';
+FILENAME h168h 'C:\MEPS\data\h168h.ssp';
+FILENAME h168if 'C:\MEPS\data\h168If1.ssp';
 
-proc xcopy in = in_h171 out = SASdata IMPORT; run;
-proc xcopy in = in_h170 out = SASdata IMPORT; run;
-proc xcopy in = in_h168a out = SASdata IMPORT; run;
-proc xcopy in = in_h168d out = SASdata IMPORT; run;
-proc xcopy in = in_h168e out = SASdata IMPORT; run;
-proc xcopy in = in_h168f out = SASdata IMPORT; run;
-proc xcopy in = in_h168g out = SASdata IMPORT; run;
-proc xcopy in = in_h168h out = SASdata IMPORT; run;
-proc xcopy in = in_h168fi1 out = SASdata IMPORT; run;
+proc xcopy in = h171 out = SASdata IMPORT; run;
+proc xcopy in = h170 out = SASdata IMPORT; run;
+proc xcopy in = h168a out = SASdata IMPORT; run;
+proc xcopy in = h168d out = SASdata IMPORT; run;
+proc xcopy in = 168e out = SASdata IMPORT; run;
+proc xcopy in = h168f out = SASdata IMPORT; run;
+proc xcopy in = h168g out = SASdata IMPORT; run;
+proc xcopy in = h168h out = SASdata IMPORT; run;
+proc xcopy in = h168if out = SASdata IMPORT; run;
 ```
 > <b>Note</b>: The target directory (e.g. 'C:\MEPS\SAS\data') must be different from the input directory (e.g. 'C:\MEPS\data'). If not, an error may occur.
 
