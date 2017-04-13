@@ -23,11 +23,8 @@
 clear
 set more off
 capture log close
-/*log using c:\meps\stata\prog\exercise2.log, replace
-cd c:\meps\stata\data*/
-
-log using \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise2.log, replace
-cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+log using c:\meps\stata\prog\exercise2.log, replace
+cd c:\meps\stata\data
 
 // 1) identify antipsychotic drugs using therapeutic classification (tc) codes
 use dupersid rxrecidx linkidx tc1 tc1s1 rxxp14x rxsf14x if tc1==242 & tc1s1==251 using h168a
