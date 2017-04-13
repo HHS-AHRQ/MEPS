@@ -15,8 +15,8 @@ INPUT FILE:   C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FY PUF DATA)
 *********************************************************************************/;
 OPTIONS LS=132 PS=79 NODATE;
 
-*LIBNAME CDATA 'C:\MEPS\SAS\DATA';
-LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+*LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
 
 TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
 TITLE2 "EXERCISE3.SAS: CALCULATE FAMILY-LEVEL ESTIMATES";
