@@ -17,11 +17,8 @@
 clear
 set more off
 capture log close
-/*log using c:\meps\stata\prog\exercise3.log, replace
-cd c:\meps\stata\data*/
-
-log using \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise3.log, replace
-cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+log using c:\meps\stata\prog\exercise3.log, replace
+cd c:\meps\stata\data
 
 use dupersid duid cpsfamid famwt14c varstr varpsu totslf14 ttlp14x using h171
 
