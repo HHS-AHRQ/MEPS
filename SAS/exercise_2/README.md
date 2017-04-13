@@ -2,7 +2,7 @@
 
 
 ## Loading the data
-Use the following links to download the data .zip files, then unzip and save to a local directory (e.g. 'C:\MEPS\data'):
+Use the following links to download the data .zip files, then unzip and save to a local directory. Create the folder 'C:\MEPS\data' on your hard drive if it is not there:
 
 <b>Input Files</b>:
 <br>[H171  (2014 Full year consolidated PUF)](https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip)
