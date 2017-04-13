@@ -6,8 +6,8 @@
 ## Loading MEPS data
 In Stata, transport (.ssp) files can be loaded using the `import` function. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details)
 ``` stata
+set more off
 import sasxport "C:\MEPS\data\h171.ssp"
-compress
 ```
 
 To save the loaded data as a permanent Stata dataset (.dta), run the following code (first create the 'Stata\data' folders if needed):
