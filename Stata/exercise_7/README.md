@@ -7,9 +7,9 @@ Use the following links to download the data .zip files, then unzip and save to 
 
 Next, run the following code to convert the transport file (.ssp) to a Stata dataset (.dta) and save to a local directory (first create the target folder 'C:\MEPS\Stata\data' if needed):
 ``` stata
+clear
 import sasxport "C:\MEPS\data\h171.ssp"
-compress
-save "C:\MEPS\Stata\data\h171.dta"
+save "C:\MEPS\Stata\data\h171.dta", replace
 clear
 ```
 
