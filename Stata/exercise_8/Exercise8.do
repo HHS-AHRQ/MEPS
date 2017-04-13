@@ -42,7 +42,7 @@ label value povcaty1 povcat
 tab1 agey1x inscovy1 inscovy2 povcaty1 panel if subpop==1
 tab subpop
 summarize  if subpop==1
-tabmiss
+tabmiss // user-written command that tabulates missing values
 
 svyset [pweight=poolwt], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
