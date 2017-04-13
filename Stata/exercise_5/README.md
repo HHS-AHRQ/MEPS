@@ -17,38 +17,47 @@ Use the following links to download the data .zip files, then unzip and save to 
 Next, run the following code to convert the transport files (.ssp) to Stata datasets (.dta) and save to a local directory (first create the target folder 'C:\MEPS\Stata\data' if needed):
 ``` stata
 import sasxport "C:\MEPS\data\h171.ssp"
+compress
 save "C:\MEPS\Stata\data\h171.dta"
 clear
 
 import sasxport "C:\MEPS\data\h170.ssp"
+compress
 save "C:\MEPS\Stata\data\h170.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168a.ssp"
+compress
 save "C:\MEPS\Stata\data\h168a.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168d.ssp"
+compress
 save "C:\MEPS\Stata\data\h168d.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168e.ssp"
+compress
 save "C:\MEPS\Stata\data\h168e.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168f.ssp"
+compress
 save "C:\MEPS\Stata\data\h168f.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168g.ssp"
+compress
 save "C:\MEPS\Stata\data\h168g.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168h.ssp"
+compress
 save "C:\MEPS\Stata\data\h168h.dta"
 clear
 
 import sasxport "C:\MEPS\data\h168if1.ssp"
+compress
 save "C:\MEPS\Stata\data\h168if1.dta"
 clear
 ```
