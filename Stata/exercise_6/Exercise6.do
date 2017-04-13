@@ -22,11 +22,8 @@
 clear
 set more off
 capture log close
-/*log using c:\meps\stata\prog\exercise6.log, replace
-cd c:\meps\stata\data*/
-
-log using \\files.s-3.com\HPDA\AHRQ\Fang\bj001\exercise6.log, replace
-cd \\files.s-3.com\HPDA\AHRQ\Fang\bj001
+log using c:\meps\stata\prog\exercise6.log, replace
+cd c:\meps\stata\data
 
 // rename year specific variables prior to combining files
 use dupersid inscov13 perwt13f varstr varpsu povcat13 agelast totslf13 using h163
