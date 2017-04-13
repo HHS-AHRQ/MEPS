@@ -37,7 +37,6 @@ Several exercises are provided as examples of calculating estimates using MEPS d
 <br>[Exercise 7](exercise_7): Constructing insurance status variables from monthly insurance variables
 <br>[Exercise 8](exercise_8): Pooling longitudinal files
 
-Each folder contains three files:
+Each folder contains two files:
 1. Stata 'do' file (.do)
 2. Stata log file (.log)
-3. Text file combining the 'do' and log files (.docx).

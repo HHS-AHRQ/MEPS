@@ -45,9 +45,8 @@ Several exercises are provided as examples of calculating estimates using MEPS d
 <br>[Exercise 7](exercise_7): Constructing insurance status variables from monthly insurance variables
 <br>[Exercise 8](exercise_8): Pooling longitudinal files
 
-Each folder contains four files:
+Each folder contains three files:
 
 1. SAS program file (.sas)
 2. SAS log file (.LOG)
 3. SAS list file containing output (.LST)
-4. Rich text file containing both the log and output files (.rtf).
