@@ -26,13 +26,13 @@ FILENAME h168e 'C:\MEPS\data\h168e.ssp';
 FILENAME h168f 'C:\MEPS\data\h168f.ssp';
 FILENAME h168g 'C:\MEPS\data\h168g.ssp';
 FILENAME h168h 'C:\MEPS\data\h168h.ssp';
-FILENAME h168if 'C:\MEPS\data\h168If1.ssp';
+FILENAME h168if 'C:\MEPS\data\h168if1.ssp';
 
 proc xcopy in = h171 out = SASdata IMPORT; run;
 proc xcopy in = h170 out = SASdata IMPORT; run;
 proc xcopy in = h168a out = SASdata IMPORT; run;
 proc xcopy in = h168d out = SASdata IMPORT; run;
-proc xcopy in = 168e out = SASdata IMPORT; run;
+proc xcopy in = h168e out = SASdata IMPORT; run;
 proc xcopy in = h168f out = SASdata IMPORT; run;
 proc xcopy in = h168g out = SASdata IMPORT; run;
 proc xcopy in = h168h out = SASdata IMPORT; run;
@@ -42,11 +42,13 @@ proc xcopy in = h168if out = SASdata IMPORT; run;
 
 
 ## Summary
-This exercise illustrates how to calculate expenditures for all events associated with a condition.
+This exercise illustrates how to calculate expenditures for all events associated with a condition. The condition used in this exercise is diabetes (049 or 050 in definitions table below).
 
-The condition used in this exercise is diabetes (049 or 050)
+The following flow chart illustrates the steps needed to create the analytical dataset:
+![flowchart](../../_images/flowchart_exercise5.png)
 
-Definition of 61 conditions based on the CCS code
+
+Definition of 61 conditions based on the CCS code:
 
 No. | Condition | CCS Codes
 -------|------------- |-------------
