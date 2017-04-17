@@ -7,7 +7,7 @@
 *
 *	         		 DATA FROM 2013 AND 2014 ARE POOLED.
 *
-*              VARIABLES WITH YEAR-SPECIFIC NAMES MUST BE RENAMED BEFORE COMBINING FILES.  
+*              VARIABLES WITH YEAR-SPECIFIC NAMES MUST BE RENAMED BEFORE COMBINING FILES.
 *              IN THIS PROGRAM THE INSURANCE COVERAGE VARIABLES 'INSCOV13' AND 'INSCOV14' ARE RENAMED TO 'INSCOV'.
 *
 *	         		 SEE HC-036 (1996-2014 POOLED ESTIMATION FILE) FOR
@@ -28,16 +28,16 @@ cd c:\meps\stata\data
 // rename year specific variables prior to combining files
 use dupersid inscov13 perwt13f varstr varpsu povcat13 agelast totslf13 using h163
 rename inscov13 inscov
-rename perwt13f perwt 
-rename povcat13 povcat 
+rename perwt13f perwt
+rename povcat13 povcat
 rename totslf13 totslf
 tempfile yr1
 save "`yr1'"
 
 use dupersid inscov14 perwt14f varstr varpsu povcat14 agelast totslf14 using h171
 rename inscov14 inscov
-rename perwt14f perwt 
-rename povcat14 povcat 
+rename perwt14f perwt
+rename povcat14 povcat
 rename totslf14 totslf
 
 append using "`yr1'", generate(yearnum)
@@ -48,7 +48,7 @@ gen subpop=(agelast>=26 & agelast<=30 & inscov==3 & povcat==5)
 tab1 agelast inscov povcat if subpop==1
 tab subpop yearnum
 summarize
-tabmiss
+tabmiss // user-written command to tabulate missing values
 
 svyset [pweight=poolwt], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
@@ -56,5 +56,5 @@ svyset [pweight=poolwt], strata( varstr) psu(varpsu) vce(linearized) singleunit(
 svy, subpop(subpop): mean totslf
 
 
-log close  
+log close
 exit, clear

@@ -42,7 +42,7 @@ list dupersid n_purchase tot oop rxxp14x rxsf14x in 1/20
 by dupersid: keep if _n==_N
 gen third_payer   = tot - oop
 
-// 3) merge the person-level expenditures to the fy puf 
+// 3) merge the person-level expenditures to the fy puf
 tempfile perdrug
 save "`perdrug'"
 
@@ -50,7 +50,7 @@ use dupersid varstr varpsu perwt14f using h171
 sort dupersid
 
 merge 1:m dupersid using "`perdrug'", keep(master matches)
-tabmiss  n_purchase tot oop third_payer
+tabmiss  n_purchase tot oop third_payer // user-written command to tabulate missing values
 
 gen sub=(_merge==3)
 tab sub
@@ -66,5 +66,5 @@ svy, subpop(sub): mean n_purchase tot oop third_payer, cformat(%8.3g)
 svy, subpop(sub): total n_purchase tot oop third_payer
 estimates table, b(%13.0f) se(%11.0f)
 
-log close  
+log close
 exit, clear

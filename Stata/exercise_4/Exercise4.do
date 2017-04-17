@@ -112,7 +112,7 @@ tab diabper sex
 // weighted # of persons who reported diabetes, 2014
 tab diabper sex [iweight=perwt14f]
 
-tabmiss  totexp14 totslf14 obtotv14
+tabmiss  totexp14 totslf14 obtotv14 // user-written command to tabulate missing values
 
 // 4) calculate estimates on use and expenditures for persons who reported diabetes
 svyset [pweight= perwt14f], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
@@ -122,5 +122,5 @@ svy, subpop(diabper): mean totexp14 totslf14 obtotv14, over(sex)
 
 svy, subpop(diabper): tabulate sex, obs count percent format(%14.3gc)
 
-log close  
+log close
 exit, clear
