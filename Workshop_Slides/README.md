@@ -15,7 +15,7 @@ Time	| Topic |	Presenter
 9:45 a.m. – 10:15 a.m. | [MEPS-HC: Utilization and Expenditures](02%20MEPS-HC%20Utilization.pdf)	|Emily Mitchell, PhD
 10:15 a.m. – 10:45 a.m. |[MEPS-HC: Medical Conditions](03%20MEPS-HC%20Medical%20Conditions.pdf)	|Steve Machlin, MS
 10:45 a.m. – 11:00 a.m.	|Break |
-11:00 a.m.- 11:20 a.m.	|[MEPS-HC: Prescription Medicines](04%20MEPS-HC%20Prescription%20Meds)	|Marc Roemer, MS
+11:00 a.m.- 11:20 a.m.	|[MEPS-HC: Prescription Medicines](04%20MEPS-HC%20Prescription%20Meds.pdf)	|Marc Roemer, MS
 11:20 a.m.- 11:40 a.m.	|[MEPS-HC: Health Insurance](05%20MEPS-HC%20Health%20Insurance.pdf)	|Jeffrey Rhoades, PhD
 11:40 a.m. – 12:00 p.m.	|[MEPS-HC: Jobs and Income](06%20MEPS-HC%20JOBS.pdf)	|William Carroll, MA
 12:00 p.m. – 12:45 p.m. | Lunch |	Optional HCUP Overview
