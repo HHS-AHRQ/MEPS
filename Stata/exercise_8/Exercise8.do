@@ -9,7 +9,7 @@
 *	         		 DATA FROM PANEL 15, 16, AND 17 ARE POOLED.
 *
 *INPUT FILE:   (1) C:\MEPS\STATA\DATA\H172.dta (PANEL 18 LONGITUDINAL FILE)
-*	           (2) C:\MEPS\STATA\DATA\H164.dta (PANEL 17 LONGTTUDIANL FILE)
+*	             (2) C:\MEPS\STATA\DATA\H164.dta (PANEL 17 LONGITUDINAL FILE)
 *              (3) C:\MEPS\STATA\DATA\H156.dta (PANEL 16 LONGITUDINAL FILE)
 *********************************************************************************
 
@@ -50,5 +50,5 @@ svyset [pweight=poolwt], strata( varstr) psu(varpsu) vce(linearized) singleunit(
 // in the first year
 svy, subpop(subpop): tabulate inscovy2, cell se obs
 
-log close  
+log close
 exit, clear
