@@ -25,8 +25,9 @@ compress
 save "C:\MEPS\Stata\data\h156.dta"
 clear
 ```
-> <b>IMPORTANT!</b> If you are using the IC version of Stata, download the .dta files with the '_IC' extension included in this folder. The files and the line numbers are: [h172_IC.dta](https://github.com/e-mitchell/git_test/raw/master/h172_IC.dta) (line 23), [h164_IC.dta](https://github.com/e-mitchell/git_test/raw/master/h164_IC.dta) (line 27), and [h156_IC.dta](https://github.com/e-mitchell/git_test/raw/master/h156_IC.dta) (line 31). These files have been created with fewer variables, since the IC version of Stata is limited to loading data files with 2,047 variables. Make sure to edit the code in the .do file to reflect these file names.
+> <b>IMPORTANT!</b> If you are using the IC version of Stata, download the .dta files with the '_IC' extension included in this folder. The files and the line numbers are: [h172_IC.dta](https://github.com/HHS-AHRQ/MEPS/raw/master/Stata/exercise_8/h172_IC.dta) (line 23), [h164_IC.dta](https://github.com/HHS-AHRQ/MEPS/raw/master/Stata/exercise_8/h164_IC.dta) (line 27), and [h156_IC.dta](https://github.com/HHS-AHRQ/MEPS/raw/master/Stata/exercise_8/h156_IC.dta) (line 31). These files have been created with fewer variables, since the IC version of Stata is limited to loading data files with 2,047 variables. Make sure to edit the code in the .do file to reflect these file names.
 
+https://github.com/HHS-AHRQ/MEPS/raw/master/Stata/exercise_8/h156_IC.dta
 
 ## Summary
 This exercise illustrates how to pool meps longitudinal data files from different panels.
