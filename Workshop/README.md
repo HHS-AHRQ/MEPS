@@ -1,12 +1,8 @@
-# MEPS Workshops
+# MEPS Workshop: April 24, 2017
 
-The Agency for Healthcare Research and Quality (AHRQ) conducts several workshops throughout the year. These workshops provide extended knowledge about MEPS data, practical information about usage of MEPS public use data files and an opportunity to construct analytic files with the assistance of AHRQ staff. The workshops are designed for health services researchers who have a background or interest in using national health surveys. For questions regarding MEPS Workshop, please contact Anita Soni at [WorkshopInfo@ahrq.hhs.gov](mailto:WorkshopInfo@ahrq.hhs.gov).
+Presentation slides in pdf format can be accessed at the above links, or by clicking on the links in the agenda below. A [pdf version of the agenda](Agenda_Final_April2017.pdf) is also available.
 
-[Click here](https://meps.ahrq.gov/about_meps/workshops_events.jsp) for more information on upcoming Workhops.
-
-## Agenda: April 24, 2017 Workshop
-
-A [pdf version of the agenda](Agenda_Final_April2017.pdf) is also available.
+## Agenda
 
 Time	| Topic |	Presenter
 ------|-------|----------

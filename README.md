@@ -2,6 +2,7 @@
 
 This repository contains instructions and example code for loading and analyzing data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
 
+[MEPS Workshops](#meps-workshops) <br>
 [Survey Background](#survey-background) <br>
 [Accessing MEPS-HC data](#accessing-meps-hc-data) <br>
 [Analyzing MEPS-HC data](#analyzing-meps-hc-data) <br>
@@ -12,6 +13,14 @@ This repository contains instructions and example code for loading and analyzing
  * [R](R) <br>
  * [SAS](SAS) <br>
  * [Stata](Stata) <br>
+
+## MEPS Workshops
+
+The Agency for Healthcare Research and Quality (AHRQ) conducts several workshops throughout the year. These workshops provide extended knowledge about MEPS data, practical information about usage of MEPS public use data files and an opportunity to construct analytic files with the assistance of AHRQ staff. The workshops are designed for health services researchers who have a background or interest in using national health surveys. For questions regarding MEPS Workshop, please contact Anita Soni at [WorkshopInfo@ahrq.hhs.gov](mailto:WorkshopInfo@ahrq.hhs.gov).
+
+The agenda and presentation slides for the <b>MEPS Spring Workshop (April 24, 2017)</b> are available in the [Workshop](Workshop) folder. Programming exercises presented during the workshop are located in the [R](R), [SAS](SAS), and [Stata](Stata) folders.
+
+[Click here](https://meps.ahrq.gov/about_meps/workshops_events.jsp) for information on upcoming Workhops.
 
 ## Survey Background
 The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times (rounds) over a two-year period:
@@ -28,7 +37,7 @@ Data from the Household Component of MEPS are available for download as [public 
 
 To download the data, unzip and save the ASCII (.dat) or SAS transport (.ssp) file to your local computer. For example the 2014 full-year-consolidated files <b>h171.dat</b> and <b>h171.ssp</b> can be stored in a local directory <b>'C:\MEPS\data'</b>:
 
-![irectory](_images/directory.png)
+![irectory](_images/directory_cropped.png)
 
 The steps for loading the .dat or .ssp files depends on the programming language being used. Code for loading .ssp files in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
 
