@@ -74,7 +74,7 @@ load(file="C:/MEPS/R/data/h163.Rdata")
 
 
 ## Survey package in R
-To analyze MEPS data using R, the [`survey` package](https://cran.r-project.org/web/packages/survey/survey.pdf) should be used to ensure unbiased estimates. The survey package contains functions for analyzing survey data by defining a **survey design object** with information about the sampling procedure, then running analyses on that object. Here are some of the functions in the survey package that are most useful for analyzing data from MEPS.
+To analyze MEPS data using R, the [`survey` package](https://cran.r-project.org/web/packages/survey/survey.pdf) should be used to ensure unbiased estimates. The survey package contains functions for analyzing survey data by defining a **survey design object** with information about the sampling procedure, then running analyses on that object. Some of the functions in the survey package that are most useful for analyzing data from MEPS include:
 
 *   `svydesign`: define the survey object
 *   `svytotal`: population totals
