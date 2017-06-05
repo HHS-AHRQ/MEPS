@@ -51,7 +51,7 @@ Data downloading tasks can also be automated using R. This offers several advant
 
 To do this, use the `download.file` function to save the zip file from the MEPS website to the temporary file `temp`. To find the name of the zip file, navigate to the dataset on the MEPS website, right-click on the ZIP link, then select 'Copy link address' to copy the location to the clipboard. (Alternatively, the quick reference guide [meps_file_names.csv](../Quick_Reference_Guides/meps_file_names.csv) contains a table of the names of MEPS data files by type and year.)
 
-![](../_images/copy_link_address.png)
+!['Copy link address' selection on MEPS data file website](../_images/copy_link_address.png)
 
 Then, paste this address into the R code below. The file location for the full-year-consolidated data from 2013 is: "https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip". Next, use the `unzip` and `read.xport` functions to unzip and load the SAS transport data into R as a data frame. The `unlink` function is used to delete the temporary file, to free up space in memory.
 ``` r

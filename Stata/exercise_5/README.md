@@ -58,7 +58,7 @@ clear
 This exercise illustrates how to calculate expenditures for all events associated with a condition. The condition used in this exercise is diabetes (049 or 050 in definitions table below).
 
 The following flow chart illustrates the steps needed to create the analytical dataset:
-![flowchart](../../_images/flowchart_exercise5.png)
+![supplemental flowchart of datasets](../../_images/flowchart_exercise5.png)
 
 
 Definition of 61 conditions based on the CCS code:

@@ -25,7 +25,7 @@ Information on upcoming workshops is posted on the [MEPS website](https://meps.a
 ## Survey Background
 The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times (rounds) over a two-year period:
 
-![panel_design](_images/panel_design.png)
+![MEPS over-lapping panel design](_images/panel_design.png)
 
 The MEPS-HC is designed to produce national and regional estimates of the health care use, expenditures, sources of payment, and insurance coverage of the <b>U.S. civilian noninstitutionalized population</b>. The sample design of the survey includes weighting, stratification, clustering, multiple stages of selection, and disproportionate sampling.
 
@@ -33,11 +33,11 @@ The MEPS-HC is designed to produce national and regional estimates of the health
 
 Data from the Household Component of MEPS are [available for download](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp) as public use files. Each dataset contains .zip and .exe files in ASCII and SAS transport format.
 
-![dataset_website_screenshot](_images/data_documentation_arrow.png)
+![MEPS data files website screenshot](_images/data_documentation_arrow.png)
 
 To download the data, unzip and save the ASCII (.dat) or SAS transport (.ssp) file to your local computer. For example, the 2014 full-year-consolidated files <b>h171.dat</b> and <b>h171.ssp</b> can be stored in a local directory <b>'C:\MEPS\data'</b>:
 
-![irectory](_images/directory_cropped.png)
+![Windows folder containing h171.dat and h171.ssp](_images/directory_cropped.png)
 
 The steps for loading the .dat or .ssp files depends on the programming language being used. Code for loading .ssp files in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
 
