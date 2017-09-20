@@ -8,7 +8,7 @@ CCS Codes,MEPS Code,Condition
 53,7,Hyperlipidemia
  60-64,9,"Hemorrhagic, coagulation, and disorders of White Blood cells"
 59,8,Anemia and other deficiencies
-650-670,10,Mental disorders
+"65-75, 650-670",10,Mental disorders
 76-78,11,CNS infection
 79-81,12,"Hereditary, degenerative and other nervous system disorders"
 82,13,Paralysis
@@ -40,7 +40,7 @@ CCS Codes,MEPS Code,Condition
  149-152,39,"Gallbladder, pancreatic, and liver disease"
 " 156-158, 160, 161",40,Kidney Disease
 159,41,Urinary tract infections
-" 162,163",42,Other urinary
+"162,163",42,Other urinary
  164-166,43,Male genital disorders
 167,44,Non-malignant breast disease
  177-195,46,Complications of pregnancy and birth
