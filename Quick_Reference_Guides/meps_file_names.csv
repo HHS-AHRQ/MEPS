@@ -1,8 +1,8 @@
 Year,Old Panel,New Panel,PIT,FYC,Conditions,RX Events,Events,Jobs,PRP,Longitudinal,CLNK,RXLK
-1996,-,1,hc001,h12,h06r,h10a,h10*f1,h07,h24,-,h10if1,h10if2
-1997,1,2,hc005xf,h20,h18,h16a,h16*f1,h19,h47f1,h23,h16if1,h16if2
-1998,2,3,hc009xf,h28,h27,h26a,h26*f1,h25,h47f2,h35,h26if1,h26if2
-1999,3,4,hc013xf,h38,h37,h33a,h33*,h32,h47f3,h48,h33if1,h33if2
+1996,-,1,h01,h12,h06r,h10a,h10*f1,h07,h24,-,h10if1,h10if2
+1997,1,2,h05,h20,h18,h16a,h16*f1,h19,h47f1,h23,h16if1,h16if2
+1998,2,3,h09,h28,h27,h26a,h26*f1,h25,h47f2,h35,h26if1,h26if2
+1999,3,4,h13,h38,h37,h33a,h33*,h32,h47f3,h48,h33if1,h33if2
 2000,4,5,h22,h50,h52,h51a,h51*,h40,h47f4,h58,h51if1,h51if2
 2001,5,6,h34,h60,h61,h59a,h59*,h56,h57,h65,h59if1,h59if2
 2002,6,7,h53,h70,h69,h67a,h67*,h63,h66,h71,h67if1,h67if2
