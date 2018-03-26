@@ -18,7 +18,7 @@ This repository contains instructions and example code for loading and analyzing
 
 The Agency for Healthcare Research and Quality (AHRQ) conducts several workshops throughout the year. These workshops provide extended knowledge about MEPS data, practical information about usage of MEPS public use data files and an opportunity to construct analytic files with the assistance of AHRQ staff. The workshops are designed for health services researchers who have a background or interest in using national health surveys. For questions regarding MEPS Workshops, please contact Anita Soni at [WorkshopInfo@ahrq.hhs.gov](mailto:WorkshopInfo@ahrq.hhs.gov).
 
-The agenda and presentation slides for the <b>MEPS Spring Workshop (April 24, 2017)</b> are available in the [Workshop](Workshop) folder. Programming exercises presented during the workshop are located in the [R](R), [SAS](SAS), and [Stata](Stata) folders.
+The agenda and presentation slides for the most recent <b>MEPS Workshop</b> are available in the [Workshop](Workshop) folder. Programming exercises presented during the workshop are located in the [R](R), [SAS](SAS), and [Stata](Stata) folders.
 
 Information on upcoming workshops is posted on the [MEPS website](https://meps.ahrq.gov/about_meps/workshops_events.jsp). Check back regularly for updates.
 
