@@ -1,0 +1,345 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.01 seconds
+      
+
+28   
+29   LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: C:\MEPS\SAS\DATA
+30   *LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_&curr_yr\SAS\Data";
+31   
+32    PROC FORMAT;
+33     VALUE AGEF
+34         0-  64 = '0-64'
+35        65-HIGH = '65+';
+NOTE: Format AGEF has been output.
+36   
+37     VALUE AGECAT
+38         .  = 'All Ages'
+39          1 = '0-64'
+40          2 = '65+';
+NOTE: Format AGECAT has been output.
+41   
+42       VALUE GTZERO
+43         0         = '$0'
+44         0 <- HIGH = '>$0';
+NOTE: Format GTZERO has been output.
+45   
+46       VALUE FLAG
+47         .         = 'No or any expense'
+48         0         = 'No expense'
+49         1         = 'Any expense';
+NOTE: Format FLAG has been output.
+50   
+51    RUN;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+52   
+53   TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
+54   TITLE2 "EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2015";
+55   
+56   
+57   
+58    /* READ IN DATA FROM 2015 CONSOLIDATED DATA FILE (HC-181) */
+59    DATA PUF181;
+60      SET CDATA.H181 (KEEP= TOTEXP15 IPDEXP15 IPFEXP15 OBVEXP15 RXEXP15
+61                             OPDEXP15 OPFEXP15 DVTEXP15 ERDEXP15 ERFEXP15
+62                             HHAEXP15 HHNEXP15 OTHEXP15 VISEXP15 AGE15X AGE42X AGE31X
+63                             VARSTR   VARPSU   PERWT15f );
+64   
+65   
+66      /* Define expenditure variables by type of service  */
+67   
+68   
+69      TOTAL                = TOTEXP15;
+70      HOSPITAL_INPATIENT   = IPDEXP15 + IPFEXP15;
+71      AMBULATORY           = OBVEXP15 + OPDEXP15 + OPFEXP15 + ERDEXP15 + ERFEXP15;
+72      PRESCRIBED_MEDICINES = RXEXP15;
+73      DENTAL               = DVTEXP15;
+74      HOME_HEALTH_OTHER    = HHAEXP15 + HHNEXP15 + OTHEXP15 + VISEXP15;
+75   
+76   
+77     /*QC CHECK IF THE SUM OF EXPENDITURES BY TYPE OF SERVICE IS EQUAL TO TOTAL*/
+78   
+79   
+80      DIFF = TOTAL-HOSPITAL_INPATIENT - AMBULATORY   - PRESCRIBED_MEDICINES
+81                 - DENTAL            - HOME_HEALTH_OTHER        ;
+82   
+83   
+84     /* CREATE FLAG (1/0) VARIABLES FOR PERSONS WITH AN EXPENSE, BY TYPE OF SERVICE  */
+85      ARRAY EXX  (6) TOTAL     HOSPITAL_INPATIENT   AMBULATORY     PRESCRIBED_MEDICINES
+86                     DENTAL    HOME_HEALTH_OTHER      ;
+87   
+88   
+89      ARRAY ANYX (6) X_ANYSVCE X_HOSPITAL_INPATIENT X_AMBULATORY    X_PRESCRIBED_MEDICINES
+90                     X_DENTAL  X_HOME_HEALTH_OTHER    ;
+91   
+92   
+93      DO II=1 TO 6;
+94        ANYX(II) = 0;
+95        IF EXX(II) > 0 THEN ANYX(II) = 1;
+96      END;
+97      DROP II;
+98   
+99      /* CREATE A SUMMARY VARIABLE FROM END OF YEAR, 42, AND 31 VARIABLES*/
+100  
+101  
+102          IF AGE15X >= 0 THEN AGE = AGE15X ;
+103     ELSE IF AGE42X >= 0 THEN AGE = AGE42X ;
+104     ELSE IF AGE31X >= 0 THEN AGE = AGE31X ;
+105  
+106          IF 0 LE AGE LE 64 THEN AGECAT=1 ;
+107     ELSE IF      AGE  > 64 THEN AGECAT=2 ;
+108    ;
+109  
+110  
+111   RUN;
+
+NOTE: There were 35427 observations read from the data set CDATA.H181.
+NOTE: The data set WORK.PUF181 has 35427 observations and 35 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.74 seconds
+      cpu time            0.62 seconds
+      
+
+112   TITLE3 "Supporting crosstabs for the flag variables";
+113   PROC FREQ DATA=PUF181;
+114      TABLES X_ANYSVCE              * TOTAL
+115             X_HOSPITAL_INPATIENT   * HOSPITAL_INPATIENT
+116             X_AMBULATORY           * AMBULATORY
+117             X_PRESCRIBED_MEDICINES * PRESCRIBED_MEDICINES
+118             X_DENTAL               * DENTAL
+119             X_HOME_HEALTH_OTHER    * HOME_HEALTH_OTHER
+120             AGECAT*AGE
+121             DIFF/LIST MISSING;
+122  
+123      FORMAT TOTAL
+124             HOSPITAL_INPATIENT
+125             AMBULATORY
+126             PRESCRIBED_MEDICINES
+127             DENTAL
+128             HOME_HEALTH_OTHER   gtzero.
+129             AGE  agef.
+130             X_ANYSVCE
+131             X_HOSPITAL_INPATIENT
+132             X_AMBULATORY
+133             X_PRESCRIBED_MEDICINES
+134             X_DENTAL
+135             X_HOME_HEALTH_OTHER flag.
+136             AGECAT agecat.
+137    ;
+138  RUN;
+
+NOTE: There were 35427 observations read from the data set WORK.PUF181.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.11 seconds
+      
+
+139   ods graphics off;
+140    TITLE3 'PERCENTAGE DISTRIBUTION OF EXPENSES BY TYPE OF SERVICE (STAT BRIEF #491 FIGURE 1)';
+141   PROC SURVEYMEANS DATA=PUF181 sum ;
+142      STRATUM VARSTR;
+143      CLUSTER VARPSU;
+144      WEIGHT PERWT15f;
+145      VAR   HOSPITAL_INPATIENT
+146           AMBULATORY
+147           PRESCRIBED_MEDICINES
+148            DENTAL
+149           HOME_HEALTH_OTHER
+150           TOTAL ;
+151      RATIO  HOSPITAL_INPATIENT
+152            AMBULATORY
+153            PRESCRIBED_MEDICINES
+154            DENTAL
+155            HOME_HEALTH_OTHER   / TOTAL ;
+156   RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.30 seconds
+      cpu time            0.25 seconds
+      
+
+157  TITLE3 'PERCENTAGE OF PERSONS WITH AN EXPENSE, BY TYPE OF SERVICE';
+158  PROC SURVEYMEANS DATA= PUF181 NOBS MEAN STDERR SUM;
+159      STRATUM VARSTR ;
+160      CLUSTER VARPSU ;
+161      WEIGHT  PERWT15f ;
+162      VAR X_ANYSVCE
+163          X_HOSPITAL_INPATIENT
+164          X_AMBULATORY
+165          X_PRESCRIBED_MEDICINES
+166          X_DENTAL
+167          X_HOME_HEALTH_OTHER;
+168          RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+169  
+170  
+171   TITLE3 'MEAN TOTAL EXPENSE PER PERSON WITH AN EXPENSE, AGE 0-64, AND AGE 65+ (via ODS Output)';
+172    *ods trace on;
+173   PROC SURVEYMEANS DATA= PUF181 MEAN NOBS SUMWGT STDERR SUM;
+174      STRATUM VARSTR ;
+175      CLUSTER VARPSU ;
+176      VAR  TOTAL;
+177      DOMAIN  AGECAT AGECAT*X_ANYSVCE('1');
+178      WEIGHT  PERWT15f ;
+179      FORMAT  AGECAT agecat.;
+180      ods output Statistics=work.Overall_results
+181                 domain= work.domain_results;
+182  RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for AGECAT*X_ANYSVCE domains for variable(s) TOTAL. The estimate of variance for TOTAL will 
+      omit this stratum.
+NOTE: The data set WORK.DOMAIN_RESULTS has 4 observations and 10 variables.
+NOTE: The data set WORK.OVERALL_RESULTS has 1 observations and 7 variables.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.10 seconds
+      
+
+183  data combine;
+184    set work.Overall_results
+185        work.domain_results;
+186  run;
+
+NOTE: There were 1 observations read from the data set WORK.OVERALL_RESULTS.
+NOTE: There were 4 observations read from the data set WORK.DOMAIN_RESULTS.
+NOTE: The data set WORK.COMBINE has 5 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+187  proc print data= combine noobs split='*';
+188   var AGECAT  X_ANYSVCE N  SumWgt  mean StdErr  Sum stddev;
+189   label AGECAT = 'Age Group'
+190         X_ANYSVCE = 'Expense*Category*(Flag)'
+191         SumWgt = 'Population*Size'
+192         mean = 'Mean($)'
+193         StdErr = 'SE of Mean($)'
+194         Sum = 'Total*Expense ($)'
+195         Stddev = 'SE of*Total Expense($)';
+196         format N SumWgt Comma12. mean comma7. stderr 7.3 sum Stddev comma17.
+197          X_ANYSVCE flag.;
+198  run;
+
+NOTE: There were 5 observations read from the data set WORK.COMBINE.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+199  
+200  TITLE3 'MEAN HOSPITAL INPATIENT EXPENSE PER PERSON WITH AN INPATIENT EXPENSE, AGE 0-64, AND AGE 65+';
+201  PROC SURVEYMEANS DATA= PUF181 NOBS MEAN SUMWGT STDERR SUM ;
+202      STRATUM VARSTR ;
+203      CLUSTER VARPSU ;
+204      WEIGHT  PERWT15f ;
+205      VAR  HOSPITAL_INPATIENT;
+206      DOMAIN  X_HOSPITAL_INPATIENT('1') AGECAT*X_HOSPITAL_INPATIENT ('1');
+207      FORMAT  AGECAT agecat. ;
+208  RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for X_HOSPITAL_INPATIENT domains for variable(s) HOSPITAL_INPATIENT. The estimate of variance 
+      for HOSPITAL_INPATIENT will omit this stratum.
+NOTE: Only one cluster in a stratum for AGECAT*X_HOSPITAL_INPATIENT domains for variable(s) HOSPITAL_INPATIENT. The estimate of 
+      variance for HOSPITAL_INPATIENT will omit this stratum.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.09 seconds
+      
+
+209  
+210  TITLE3 'MEAN AMBULATORY EXPENSE PER PERSON WITH AN AMBULATORY EXPENSE, AGE 0-64, AND AGE 65+';
+211  PROC SURVEYMEANS DATA= PUF181 NOBS MEAN SUMWGT STDERR SUM ;
+212      STRATUM VARSTR ;
+213      CLUSTER VARPSU ;
+214      WEIGHT  PERWT15f ;
+215      VAR  AMBULATORY;
+216      DOMAIN  X_AMBULATORY('1')  AGECAT*X_AMBULATORY('1') ;
+217      FORMAT  AGECAT agecat.;
+218   RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for AGECAT*X_AMBULATORY domains for variable(s) AMBULATORY. The estimate of variance for 
+      AMBULATORY will omit this stratum.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.07 seconds
+      
+
+219  
+220   TITLE3 'MEAN PRESCRIPTION MEDICINE EXPENSE PER PERSON WITH A PRESCRIPTION MEDICINE EXPENSE, AGE 0-64, AND AGE 65+';
+221  PROC SURVEYMEANS DATA= PUF181 MEAN NOBS SUMWGT STDERR SUM ;
+222      STRATUM VARSTR ;
+223      CLUSTER VARPSU ;
+224      WEIGHT  PERWT15f ;
+225      VAR  PRESCRIBED_MEDICINES;
+226      DOMAIN  X_PRESCRIBED_MEDICINES('1') AGECAT*X_PRESCRIBED_MEDICINES('1');
+227      FORMAT  AGECAT agecat.;
+228   RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for AGECAT*X_PRESCRIBED_MEDICINES domains for variable(s) PRESCRIBED_MEDICINES. The estimate of 
+      variance for PRESCRIBED_MEDICINES will omit this stratum.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.09 seconds
+      
+
+229  
+230   TITLE3 'MEAN DENTAL EXPENSE PER PERSON WITH A DENATL EXPENSE, AGE 0-64, AND AGE 65+';
+231  PROC SURVEYMEANS DATA= PUF181 MEAN NOBS SUMWGT STDERR SUM ;
+232      STRATUM VARSTR ;
+233      CLUSTER VARPSU ;
+234      WEIGHT  PERWT15f ;
+235      VAR  DENTAL;
+236      DOMAIN   X_DENTAL('1') AGECAT*X_DENTAL('1') ;
+237      FORMAT  AGECAT agecat.;
+238   RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for AGECAT*X_DENTAL domains for variable(s) DENTAL. The estimate of variance for DENTAL will 
+      omit this stratum.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.09 seconds
+      
+
+239  
+240  TITLE3 'MEAN  OTHER EXPENSE (INCLUDING HOME HEALTH EXPENSE) PER PERSON WITH AN OTHER  EXPENSE, AGE 0-64, AND AGE 65+';
+241   PROC SURVEYMEANS DATA= PUF181 MEAN NOBS SUMWGT STDERR SUM ;
+242      STRATUM VARSTR ;
+243      CLUSTER VARPSU ;
+244      WEIGHT  PERWT15f ;
+245      VAR  HOME_HEALTH_OTHER;
+246      DOMAIN  X_HOME_HEALTH_OTHER('1') AGECAT*X_HOME_HEALTH_OTHER('1') ;
+247      FORMAT  AGECAT agecat.;
+248   RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for AGECAT*X_HOME_HEALTH_OTHER domains for variable(s) HOME_HEALTH_OTHER. The estimate of 
+      variance for HOME_HEALTH_OTHER will omit this stratum.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.07 seconds
+      
+
+249   PROC PRINTTO;
+250   RUN;
+

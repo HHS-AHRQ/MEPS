@@ -1,0 +1,127 @@
+                                                               2017 AHRQ MEPS DATA USERS WORKSHOP                                                              1
+                                         EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 17, 18, 19)
+                                                           CHECK MISSING VALUES ON THE COMBINED DATA
+
+                                                                      The MEANS Procedure
+
+                                                                                                                               N
+                               Variable    Label                                                                      N     Miss
+                               -------------------------------------------------------------------------------------------------
+                               INSCOVY1    HEALTH INSURANCE COVERAGE INDICATOR 12                                 50535        0
+                               INSCOVY2    HEALTH INSURANCE COVERAGE INDICATOR IN YEAR 2                          50535        0
+                               PANEL       PANEL NUMBER                                                           50535        0
+                               AGEY1X      AGE AS OF 12/31/12 (EDITED/IMPUTED)                                    50535        0
+                               POVCATY1    FAMLY INC AS % OF POVERTY LINE-CATEGO 12                               50535        0
+                               VARSTR      VARIANCE ESTIMATION STRATUM                                            50535        0
+                               VARPSU      VARIANCE ESTIMATION PSU                                                50535        0
+                               LONGWT      LONGITUDINAL WEIGHT - PANEL 17                                         50535        0
+                               POOLWT                                                                             50535        0
+                               SUBPOP      POPULATION WITH AGE=26-30, UNINSURED, AND HIGH INCOME IN FIRST YEAR    50535        0
+                               -------------------------------------------------------------------------------------------------
+                                                               2017 AHRQ MEPS DATA USERS WORKSHOP                                                              2
+                                         EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 17, 18, 19)
+                                                    SUPPORTING CROSSTAB FOR THE CREATION OF THE SUBPOP FLAG
+
+                                                                       The FREQ Procedure
+
+                                              POPULATION WITH AGE=26-30, UNINSURED, AND HIGH INCOME IN FIRST YEAR
+ 
+                                                                                     Cumulative    Cumulative
+                                                  SUBPOP    Frequency     Percent     Frequency      Percent
+                                                  -----------------------------------------------------------
+                                                       1          78        0.15            78         0.15  
+                                                       2       50457       99.85         50535       100.00  
+
+
+                                                                                          Cumulative    Cumulative
+                                              SUBPOP    PANEL    Frequency     Percent     Frequency      Percent
+                                              --------------------------------------------------------------------
+                                                   1       17          41        0.08            41         0.08  
+                                                   1       18          22        0.04            63         0.12  
+                                                   1       19          15        0.03            78         0.15  
+                                                   2       17       17882       35.39         17960        35.54  
+                                                   2       18       16692       33.03         34652        68.57  
+                                                   2       19       15883       31.43         50535       100.00  
+
+
+                                                                                                               Cumulative    Cumulative
+                         SUBPOP           INSCOVY1       AGEY1X           POVCATY1    Frequency     Percent     Frequency      Percent
+                         --------------------------------------------------------------------------------------------------------------
+                              1    3 UNINSURED        26-30        5 HIGH INCOME            78        0.15            78         0.15  
+                              2    -1 INAPPLICABLE           -1                 -1         647        1.28           725         1.43  
+                              2    1 ANY PRIVATE             -1    1 POOR/NEGATIVE          25        0.05           750         1.48  
+                              2    1 ANY PRIVATE             -1    2 NEAR POOR              10        0.02           760         1.50  
+                              2    1 ANY PRIVATE             -1    3 LOW INCOME             21        0.04           781         1.55  
+                              2    1 ANY PRIVATE             -1    4 MIDDLE INCOME          32        0.06           813         1.61  
+                              2    1 ANY PRIVATE             -1    5 HIGH INCOME            34        0.07           847         1.68  
+                              2    1 ANY PRIVATE      0-25, 31+    1 POOR/NEGATIVE        1361        2.69          2208         4.37  
+                              2    1 ANY PRIVATE      0-25, 31+    2 NEAR POOR             685        1.36          2893         5.72  
+                              2    1 ANY PRIVATE      0-25, 31+    3 LOW INCOME           3048        6.03          5941        11.76  
+                              2    1 ANY PRIVATE      0-25, 31+    4 MIDDLE INCOME        8270       16.36         14211        28.12  
+                              2    1 ANY PRIVATE      0-25, 31+    5 HIGH INCOME          9717       19.23         23928        47.35  
+                              2    1 ANY PRIVATE      26-30        1 POOR/NEGATIVE         107        0.21         24035        47.56  
+                              2    1 ANY PRIVATE      26-30        2 NEAR POOR              63        0.12         24098        47.69  
+                              2    1 ANY PRIVATE      26-30        3 LOW INCOME            273        0.54         24371        48.23  
+                              2    1 ANY PRIVATE      26-30        4 MIDDLE INCOME         668        1.32         25039        49.55  
+                              2    1 ANY PRIVATE      26-30        5 HIGH INCOME           656        1.30         25695        50.85  
+                              2    2 PUBLIC ONLY             -1    1 POOR/NEGATIVE          59        0.12         25754        50.96  
+                              2    2 PUBLIC ONLY             -1    2 NEAR POOR              17        0.03         25771        51.00  
+                              2    2 PUBLIC ONLY             -1    3 LOW INCOME             30        0.06         25801        51.06  
+                              2    2 PUBLIC ONLY             -1    4 MIDDLE INCOME          43        0.09         25844        51.14  
+                              2    2 PUBLIC ONLY             -1    5 HIGH INCOME            22        0.04         25866        51.18  
+                              2    2 PUBLIC ONLY      0-25, 31+    1 POOR/NEGATIVE        7725       15.29         33591        66.47  
+                              2    2 PUBLIC ONLY      0-25, 31+    2 NEAR POOR            1832        3.63         35423        70.10  
+                              2    2 PUBLIC ONLY      0-25, 31+    3 LOW INCOME           3132        6.20         38555        76.29  
+                              2    2 PUBLIC ONLY      0-25, 31+    4 MIDDLE INCOME        2385        4.72         40940        81.01  
+                              2    2 PUBLIC ONLY      0-25, 31+    5 HIGH INCOME           865        1.71         41805        82.72  
+                              2    2 PUBLIC ONLY      26-30        1 POOR/NEGATIVE         320        0.63         42125        83.36  
+                              2    2 PUBLIC ONLY      26-30        2 NEAR POOR              71        0.14         42196        83.50  
+                              2    2 PUBLIC ONLY      26-30        3 LOW INCOME            120        0.24         42316        83.74  
+                              2    2 PUBLIC ONLY      26-30        4 MIDDLE INCOME          88        0.17         42404        83.91  
+                              2    2 PUBLIC ONLY      26-30        5 HIGH INCOME            23        0.05         42427        83.96  
+                              2    3 UNINSURED               -1    1 POOR/NEGATIVE          33        0.07         42460        84.02  
+                              2    3 UNINSURED               -1    2 NEAR POOR               7        0.01         42467        84.03  
+                              2    3 UNINSURED               -1    3 LOW INCOME             12        0.02         42479        84.06  
+                              2    3 UNINSURED               -1    4 MIDDLE INCOME          14        0.03         42493        84.09  
+                              2    3 UNINSURED               -1    5 HIGH INCOME             7        0.01         42500        84.10  
+                              2    3 UNINSURED        0-25, 31+    1 POOR/NEGATIVE        2194        4.34         44694        88.44  
+                              2    3 UNINSURED        0-25, 31+    2 NEAR POOR             674        1.33         45368        89.78  
+                              2    3 UNINSURED        0-25, 31+    3 LOW INCOME           1735        3.43         47103        93.21  
+                              2    3 UNINSURED        0-25, 31+    4 MIDDLE INCOME        1842        3.64         48945        96.85  
+                              2    3 UNINSURED        0-25, 31+    5 HIGH INCOME           598        1.18         49543        98.04  
+                              2    3 UNINSURED        26-30        1 POOR/NEGATIVE         342        0.68         49885        98.71  
+                              2    3 UNINSURED        26-30        2 NEAR POOR             130        0.26         50015        98.97  
+                              2    3 UNINSURED        26-30        3 LOW INCOME            240        0.47         50255        99.45  
+                              2    3 UNINSURED        26-30        4 MIDDLE INCOME         280        0.55         50535       100.00  
+                                                               2017 AHRQ MEPS DATA USERS WORKSHOP                                                              3
+                                         EXERCISE8.SAS: POOL MEPS DATA FILES FROM DIFFERENT PANELS (PANELS 17, 18, 19)
+                      INSURANCE STATUS IN THE SECOND YEAR FOR THOSE W/ AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME IN THE FIRST YEAR
+
+                                                                    The SURVEYFREQ Procedure
+
+                                                                  Table of SUBPOP by INSCOVY2
+ 
+                                                                              Weighted    Std Err of                Std Err of
+                                 SUBPOP    INSCOVY2            Frequency     Frequency      Wgt Freq     Percent       Percent
+                                 ---------------------------------------------------------------------------------------------
+                                      1    -1 INAPPLICABLE             0             .             .       .             .    
+                                           1 ANY PRIVATE              15        126368         42278      0.0393        0.0131
+                                           2 PUBLIC ONLY               4         18970         10540      0.0059        0.0033
+                                           3 UNINSURED                59        397484         68168      0.1235        0.0212
+
+                                           Total                      78        542822         81412      0.1687        0.0252
+                                 ---------------------------------------------------------------------------------------------
+                                      2    -1 INAPPLICABLE           481       3202959        206882      0.9956        0.0622
+                                           1 ANY PRIVATE           25677     207751569       5229886     64.5753        0.7570
+                                           2 PUBLIC ONLY           17176      77545579       2357642     24.1034        0.5997
+                                           3 UNINSURED              7123      32676963       1292624     10.1570        0.3476
+
+                                           Total                   50457     321177069       6718515     99.8313        0.0252
+                                 ---------------------------------------------------------------------------------------------
+                                  Total    -1 INAPPLICABLE           481       3202959        206882      0.9956        0.0622
+                                           1 ANY PRIVATE           25692     207877937       5230127     64.6146        0.7558
+                                           2 PUBLIC ONLY           17180      77564550       2358161     24.1093        0.5998
+                                           3 UNINSURED              7182      33074446       1299474     10.2805        0.3494
+
+                                           Total                   50535     321719891       6725054    100.0000              
+                                 ---------------------------------------------------------------------------------------------

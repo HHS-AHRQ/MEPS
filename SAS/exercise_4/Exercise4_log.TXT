@@ -1,0 +1,184 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.01 seconds
+      
+
+537  
+538  LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: C:\MEPS\SAS\DATA
+539  *LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+540  
+541  TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
+542  TITLE2 'EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)';
+543  
+544  
+545  PROC FORMAT;
+546    VALUE SEX
+547       . = 'TOTAL'
+548       1 = 'MALE'
+549       2 = 'FEMALE'
+550         ;
+NOTE: Format SEX has been output.
+551  
+552    VALUE YESNO
+553       . = 'TOTAL'
+554       1 = 'YES'
+555       2 = 'NO'
+556         ;
+NOTE: Format YESNO has been output.
+557  RUN;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+558  
+559  
+560  /*1) PULL OUT CONDITIONS WITH DIABETES (CCS CODE='049', '050') FROM 2015 CONDITION PUF - HC180*/
+561  
+562  DATA DIAB;
+563   SET CDATA.H180;
+564      IF CCCODEX IN ('049', '050');
+565  RUN;
+
+NOTE: There were 123227 observations read from the data set CDATA.H180.
+NOTE: The data set WORK.DIAB has 3327 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.06 seconds
+      
+
+566  
+567  TITLE3 "CHECK CCS CODES FOR DIABETIC CONDITIONS";
+568  PROC FREQ DATA=DIAB;
+569    TABLES CCCODEX / LIST MISSING;
+570  RUN;
+
+NOTE: There were 3327 observations read from the data set WORK.DIAB.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+571  
+572  
+573  /*2) IDENTIFY PERSONS WHO REPORTED DIABETES*/
+574  
+575  PROC SORT DATA=DIAB OUT=DIABPERS (KEEP=DUPERSID) NODUPKEY;
+576    BY DUPERSID;
+577  RUN;
+
+NOTE: There were 3327 observations read from the data set WORK.DIAB.
+NOTE: 262 observations with duplicate key values were deleted.
+NOTE: The data set WORK.DIABPERS has 3065 observations and 1 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+578  
+579  
+580  /*3) CREATE A FLAG FOR PERSONS WITH DIABETES IN THE 2015 FY DATA*/
+581  
+582  DATA  FY1;
+583  MERGE CDATA.H181 (IN=AA)
+584        DIABPERS   (IN=BB) ;
+585     BY DUPERSID;
+586  
+587        LABEL DIABPERS='PERSONS WHO REPORTED DIABETES';
+588        IF AA AND BB THEN DIABPERS = 1;
+589                     ELSE DIABPERS = 2;
+590  
+591  RUN;
+
+NOTE: There were 35427 observations read from the data set CDATA.H181.
+NOTE: There were 3065 observations read from the data set WORK.DIABPERS.
+NOTE: The data set WORK.FY1 has 35427 observations and 1832 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.99 seconds
+      cpu time            0.98 seconds
+      
+
+592  TITLE3 "Supporting crosstabs for the flag variables";
+593  TITLE3 "UNWEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2015";
+594  PROC FREQ DATA=FY1;
+595    TABLES DIABPERS
+596           DIABPERS * SEX / LIST MISSING;
+597    FORMAT SEX      sex.
+598           DIABPERS yesno.
+599      ;
+600  RUN;
+
+NOTE: There were 35427 observations read from the data set WORK.FY1.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.20 seconds
+      
+
+601  
+602  TITLE3 "WEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2015";
+603  PROC FREQ DATA=FY1;
+604    TABLES DIABPERS
+605           DIABPERS * SEX /LIST MISSING;
+606    WEIGHT PERWT15F ;
+607    FORMAT SEX      sex.
+608           DIABPERS yesno.
+609      ;
+610  RUN;
+
+NOTE: There were 35427 observations read from the data set WORK.FY1.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.18 seconds
+      
+
+611  
+612  
+613  /*4) CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES*/
+614  
+615  ODS GRAPHICS OFF;
+616  ODS LISTING CLOSE;
+617  PROC SURVEYMEANS DATA=FY1 NOBS SUMWGT SUM STD MEAN STDERR;
+618      STRATA  VARSTR ;
+619      CLUSTER VARPSU ;
+620      WEIGHT PERWT15F ;
+621      DOMAIN DIABPERS('1') SEX*DIABPERS('1');
+622      VAR TOTEXP15 TOTSLF15 OBTOTV15;
+623        ods output domain=work.domain_results;
+624  RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for SEX*PERSONS WHO REPORTED DIABETES domains for variable(s) TOTEXP15, TOTSLF15, OBTOTV15. The 
+      estimate of variance for TOTEXP15, TOTSLF15, OBTOTV15 will omit this stratum.
+NOTE: The data set WORK.DOMAIN_RESULTS has 9 observations and 11 variables.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.33 seconds
+      cpu time            0.29 seconds
+      
+
+625  
+626  ODS LISTING;
+627  TITLE3 "ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES, 2015";
+628  PROC PRINT DATA=work.domain_results (DROP=DOMAINLABEL)  NOOBS LABEL BLANKLINE=3 ;
+629  VAR SEX VARNAME N SUMWGT SUM STDDEV MEAN STDERR;
+630  FORMAT N                      comma6.0
+631         SUMWGT   SUM    STDDEV comma17.0
+632         MEAN     STDERR        comma9.2
+633         DIABPERS               yesno.
+634         SEX                    sex.
+635     ;
+636  RUN;
+
+NOTE: There were 9 observations read from the data set WORK.DOMAIN_RESULTS.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+637  
+638  PROC PRINTTO;
+639  RUN;
+

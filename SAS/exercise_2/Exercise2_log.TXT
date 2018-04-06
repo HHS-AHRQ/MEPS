@@ -1,0 +1,174 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+276  
+277  LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: C:\MEPS\SAS\DATA
+278  *LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+279  
+280  TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
+281  TITLE2 "EXERCISE2.SAS: Antipsychotics Purchases and Expenses, 2015";
+282  
+283  PROC FORMAT;
+284    VALUE GTZERO
+285       0         = '0'
+286       0 <- HIGH = '>0'
+287       ;
+NOTE: Format GTZERO is already on the library WORK.FORMATS.
+NOTE: Format GTZERO has been output.
+288  RUN;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+289  
+290  /*1) IDENTIFY ANTIPSYCHOTIC DRUGS USING THERAPEUTIC CLASSIFICATION (TC) CODES*/
+291  
+292  DATA DRUG;
+293    SET CDATA.H178A;
+294    IF TC1=242 AND TC1S1=251; /*definition of ANTIPSYCHOTIC DRUGS*/
+295  RUN;
+
+NOTE: There were 330453 observations read from the data set CDATA.H178A.
+NOTE: The data set WORK.DRUG has 3317 observations and 69 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.84 seconds
+      cpu time            0.45 seconds
+      
+
+296  TITLE3 "Supporting crosstabs for the flag variables";
+297  TITLE3 "A SAMPLE DUMP FOR PMED RECORDS WITH ANTIPSYCHOTIC DRUGS";
+298  PROC PRINT DATA=DRUG (OBS=30);
+299  VAR RXRECIDX LINKIDX TC1 TC1S1  RXXP15X RXSF15X;
+300   BY DUPERSID;
+301  RUN;
+
+NOTE: There were 30 observations read from the data set WORK.DRUG.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+302  
+303  
+304  /*2) SUM DATA TO PERSON-LEVEL*/
+305  
+306  PROC SUMMARY DATA=DRUG NWAY;
+307    CLASS DUPERSID;
+308    VAR RXXP15X RXSF15X;
+309    OUTPUT OUT=PERDRUG (DROP=_TYPE_) sum=TOT OOP;
+310  RUN;
+
+NOTE: There were 3317 observations read from the data set WORK.DRUG.
+NOTE: The data set WORK.PERDRUG has 459 observations and 4 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+311  
+312  TITLE3 "A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR ANTIPSYCHOTIC DRUGS";
+313  PROC PRINT DATA=PERDRUG (OBS=30);
+314  RUN;
+
+NOTE: There were 30 observations read from the data set WORK.PERDRUG.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+315  
+316  DATA PERDRUG2;
+317   SET PERDRUG;
+318       RENAME _FREQ_ = N_PHRCHASE ;
+319       THIRD_PAYER   = TOT - OOP;
+320  RUN;
+
+NOTE: There were 459 observations read from the data set WORK.PERDRUG.
+NOTE: The data set WORK.PERDRUG2 has 459 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+321  
+322  /*3) MERGE THE PERSON-LEVEL EXPENDITURES TO THE FY PUF*/
+323  
+324  DATA  FY;
+325  MERGE CDATA.H181 (IN=AA KEEP=DUPERSID VARSTR VARPSU PERWT15F)
+326        PERDRUG2  (IN=BB KEEP=DUPERSID N_PHRCHASE TOT OOP THIRD_PAYER);
+327     BY DUPERSID;
+328  
+329        IF AA AND BB THEN DO;
+330           SUB      = 1 ;
+331        END;
+332  
+333        ELSE IF NOT BB THEN DO;   /*FOR PERSONS WITHOUT ANY PURCHASE OF ANTIPSYCHOTIC DRUGS*/
+334           SUB         = 2 ;
+335           N_PHRCHASE  = 0 ;
+336           THIRD_PAYER = 0 ;
+337           TOT         = 0 ;
+338           OOP         = 0 ;
+339        END;
+340  
+341        IF AA;
+342  
+343        LABEL
+344              THIRD_PAYER = 'TOTAL-OOP'
+345              N_PHRCHASE  = '# OF PURCHASES PER PERSON'
+346              SUB         = 'POPULATION FLAG FOR PERSONS WITH 1+ ANTIPSYCHOTIC DRUGS'
+347                          ;
+348  RUN;
+
+NOTE: There were 35427 observations read from the data set CDATA.H181.
+NOTE: There were 459 observations read from the data set WORK.PERDRUG2.
+NOTE: The data set WORK.FY has 35427 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.61 seconds
+      cpu time            0.62 seconds
+      
+
+349  
+350  TITLE3 "SUPPORTING CROSSTABS FOR NEW VARIABLES";
+351  PROC FREQ DATA=FY;
+352    TABLES  SUB * N_PHRCHASE * TOT * OOP * THIRD_PAYER / LIST MISSING ;
+353    FORMAT N_PHRCHASE TOT OOP THIRD_PAYER gtzero. ;
+354  RUN;
+
+NOTE: There were 35427 observations read from the data set WORK.FY.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+355  
+356  
+357  /*4) CALCULATE ESTIMATES ON EXPENDITURES AND USE*/
+358  
+359  TITLE3 "PERSON-LEVEL ESTIMATES ON EXPENDITURES AND USE FOR ANTIPSYCHOTIC DRUGS, 2014";
+360  ods graphics off;
+361  PROC SURVEYMEANS DATA=FY NOBS SUMWGT SUM STD MEAN STDERR;
+362    STRATA  VARSTR ;
+363    CLUSTER VARPSU;
+364    WEIGHT  PERWT15F;
+365    DOMAIN  SUB('1');
+366    VAR TOT N_PHRCHASE  OOP THIRD_PAYER ;
+367  RUN;
+
+NOTE: Due to nonpositive weights, 1534 observation(s) were deleted.
+NOTE: Only one cluster in a stratum for POPULATION FLAG FOR PERSONS WITH 1+ ANTIPSYCHOTIC DRUGS domains for variable(s) TOT, N_PHRCHASE, OOP, THIRD_PAYER. The 
+      estimate of variance for TOT, N_PHRCHASE, OOP, THIRD_PAYER will omit this stratum.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.09 seconds
+      
+
+368  PROC PRINTTO;
+369  RUN;
+

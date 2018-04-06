@@ -1,39 +1,43 @@
 /**********************************************************************************
 
-PROGRAM:      C:\MEPS\SAS\PROG\EXERCISE7.SAS
+PROGRAM:      C:\MEPS\SAS\Exercise_7\EXERCISE7.SAS
 
 DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO CONSTRUCT INSURANCE STATUS VARIABLES FROM
               MONTHLY INSURANCE VARIABLES (see below) IN THE PERSON-LEVEL DATA 
 
-TRImm14X   Covered by TRICARE/CHAMPVA in mm (Ed)
-MCRmm14    Covered by Medicare in mm
-MCRmm14X   Covered by Medicare in mm (Ed)
-MCDmm14    Covered by Medicaid or SCHIP in mm            
-MCDmm14X   Covered by Medicaid or SCHIP in mm  (Ed)
-OPAmm14    Covered by Other Public A Ins in mm 
-OPBmm14    Covered by Other Public B Ins in mm 
-PUBmm14X   Covered by Any Public Ins in mm (Ed)
-PEGmm14    Covered by Empl Union Ins in mm 
-PDKmm14    Coverer by Priv Ins (Source Unknown) in mm 
-PNGmm14    Covered by Nongroup Ins in mm 
-POGmm14    Covered by Other Group Ins in mm 
-PRSmm14    Covered by Self-Emp Ins in mm 
-POUmm14    Covered by Holder Outside of RU in mm 
-PRImm14    Covered by Private Ins in mm                       
+TRImm15X   Covered by TRICARE/CHAMPVA in mm (Ed)
+MCRmm15    Covered by Medicare in mm
+MCRmm15X   Covered by Medicare in mm (Ed)
+MCDmm15    Covered by Medicaid or SCHIP in mm            
+MCDmm15X   Covered by Medicaid or SCHIP in mm  (Ed)
+OPAmm15    Covered by Other Public A Ins in mm 
+OPBmm15    Covered by Other Public B Ins in mm 
+PUBmm15X   Covered by Any Public Ins in mm (Ed)
+PEGmm15    Covered by Empl Union Ins in mm 
+PDKmm15    Coverer by Priv Ins (Source Unknown) in mm 
+PNGmm15    Covered by Nongroup Ins in mm 
+POGmm15    Covered by Other Group Ins in mm 
+PRSmm15    Covered by Self-Emp Ins in mm 
+POUmm15    Covered by Holder Outside of RU in mm 
+PRImm15    Covered by Private Ins in mm                       
 
 where mm = JA-DE  (January - December)   
 
-INPUT FILE:   C:\MEPS\SAS\DATA\H171.SAS7BDAT (2014 FY PUF DATA)
+INPUT FILE:   C:\MEPS\SAS\DATA\H181.SAS7BDAT (2015 FY PUF DATA)
 
 *********************************************************************************/;
-OPTIONS LS=160 PS=65 NODATE;
+OPTIONS LS=160 PS=79 NODATE FORMCHAR="|----|+|---+=|-/\<>*" PAGENO=1;
+FILENAME MYLOG "U:\MEPS\SAS\Exercise_7\Exercise7_log.TXT";
+FILENAME MYPRINT "U:\MEPS\SAS\Exercise_7\Exercise7_OUTPUT.TXT";
+PROC PRINTTO LOG=MYLOG PRINT=MYPRINT NEW;
+RUN;
 
-*LIBNAME CDATA 'C:\MEPS\SAS\DATA';
-LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data"; 
+LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+*LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data"; 
 
-%LET YR=14;
+%LET YR=15;
 
-TITLE1 '2017 AHRQ MEPS DATA USERS WORKSHOP';
+TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
 TITLE2 "EXERCISE7.SAS: HOW TO CONSTRUCT INSURANCE STATUS VARIABLES, USING FY &YR DATA";
 
 PROC FORMAT;
@@ -50,7 +54,7 @@ RUN;
 /*1) COUNT # OF MONTHS WITH INSURANCE*/
 
 DATA FY1;
-  SET CDATA.H171;
+  SET CDATA.H181;
 
 ARRAY PEG (12) PEGJA&YR PEGFE&YR PEGMA&YR PEGAP&YR PEGMY&YR PEGJU&YR PEGJL&YR PEGAU&YR PEGSE&YR PEGOC&YR PEGNO&YR PEGDE&YR;
 ARRAY POU (12) POUJA&YR POUFE&YR POUMA&YR POUAP&YR POUMY&YR POUJU&YR POUJL&YR POUAU&YR POUSE&YR POUOC&YR POUNO&YR POUDE&YR;
@@ -58,6 +62,7 @@ ARRAY PDK (12) PDKJA&YR PDKFE&YR PDKMA&YR PDKAP&YR PDKMY&YR PDKJU&YR PDKJL&YR PD
 ARRAY PNG (12) PNGJA&YR PNGFE&YR PNGMA&YR PNGAP&YR PNGMY&YR PNGJU&YR PNGJL&YR PNGAU&YR PNGSE&YR PNGOC&YR PNGNO&YR PNGDE&YR;
 ARRAY POG (12) POGJA&YR POGFE&YR POGMA&YR POGAP&YR POGMY&YR POGJU&YR POGJL&YR POGAU&YR POGSE&YR POGOC&YR POGNO&YR POGDE&YR;
 ARRAY PRS (12) PRSJA&YR PRSFE&YR PRSMA&YR PRSAP&YR PRSMY&YR PRSJU&YR PRSJL&YR PRSAU&YR PRSSE&YR PRSOC&YR PRSNO&YR PRSDE&YR;
+ARRAY PRX (12) PRXJA&YR PRXFE&YR PRXMA&YR PRXAP&YR PRXMY&YR PRXJU&YR PRXJL&YR PRXAU&YR PRXSE&YR PRXOC&YR PRXNO&YR PRXDE&YR;
 
 ARRAY PRI (12) PRIJA&YR PRIFE&YR PRIMA&YR PRIAP&YR PRIMY&YR PRIJU&YR PRIJL&YR PRIAU&YR PRISE&YR PRIOC&YR PRINO&YR PRIDE&YR;
 ARRAY INS (12) INSJA&YR.X INSFE&YR.X INSMA&YR.X INSAP&YR.X INSMY&YR.X INSJU&YR.X INSJL&YR.X INSAU&YR.X INSSE&YR.X INSOC&YR.X INSNO&YR.X INSDE&YR.X;
@@ -89,7 +94,7 @@ ARRAY OPB (12) OPBJA&YR OPBFE&YR OPBMA&YR OPBAP&YR OPBMY&YR OPBJU&YR OPBJL&YR OP
     IF TRI(I)=1 THEN TRI_N+1;
     IF OPA(I)=1 OR OPB(I)=1 THEN OPAB_N+1;
     IF PEG(I)=1 OR TRI(I)=1 OR POU(I)=1 OR PDK(I)=1 THEN GRP_N + 1;
-    IF PNG(I)=1 OR POG(I)=1 OR PRS(I)=1 THEN NG_N + 1;
+    IF PRX(I)=1 OR PNG(I)=1 OR POG(I)=1 OR PRS(I)=1 THEN NG_N + 1;
     IF MCR(I)=1 OR MCD(I)=1 OR OPA(I)=1 OR OPB(I)=1 THEN PUB_N + 1;
     IF INS(I)>0 THEN REF_N+1;
   END;
@@ -150,13 +155,16 @@ RUN;
 
 
 /*3) CALCULATE % OF PERSONS COVERED BY INSU*/
-
+ODS GRAPHICS OFF;
 TITLE3 "% AND POPULATION WITH INSU";
 PROC SURVEYMEANS DATA=FY2 NOBS SUMWGT SUM STD MEAN STDERR;
 	STRATA  VARSTR;
 	CLUSTER VARPSU;
-	WEIGHT PERWT14F;
+	WEIGHT PERWT15F;
 	VAR  FULL_INSU GROUP_INS1 GROUP_INS2 NG_INS;
 	DOMAIN RACETHX;
   FORMAT RACETHX RACETHX.;
+RUN;
+
+PROC PRINTTO; 
 RUN;

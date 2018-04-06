@@ -1,0 +1,131 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+389  LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: C:\MEPS\SAS\DATA
+390  *LIBNAME CDATA "\\programs.ahrq.local\programs\meps\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2017\SAS\Data";
+391  
+392  TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
+393  TITLE2 "EXERCISE3.SAS: CALCULATE FAMILY-LEVEL ESTIMATES";
+394  
+395  TITLE3 "SAMPLE DUMP FOR FAMILY IDS";
+396  PROC PRINT DATA=CDATA.H181 (OBS=20);
+397    VAR PID AGE15X SEX CPSFAMID FAMWT15C FAMIDYR FAMWT15F;
+398    BY DUID;
+399  RUN;
+
+NOTE: There were 20 observations read from the data set CDATA.H181.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+400  
+401  PROC SORT DATA=CDATA.H181 (KEEP=DUPERSID DUID CPSFAMID FAMWT15C VARSTR VARPSU TOTSLF15 TTLP15X)
+402                OUT=PERS;
+403    BY DUID CPSFAMID;
+404  RUN;
+
+NOTE: There were 35427 observations read from the data set CDATA.H181.
+NOTE: The data set WORK.PERS has 35427 observations and 8 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.61 seconds
+      cpu time            0.62 seconds
+      
+
+405  
+406  DATA PERS2
+407       FAM (KEEP=DUID CPSFAMID FAMSIZE FAMOOP FAMINC);
+408   SET PERS;
+409    BY DUID CPSFAMID;
+410  
+411       LABEL FAMSIZE = '# OF PERSONS PER CPS FAMILY'
+412             FAMOOP  = 'TOTAL OUT-OF-POCKET EXP (TOTSLF15) PER CPS FAMILY'
+413             FAMINC  = 'TOTAL INCOME (TTLP15X) PER CPS FAMILY';
+414  
+415       IF FIRST.CPSFAMID THEN DO;
+416          FAMSIZE = 0 ;
+417          FAMOOP  = 0 ;
+418          FAMINC  = 0 ;
+419       END;
+420  
+421       FAMSIZE + 1        ;
+422       FAMOOP  + TOTSLF15 ;
+423       FAMINC  + TTLP15X  ;
+424  
+425       OUTPUT PERS2;
+426       IF LAST.CPSFAMID THEN OUTPUT FAM;
+427  RUN;
+
+NOTE: There were 35427 observations read from the data set WORK.PERS.
+NOTE: The data set WORK.PERS2 has 35427 observations and 11 variables.
+NOTE: The data set WORK.FAM has 15423 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+428  TITLE3 "A SAMPLE DUMP TO CHECK THE CREATION OF THE FAMILY-LEVEL VARIABLES";
+429  PROC PRINT DATA=PERS2 (OBS=20);
+430    BY DUID CPSFAMID;
+431  RUN;
+
+NOTE: There were 20 observations read from the data set WORK.PERS2.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+432  
+433  /*ADD WEIGHT, VARSTR, AND VARPSU TO THE FAMILY-LEVEL ANALYTIC DATA*/
+434  
+435  PROC SORT DATA=PERS (WHERE=(FAMWT15C>0)) OUT=FAMWT (KEEP=DUID CPSFAMID FAMWT15C VARSTR VARPSU) NODUPKEY;
+436    BY DUID CPSFAMID;
+437  RUN;
+
+NOTE: There were 33850 observations read from the data set WORK.PERS.
+      WHERE FAMWT15C>0;
+NOTE: 19328 observations with duplicate key values were deleted.
+NOTE: The data set WORK.FAMWT has 14522 observations and 5 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+438  
+439  DATA FAM2;
+440    MERGE FAM (IN=AA) FAMWT (IN=BB);
+441    BY DUID CPSFAMID;
+442    IF AA AND BB;
+443  RUN;
+
+NOTE: There were 15423 observations read from the data set WORK.FAM.
+NOTE: There were 14522 observations read from the data set WORK.FAMWT.
+NOTE: The data set WORK.FAM2 has 14522 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+444  
+445  TITLE3 "CPS FAMILY-LEVEL ESTIMATES ON FAMILY SIZE, OUT-OF-POCKET EXP, AND INCOME, 2015";
+446  ods graphics off;
+447  PROC SURVEYMEANS DATA=FAM2 NOBS SUMWGT MEAN STDERR;
+448      STRATA  VARSTR ;
+449      CLUSTER VARPSU ;
+450      WEIGHT  FAMWT15C ;
+451      VAR FAMSIZE FAMOOP FAMINC;
+452  RUN;
+
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+453  PROC PRINTTO;
+454  RUN;
+

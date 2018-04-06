@@ -1,0 +1,481 @@
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               1
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                                          CHECK CCS CODES
+
+                                                         The FREQ Procedure
+
+                                               CLINICAL CLASSIFICATION CODE - EDITED
+ 
+                                                                        Cumulative    Cumulative
+                                    CCCODEX    Frequency     Percent     Frequency      Percent
+                                    ------------------------------------------------------------
+                                    049            3228       97.02          3228        97.02  
+                                    050              99        2.98          3327       100.00  
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               2
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                              SAMPLE DUMP FOR CONDITION-EVEL LINK FILE
+
+---------------------------------------------------- CONDITION ID=600011010051 -----------------------------------------------------
+
+                                              Obs    DUPERSID    CCCODEX      EVNTIDX
+
+                                                1    60001101      049      600011011361
+                                                2    60001101      049      600011011401
+                                                3    60001101      049      600011011431
+                                                4    60001101      049      600011011441
+                                                5    60001101      049      600011011701
+                                                6    60001101      049      600011011721
+                                                7    60001101      049      600011011741
+                                                8    60001101      049      600011011991
+                                                9    60001101      049      600011012001
+                                               10    60001101      049      600011012031
+                                               11    60001101      049      600011012071
+                                               12    60001101      049      600011012081
+
+
+---------------------------------------------------- CONDITION ID=600011010121 -----------------------------------------------------
+
+                                              Obs    DUPERSID    CCCODEX      EVNTIDX
+
+                                               13    60001101      050      600011011451
+                                               14    60001101      050      600011011701
+                                               15    60001101      050      600011011771
+
+
+---------------------------------------------------- CONDITION ID=600011020031 -----------------------------------------------------
+
+                                              Obs    DUPERSID    CCCODEX      EVNTIDX
+
+                                               16    60001102      049      600011020281
+                                               17    60001102      049      600011020311
+                                               18    60001102      049      600011020521
+                                               19    60001102      049      600011020581
+                                               20    60001102      049      600011020731
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               3
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                           SAMPLE DUMP AFTER DUPLICATE CASES ARE DELETED
+
+                                                   Obs    DUPERSID      EVNTIDX
+
+                                                     1    60001101    600011011361
+                                                     2    60001101    600011011401
+                                                     3    60001101    600011011431
+                                                     4    60001101    600011011441
+                                                     5    60001101    600011011451
+                                                     6    60001101    600011011701
+                                                     7    60001101    600011011721
+                                                     8    60001101    600011011741
+                                                     9    60001101    600011011771
+                                                    10    60001101    600011011991
+                                                    11    60001101    600011012001
+                                                    12    60001101    600011012031
+                                                    13    60001101    600011012071
+                                                    14    60001101    600011012081
+                                                    15    60001102    600011020281
+                                                    16    60001102    600011020311
+                                                    17    60001102    600011020521
+                                                    18    60001102    600011020581
+                                                    19    60001102    600011020731
+                                                    20    60004103    600041030011
+                                                    21    60004103    600041030041
+                                                    22    60004103    600041030071
+                                                    23    60004103    600041030081
+                                                    24    60004103    600041030091
+                                                    25    60020101    600201010081
+                                                    26    60035101    600351010461
+                                                    27    60036101    600361010281
+                                                    28    60036101    600361010291
+                                                    29    60036101    600361010361
+                                                    30    60036101    600361010461
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               4
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                               ALL EVENTS ARE COMBINED INTO ONE FILE
+
+                                                         The FREQ Procedure
+
+                                                            EVENT TYPE
+ 
+                                                                       Cumulative    Cumulative
+                                    EVNTYP    Frequency     Percent     Frequency      Percent
+                                    -----------------------------------------------------------
+                                    AMBU        185183       54.12        185183        54.12  
+                                    EROM          7163        2.09        192346        56.22  
+                                    HVIS          5933        1.73        198279        57.95  
+                                    IPAT          2921        0.85        201200        58.80  
+                                    PMED        140953       41.20        342153       100.00  
+
+
+                                                    TOTAL EXPENDITURE FOR EVENT
+ 
+                                                                       Cumulative    Cumulative
+                                    TOTEXP    Frequency     Percent     Frequency      Percent
+                                    -----------------------------------------------------------
+                                      GE 0      342153      100.00        342153       100.00  
+
+
+                                                     SOURCE OF PAYMENT: FAMILY
+ 
+                                                                      Cumulative    Cumulative
+                                       SF    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                    SOURCE OF PAYMENT: MEDICARE
+ 
+                                                                      Cumulative    Cumulative
+                                       MR    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                    SOURCE OF PAYMENT: MEDICAID
+ 
+                                                                      Cumulative    Cumulative
+                                       MD    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                SOURCE OF PAYMENT: PRIVATE INSURANCE
+ 
+                                                                      Cumulative    Cumulative
+                                       PV    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                    SOURCE OF PAYMENT: VETERANS
+ 
+                                                                      Cumulative    Cumulative
+                                       VA    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                     SOURCE OF PAYMENT: TRICARE
+ 
+                                                                      Cumulative    Cumulative
+                                       TR    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               5
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                               ALL EVENTS ARE COMBINED INTO ONE FILE
+
+                                                         The FREQ Procedure
+
+                                                  SOURCE OF PAYMENT: OTHER FEDERAL
+ 
+                                                                      Cumulative    Cumulative
+                                       OF    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                SOURCE OF PAYMENT: STATE & LOCAL GOV
+ 
+                                                                      Cumulative    Cumulative
+                                       SL    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                  SOURCE OF PAYMENT: WORKERS COMP
+ 
+                                                                      Cumulative    Cumulative
+                                       WC    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                  SOURCE OF PAYMENT: OTHER PRIVATE
+ 
+                                                                      Cumulative    Cumulative
+                                       OR    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                  SOURCE OF PAYMENT: OTHER PUBLIC
+ 
+                                                                      Cumulative    Cumulative
+                                       OU    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+
+
+                                                 SOURCE OF PAYMENT: OTHER INSURANCE
+ 
+                                                                      Cumulative    Cumulative
+                                       OT    Frequency     Percent     Frequency      Percent
+                                     ---------------------------------------------------------
+                                     GE 0      342153      100.00        342153       100.00  
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               6
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                               ALL EVENTS ARE COMBINED INTO ONE FILE
+
+      Obs      EVNTIDX         SF          MR      MD     PV    VA    TR    OF    SL    WC    OR    OU    OT     TOTEXP    EVNTYP
+
+        1    600011011311     0.00    1287.28     3.12     0     0     0     0     0     0     0     0     0    1290.40     AMBU 
+        2    600011011361     6.60       8.22     0.00     0     0     0     0     0     0     0     0     0      14.82     PMED 
+        3    600011011381     0.00      48.48     0.00     0     0     0     0     0     0     0     0     0      48.48     PMED 
+        4    600011011391     0.00       5.13     0.00     0     0     0     0     0     0     0     0     0       5.13     PMED 
+        5    600011011401     0.00      75.88     0.00     0     0     0     0     0     0     0     0     0      75.88     PMED 
+        6    600011011411     0.00     165.84     0.00     0     0     0     0     0     0     0     0     0     165.84     PMED 
+        7    600011011421     0.00      73.96     0.00     0     0     0     0     0     0     0     0     0      73.96     PMED 
+        8    600011011431    14.40    3013.44     0.00     0     0     0     0     0     0     0     0     0    3027.84     PMED 
+        9    600011011441     3.60     215.13     0.00     0     0     0     0     0     0     0     0     0     218.73     PMED 
+       10    600011011451     0.00      56.87     0.00     0     0     0     0     0     0     0     0     0      56.87     PMED 
+       11    600011011471     0.00      13.32     0.00     0     0     0     0     0     0     0     0     0      13.32     PMED 
+       12    600011011491     0.00      23.99     0.00     0     0     0     0     0     0     0     0     0      23.99     PMED 
+       13    600011011501    19.35       0.00     0.00     0     0     0     0     0     0     0     0     0      19.35     PMED 
+       14    600011011511     6.60     834.06     0.00     0     0     0     0     0     0     0     0     0     840.66     PMED 
+       15    600011011521     0.00     151.96     0.00     0     0     0     0     0     0     0     0     0     151.96     PMED 
+       16    600011011541     0.00      81.12     0.00     0     0     0     0     0     0     0     0     0      81.12     PMED 
+       17    600011011561     4.79       0.00     0.00     0     0     0     0     0     0     0     0     0       4.79     PMED 
+       18    600011011571     2.50       0.00     0.00     0     0     0     0     0     0     0     0     0       2.50     PMED 
+       19    600011011581     1.79       0.00     0.00     0     0     0     0     0     0     0     0     0       1.79     PMED 
+       20    600011011601     0.00     843.87    16.00     0     0     0     0     0     0     0     0     0     859.87     EROM 
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               7
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                          ESTIMATES ON USE AND EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH DIABETES, 2015
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+             TOTEXP      2,831           26,356,142       89,665,504,958        5,165,060,112     3,402.07       167.10
+             SF          2,831           26,356,142        7,754,063,159          456,932,722       294.20        15.20
+             MR          2,831           26,356,142       35,492,281,908        3,182,445,303     1,346.64       113.88
+             MD          2,831           26,356,142       12,612,562,776        1,842,313,175       478.54        68.34
+             PV          2,831           26,356,142       25,605,505,962        2,243,003,700       971.52        80.05
+             VA          2,831           26,356,142        1,864,147,550          339,111,593        70.73        12.93
+             TR          2,831           26,356,142        1,600,311,164          606,348,575        60.72        22.95
+             OF          2,831           26,356,142          771,599,798          462,532,096        29.28        17.30
+             SL          2,831           26,356,142        1,217,886,863          307,410,213        46.21        11.63
+             WC          2,831           26,356,142           24,985,573           16,515,091         0.95         0.63
+             OR          2,831           26,356,142        1,745,745,854          398,150,040        66.24        15.07
+             OU          2,831           26,356,142           81,350,794           22,344,564         3.09         0.85
+             OT          2,831           26,356,142          895,063,556          402,135,500        33.96        15.27
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               8
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                   SAMPLE DUMP AFTER DATA IS SUMMED UP TO PERSON-EVENT TYPE-LEVEL
+
+------------------------------------------------- PERSON ID (DUID + PID)=60001101 --------------------------------------------------
+
+      Obs    EVNTYP    N_VISITS      TOTEXP     SF           MR      MD     PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+        1     AMBU         1          69.46     0.0        0.00    69.46     0     0     0     0     0     0     0     0     0
+        2     PMED        13       11576.18    87.6    11488.58     0.00     0     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60001102 --------------------------------------------------
+
+           Obs    EVNTYP    N_VISITS    TOTEXP    SF    MR      MD      PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+             3     AMBU         1       134.29     0     0    134.29     0     0     0     0     0     0     0     0     0
+             4     PMED         4       105.82     0     0    105.82     0     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60004103 --------------------------------------------------
+
+      Obs    EVNTYP    N_VISITS     TOTEXP      SF      MR    MD    PV    VA    TR    OF    SL    WC       OR        OU      OT
+
+        5     PMED         5       2120.73    401.54     0     0     0     0     0     0     0     0    1268.23    450.96     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60020101 --------------------------------------------------
+
+           Obs    EVNTYP    N_VISITS    TOTEXP    SF    MR    MD    PV    VA    TR      OF     SL    WC    OR    OU    OT
+
+             6     PMED         1        32.21     0     0     0     0     0     0    32.21     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60035101 --------------------------------------------------
+
+           Obs    EVNTYP    N_VISITS    TOTEXP    SF      MR      MD    PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+             7     PMED         1       275.96     0    275.96     0     0     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60036101 --------------------------------------------------
+
+       Obs    EVNTYP    N_VISITS     TOTEXP     SF       MR     MD       PV      VA    TR    OF    SL    WC    OR    OU    OT
+
+         8     AMBU         2        208.74     0.6    34.14     0     174.00     0     0     0     0     0     0     0     0
+         9     PMED         8       5896.21    88.0     0.00     0    5808.21     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60045101 --------------------------------------------------
+
+          Obs    EVNTYP    N_VISITS    TOTEXP      SF     MR    MD      PV     VA    TR    OF    SL    WC    OR    OU    OT
+
+           10     AMBU         1        61.37    25.00     0     0    36.37     0     0     0     0     0     0     0     0
+           11     PMED         2        12.00     5.76     0     0     6.24     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60052101 --------------------------------------------------
+
+             Obs    EVNTYP    N_VISITS    TOTEXP    SF    MR    MD    PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+              12     PMED         1         10      10     0     0     0     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60060102 --------------------------------------------------
+
+       Obs    EVNTYP    N_VISITS     TOTEXP       SF      MR    MD       PV      VA    TR    OF    SL    WC    OR    OU    OT
+
+        13     AMBU         4        344.24      79.00     0     0     265.24     0     0     0     0     0     0     0     0
+        14     PMED         5       6119.73    1021.87     0     0    5097.86     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60069101 --------------------------------------------------
+
+            Obs    EVNTYP    N_VISITS    TOTEXP     SF    MR    MD    PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+             15     AMBU         4         260     260     0     0     0     0     0     0     0     0     0     0     0
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                               9
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                                   SAMPLE DUMP AFTER DATA IS SUMMED UP TO PERSON-EVENT TYPE-LEVEL
+
+------------------------------------------------- PERSON ID (DUID + PID)=60121103 --------------------------------------------------
+
+       Obs    EVNTYP    N_VISITS     TOTEXP     SF        MR          MD    PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+        16     AMBU         4        650.24     0.0     518.08    132.16     0     0     0     0     0     0     0     0     0
+        17     PMED         3       2211.86    13.2    2198.66      0.00     0     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60122202 --------------------------------------------------
+
+         Obs    EVNTYP    N_VISITS    TOTEXP      SF       MR      MD    PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+          18     AMBU         3       222.79     0.00    222.79     0     0     0     0     0     0     0     0     0     0
+          19     PMED         4       232.90    60.48    172.42     0     0     0     0     0     0     0     0     0     0
+
+
+------------------------------------------------- PERSON ID (DUID + PID)=60128102 --------------------------------------------------
+
+           Obs    EVNTYP    N_VISITS    TOTEXP      SF      MR    MD    PV    VA    TR    OF    SL    WC    OR    OU    OT
+
+            20     AMBU         5       352.35    330.35     0     0    22     0     0     0     0     0     0     0     0
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                              10
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                  ESTIMATES ON USE AND EXPENDITURES FOR EVENTS ASSOCIATED WITH DIABETES, BY TYPE OF SERVICE, 2015
+
+--------------------------------------------------------- EVENT TYPE=AMBU ----------------------------------------------------------
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+            N_VISITS     1,989           18,348,311           73,814,485            4,134,339         4.02         0.17
+            TOTEXP       1,989           18,348,311       15,851,107,936        2,255,347,515       863.90       119.77
+            SF           1,989           18,348,311        1,115,401,180          123,560,206        60.79         6.29
+            MR           1,989           18,348,311        7,060,561,128        2,073,821,092       384.81       112.09
+            MD           1,989           18,348,311        1,335,002,849          153,336,649        72.76         8.03
+            PV           1,989           18,348,311        4,326,360,237          585,450,057       235.79        31.73
+            VA           1,989           18,348,311        1,058,537,553          233,961,540        57.69        12.71
+            TR           1,989           18,348,311          181,795,747           68,957,785         9.91         3.71
+            OF           1,989           18,348,311          148,204,897          142,747,145         8.08         7.73
+            SL           1,989           18,348,311           68,548,827           31,668,370         3.74         1.71
+            WC           1,989           18,348,311            1,689,774              792,665         0.09         0.04
+            OR           1,989           18,348,311          264,009,820           44,085,135        14.39         2.39
+            OU           1,989           18,348,311           29,667,856           12,970,333         1.62         0.71
+            OT           1,989           18,348,311          261,328,069          134,806,956        14.24         7.40
+
+
+--------------------------------------------------------- EVENT TYPE=EROM ----------------------------------------------------------
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+            N_VISITS        85              709,974            1,170,787              202,775         1.65         0.16
+            TOTEXP          85              709,974        1,326,360,573          476,694,718     1,868.18       540.11
+            SF              85              709,974          126,598,841           59,723,824       178.31        74.79
+            MR              85              709,974          102,877,068           33,761,390       144.90        47.99
+            MD              85              709,974           97,100,264           38,357,365       136.77        51.64
+            PV              85              709,974          550,456,083          265,560,507       775.32       313.40
+            VA              85              709,974           51,732,743           29,859,934        72.87        38.97
+            TR              85              709,974            1,437,657            1,437,657         2.02         2.06
+            OF              85              709,974                    0                    0         0.00         0.00
+            SL              85              709,974            9,610,906            9,268,755        13.54        13.06
+            WC              85              709,974                    0                    0         0.00         0.00
+            OR              85              709,974           24,129,927           12,064,166        33.99        17.31
+            OU              85              709,974               85,802               85,802         0.12         0.12
+            OT              85              709,974          362,331,283          342,235,939       510.34       472.15
+
+
+--------------------------------------------------------- EVENT TYPE=HVIS ----------------------------------------------------------
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+            N_VISITS       132            1,030,192            4,648,315              709,760         4.51         0.40
+            TOTEXP         132            1,030,192        6,777,150,288        1,752,021,246     6,578.53     1,451.05
+            SF             132            1,030,192          229,658,724          140,027,353       222.93       132.40
+            MR             132            1,030,192        2,347,105,942          797,117,811     2,278.32       688.82
+            MD             132            1,030,192        3,898,732,885        1,526,452,748     3,784.47     1,402.43
+            PV             132            1,030,192           37,437,214           24,734,191        36.34        25.03
+            VA             132            1,030,192           69,744,183           65,812,647        67.70        62.74
+            TR             132            1,030,192            2,081,022            2,081,022         2.02         2.02
+            OF             132            1,030,192                    0                    0         0.00         0.00
+            SL             132            1,030,192          113,122,769           50,674,760       109.81        50.67
+            WC             132            1,030,192                    0                    0         0.00         0.00
+            OR             132            1,030,192           76,279,122           64,716,974        74.04        62.22
+            OU             132            1,030,192            2,988,428            2,988,428         2.90         2.92
+            OT             132            1,030,192                    0                    0         0.00         0.00
+
+
+--------------------------------------------------------- EVENT TYPE=IPAT ----------------------------------------------------------
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+            N_VISITS        48              492,910              596,566              123,694         1.21         0.09
+            TOTEXP          48              492,910        6,016,316,285        1,295,502,888    12,205.71     2,188.97
+            SF              48              492,910          181,348,305           76,405,367       367.91       133.41
+            MR              48              492,910        3,321,053,110        1,002,156,852     6,737.64     1,760.19
+            MD              48              492,910        1,438,291,456          635,473,685     2,917.96     1,275.74
+            PV              48              492,910          754,969,640          197,400,289     1,531.66       408.54
+                                               AHRQ MEPS DATA USERS WORKSHOP -- 2018                                              11
+                    EXERCISE5.SAS: CALCULATE EXPENDITURES FOR ALL EVENTS ASSOCIATED WITH A CONDITION (DIABETES)
+                  ESTIMATES ON USE AND EXPENDITURES FOR EVENTS ASSOCIATED WITH DIABETES, BY TYPE OF SERVICE, 2015
+
+--------------------------------------------------------- EVENT TYPE=IPAT ----------------------------------------------------------
+
+                                                            (continued)
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+               VA           48              492,910           45,375,833           45,375,833        92.06        93.88
+               TR           48              492,910           65,406,164           65,406,164       132.69       134.43
+               OF           48              492,910                    0                    0         0.00         0.00
+               SL           48              492,910           52,004,676           52,004,676       105.51       106.32
+               WC           48              492,910                    0                    0         0.00         0.00
+               OR           48              492,910           77,905,162           56,950,886       158.05       113.66
+               OU           48              492,910              964,004              749,730         1.96         1.55
+               OT           48              492,910           78,997,936           52,106,011       160.27       104.73
+
+
+--------------------------------------------------------- EVENT TYPE=PMED ----------------------------------------------------------
+
+            Variable                                                                                          Std Error
+              Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+            N_VISITS     2,615           24,506,882          119,106,978            4,652,343         4.86         0.10
+            TOTEXP       2,615           24,506,882       59,694,569,875        3,778,922,778     2,435.83       131.88
+            SF           2,615           24,506,882        6,101,056,109          374,616,236       248.95        13.66
+            MR           2,615           24,506,882       22,660,684,661        1,799,253,460       924.67        66.98
+            MD           2,615           24,506,882        5,843,435,322          791,965,227       238.44        31.03
+            PV           2,615           24,506,882       19,936,282,789        1,991,368,746       813.50        76.90
+            VA           2,615           24,506,882          638,757,239          152,047,675        26.06         6.26
+            TR           2,615           24,506,882        1,349,590,574          579,990,340        55.07        23.59
+            OF           2,615           24,506,882          623,394,902          325,661,598        25.44        13.06
+            SL           2,615           24,506,882          974,599,685          269,255,653        39.77        11.01
+            WC           2,615           24,506,882           23,295,800           16,499,508         0.95         0.67
+            OR           2,615           24,506,882        1,303,421,824          370,340,286        53.19        15.13
+            OU           2,615           24,506,882           47,644,704           12,259,541         1.94         0.49
+            OT           2,615           24,506,882          192,406,267           82,823,147         7.85         3.37

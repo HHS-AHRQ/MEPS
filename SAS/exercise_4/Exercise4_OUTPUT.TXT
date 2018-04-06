@@ -1,0 +1,75 @@
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                1
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                                              CHECK CCS CODES FOR DIABETIC CONDITIONS
+
+                                                         The FREQ Procedure
+
+                                               CLINICAL CLASSIFICATION CODE - EDITED
+ 
+                                                                        Cumulative    Cumulative
+                                    CCCODEX    Frequency     Percent     Frequency      Percent
+                                    ------------------------------------------------------------
+                                    049            3228       97.02          3228        97.02  
+                                    050              99        2.98          3327       100.00  
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                2
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                                        UNWEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2015
+
+                                                         The FREQ Procedure
+
+                                                   PERSONS WHO REPORTED DIABETES
+ 
+                                                                        Cumulative    Cumulative
+                                   DIABPERS    Frequency     Percent     Frequency      Percent
+                                   -------------------------------------------------------------
+                                      YES          3065        8.65          3065         8.65  
+                                      NO          32362       91.35         35427       100.00  
+
+
+                                                                             Cumulative    Cumulative
+                              DIABPERS       SEX    Frequency     Percent     Frequency      Percent
+                              -----------------------------------------------------------------------
+                              YES         MALE          1393        3.93          1393         3.93  
+                              YES         FEMALE        1672        4.72          3065         8.65  
+                              NO          MALE         15620       44.09         18685        52.74  
+                              NO          FEMALE       16742       47.26         35427       100.00  
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                3
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                                         WEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2015
+
+                                                         The FREQ Procedure
+
+                                                   PERSONS WHO REPORTED DIABETES
+ 
+                                                                        Cumulative    Cumulative
+                                   DIABPERS    Frequency     Percent     Frequency      Percent
+                                   -------------------------------------------------------------
+                                      YES      27700589        8.62      27700589         8.62  
+                                      NO       2.9372E8       91.38      3.2142E8       100.00  
+
+
+                                                                             Cumulative    Cumulative
+                              DIABPERS       SEX    Frequency     Percent     Frequency      Percent
+                              -----------------------------------------------------------------------
+                              YES         MALE      13531921        4.21      13531921         4.21  
+                              YES         FEMALE    14168669        4.41      27700589         8.62  
+                              NO          MALE      1.4364E8       44.69      1.7134E8        53.31  
+                              NO          FEMALE    1.5009E8       46.69      3.2142E8       100.00  
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                4
+                 EXERCISE4.SAS: CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WITH A CONDITION (DIABETES)
+                             ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES, 2015
+
+                 Variable                                                                                          Std Error
+        SEX        Name           N               SumWgt                  Sum     Std Error of Sum         Mean     of Mean
+
+       TOTAL     TOTEXP15     2,982           27,700,589      393,028,078,843       24,786,133,857    14,188.44       803.76
+       TOTAL     TOTSLF15     2,982           27,700,589       33,333,948,175        1,487,670,122     1,203.37        47.36
+       TOTAL     OBTOTV15     2,982           27,700,589          327,151,092           14,514,086        11.81         0.37
+
+       MALE      TOTEXP15     1,359           13,531,921      195,119,396,038       14,540,065,365    14,419.19       937.74
+       MALE      TOTSLF15     1,359           13,531,921       16,486,769,548        1,108,692,452     1,218.36        68.42
+       MALE      OBTOTV15     1,359           13,531,921          148,875,724            9,300,471        11.00         0.54
+
+       FEMALE    TOTEXP15     1,623           14,168,669      197,908,682,805       14,806,750,887    13,968.05       975.73
+       FEMALE    TOTSLF15     1,623           14,168,669       16,847,178,628          965,315,394     1,189.04        63.78
+       FEMALE    OBTOTV15     1,623           14,168,669          178,275,368            9,488,276        12.58         0.49
