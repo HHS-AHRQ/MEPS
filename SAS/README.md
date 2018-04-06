@@ -1,7 +1,6 @@
 # Analyzing MEPS data using SAS
 [Loading MEPS data](#loading-meps-data)<br>
 [SAS SURVEY procedures](#sas-survey-procedures)<br>
-[SAS exercises](#sas-exercises)
 
 ## Loading MEPS data
 In SAS 9.4, transport (.ssp) files can be read in using PROC XCOPY. In the following example, the SAS transport file '<b>h171.ssp</b>' has been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS\data</b>' (click [here](../README.md#accessing-meps-hc-data) for details)
