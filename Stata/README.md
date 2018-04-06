@@ -1,7 +1,6 @@
 # Analyzing MEPS data using Stata
 [Loading MEPS data](#loading-meps-data)<br>
 [Stata `svy` commands](#stata-svy-commands)<br>
-[Stata exercises](#stata-exercises)
 
 ## Loading MEPS data
 In Stata, transport (.ssp) files can be loaded using the `import` function. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details)
