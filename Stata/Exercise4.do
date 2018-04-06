@@ -72,25 +72,24 @@
 *  61 Allergic reactions                                            : CCS CODE = 253
 *
 *
-*INPUT FILES:  1) C:\MEPS\STATA\DATA\H170.dta (2014 CONDITION PUF DATA)
-*              2) C:\MEPS\STATA\DATA\H171.dta (2014 FY PUF DATA)
+*INPUT FILES:  1) C:\MEPS\STATA\DATA\H180.dta (2015 CONDITION PUF DATA)
+*              2) C:\MEPS\STATA\DATA\H181.dta (2015 FY PUF DATA)
 *
 *********************************************************************************;
-
 clear
 set more off
 capture log close
-log using c:\meps\stata\prog\exercise4.log, replace
-cd c:\meps\stata\data
+log using C:\MEPS\stata\prog\Exercise4.log, replace
+cd C:\MEPS\stata\data
 
-// 1) pull out conditions with diabetes (ccs code='049', '050') from 2014 condition puf - hc170
-use dupersid cccodex using h170
+/* 1) PULL OUT CONDITIONS WITH DIABETES (CCS CODE='049', '050') FROM 2015 CONDITION PUF - HC180 */
+use dupersid cccodex using h180
 
 keep if cccodex=="049" | cccodex=="050"
-// check ccs codes for diabetic conditions
+/* CHECK CCS CODES FOR DIABETIC CONDITIONS */
 tab cccodex
 
-// 2) identify persons who reported diabetes
+/* 2) IDENTIFY PERSONS WHO REPORTED DIABETES */
 keep dupersid
 sort dupersid
 by dupersid: keep if _n==1
@@ -98,29 +97,30 @@ by dupersid: keep if _n==1
 tempfile diab
 save "`diab'"
 
-use dupersid varstr varpsu perwt14f sex totexp14 totslf14 obtotv14 using h171
+use dupersid varstr varpsu perwt15f sex totexp15 totslf15 obtotv15 using h181
 
 sort dupersid
 merge 1:1 dupersid using "`diab'"
 
-// 3) create a flag for persons with diabetes in the 2014 fy data
+/* 3) CREATE A FLAG FOR PERSONS WITH DIABETES IN THE 2015 FY DATA */
 gen diabper=(_merge==3)
 tab diabper _merge
 
-// unweighted # of persons who reported diabetes, 2014
+/* UNWEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2015 */
 tab diabper sex
-// weighted # of persons who reported diabetes, 2014
-tab diabper sex [iweight=perwt14f]
 
-tabmiss  totexp14 totslf14 obtotv14 // user-written command to tabulate missing values
+/* WEIGHTED # OF PERSONS WHO REPORTED DIABETES, 2015 */
+tab diabper sex [iweight=perwt15f]
 
-// 4) calculate estimates on use and expenditures for persons who reported diabetes
-svyset [pweight= perwt14f], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+tabmiss  totexp15 totslf15 obtotv15
 
-svy, subpop(diabper): mean totexp14 totslf14 obtotv14
-svy, subpop(diabper): mean totexp14 totslf14 obtotv14, over(sex)
+/* 4) CALCULATE ESTIMATES ON USE AND EXPENDITURES FOR PERSONS WHO REPORTED DIABETES */
+svyset [pweight= perwt15f], strata( varstr) psu(varpsu) vce(linearized) singleunit(missing)
+
+svy, subpop(diabper): mean totexp15 totslf15 obtotv15
+svy, subpop(diabper): mean totexp15 totslf15 obtotv15, over(sex)
 
 svy, subpop(diabper): tabulate sex, obs count percent format(%14.3gc)
 
-log close
+log close  
 exit, clear

@@ -3,14 +3,15 @@
 *PROGRAM:      C:\MEPS\STATA\PROG\EXERCISE8.do
 *
 *DESCRIPTION:  THIS PROGRAM ILLUSTRATES HOW TO POOL MEPS LONGITUDINAL DATA FILES FROM DIFFERENT PANELS
-*              THE EXAMPLE USED IS PANEL 16, 17, AND 18 POPULATION AGE 26-30 WHO ARE UNINSURED BUT HAVE HIGH INCOME
+*              THE EXAMPLE USED IS PANEL 17, 18, AND 19 POPULATION AGE 26-30 WHO ARE UNINSURED BUT HAVE HIGH INCOME
 *              IN THE FIRST YEAR
 *
-*	         		 DATA FROM PANEL 15, 16, AND 17 ARE POOLED.
+*	         		 DATA FROM PANEL 17, 18, AND 19 ARE POOLED.
 *
-*INPUT FILE:   (1) C:\MEPS\STATA\DATA\H172.dta (PANEL 18 LONGITUDINAL FILE)
-*	             (2) C:\MEPS\STATA\DATA\H164.dta (PANEL 17 LONGITUDINAL FILE)
-*              (3) C:\MEPS\STATA\DATA\H156.dta (PANEL 16 LONGITUDINAL FILE)
+*INPUT FILE:   
+*               (1) C:\MEPS\STATA\DATA\H183.dta (PANEL 19 LONGITUDINAL FILE)
+*  				(2) C:\MEPS\STATA\DATA\H172.dta (PANEL 18 LONGITUDINAL FILE)
+*	            (3) C:\MEPS\STATA\DATA\H164.dta (PANEL 17 LONGITUDINAL FILE)
 *********************************************************************************
 
 clear
@@ -28,7 +29,7 @@ use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using 
 tempfile panel17
 save "`panel17'"
 
-use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using h156
+use dupersid inscovy1 inscovy2 longwt varstr varpsu povcaty1 agey1x panel using h183
 
 append using "`panel18'" "`panel17'"
 
@@ -52,3 +53,6 @@ svy, subpop(subpop): tabulate inscovy2, cell se obs
 
 log close
 exit, clear
+
+
+
