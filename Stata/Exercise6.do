@@ -13,8 +13,8 @@
 *	             SEE HC-036 (1996-2015 POOLED ESTIMATION FILE) FOR
 *              INSTRUCTIONS ON POOOLING AND CONSIDERATIONS FOR VARIANCE ESTIMATION FOR PRE-2002 DATA.
 *	             
-*INPUT FILE:   (1) C:\MEPS\STATA\DATA\H147.dta (2011 FULL-YEAR FILE)
-*	             (2) C:\MEPS\STATA\DATA\H155.dta (2012 FULL-YEAR FILE)
+*INPUT FILE:   (1) C:\MEPS\STATA\DATA\H171.dta (2014 FULL-YEAR FILE)
+*	             (2) C:\MEPS\STATA\DATA\H181.dta (2015 FULL-YEAR FILE)
 *
 *********************************************************************************
 
