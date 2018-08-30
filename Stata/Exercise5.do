@@ -170,7 +170,7 @@ by dupersid evntyp: egen `xp'_evnt=sum(`xp')
 }
 
 by dupersid evntyp: gen n_visits=_n
-by dupersid evntyp: keep if _n==1
+by dupersid evntyp: keep if _n==_N
 keep dupersid evntyp evntidx *_evnt n_visits
 save allevnt, replace
 
