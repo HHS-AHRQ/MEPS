@@ -34,10 +34,10 @@ Two methods for downloading MEPS files into Stata are available. The first requi
 
 ### Manually
 
-In Stata, SAS transport (.ssp) files can be loaded using the `import` command. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+In Stata, SAS transport (.ssp) files can be loaded using the `import` command. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` stata
 set more off
-import sasxport "C:\MEPS\data\h171.ssp"
+import sasxport "C:\MEPS\h171.ssp"
 ```
 
 ### Programmatically
@@ -45,9 +45,9 @@ import sasxport "C:\MEPS\data\h171.ssp"
 Alternatively, Stata can download MEPS data directly from the MEPS website using the `copy` and `unzipfile` commands. The following code downloads the 2014 full year consolidated file (h171) directly from the MEPS website and stores it in Stata memory:
 
 ``` stata
-copy https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip h171ssp.zip
-unzipfile h171ssp.zip
-import sasxport h171.ssp
+copy "https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip" "h171ssp.zip"
+unzipfile "h171ssp.zip"
+import sasxport "h171.ssp", clear
 
 browse /* View dataset */
 ```

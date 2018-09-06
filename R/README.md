@@ -38,9 +38,9 @@ Two methods for downloading MEPS transport files are available. The first requir
 
 ### Manually
 
-If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h163.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\data</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+If the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h163.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` r
-h163 = read.xport("C:/MEPS/data/h163.ssp")
+h163 = read.xport("C:/MEPS/h163.ssp")
 ```
 > <b>Note:</b> Directory names need to be separated by a slash ("/") or a double backslash ("\\\\") in R.
 
