@@ -4,7 +4,7 @@
 [Loading MEPS data](#loading-meps-data)<br>
 &nbsp; &nbsp; [Manually](#manually)<br>
 &nbsp; &nbsp; [Programmatically](#programmatically)<br>
-&nbsp; &nbsp; [Saving SAS data](#saving-sas-data)<br>
+&nbsp; &nbsp; [Saving Stata data file (.dta)](#saving-stata-data-file-dta)<br>
 [Stata `svy` commands](#stata-svy-commands)<br>
 
 
