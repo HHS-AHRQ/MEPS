@@ -3,7 +3,7 @@
 [Loading MEPS data](#loading-meps-data)<br>
 &nbsp; &nbsp; [Manually](#manually)<br>
 &nbsp; &nbsp; [Programmatically](#programmatically)<br>
-&nbsp; &nbsp; [Saving SAS data](#saving-sas-data)<br>
+&nbsp; &nbsp; [Saving SAS data file (.sas7bdat)](#saving-sas-data-file-sas7bdat)<br>
 [SAS SURVEY procedures](#sas-survey-procedures)<br>
 
 ## SAS examples
