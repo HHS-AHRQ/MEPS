@@ -5,7 +5,7 @@
 [Loading MEPS data](#loading-meps-data)<br>
 &nbsp; &nbsp; [Manually](#manually)<br>
 &nbsp; &nbsp; [Programmatically](#programmatically)<br>
-&nbsp; &nbsp; [Saving .Rdata file](#saving-rdata-file)<br>
+&nbsp; &nbsp; [Saving R data file (.Rdata)](#saving-r-data-file-rdata)<br>
 [Survey Package in R](#survey-package-in-r)<br>
 
 
