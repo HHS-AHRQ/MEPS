@@ -46,7 +46,7 @@ When reading MEPS data directly from the MEPS website, it is often helpful to kn
 
 This link can then be used to programmatically import MEPS data directly into programming code. Details on this method are provided in the [R](R), [SAS](SAS), and [Stata](Stata) folders.
 
-Shortened file names by data type and year can be found at the quick reference guide [meps_file_names.csv](../Quick_Reference_Guides/meps_file_names.csv).
+Shortened file names by data type and year can be found at the quick reference guide [meps_file_names.csv](Quick_Reference_Guides/meps_file_names.csv).
 
 ## Analyzing MEPS-HC data
 The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages including R, SAS, and Stata. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided for [R](R), [SAS](SAS), and [Stata](Stata). Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
