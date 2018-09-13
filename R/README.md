@@ -21,9 +21,9 @@ The following codes are provided in this folder:
 <br>
 [exercise_4.R](exercise_4.R):  Pooling longitudinal files, panels 17-19
 
-[example_5.R](example_5.R): Code to calculate some of the estimates from the [MEPS summary table](https://meps.ahrq.gov/mepstrends/hc_use/) for 2013 data.
+[exercise_5.R](exercise_5.R): Code to calculate some of the estimates from the [MEPS summary table](https://meps.ahrq.gov/mepstrends/hc_use/) for 2013 data.
 <br>
-[example_6.R](example_6.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml) (includes `ggplot2` example).
+[exercise_6.R](exercise_6.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml) (includes `ggplot2` example).
 
 
 ## Loading R packages
