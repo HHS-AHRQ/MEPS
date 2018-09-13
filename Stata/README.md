@@ -13,31 +13,31 @@
 The following example codes are provided in this folder.
 
 #### 1. National health care expenses
-[Exercise_1a.do](Exercise_1a.do): National health care expenses by age group, 2016
+[Exercise1a.do](Exercise1a.do): National health care expenses by age group, 2016
 <br>
-[Exercise_1b.do](Exercise_1b.do): National health care expenses by age group and type of service, 2015
+[Exercise1b.do](Exercise1b.do): National health care expenses by age group and type of service, 2015
 <br>
 
 #### 2. Prescribed medicine purchases
-[Exercise_2a.do](Exercise_2a.do): Trends in antipsychotics purchases and expenses, 2015
+[Exercise2a.do](Exercise2a.do): Trends in antipsychotics purchases and expenses, 2015
 <br>
-[Exercise_2b.do](Exercise_2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+[Exercise2b.do](Exercise2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
 
 #### 3. Medical conditions
-[Exercise_3a.do](Exercise_3a.do): Use and expenditures for persons with diabetes, 2015
+[Exercise3a.do](Exercise3a.do): Use and expenditures for persons with diabetes, 2015
 <br>
-[Exercise_3b.do](Exercise_3b.do): Expenditures for all events associated with diabetes, 2015
+[Exercise3b.do](Exercise3b.do): Expenditures for all events associated with diabetes, 2015
 <br>
 
 #### 4. Pooling data files
-[Exercise_4a.do](Exercise_4a.do): Pooling MEPS FYC files, 2015 and 2016
+[Exercise4a.do](Exercise4a.do): Pooling MEPS FYC files, 2015 and 2016
 <br>
-[Exercise_4b.do](Exercise_4b.do): Pooling longitudinal files, panels 17-19
+[Exercise4b.do](Exercise4b.do): Pooling longitudinal files, panels 17-19
 
 #### 5. Constructing variables
-[Exercise_5a.do](Exercise_5a.do): Constructing family-level variables from person-level data, 2015
+[Exercise5a.do](Exercise5a.do): Constructing family-level variables from person-level data, 2015
 <br>
-[Exercise_5b.do](Exercise_5b.do): Constructing insurance status from monthly insurance variables, 2015
+[Exercise5b.do](Exercise5b.do): Constructing insurance status from monthly insurance variables, 2015
 
 
 ## Loading MEPS data
