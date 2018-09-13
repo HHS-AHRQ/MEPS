@@ -12,21 +12,33 @@
 
 The following example codes are provided in this folder.
 
-[Exercise1.do](Exercise1.do): National health care expenses by type of service, 2015
+#### 1. National health care expenses
+[Exercise_1a.do](Exercise_1a.do): National health care expenses by age group, 2016
 <br>
-[Exercise2.do](Exercise2.do): Trends in antipsychotics purchases and expenses, 2015
+[Exercise_1b.do](Exercise_1b.do): National health care expenses by age group and type of service, 2015
 <br>
-[Exercise3.do](Exercise3.do): Constructing family-level variables from person-level data, 2015
+
+#### 2. Prescribed medicine purchases
+[Exercise_2a.do](Exercise_2a.do): Trends in antipsychotics purchases and expenses, 2015
 <br>
-[Exercise4.do](Exercise4.do): Use and expenditures for persons with diabetes, 2015
+[Exercise_2b.do](Exercise_2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+
+#### 3. Medical conditions
+[Exercise_3a.do](Exercise_3a.do): Use and expenditures for persons with diabetes, 2015
 <br>
-[Exercise5.do](Exercise5.do): Expenditures for all events associated with diabetes, 2015
+[Exercise_3b.do](Exercise_3b.do): Expenditures for all events associated with diabetes, 2015
 <br>
-[Exercise6.do](Exercise6.do): Pooling MEPS FYC files, 2014 and 2015
+
+#### 4. Pooling data files
+[Exercise_4a.do](Exercise_4a.do): Pooling MEPS FYC files, 2015 and 2016
 <br>
-[Exercise7.do](Exercise7.do): Constructing insurance status from monthly insurance variables, 2015
+[Exercise_4b.do](Exercise_4b.do): Pooling longitudinal files, panels 17-19
+
+#### 5. Constructing variables
+[Exercise_5a.do](Exercise_5a.do): Constructing family-level variables from person-level data, 2015
 <br>
-[Exercise8.do](Exercise8.do): Pooling longitudinal files, panels 17-19
+[Exercise_5b.do](Exercise_5b.do): Constructing insurance status from monthly insurance variables, 2015
+
 
 ## Loading MEPS data
 

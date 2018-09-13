@@ -1,0 +1,47 @@
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                1
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2016
+                                            Supporting crosstabs for the flag variables
+
+                                                         The FREQ Procedure
+
+                                                                             Cumulative    Cumulative
+                              X_ANYSVCE    TOTAL    Frequency     Percent     Frequency      Percent
+                              -----------------------------------------------------------------------
+                                      0    0            6933       20.01          6933        20.01  
+                                      1    >0          27722       79.99         34655       100.00  
+
+
+                                                                             Cumulative    Cumulative
+                              AGECAT         AGE    Frequency     Percent     Frequency      Percent
+                              -----------------------------------------------------------------------
+                                   1    0-64           29910       86.31         29910        86.31  
+                                   2    65+             4745       13.69         34655       100.00  
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                2
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2016
+                                               PERCENTAGE OF PERSONS WITH AN EXPENSE
+
+                                                                                                              SE of
+                                                                                                             Number
+                                                                                       Persons              Persons
+                                   Population                    SE of                with Any                 with
+                            N            Size    Proportion    Proportion              Expense          Any Expense
+
+                       33,259     323,141,687        0.85       0.00359            273,773,024            6,396,258
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                3
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2016
+                                                          OVERALL EXPENSES
+
+                                    Population                     SE of                Total                SE of
+                             N            Size      Mean($)      Mean($)          Expense ($)     Total Expense($)
+
+                        33,259     323,141,687     5,005.64    116.95824    1,617,531,007,314       50,638,644,399
+                                                 2018 AHRQ MEPS DATA USERS WORKSHOP                                                4
+                                         EXERCISE1.SAS: NATIONAL HEALTH CARE EXPENSES, 2016
+                            MEAN EXPENSE PER PERSON WITH AN EXPENSE, FOR OVERALL, AGE 0-64, AND AGE 65+
+
+            Age                           Population                     SE of                Total                SE of
+            Group                  N            Size      Mean($)      Mean($)          Expense ($)     Total Expense($)
+
+            ALL AGES          26,942     273,773,024      5,908.3     133.8208    1,617,531,007,314       50,638,644,399
+            0-64              22,513     224,366,322      4,615.1     137.6071    1,035,478,590,271       38,245,335,117
+            0-64               4,429      49,406,702     11,780.8     429.1720      582,052,417,044       26,901,634,384

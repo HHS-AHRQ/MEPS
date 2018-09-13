@@ -1,0 +1,223 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.04 seconds
+      
+
+30   
+31   proc datasets lib=work nolist kill;
+NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
+NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
+31 !                                     quit;
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+31 !                                           /* delete  all files in the WORK library */
+32   LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: C:\MEPS\SAS\DATA
+33   *LIBNAME CDATA "\\programs.ahrq.local\programs\MEPS\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2018_Fall\SAS\DATA";
+34   
+35   OPTIONS NODATE;
+36   TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
+37   TITLE2 'EXERCISE6.SAS: POOL MEPS DATA FILES FROM DIFFERENT YEARS (2015 and 2016)';
+38   
+39   PROC FORMAT;
+40       VALUE POVCAT
+41       1 = '1 POOR/NEGATIVE'
+42       2 = '2 NEAR POOR'
+43       3 = '3 LOW INCOME'
+44       4 = '4 MIDDLE INCOME'
+45       5 = '5 HIGH INCOME'
+46       ;
+NOTE: Format POVCAT has been output.
+47   
+48       VALUE INSF
+49       1 = '1 ANY PRIVATE'
+50       2 = '2 PUBLIC ONLY'
+51       3 = '3 UNINSURED';
+NOTE: Format INSF has been output.
+52   
+53       VALUE AGE
+54       26-30='26-30'
+55       0-25='0-25'
+56       31-HIGH='31+';
+NOTE: Format AGE has been output.
+57   run;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+58   
+59   /* FREQUENCY OF 2015 */
+60   DATA YR1;
+61       SET CDATA.H181 (KEEP= DUPERSID INSCOV15 PERWT15F VARSTR VARPSU POVCAT15 AGELAST TOTSLF15);
+62        IF PERWT15F>0;
+63   RUN;
+
+NOTE: There were 35427 observations read from the data set CDATA.H181.
+NOTE: The data set WORK.YR1 has 33893 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.07 seconds
+      cpu time            0.21 seconds
+      
+
+64   
+65   TITLE3 'UNWEIGHTED FREQUENCY FOR 2015 FY PERSONS WITH AGE 26-30';
+66   PROC FREQ DATA= YR1 (WHERE=(26 LE AGELAST LE 30));
+67       TABLES POVCAT15*INSCOV15/ LIST MISSING ;
+68       FORMAT INSCOV15 INSF.  POVCAT15 POVCAT.;
+69   RUN;
+
+NOTE: There were 2298 observations read from the data set WORK.YR1.
+      WHERE (AGELAST>=26 and AGELAST<=30);
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.01 seconds
+      
+
+70   
+71   /* FREQUENCY OF 2016*/
+72   DATA YR2;
+73       SET CDATA.H192 (KEEP= DUPERSID INSCOV16 PERWT16F VARSTR VARPSU POVCAT16 AGELAST TOTSLF16);
+74        IF PERWT16F>0;
+75   run;
+
+NOTE: There were 34655 observations read from the data set CDATA.H192.
+NOTE: The data set WORK.YR2 has 33259 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.06 seconds
+      cpu time            0.40 seconds
+      
+
+76   
+77   TITLE3 'UNWEIGHTED FREQUENCY FOR 2016 FY PERSONS WITH AGE 26-30';
+78   PROC FREQ DATA= YR2 (WHERE=(26 LE AGELAST LE 30));
+79       TABLES POVCAT16*INSCOV16/ LIST MISSING ;
+80       FORMAT INSCOV16 INSF.  POVCAT16 POVCAT.;
+81   RUN;
+
+NOTE: There were 2095 observations read from the data set WORK.YR2.
+      WHERE (AGELAST>=26 and AGELAST<=30);
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+82   
+83   
+84   /* RENAME YEAR SPECIFIC VARIABLES PRIOR TO COMBINING FILES */
+85   DATA YR1X;
+86       SET YR1 (RENAME=(INSCOV15=INSCOV PERWT15F=PERWT POVCAT15=POVCAT TOTSLF15=TOTSLF));
+87   RUN;
+
+NOTE: There were 33893 observations read from the data set WORK.YR1.
+NOTE: The data set WORK.YR1X has 33893 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+88   
+89   DATA YR2X;
+90       SET YR2 (RENAME=(INSCOV16=INSCOV PERWT16F=PERWT POVCAT16=POVCAT TOTSLF16=TOTSLF));
+91   RUN;
+
+NOTE: There were 33259 observations read from the data set WORK.YR2.
+NOTE: The data set WORK.YR2X has 33259 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+92   
+93   DATA POOL;
+94        LENGTH INSCOV AGELAST POVCAT VARSTR VARPSU 8;
+95       SET YR1X YR2X;
+96        POOLWT = PERWT/2 ;
+97   
+98        IF 26 LE AGELAST LE 30 AND POVCAT=5 AND INSCOV=3 THEN SUBPOP=1;
+99        ELSE SUBPOP=2;
+100  
+101       LABEL SUBPOP='POPULATION WITH AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME'
+102             TOTSLF='TOTAL AMT PAID BY SELF/FAMILY';
+103  RUN;
+
+NOTE: There were 33893 observations read from the data set WORK.YR1X.
+NOTE: There were 33259 observations read from the data set WORK.YR2X.
+NOTE: The data set WORK.POOL has 67152 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+104  
+105  TITLE3 "CHECK MISSING VALUES ON THE COMBINED DATA";
+106  PROC MEANS DATA=POOL N NMISS;
+107  RUN;
+
+NOTE: There were 67152 observations read from the data set WORK.POOL.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+108  
+109  TITLE3 'SUPPORTING CROSSTAB FOR THE CREATION OF THE SUBPOP FLAG';
+110  PROC FREQ DATA=POOL;
+111      TABLES SUBPOP SUBPOP*AGELAST*POVCAT*INSCOV/ LIST MISSING ;
+112      FORMAT  AGELAST AGE. ;
+113  RUN;
+
+NOTE: There were 67152 observations read from the data set WORK.POOL.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+114  
+115  ODS EXCLUDE ALL; /* Suppress the printing of output */
+116  TITLE3 'WEIGHTED ESTIMATE ON TOTSLF FOR COMBINED DATA W/AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME';
+117  PROC SURVEYMEANS DATA=POOL NOBS MEAN STDERR;
+118      STRATUM VARSTR ;
+119      CLUSTER VARPSU ;
+120      WEIGHT  POOLWT;
+121      VAR  TOTSLF;
+122      DOMAIN  SUBPOP("1");
+123      ODS OUTPUT DOMAIN=work.domain_results;
+124  RUN;
+
+NOTE: Only one cluster in a stratum for POPULATION WITH AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME domains for variable(s) 
+      TOTSLF. The estimate of variance for TOTSLF will omit this stratum.
+NOTE: The data set WORK.DOMAIN_RESULTS has 1 observations and 7 variables.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.60 seconds
+      cpu time            0.51 seconds
+      
+
+125  
+126  ODS EXCLUDE NONE; /* Unsuppress the printing of output */
+127  TITLE3 'WEIGHTED ESTIMATE ON TOTSLF FOR COMBINED DATA W/AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME';
+128  proc print data= work.domain_results noobs split='*';
+129   var   VARLABEL N  mean StdErr  ;
+130   label mean = 'Mean'
+131         StdErr = 'SE of Mean';
+132         format N Comma12. mean comma9.1 stderr 9.4;
+133  run;
+
+NOTE: There were 1 observations read from the data set WORK.DOMAIN_RESULTS.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+134  ODS _ALL_ CLOSE;
+135  /* THE PROC PRINTTO null step is required to close the PROC PRINTTO */
+136  PROC PRINTTO;
+137  RUN;
+

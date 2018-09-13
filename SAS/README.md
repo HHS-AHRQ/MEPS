@@ -11,22 +11,32 @@
 
 The following example codes are provided in this folder.
 
-[exercise_1](exercise_1): National health care expenses by type of service, 2015
+#### 1. National health care expenses
+[exercise_1a](exercise_1a): National health care expenses by age group, 2016
 <br>
-[exercise_2](exercise_2): Trends in antipsychotics purchases and expenses, 2015
+[exercise_1b](exercise_1b): National health care expenses by age group and type of service, 2015
 <br>
-[exercise_3](exercise_3): Constructing family-level variables from person-level data, 2015
-<br>
-[exercise_4](exercise_4): Use and expenditures for persons with diabetes, 2015
-<br>
-[exercise_5](exercise_5): Expenditures for all events associated with diabetes, 2015
-<br>
-[exercise_6](exercise_6): Pooling MEPS FYC files, 2014 and 2015
-<br>
-[exercise_7](exercise_7): Constructing insurance status from monthly insurance variables, 2015
-<br>
-[exercise_8](exercise_8): Pooling longitudinal files, panels 17-19
 
+#### 2. Prescribed medicine purchases
+[exercise_2a](exercise_2a): Trends in antipsychotics purchases and expenses, 2015
+<br>
+[exercise_2b](exercise_2b): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+
+#### 3. Medical conditions
+[exercise_3a](exercise_3a): Use and expenditures for persons with diabetes, 2015
+<br>
+[exercise_3b](exercise_3b): Expenditures for all events associated with diabetes, 2015
+<br>
+
+#### 4. Pooling data files
+[exercise_4a](exercise_4a): Pooling MEPS FYC files, 2015 and 2016
+<br>
+[exercise_4b](exercise_4b): Pooling longitudinal files, panels 17-19
+
+#### 5. Constructing variables
+[exercise_5a](exercise_5a): Constructing family-level variables from person-level data, 2015
+<br>
+[exercise_5b](exercise_5b): Constructing insurance status from monthly insurance variables, 2015
 
 Each exercise contains three files: SAS code (e.g. Exercise1.sas), a SAS log file (e.g. Exercise1_log.TXT) and a SAS output file (e.g. Exercise1_OUTPUT.TXT)
 

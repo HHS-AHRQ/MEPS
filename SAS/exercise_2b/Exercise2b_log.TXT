@@ -1,0 +1,207 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+275  
+276  proc datasets lib=work nolist kill;
+NOTE: Deleting WORK.DOMAIN_RESULTS (memtype=DATA).
+NOTE: Deleting WORK.FORMATS (memtype=CATALOG).
+NOTE: Deleting WORK.OVERALL_RESULTS (memtype=DATA).
+NOTE: Deleting WORK.PUF192 (memtype=DATA).
+276!                                     quit;
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+276!                                           /* delete  all files in the WORK library */
+277  LIBNAME CDATA 'C:\MEPS\SAS\DATA';
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: C:\MEPS\SAS\DATA
+278  
+279  TITLE1 '2018 AHRQ MEPS DATA USERS WORKSHOP';
+280  TITLE2 "EXERCISE2.SAS: Narcotic analgesics or Narcotic analgesic combos, 2016";
+281  
+282  PROC FORMAT;
+283    VALUE GTZERO
+284       0         = '0'
+285       0 <- HIGH = '>0'
+286       ;
+NOTE: Format GTZERO has been output.
+287  RUN;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+288  
+289  /*1) IDENTIFY Narcotic analgesics or Narcotic analgesic combos USING THERAPEUTIC CLASSIFICATION (TC) CODES*/
+290  
+291  DATA DRUG;
+292    SET CDATA.H188A;
+293    IF TC1S1_1 IN (60, 191) ; /*definition of Narcotic analgesics or Narcotic analgesic combos*/
+294  RUN;
+
+NOTE: There were 319685 observations read from the data set CDATA.H188A.
+NOTE: The data set WORK.DRUG has 12049 observations and 70 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.12 seconds
+      
+
+295  
+296  TITLE3 "A SAMPLE DUMP FOR PMED RECORDS WITH Narcotic analgesics or Narcotic analgesic combos";
+297  PROC PRINT DATA=DRUG (OBS=30);
+298  VAR RXRECIDX LINKIDX TC1S1_1 RXXP16X RXSF16X;
+299   BY DUPERSID;
+300  RUN;
+
+NOTE: There were 30 observations read from the data set WORK.DRUG.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+301  
+302  
+303  /*2) SUM DATA TO PERSON-LEVEL*/
+304  
+305  PROC SUMMARY DATA=DRUG NWAY;
+306    CLASS DUPERSID;
+307    VAR RXXP16X RXSF16X;
+308    OUTPUT OUT=PERDRUG (DROP=_TYPE_) sum=TOT OOP;
+309  RUN;
+
+NOTE: There were 12049 observations read from the data set WORK.DRUG.
+NOTE: The data set WORK.PERDRUG has 3254 observations and 4 variables.
+NOTE: PROCEDURE SUMMARY used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+310  
+311  TITLE3 "A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR Narcotic analgesics or Narcotic analgesic combos";
+312  PROC PRINT DATA=PERDRUG (OBS=30);
+313  RUN;
+
+NOTE: There were 30 observations read from the data set WORK.PERDRUG.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+314  
+315  DATA PERDRUG2;
+316   SET PERDRUG;
+317       RENAME _FREQ_ = N_PHRCHASE ;
+318       THIRD_PAYER   = TOT - OOP;
+319  RUN;
+
+NOTE: There were 3254 observations read from the data set WORK.PERDRUG.
+NOTE: The data set WORK.PERDRUG2 has 3254 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+320  
+321  /*3) MERGE THE PERSON-LEVEL EXPENDITURES TO THE FY PUF*/
+322  
+323  DATA  FY;
+324  MERGE CDATA.H192 (IN=AA KEEP=DUPERSID VARSTR VARPSU PERWT16F)
+325        PERDRUG2  (IN=BB KEEP=DUPERSID N_PHRCHASE TOT OOP THIRD_PAYER);
+326     BY DUPERSID;
+327  
+328        IF AA AND BB THEN DO;
+329           SUB      = 1 ;
+330        END;
+331  
+332        ELSE IF NOT BB THEN DO;   /*FOR PERSONS WITHOUT ANY PURCHASE OF Narcotic analgesics or Narcotic analgesic combos*/
+333           SUB         = 2 ;
+334           N_PHRCHASE  = 0 ;
+335           THIRD_PAYER = 0 ;
+336           TOT         = 0 ;
+337           OOP         = 0 ;
+338        END;
+339  
+340        IF AA;
+341  
+342        LABEL
+343              THIRD_PAYER = 'TOTAL-OOP'
+344              N_PHRCHASE  = '# OF PURCHASES PER PERSON'
+345              SUB         = 'POPULATION FLAG FOR PERSONS WITH 1+ Narcotic analgesics or Narcotic analgesic combos'
+346                          ;
+347  RUN;
+
+NOTE: There were 34655 observations read from the data set CDATA.H192.
+NOTE: There were 3254 observations read from the data set WORK.PERDRUG2.
+NOTE: The data set WORK.FY has 34655 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.23 seconds
+      cpu time            0.23 seconds
+      
+
+348  
+349  TITLE3 "SUPPORTING CROSSTABS FOR NEW VARIABLES";
+350  PROC FREQ DATA=FY;
+351    TABLES  SUB * N_PHRCHASE * TOT * OOP * THIRD_PAYER / LIST MISSING ;
+352    FORMAT N_PHRCHASE TOT OOP THIRD_PAYER gtzero. ;
+353  RUN;
+
+NOTE: There were 34655 observations read from the data set WORK.FY.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+354  
+355  
+356  /*4) CALCULATE ESTIMATES ON USE AND EXPENDITURES*/
+357  
+358  ODS EXCLUDE ALL; /* Suppress the printing of output */
+359  TITLE3 "PERSON-LEVEL ESTIMATES ON EXPENDITURES AND USE FOR Narcotic analgesics or Narcotic analgesic combos, 2016";
+360  PROC SURVEYMEANS DATA=FY NOBS SUMWGT SUM STD MEAN STDERR;
+361    STRATA  VARSTR ;
+362    CLUSTER VARPSU;
+363    WEIGHT  PERWT16F;
+364     VAR TOT N_PHRCHASE  OOP THIRD_PAYER ;
+365     DOMAIN  SUB('1');
+366    ODS OUTPUT DOMAIN=work.domain_results;
+367  RUN;
+
+NOTE: Due to nonpositive weights, 1396 observation(s) were deleted.
+NOTE: The data set WORK.DOMAIN_RESULTS has 4 observations and 10 variables.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.11 seconds
+      cpu time            0.11 seconds
+      
+
+368  
+369  ODS EXCLUDE NONE; /* Unsuppress the printing of output */
+370  TITLE4 "SUBSET THE ESTIMATES FOR PERSONS ONLY WITH 1+ Narcotic analgesics or Narcotic analgesic combos";
+371  proc print data= work.domain_results noobs split='*';
+372   var   VARLABEL N  SumWgt  mean StdErr  Sum stddev;
+373   label SumWgt = 'Population*Size'
+374         mean = 'Mean'
+375         StdErr = 'SE of Mean'
+376         Sum = 'Total'
+377         Stddev = 'SE of*Total';
+378         format N SumWgt Comma12. mean comma9.1 stderr 9.4
+379                sum Stddev comma17.;
+380  run;
+
+NOTE: There were 4 observations read from the data set WORK.DOMAIN_RESULTS.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+381  ODS _ALL_ CLOSE;
+382  /* THE PROC PRINTTO null step is required to close the PROC PRINTTO */
+383  PROC PRINTTO;
+384  RUN;
+
