@@ -44,15 +44,3 @@ svymean(~any_expense,design = mepsdsgn)
 # (i.e. any_expense == 1).
 svymean(~TOTEXP13, design = subset(mepsdsgn,any_expense==1))
 svyquantile(~TOTEXP13, design = subset(mepsdsgn,any_expense==1),quantiles = 0.5)
-
-# DISTRIBUTION BY SOURCE OF PAYMENT
-# For percent of total, use the `svyratio` function, and specify the numerator and denominator.
-# Use a '+' sign to calculate estimates for multiple variables.
-svyratio(~TOTSLF13 + TOTPTR13 + TOTMCR13 + TOTMCD13,
-         denominator = ~TOTEXP13,
-         design = mepsdsgn)
-
-# Before estimating percentages for 'Other' insurance, we need to adjust this variable to match the online table:
-# Other = VA + worker's comp + other sources.
-mepsdsgn <- update(mepsdsgn, tototh13 = TOTVA13 + TOTWCP13 + TOTOTH13)
-svyratio(~tototh13, denominator = ~TOTEXP13, design = mepsdsgn)

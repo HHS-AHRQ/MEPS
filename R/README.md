@@ -13,9 +13,18 @@
 
 The following codes are provided in this folder:
 
-[example_1.R](example_1.R): code to re-create some of the estimates from the MEPS summary table for 2013 data.
+[exercise_1.R](exercise_1.R): National health care expenses by age group, 2016
 <br>
-[example_2.R](example_2.R): code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml) (includes `ggplot2` example).
+[exercise_2.R](exercise_2.R): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+<br>
+[exercise_3.R](exercise_3.R): Pooling MEPS FYC files, 2015 and 2016
+<br>
+[exercise_4.R](exercise_4.R):  Pooling longitudinal files, panels 17-19
+
+[example_5.R](example_5.R): Code to calculate some of the estimates from the [MEPS summary table](https://meps.ahrq.gov/mepstrends/hc_use/) for 2013 data.
+<br>
+[example_6.R](example_6.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml) (includes `ggplot2` example).
+
 
 ## Loading R packages
 
