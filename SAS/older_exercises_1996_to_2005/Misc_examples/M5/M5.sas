@@ -1,0 +1,200 @@
+/**************************************************************************\
+
+PROGRAM:       C:\\MEPS\PROG\M5.SAS
+
+DESCRIPTION:   THIS EXAMPLE SHOWS THE DIFFERENCE BETWEEN TWO USES OF
+               THE TERM "PRIORITY CONDITION" IN MEPS.
+               
+               THE MEPS SUPPLEMENTAL PRIORITY CONDITIONS (PC) SECTION
+               ASKS (IN ROUNDS 2/4), FOR EACH PERSON, ABOUT THE 
+               EXISTENCE OF CERTAIN PRIORITY CONDITIONS (SEE PAGES C-56 - 
+               C-60 OF THE HC-097 DOCUMENTATION FILE).                                                   
+               INFORMATION COLLECTED IN THE PC SECTION OF THE MEPS
+               IS DISTINCT FROM THAT INCLUDED IN THE CONDITION
+               ROSTER.  THESE CONDITIONS ARE NOT PART OF THE CONDITION
+               ROSTER UNLESS THEY ARE MENTIONED ELSEWHERE IN THE
+               INTERVIEW. NOTE THAT PC QUESTIONS ARE OF THE FORM,
+               "HAS PERSON *EVER* BEEN TOLD BY A DOCTOR OR OTHER
+               HEALTH PROFESSIONAL THAT THEY HAVE (CONDITION)?"
+               THE VARIABLES ASSOCIATED WITH THESE PC SECTION 
+               QUESTIONS ARE ON THE FULL-YEAR FILE (HC-097 FOR 2005).                                    
+               
+               THE CONDITIONS FILE ALSO HAS A SET OF CONDITIONS
+               FLAGGED AS PRIORITY BY THE VARIABLE PRIOLIST (SEE APPENDIX 
+               4 OF THE CONDITIONS FILE DOCUMENTATION).  THESE
+               CONDITIONS MIGHT COME FROM A REPORT OF BEING BOTHERED BY THE
+               CONDITION DURING THE YEAR, FROM AN ASSOCIATED
+               EVENT OR PRESCRIPTION MEDICINE IN THE YEAR, FROM BEING
+               ASSOCIATED WITH A DISABILITY DAY DURING THE YEAR, OR AS A 
+               FOLLOW-UP QUESTION FOR A PREVIOUSLY REPORTED CONDITION WHERE
+               THE PRIORITY LIST FLAG IS SET (PRIOLIST=1).  SETTING THE
+               PRIORITY LIST FLAG IS A MANUAL PROCESS AND MAY NOT HAVE BEEN
+               SET FOR ALL ELIGIBLE CONDITIONS. 
+
+INPUT FILES:   (1) C:\MEPS\DATA\H96.SAS7BDAT (2005 MEDICAL CONDITIONS FILE)                            
+               (2) C:\MEPS\DATA\H97.SAS7BDAT (2005 FULL-YEAR DATA FILE)                                  
+               
+
+\**************************************************************************/
+
+FOOTNOTE 'PROGRAM: C:\MEPS\PROG\M5.SAS';
+
+LIBNAME CDATA  'C:\MEPS\DATA' ;
+
+TITLE1 'AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008';                                              
+TITLE2 'TWO DIFFERENT SETS OF PRIORITY CONDITIONS';
+
+PROC FORMAT;
+   VALUE $ICD9F
+   '250' = 'DIABETES MELLITUS*'
+   '401' = 'ESSENTIAL HYPERTENSION'
+   '492' = 'EMPHYSEMA*'
+   '493' = 'ASTHMA';
+   VALUE YESNOF
+   -1 = '-1 INAPPLICABLE'
+   1 = '1 YES'
+   0 = '0  NO';
+   VALUE PRIOF
+   1 = '1 YES'
+   2 = '2 NO';
+RUN;
+
+*READ 2005 CONDITIONS FILE AND SELECT THE FOLLOWING CONDITIONS -
+   DIABETES MELLITUS, ESSENTIAL HYPERTENSION, EMPHYSEMA, ASTHMA;
+DATA COND2005;                                                                                   
+   SET CDATA.H96 (KEEP= DUPERSID CONDIDX ICD9CODX PRIOLIST);                                     
+   WHERE ICD9CODX IN ('250', '401', '492', '493');
+RUN;
+
+TITLE3 'VARIABLES FROM 2005 COND FILE';                                                          
+TITLE4 'CONDITION LEVEL';
+
+PROC FREQ DATA= COND2005;                                                                        
+   TABLES   ICD9CODX
+            ICD9CODX*PRIOLIST / LIST MISSING;
+   FORMAT ICD9CODX $ICD9F. PRIOLIST PRIOF. ;
+RUN;
+
+PROC SORT DATA= COND2005;                                                                        
+   BY DUPERSID;
+RUN;
+
+* CREATE INDICATORS FOR EACH TYPE OF PRIORITY CONDITION;
+DATA  CONDPERS (KEEP= DUPERSID C_DIABETES C_HYPERTENSION 
+                        C_EMPHYSEMA C_ASTHMA);
+   SET COND2005;                                                                                
+   BY DUPERSID;
+   ARRAY CONDS{4} C_DIABETES C_HYPERTENSION C_EMPHYSEMA C_ASTHMA;
+   RETAIN C_DIABETES C_HYPERTENSION C_EMPHYSEMA C_ASTHMA;
+   IF FIRST.DUPERSID
+      THEN 
+      DO XX = 1 TO 4;
+         CONDS{XX} = 0;
+      END;
+   IF ICD9CODX = '250'
+      THEN C_DIABETES = 1;
+   ELSE IF ICD9CODX = '401'
+      THEN C_HYPERTENSION = 1;
+   ELSE IF ICD9CODX = '492'
+      THEN C_EMPHYSEMA = 1;
+   ELSE IF ICD9CODX = '493'
+      THEN C_ASTHMA = 1;
+   IF LAST.DUPERSID
+      THEN
+      DO;
+         DO YY = 1 TO 4;
+            IF CONDS{YY} NE 1
+               THEN CONDS{YY} = 0;
+         END;
+         OUTPUT CONDPERS;
+      END;
+RUN;
+
+TITLE3 'VARIABLES FROM 2005 CONDITIONS FILE';                                              
+TITLE4 'PERSON LEVEL';
+
+PROC FREQ DATA= CONDPERS;
+   TABLES   C_DIABETES
+	         C_ASTHMA
+	         C_HYPERTENSION
+	         C_EMPHYSEMA
+	         / LIST MISSING;
+	FORMAT   C_DIABETES C_ASTHMA C_HYPERTENSION C_EMPHYSEMA YESNOF. ;
+RUN;
+
+PROC SORT DATA= COND2005 NODUPKEY;                                                       
+   BY DUPERSID ICD9CODX;
+RUN;
+
+*READ 2005 CONSOLIDATED FULL YEAR FILE;
+*CREATE INDICATORS FOR EACH OF THE 4 PRIORITY CONDITIONS;
+DATA FY2005 (KEEP= DUPERSID PC_DIABETES PC_ASTHMA PC_HYPERTENSION PC_EMPHYSEMA);         
+	SET CDATA.H97 (KEEP= DUPERSID DIABDX53 ASTHDX53 HIBPDX53 
+	                     EMPHDX53 VARPSU VARSTR PERWT05F                                 
+	               RENAME=(DIABDX53=PC_DIABETES
+	                       ASTHDX53=PC_ASTHMA
+	                       HIBPDX53=PC_HYPERTENSION
+	                       EMPHDX53=PC_EMPHYSEMA));                                      
+   ARRAY CONDS{4} PC_DIABETES PC_ASTHMA PC_HYPERTENSION PC_EMPHYSEMA;
+   DO XX = 1 TO 4;
+      IF ((CONDS{XX} = 2) OR (CONDS{XX} LT -1))
+         THEN CONDS{XX} = 0;
+   END;
+RUN;
+
+PROC SORT DATA= FY2005;                                                                   
+   BY DUPERSID;
+RUN;
+
+TITLE3 'VARIABLES FROM 2005 FULL-YEAR FILE';                                              
+TITLE4 'PERSON-LEVEL';
+
+PROC FREQ DATA= FY2005;                                                                   
+   TABLES   PC_DIABETES
+	         PC_ASTHMA
+	         PC_HYPERTENSION
+	         PC_EMPHYSEMA
+	         / LIST MISSING;
+	FORMAT PC_DIABETES PC_ASTHMA PC_HYPERTENSION PC_EMPHYSEMA YESNOF. ;
+RUN;
+
+*MERGE CONDITIONS AND FULL YEAR FILES TO COMPARE THE PRIORITY CONDITIONS INFORMATION;
+DATA FYCOND05;                                                                           
+   MERGE CONDPERS (IN= A) FY2005 (IN= B) END= ITSOVER;                                   
+   BY DUPERSID;
+   ARRAY CONDS{4} C_DIABETES C_HYPERTENSION C_EMPHYSEMA C_ASTHMA;
+   DO XX = 1 TO 4;
+      IF CONDS{XX} = .
+         THEN CONDS{XX} = 0;
+   END;
+   IF A AND B
+      THEN BOTH+1;
+   ELSE IF A
+      THEN JUSTA+1;
+   ELSE IF B
+      THEN JUSTB+1;
+   IF ITSOVER
+      THEN PUT BOTH= JUSTA= JUSTB= ;
+   DROP XX;
+   IF B;
+RUN;
+
+TITLE3 'VARIABLES FROM COMBINED FILE';
+TITLE4 'PERSON-LEVEL';
+TITLE5 'C_variables FROM COND FILE, PC_variables FROM FULL YEAR FILE';
+
+PROC FREQ DATA= FYCOND05;                                                             
+   TABLES   C_DIABETES*PC_DIABETES
+	         C_ASTHMA*PC_ASTHMA
+	         C_HYPERTENSION*PC_HYPERTENSION
+	         C_EMPHYSEMA*PC_EMPHYSEMA
+	         / LIST MISSING;
+	FORMAT   C_DIABETES C_ASTHMA C_HYPERTENSION C_EMPHYSEMA         
+	         PC_DIABETES PC_ASTHMA PC_HYPERTENSION PC_EMPHYSEMA YESNOF. ;
+RUN;
+   
+
+
+
+
+   
