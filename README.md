@@ -9,7 +9,7 @@ This repository contains instructions and example code for loading and analyzing
 [Additional Survey Components](#additional-survey-components) <br>
 [Contact MEPS](#contact-meps)
 
-<b>Example code</b> for loading and analyzing MEPS data in R, SAS, and Stata is available in the following folders:
+<b>Example code</b> for loading and analyzing MEPS data in R, SAS, and Stata is available in the following folders. These folders also include example exercises from recent MEPS workshops. In addition, the SAS folder contains exercises from older workshops (1996-2006):
  * [R](R) <br>
  * [SAS](SAS) <br>
  * [Stata](Stata) <br>
