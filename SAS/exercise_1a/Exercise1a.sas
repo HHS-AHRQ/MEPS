@@ -30,6 +30,7 @@ PROC FORMAT;
      65-HIGH = '65+';
 
   VALUE AGECAT
+      .      = 'ALL AGES'
 	   1 = '0-64'
 	   2 = '65+';
 
@@ -133,7 +134,7 @@ proc print data= work.domain_results noobs split='*';
        StdErr = 'SE of Mean($)'
        Sum = 'Total*Expense ($)'
        Stddev = 'SE of*Total Expense($)';
-       format AGECAT AGEF. N SumWgt Comma12. mean comma9.1 stderr 9.4
+       format AGECAT agecat. N SumWgt Comma12. mean comma9.1 stderr 9.4
               sum Stddev comma17.;
 run;
 ODS _ALL_ CLOSE;
