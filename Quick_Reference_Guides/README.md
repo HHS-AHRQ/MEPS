@@ -7,6 +7,10 @@ The following reference guides are provided for convenience:
 [meps_condition_codes.csv](meps_condition_codes.csv) provides a cross-reference between [collapsed condition categories](https://meps.ahrq.gov/survey_comp/MEPS_condition_data.pdf) commonly used in MEPS analyses and [Clinical Classification Software (CCS) Codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp#download). Information on how CCS codes relate to [ICD-9](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [ICD-10](https://www.hcup-us.ahrq.gov/toolssoftware/ccs10/ccs10.jsp) codes is available on the HCUP website.
 [![preview of condition codes](../_images/meps_condition_codes.png)](meps_condition_codes.csv)
 
+## Entity Relationship Diagram
+[meps_erd.pdf](meps_erd.pdf) is a printable entity relationship diagram of the most commonly used MEPS public use files (PUFs). Short descriptions of the datasets and example programming codes in SAS, R, and Stata are available on page 2.
+[<img src = "../_images/meps_erd.png" alt = "preview of ERD" width = 500>](meps_erd.pdf)
+
 ## File names
 [meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically.
 [![preview of file names](../_images/meps_file_names.png)](meps_file_names.csv)
