@@ -6,11 +6,11 @@ The following reference guides are provided for convenience:
 <br>
 [Entity Relationship Diagram](#entity-relationship-diagram)
 <br>
-[File names](file-names)
+[File names](#file-names)
 <br>
-[Programming Statements](programming-statements)
+[Programming Statements](#programming-statements)
 <br>
-[Variable Names](variable-names)
+[Variable Names](#variable-names)
 
 
 ## Condition Codes
