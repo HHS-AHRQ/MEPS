@@ -8,42 +8,42 @@
 
 ## SAS examples
 
-The following example codes are provided in this folder. Each exercise contains three files: SAS code (e.g. Exercise1.sas), a SAS log file (e.g. Exercise1_log.TXT) and a SAS output file (e.g. Exercise1_OUTPUT.TXT)
+The following example codes are provided in the [workshop_exercises](workshop_exercises) folder. Each exercise contains three files: SAS code (e.g. Exercise1.sas), a SAS log file (e.g. Exercise1_log.TXT) and a SAS output file (e.g. Exercise1_OUTPUT.TXT)
 
 #### 1. National health care expenses
-[exercise_1a](exercise_1a): National health care expenses by age group, 2016
+[exercise_1a](workshop_exercises/exercise_1a): National health care expenses by age group, 2016
 <br>
-[exercise_1b](exercise_1b): National health care expenses by age group and type of service, 2015
+[exercise_1b](workshop_exercises/exercise_1b): National health care expenses by age group and type of service, 2015
 <br>
 
 #### 2. Prescribed medicine purchases
-[exercise_2a](exercise_2a): Trends in antipsychotics purchases and expenses, 2015
+[exercise_2a](workshop_exercises/exercise_2a): Trends in antipsychotics purchases and expenses, 2015
 <br>
-[exercise_2b](exercise_2b): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+[exercise_2b](workshop_exercises/exercise_2b): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
 
 #### 3. Medical conditions
-[exercise_3a](exercise_3a): Use and expenditures for persons with diabetes, 2015
+[exercise_3a](workshop_exercises/exercise_3a): Use and expenditures for persons with diabetes, 2015
 <br>
-[exercise_3b](exercise_3b): Expenditures for all events associated with diabetes, 2015
+[exercise_3b](workshop_exercises/exercise_3b): Expenditures for all events associated with diabetes, 2015
 <br>
 
 #### 4. Pooling data files
-[exercise_4a](exercise_4a): Pooling MEPS FYC files, 2015 and 2016
+[exercise_4a](workshop_exercises/exercise_4a): Pooling MEPS FYC files, 2015 and 2016
 <br>
-[exercise_4b](exercise_4b): Pooling longitudinal files, panels 17-19
+[exercise_4b](workshop_exercises/exercise_4b): Pooling longitudinal files, panels 17-19
 
 #### 5. Constructing variables
-[exercise_5a](exercise_5a): Constructing family-level variables from person-level data, 2015
+[exercise_5a](workshop_exercises/exercise_5a): Constructing family-level variables from person-level data, 2015
 <br>
-[exercise_5b](exercise_5b): Constructing insurance status from monthly insurance variables, 2015
+[exercise_5b](workshop_exercises/exercise_5b): Constructing insurance status from monthly insurance variables, 2015
 
 
 
-#### Older Exercises (1996 to 2006)
+### Older Exercises (1996 to 2006)
 
 These exercises include older SAS programs presented during previous MEPS workshops. Each folder includes a SAS program (.sas) and SAS output (.pdf)
 
-##### Estimation examples
+#### Estimation examples
 
 [E1](older_exercises_1996_to_2006/Estimation_examples/E1):
 Person-level estimates (means, proportions, and totals) for healthcare expenditures, 2001
@@ -62,12 +62,12 @@ Person-level estimates (means, proportions, and totals) for healthcare expenditu
 <br>
 [E8](older_exercises_1996_to_2006/Estimation_examples/E8): Expenditures for inpatient stays by source of payment, per stay, per diem, with and without surgery, 2005
 
-##### Employment examples
+#### Employment examples
 [EM1](older_exercises_1996_to_2006/Employment_examples/EM1): Relationship between health status and current main job weekly earnings, 2002
 <br>
 [EM2](older_exercises_1996_to_2006/Employment_examples/EM2): Determine how many people working at the beginning of the year changed jobs, 2002
 
-##### Linking examples
+#### Linking examples
 [L1](older_exercises_1996_to_2006/Linking_examples/L1): Merge the 2001 MEPS full-year file and the 2001 MEPS Jobs file
 <br>
 [L1A](older_exercises_1996_to_2006/Linking_examples/L1A): Combine the 2000 and 2001 MEPS Jobs files
@@ -80,7 +80,7 @@ Person-level estimates (means, proportions, and totals) for healthcare expenditu
 <br>
 [L5](older_exercises_1996_to_2006/Linking_examples/L5): Merge 2001 MEPS Medical Conditions file with full-year file and various event files
 
-##### Miscellaneous examples
+#### Miscellaneous examples
 [M1](older_exercises_1996_to_2006/Misc_examples/M1): Demonstrates need for weight variables when analyzing MEPS data, 2005
 <br>
 [M2](older_exercises_1996_to_2006/Misc_examples/M2): Demonstrates need for using the STRATUM and PSU variables when analyzing MEPS data, 2005

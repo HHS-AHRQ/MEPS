@@ -10,34 +10,34 @@
 
 ## Stata examples
 
-The following example codes are provided in this folder.
+The following example codes are provided in the [workshop_exercises](workshop_exercises) folder.
 
 #### 1. National health care expenses
-[Exercise1a.do](Exercise1a.do): National health care expenses by age group, 2016
+[Exercise1a.do](workshop_exercises/Exercise1a.do): National health care expenses by age group, 2016
 <br>
-[Exercise1b.do](Exercise1b.do): National health care expenses by age group and type of service, 2015
+[Exercise1b.do](workshop_exercises/Exercise1b.do): National health care expenses by age group and type of service, 2015
 <br>
 
 #### 2. Prescribed medicine purchases
-[Exercise2a.do](Exercise2a.do): Trends in antipsychotics purchases and expenses, 2015
+[Exercise2a.do](workshop_exercises/Exercise2a.do): Trends in antipsychotics purchases and expenses, 2015
 <br>
-[Exercise2b.do](Exercise2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+[Exercise2b.do](workshop_exercises/Exercise2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
 
 #### 3. Medical conditions
-[Exercise3a.do](Exercise3a.do): Use and expenditures for persons with diabetes, 2015
+[Exercise3a.do](workshop_exercises/Exercise3a.do): Use and expenditures for persons with diabetes, 2015
 <br>
-[Exercise3b.do](Exercise3b.do): Expenditures for all events associated with diabetes, 2015
+[Exercise3b.do](workshop_exercises/Exercise3b.do): Expenditures for all events associated with diabetes, 2015
 <br>
 
 #### 4. Pooling data files
-[Exercise4a.do](Exercise4a.do): Pooling MEPS FYC files, 2015 and 2016
+[Exercise4a.do](workshop_exercises/Exercise4a.do): Pooling MEPS FYC files, 2015 and 2016
 <br>
-[Exercise4b.do](Exercise4b.do): Pooling longitudinal files, panels 17-19
+[Exercise4b.do](workshop_exercises/Exercise4b.do): Pooling longitudinal files, panels 17-19
 
 #### 5. Constructing variables
-[Exercise5a.do](Exercise5a.do): Constructing family-level variables from person-level data, 2015
+[Exercise5a.do](workshop_exercises/Exercise5a.do): Constructing family-level variables from person-level data, 2015
 <br>
-[Exercise5b.do](Exercise5b.do): Constructing insurance status from monthly insurance variables, 2015
+[Exercise5b.do](workshop_exercises/Exercise5b.do): Constructing insurance status from monthly insurance variables, 2015
 
 
 ## Loading MEPS data
