@@ -39,7 +39,7 @@
 #  - For 1996-2007, AGELAST must be created from AGEyyX, AGE42X, AGE31X
   FYC <- FYC %>%
     mutate(
-      child_2to17 = (1 < AGELAST & AGELAST < 18),
+      child_2to17 = (1 < AGELAST & AGELAST < 18)*1,
       child_dental = ((DVTOT16 > 0) & (child_2to17 == 1))*1,
       child_dental = recode_factor(
         child_dental,
@@ -72,3 +72,5 @@
 # Children with dental care, by poverty status
   svyby(~child_dental, FUN = svytotal, by = ~poverty, design = children_2to17) # number
   svyby(~child_dental, FUN = svymean,  by = ~poverty, design = children_2to17) # percent
+
+  

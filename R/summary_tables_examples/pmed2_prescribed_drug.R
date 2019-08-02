@@ -8,7 +8,6 @@
 #  - Number of people with purchase
 #  - Total purchases
 #  - Total expenditures
-#
 # -----------------------------------------------------------------------------
 
 # Install/load packages and set global options --------------------------------
@@ -50,7 +49,7 @@
       pers_RXXP = sum(RXXP16X),
       n_purchases = n()) %>%
     ungroup %>%
-    mutate(person = 1)
+    mutate(persons = 1)
 
 
 # Define survey design and calculate estimates --------------------------------
@@ -63,11 +62,9 @@
     nest = TRUE
   )
 
-# Number of people with purchase
-  svyby(~person, by = ~RXDRGNAM, FUN = svytotal, design = RXdsgn)
+  totals <- svyby(~persons + n_purchases + pers_RXXP,
+                  by = ~RXDRGNAM, FUN = svytotal, design = RXdsgn)
 
-# Number of purchases
-  svyby(~n_purchases, by = ~RXDRGNAM, FUN = svytotal, design = RXdsgn)
-
-# Total expenditures
-  svyby(~pers_RXXP, by = ~RXDRGNAM, FUN = svytotal, design = RXdsgn)
+  totals %>% select(persons, se.persons)         # Number of people with purchase
+  totals %>% select(n_purchases, se.n_purchases) # Number of purchases
+  totals %>% select(pers_RXXP, se.pers_RXXP)     # Total expenditures

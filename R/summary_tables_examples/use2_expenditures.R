@@ -50,13 +50,12 @@
   FYC <- read_MEPS(year = 2016, type = "FYC")
 
 # Aggregate payment sources ---------------------------------------------------
-#  PTR = Private (PRV) + TRICARE (TRI)
+#  For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+#
+#  PTR = Private (PRV) + TRICARE (TRI) 
 #  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
 #         other public (OPU)  + other unclassified sources (OSR) +
 #         worker's comp (WCP) + Veteran's (VA)
-
-# Notes on source of payment categories:
-#  1996-1999: TRICARE label is CHM (changed to TRI in 2000)
 
   FYC <- FYC %>% mutate(
 
@@ -87,11 +86,11 @@
 #  Note: for 1996-2006, also need to create OPT*** = OPF*** + OPD***
 
   FYC <- FYC %>% mutate(
-    OPTSLF_phys = OPVSLF16  + OPSSLF16, # out-of-pocket payments
-    OPTMCR_phys = OPVMCR16  + OPSMCR16, # Medicare
-    OPTMCD_phys = OPVMCD16  + OPSMCD16, # Medicaid
-    OPTPTR_phys = OPVPTR    + OPSPTR,   # private insurance (including TRICARE)
-    OPTOTZ_phys = OPVOTZ    + OPSOTZ    # other sources of payment
+    OPTSLF_p = OPVSLF16  + OPSSLF16, # out-of-pocket payments
+    OPTMCR_p = OPVMCR16  + OPSMCR16, # Medicare
+    OPTMCD_p = OPVMCD16  + OPSMCD16, # Medicaid
+    OPTPTR_p = OPVPTR    + OPSPTR,   # private insurance (including TRICARE)
+    OPTOTZ_p = OPVOTZ    + OPSOTZ    # other sources of payment
   )
 
 
@@ -106,21 +105,27 @@
 
 
 # Total expenditures
+  
+  totals <- 
+    svytotal(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
+               OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys. 
+               OPTSLF16 + OPTPTR   + OPTMCR16 + OPTMCD16 + OPTOTZ +  # OP visits
+               OPTSLF_p + OPTPTR_p + OPTMCR_p + OPTMCD_p + OPTOTZ_p, # OP phys. visits
+             design = FYCdsgn) 
 
-  svytotal(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ, design = FYCdsgn) # office-based visits
-  svytotal(~OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ, design = FYCdsgn) # office-based phys. visits
-
-  svytotal(~OPTSLF16    + OPTPTR      + OPTMCR16    + OPTMCD16    + OPTOTZ,      design = FYCdsgn) # OP visits
-  svytotal(~OPTSLF_phys + OPTPTR_phys + OPTMCR_phys + OPTMCD_phys + OPTOTZ_phys, design = FYCdsgn) # OP phys. visits
-
-
+  totals %>% as.data.frame()
+  
+  
 # Mean expenditure per person
 
-  svymean(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ, design = FYCdsgn) # office-based visits
-  svymean(~OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ, design = FYCdsgn) # office-based phys. visits
-
-  svymean(~OPTSLF16    + OPTPTR      + OPTMCR16    + OPTMCD16    + OPTOTZ,      design = FYCdsgn) # OP visits
-  svymean(~OPTSLF_phys + OPTPTR_phys + OPTMCR_phys + OPTMCD_phys + OPTOTZ_phys, design = FYCdsgn) # OP phys. visits
+  means <- 
+    svymean(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
+              OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys. 
+              OPTSLF16 + OPTPTR   + OPTMCR16 + OPTMCD16 + OPTOTZ +  # OP visits
+              OPTSLF_p + OPTPTR_p + OPTMCR_p + OPTMCD_p + OPTOTZ_p, # OP phys. visits
+            design = FYCdsgn) 
+  
+  means %>% as.data.frame()
 
 
 # Mean out-of-pocket expense per person with an out-of-pocket expense
@@ -128,5 +133,5 @@
   svymean(~OBVSLF16, design = subset(FYCdsgn, OBVSLF16 > 0)) # office-based visits
   svymean(~OBDSLF16, design = subset(FYCdsgn, OBDSLF16 > 0)) # office-based phys. visits
 
-  svymean(~OPTSLF16,    design = subset(FYCdsgn, OPTSLF16 > 0))    # OP visits
-  svymean(~OPTSLF_phys, design = subset(FYCdsgn, OPTSLF_phys > 0)) # OP phys. visits
+  svymean(~OPTSLF16, design = subset(FYCdsgn, OPTSLF16 > 0)) # OP visits
+  svymean(~OPTSLF_p, design = subset(FYCdsgn, OPTSLF_p > 0)) # OP phys. visits

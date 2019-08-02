@@ -56,7 +56,7 @@
 #     INSURC16 = ifelse(AGELAST < 65, INSCOV16, ins_gt65)
 
   FYC <- FYC %>%
-    mutate(insurance = recode_factor(INSURC16, .default = "Missing", .missing = "Missing",
+    mutate(insurance = recode_factor(INSURC16,
       "1" = "<65, Any private",
       "2" = "<65, Public only",
       "3" = "<65, Uninsured",
@@ -85,7 +85,6 @@
     weights = ~PERWT16F,
     data = FYC,
     nest = TRUE)
-
 
 # Insurance coverage by age groups
   svyby(~insurance, FUN = svytotal, by = ~agegrps, design = FYCdsgn) # number

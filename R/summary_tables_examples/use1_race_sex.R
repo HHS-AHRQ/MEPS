@@ -57,21 +57,20 @@
       white  = (RACETHX == 2),
       black  = (RACETHX == 3),
       native = (RACETHX > 3 & RACEV1X %in% c(3,6)),
-      asian  = (RACETHX > 3 & RACEV1X %in% c(4,5)))
+      asian  = (RACETHX > 3 & RACEV1X %in% c(4,5)),
 
-  FYC <- FYC %>% mutate(
-    race = 1*hisp + 2*white + 3*black + 4*native + 5*asian,
-    race = recode_factor(race, .default = "Missing", .missing = "Missing",
-      "1" = "Hispanic",
-      "2" = "White",
-      "3" = "Black",
-      "4" = "Amer. Indian, AK Native, or mult. races",
-      "5" = "Asian, Hawaiian, or Pacific Islander"))
+      race = 1*hisp + 2*white + 3*black + 4*native + 5*asian,
+      race = recode_factor(race,
+        "1" = "Hispanic",
+        "2" = "White",
+        "3" = "Black",
+        "4" = "Amer. Indian, AK Native, or mult. races",
+        "5" = "Asian, Hawaiian, or Pacific Islander"))
 
 # Sex
   FYC <- FYC %>%
     mutate(
-      sex = recode_factor(SEX, .default = "Missing", .missing = "Missing",
+      sex = recode_factor(SEX, 
         "1" = "Male",
         "2" = "Female"))
 
@@ -84,12 +83,12 @@
 
   FYC <- FYC %>%
     mutate(
-      person = 1,                # counter variable for population totals
-      has_exp = (TOTEXP16 > 0) ) # TRUE if person has an expense
+      persons = 1,                # counter variable for population totals
+      has_exp = (TOTEXP16 > 0)*1) # 1 if person has an expense
 
 # QC new variables
   FYC %>%
-    group_by(person, has_exp) %>%
+    group_by(persons, has_exp) %>%
     summarize(
       min_exp  = min(TOTEXP16),
       mean_exp = mean(TOTEXP16),
@@ -105,24 +104,40 @@
     data = FYC,
     nest = TRUE)
 
-  has_exp_dsgn <- subset(FYCdsgn, has_exp)
+  has_exp_dsgn <- subset(FYCdsgn, has_exp == 1)
 
 
-# Number of people, by race and sex
-  svyby(~person, FUN = svytotal, by = ~sex + race, design = FYCdsgn)
+# Totals (population, expenditures)
+  totals <- svyby(~persons + TOTEXP16, 
+                  FUN = svytotal, by = ~sex + race, design = FYCdsgn)
 
-# Percent of population with any expense in 2016, by race and sex
-  svyby(~has_exp, FUN = svymean, by = ~sex + race, design = FYCdsgn)
+  totals %>% select(persons)               # Number of people 
+  totals %>% select(TOTEXP16, se.TOTEXP16) # Total expenditures
 
-# Total expenditures, by race and sex
-  svyby(~TOTEXP16, FUN = svytotal, by = ~sex + race, design = FYCdsgn)
+  
+# Means (pct. with expense, expenditures)
+  
+  means <- svyby(~has_exp + TOTEXP16, 
+                 FUN = svymean, by = ~sex + race, design = FYCdsgn)
+  
+  means %>% select(has_exp, se.has_exp)   # Pct of population with expense 
+  means %>% select(TOTEXP16, se.TOTEXP16) # Mean expenditure per person
 
-# Mean expenditure per person, by race and sex
-  svyby(~TOTEXP16, FUN = svymean, by = ~sex + race, design = FYCdsgn)
 
 # Mean expenditure per person with expense, by race and sex
-  svyby(~TOTEXP16, FUN = svymean, by = ~sex + race, design = has_exp_dsgn)
+  mean_exp <- svyby(~TOTEXP16, FUN = svymean, 
+                    by = ~sex + race, design = has_exp_dsgn)
 
+  mean_exp %>% select(TOTEXP16, se)
+  
+  
 # Median expenditure per person with expense, by race and sex
-  svyby(~TOTEXP16, FUN = svyquantile, by = ~sex + race, design = has_exp_dsgn,
-        quantiles = c(0.5), ci = T, method = "constant")
+  med_exp <-svyby(~TOTEXP16, FUN = svyquantile, 
+                  by = ~sex + race, design = has_exp_dsgn,
+                  quantiles = c(0.5), ci = T, method = "constant")
+
+  med_exp %>% select(TOTEXP16, se)
+  
+  
+  
+  

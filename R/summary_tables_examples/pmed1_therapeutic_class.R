@@ -52,7 +52,7 @@
       pers_RXXP = sum(RXXP16X),
       n_purchases = n()) %>%
     ungroup %>%
-    mutate(person = 1)
+    mutate(persons = 1)
 
 
 # Define survey design and calculate estimates --------------------------------
@@ -64,12 +64,11 @@
     data = TC1_pers,
     nest = TRUE
   )
-
-# Number of people with purchase
-  svyby(~person, by = ~TC1name, FUN = svytotal, design = TC1dsgn)
-
-# Number of purchases
-  svyby(~n_purchases, by = ~TC1name, FUN = svytotal, design = TC1dsgn)
-
-# Total expenditures
-  svyby(~pers_RXXP, by = ~TC1name, FUN = svytotal, design = TC1dsgn)
+  
+  totals <- svyby(~persons + n_purchases + pers_RXXP, 
+                  by = ~TC1name, FUN = svytotal, design = TC1dsgn)
+  
+  totals %>% select(persons, se.persons)         # Number of people with purchase
+  totals %>% select(n_purchases, se.n_purchases) # Number of purchases
+  totals %>% select(pers_RXXP, se.pers_RXXP)     # Total expenditures
+  

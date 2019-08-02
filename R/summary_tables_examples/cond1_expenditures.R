@@ -78,9 +78,9 @@
   all_events <-
     full_join(stacked_events, cond_clink, by = c("DUPERSID", "EVNTIDX")) %>%
     filter(!is.na(Condition), XP15X >= 0)
-
-
-# Aggregate to person-level ---------------------------------------------------
+  
+  
+# Aggregate to person-level, by Condition -------------------------------------
 
   all_pers <- all_events %>%
     group_by(DUPERSID, VARSTR, VARPSU, Condition) %>%
@@ -89,7 +89,7 @@
       pers_XP = sum(XP15X),
       n_events = n()) %>%
     ungroup %>%
-    mutate(person = 1)
+    mutate(persons = 1)
 
 
 # Define survey design and calculate estimates --------------------------------
@@ -102,14 +102,16 @@
     nest = TRUE)
 
 
-# Number of people with care
-  svyby(~person, by = ~Condition, FUN = svytotal, design = PERSdsgn)
+# Totals (people, events, expenditures)
+  totals <- svyby(~persons + n_events + pers_XP, 
+                  by = ~Condition, FUN = svytotal, design = PERSdsgn)
 
-# Number of events
-  svyby(~n_events, by = ~Condition, FUN = svytotal, design = PERSdsgn)
+  totals %>% select(persons, se.persons)   # Number of people with care
+  totals %>% select(n_events, se.n_events) # Number of events
+  totals %>% select(pers_XP, se.pers_XP)   # Total expenditures
 
-# Total expenditures
-  svyby(~pers_XP, by = ~Condition, FUN = svytotal, design = PERSdsgn)
-
+ 
 # Mean expenditure per person with care
-  svyby(~pers_XP, by = ~Condition, FUN = svymean, design = PERSdsgn)
+  means <- svyby(~pers_XP, by = ~Condition, FUN = svymean, design = PERSdsgn)
+  
+  means %>% select(pers_XP, se)

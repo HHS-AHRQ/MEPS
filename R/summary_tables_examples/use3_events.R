@@ -57,29 +57,29 @@
   OB <- read_MEPS(year = 2016, type = "OB") # office-based medical visits
 
 # Aggregate payment sources for each dataset ----------------------------------
+#  For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+#
 #  PR = Private (PV) + TRICARE (TR)
 #  OZ = other federal (OF)  + State/local (SL) + other private (OR) +
 #        other public (OU)  + other unclassified sources (OT) +
 #        worker's comp (WC) + Veteran's (VA)
-
-  OB <- OB %>% mutate(
-    PR = OBPV16X + OBTR16X,
-    OZ = OBOF16X + OBSL16X + OBVA16X + OBOT16X + OBOR16X + OBOU16X + OBWC16X,
-
-    # Add counter variable to exclude events with missing expenditures
-    count = 1*(OBXP16X >= 0)
-  )
-
-  OP <- OP %>% mutate(
-    PR_fac = OPFPV16X + OPFTR16X,
-    PR_sbd = OPDPV16X + OPDTR16X,
-
-    OZ_fac = OPFOF16X + OPFSL16X + OPFOR16X + OPFOU16X + OPFVA16X + OPFOT16X + OPFWC16X,
-    OZ_sbd = OPDOF16X + OPDSL16X + OPDOR16X + OPDOU16X + OPDVA16X + OPDOT16X + OPDWC16X,
-
-    # Add counter variable to exclude events with missing expenditures
-    count = 1*(OPXP16X >= 0)
-  )
+  
+  OB <- OB %>% 
+    mutate(
+      PR = OBPV16X + OBTR16X,
+      OZ = OBOF16X + OBSL16X + OBVA16X + OBOT16X + OBOR16X + OBOU16X + OBWC16X
+    ) %>% 
+    filter(OBXP16X >= 0) # Remove inapplicable events 
+  
+  OP <- OP %>% 
+    mutate(
+      PR_fac = OPFPV16X + OPFTR16X,
+      PR_sbd = OPDPV16X + OPDTR16X,
+      
+      OZ_fac = OPFOF16X + OPFSL16X + OPFOR16X + OPFOU16X + OPFVA16X + OPFOT16X + OPFWC16X,
+      OZ_sbd = OPDOF16X + OPDSL16X + OPDOR16X + OPDOU16X + OPDVA16X + OPDOT16X + OPDWC16X
+    ) %>% 
+    filter(OPXP16X >= 0) # Remove inapplicable events
 
 
 # Combine facility and SBD expenses for hospital-type events ------------------
@@ -93,20 +93,31 @@
   )
 
 
+# Merge with FYC to retain all PSUs -------------------------------------------
+  OB_FYC <- OB %>% 
+    mutate(count = 1) %>%                    # add counter for total events
+    select(-VARSTR, -VARPSU, -PERWT16F) %>%  # remove to avoid merge conflicts
+    full_join(FYC)
+  
+  OP_FYC <- OP %>% 
+    mutate(count = 1) %>%                    # add counter for total events
+    select(-VARSTR, -VARPSU, -PERWT16F) %>%  # remove to avoid merge conflicts
+    full_join(FYC)
+  
+  
 # Define survey design and calculate estimates --------------------------------
-
-  OP_dsgn <- svydesign(
-    id = ~VARPSU,
-    strata = ~VARSTR,
-    weights = ~PERWT16F,
-    data = OP,
-    nest = TRUE)
-
   OB_dsgn <- svydesign(
     id = ~VARPSU,
     strata = ~VARSTR,
     weights = ~PERWT16F,
-    data = OB,
+    data = OB_FYC,
+    nest = TRUE)
+  
+  OP_dsgn <- svydesign(
+    id = ~VARPSU,
+    strata = ~VARSTR,
+    weights = ~PERWT16F,
+    data = OP_FYC,
     nest = TRUE)
 
 
@@ -131,29 +142,23 @@
 # Mean events per person, office-based medical visits -------------------------
 
   # Aggregate to person level
-    pers_OB <- OB %>%
+    pers_OB <- OB_FYC %>%
       group_by(DUPERSID, VARSTR, VARPSU) %>%
       summarize(
         PERWT16F = mean(PERWT16F),
-        n_events = sum(count, na.rm = T)) %>%
+        n_events = sum(count, na.rm = T),
+        n_phys_events = sum(count*(SEEDOC == 1), na.rm = T)) %>%
       ungroup
-        
-  # Remove survey variables to avoid merge conflicts
-    pers_OB <- pers_OB %>% select(-VARSTR, -VARPSU, -PERWT16F)
-  
-  # Merge with FYC file to include people with no OB events
-  # For persons with no OB events, set 'n_events' = 0
-    pers_OB_FYC <- full_join(pers_OB, FYC, by = "DUPERSID") %>%
-      mutate(n_events = replace(n_events, is.na(n_events), 0))
-  
+
   # Define survey design
     pers_OB_dsgn <- svydesign(
       id = ~VARPSU,
       strata = ~VARSTR,
       weights = ~PERWT16F,
-      data = pers_OB_FYC,
+      data = pers_OB,
       nest = TRUE)
 
   # Mean events per person
-    svymean(~n_events, design = pers_OB_dsgn)
+    svymean(~n_events + n_phys_events, design = pers_OB_dsgn)
 
+    

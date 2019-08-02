@@ -83,7 +83,7 @@ options(survey.lonely.psu="adjust")
 
 
 # Define survey design and calculate estimates --------------------------------
-#  - use SAQWT16F weight variable,
+#  - use SAQWT16F weight variable
 
   SAQdsgn <- svydesign(
     id = ~VARPSU,

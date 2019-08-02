@@ -82,7 +82,7 @@ options(survey.lonely.psu="adjust")
 
 
 # Define survey design and calculate estimates --------------------------------
-#  - use DIABW16F weight variable,
+#  - use DIABW16F weight variable
 
   DIABdsgn <- svydesign(
     id = ~VARPSU,
@@ -90,7 +90,6 @@ options(survey.lonely.psu="adjust")
     weights = ~DIABW16F,
     data = FYC,
     nest = TRUE)
-
 
 # Adults with diabetes with hemoglobin A1C measurement in 2016
   svyby(~diab_a1c, FUN = svytotal, by = ~race, design = DIABdsgn) # number
