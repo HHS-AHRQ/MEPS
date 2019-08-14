@@ -16,31 +16,47 @@
   install.packages("survey")
   install.packages("dplyr")
   install.packages("foreign")
-  install.packages("devtools")
 
 # Load packages (need to run every session)
   library(survey)
   library(dplyr)
   library(foreign)
-  library(devtools)
-
-  install_github("e-mitchell/meps_r_pkg/MEPS")
-  library(MEPS)
 
 # Set survey option for lonely psu
   options(survey.lonely.psu="adjust")
 
 
 # Load datasets ---------------------------------------------------------------
-# For 1996-2013, need to merge RX event file with Multum Lexicon Addendum file
-#  to get therapeutic class categories and generic drug names
+# For 1996-2013, need to merge with RX Multum Lexicon Addendum files to get
+#  therapeutic class categories and generic drug names
 
 # Load RX file
-  RX <- read_MEPS(year = 2016, type = "RX")
+  RX <- read.xport("C:/MEPS/h188a.ssp")
 
-# Merge with therapeutic class names and add counter variable
-#  ('tc1_names' data comes pre-loaded with the MEPS R library)
-  RX <- RX %>% left_join(tc1_names, by = "TC1")
+  # Define therapeutic classes
+  RX <- RX %>% mutate(
+    TC1name = recode_factor(TC1,
+       "-9" = "Not_ascertained",
+       "-1" = "Inapplicable",
+       "1"  = "Anti-infectives",
+       "19" = "Antihyperlipidemic_agents",
+       "20" = "Antineoplastics",
+       "28" = "Biologicals",
+       "40" = "Cardiovascular_agents",
+       "57" = "Central_nervous_system_agents",
+       "81" = "Coagulation_modifiers",
+       "87" = "Gastrointestinal_agents",
+       "97" = "Hormones/hormone_modifiers",
+      "105" = "Miscellaneous_agents",
+      "113" = "Genitourinary_tract_agents",
+      "115" = "Nutritional_products",
+      "122" = "Respiratory_agents",
+      "133" = "Topical_agents",
+      "218" = "Alternative_medicines",
+      "242" = "Psychotherapeutic_agents",
+      "254" = "Immunologic_agents",
+      "358" = "Metabolic_agents"
+    ))
 
 
 # Aggregate to person-level ---------------------------------------------------
@@ -64,11 +80,10 @@
     data = TC1_pers,
     nest = TRUE
   )
-  
-  totals <- svyby(~persons + n_purchases + pers_RXXP, 
+
+  totals <- svyby(~persons + n_purchases + pers_RXXP,
                   by = ~TC1name, FUN = svytotal, design = TC1dsgn)
-  
+
   totals %>% select(persons, se.persons)         # Number of people with purchase
   totals %>% select(n_purchases, se.n_purchases) # Number of purchases
   totals %>% select(pers_RXXP, se.pers_RXXP)     # Total expenditures
-  

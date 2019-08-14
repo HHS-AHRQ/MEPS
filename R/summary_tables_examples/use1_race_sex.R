@@ -19,16 +19,11 @@
   install.packages("survey")
   install.packages("dplyr")
   install.packages("foreign")
-  install.packages("devtools")
 
 # Load packages (need to run every session)
   library(survey)
   library(dplyr)
   library(foreign)
-  library(devtools)
-
-  install_github("e-mitchell/meps_r_pkg/MEPS")
-  library(MEPS)
 
 # Set survey option for lonely psu
   options(survey.lonely.psu="adjust")
@@ -36,7 +31,7 @@
 
 # Load FYC file ---------------------------------------------------------------
 
-  FYC <- read_MEPS(year = 2016, type = "FYC")
+  FYC <- read.xport("C:/MEPS/h192.ssp")
 
 
 # Define variables ------------------------------------------------------------
@@ -70,7 +65,7 @@
 # Sex
   FYC <- FYC %>%
     mutate(
-      sex = recode_factor(SEX, 
+      sex = recode_factor(SEX,
         "1" = "Male",
         "2" = "Female"))
 
@@ -108,36 +103,32 @@
 
 
 # Totals (population, expenditures)
-  totals <- svyby(~persons + TOTEXP16, 
+  totals <- svyby(~persons + TOTEXP16,
                   FUN = svytotal, by = ~sex + race, design = FYCdsgn)
 
-  totals %>% select(persons)               # Number of people 
+  totals %>% select(persons)               # Number of people
   totals %>% select(TOTEXP16, se.TOTEXP16) # Total expenditures
 
-  
+
 # Means (pct. with expense, expenditures)
-  
-  means <- svyby(~has_exp + TOTEXP16, 
+
+  means <- svyby(~has_exp + TOTEXP16,
                  FUN = svymean, by = ~sex + race, design = FYCdsgn)
-  
-  means %>% select(has_exp, se.has_exp)   # Pct of population with expense 
+
+  means %>% select(has_exp, se.has_exp)   # Pct of population with expense
   means %>% select(TOTEXP16, se.TOTEXP16) # Mean expenditure per person
 
 
 # Mean expenditure per person with expense, by race and sex
-  mean_exp <- svyby(~TOTEXP16, FUN = svymean, 
+  mean_exp <- svyby(~TOTEXP16, FUN = svymean,
                     by = ~sex + race, design = has_exp_dsgn)
 
   mean_exp %>% select(TOTEXP16, se)
-  
-  
+
+
 # Median expenditure per person with expense, by race and sex
-  med_exp <-svyby(~TOTEXP16, FUN = svyquantile, 
+  med_exp <-svyby(~TOTEXP16, FUN = svyquantile,
                   by = ~sex + race, design = has_exp_dsgn,
                   quantiles = c(0.5), ci = T, method = "constant")
 
   med_exp %>% select(TOTEXP16, se)
-  
-  
-  
-  

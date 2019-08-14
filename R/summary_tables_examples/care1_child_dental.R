@@ -13,16 +13,11 @@
   install.packages("survey")
   install.packages("dplyr")
   install.packages("foreign")
-  install.packages("devtools")
 
 # Load packages (need to run every session)
   library(survey)
   library(dplyr)
   library(foreign)
-  library(devtools)
-
-  install_github("e-mitchell/meps_r_pkg/MEPS")
-  library(MEPS)
 
 # Set survey option for lonely psu
   options(survey.lonely.psu="adjust")
@@ -30,7 +25,7 @@
 
 # Load FYC file ---------------------------------------------------------------
 
-  FYC <- read_MEPS(year = 2016, type = "FYC")
+  FYC <- read.xport("C:/MEPS/h192.ssp")
 
 
 # Define variables ------------------------------------------------------------
@@ -72,5 +67,3 @@
 # Children with dental care, by poverty status
   svyby(~child_dental, FUN = svytotal, by = ~poverty, design = children_2to17) # number
   svyby(~child_dental, FUN = svymean,  by = ~poverty, design = children_2to17) # percent
-
-  

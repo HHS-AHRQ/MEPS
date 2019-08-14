@@ -11,27 +11,22 @@
 # Install/load packages and set global options --------------------------------
 
 # Install packages (if needed) -- only need to run once
-install.packages("survey")
-install.packages("dplyr")
-install.packages("foreign")
-install.packages("devtools")
+  install.packages("survey")
+  install.packages("dplyr")
+  install.packages("foreign")
 
 # Load packages (need to run every session)
-library(survey)
-library(dplyr)
-library(foreign)
-library(devtools)
-
-install_github("e-mitchell/meps_r_pkg/MEPS")
-library(MEPS)
+  library(survey)
+  library(dplyr)
+  library(foreign)
 
 # Set survey option for lonely psu
-options(survey.lonely.psu="adjust")
+  options(survey.lonely.psu="adjust")
 
 
 # Load FYC file ---------------------------------------------------------------
 
-  FYC <- read_MEPS(year = 2016, type = "FYC")
+  FYC <- read.xport("C:/MEPS/h192.ssp")
 
 
 # Define variables ------------------------------------------------------------

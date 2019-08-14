@@ -16,16 +16,11 @@
   install.packages("survey")
   install.packages("dplyr")
   install.packages("foreign")
-  install.packages("devtools")
 
 # Load packages (need to run every session)
   library(survey)
   library(dplyr)
   library(foreign)
-  library(devtools)
-
-  install_github("e-mitchell/meps_r_pkg/MEPS")
-  library(MEPS)
 
 # Set survey option for lonely psu
   options(survey.lonely.psu="adjust")
@@ -36,8 +31,7 @@
 #  therapeutic class categories and generic drug names
 
 # Load RX file
-  RX <- read_MEPS(year = 2016, type = "RX")
-
+  RX <- read.xport("C:/MEPS/h188a.ssp")
 
 # Aggregate to person-level ---------------------------------------------------
 

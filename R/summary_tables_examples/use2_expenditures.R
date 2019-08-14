@@ -23,23 +23,17 @@
 #  - Other (OTH)
 # -----------------------------------------------------------------------------
 
-
 # Install/load packages and set global options --------------------------------
 
 # Install packages (if needed) -- only need to run once
   install.packages("survey")
   install.packages("dplyr")
   install.packages("foreign")
-  install.packages("devtools")
 
 # Load packages (need to run every session)
   library(survey)
   library(dplyr)
   library(foreign)
-  library(devtools)
-
-  install_github("e-mitchell/meps_r_pkg/MEPS")
-  library(MEPS)
 
 # Set survey option for lonely psu
   options(survey.lonely.psu="adjust")
@@ -47,12 +41,12 @@
 
 # Load FYC file ---------------------------------------------------------------
 
-  FYC <- read_MEPS(year = 2016, type = "FYC")
+  FYC <- read.xport("C:/MEPS/h192.ssp")
 
 # Aggregate payment sources ---------------------------------------------------
 #  For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
 #
-#  PTR = Private (PRV) + TRICARE (TRI) 
+#  PTR = Private (PRV) + TRICARE (TRI)
 #  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
 #         other public (OPU)  + other unclassified sources (OSR) +
 #         worker's comp (WCP) + Veteran's (VA)
@@ -86,11 +80,11 @@
 #  Note: for 1996-2006, also need to create OPT*** = OPF*** + OPD***
 
   FYC <- FYC %>% mutate(
-    OPTSLF_p = OPVSLF16  + OPSSLF16, # out-of-pocket payments
-    OPTMCR_p = OPVMCR16  + OPSMCR16, # Medicare
-    OPTMCD_p = OPVMCD16  + OPSMCD16, # Medicaid
-    OPTPTR_p = OPVPTR    + OPSPTR,   # private insurance (including TRICARE)
-    OPTOTZ_p = OPVOTZ    + OPSOTZ    # other sources of payment
+    OPTSLF_p = OPVSLF16 + OPSSLF16, # out-of-pocket payments
+    OPTMCR_p = OPVMCR16 + OPSMCR16, # Medicare
+    OPTMCD_p = OPVMCD16 + OPSMCD16, # Medicaid
+    OPTPTR_p = OPVPTR   + OPSPTR,   # private insurance (including TRICARE)
+    OPTOTZ_p = OPVOTZ   + OPSOTZ    # other sources of payment
   )
 
 
@@ -105,26 +99,26 @@
 
 
 # Total expenditures
-  
-  totals <- 
+
+  totals <-
     svytotal(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
-               OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys. 
+               OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys.
                OPTSLF16 + OPTPTR   + OPTMCR16 + OPTMCD16 + OPTOTZ +  # OP visits
                OPTSLF_p + OPTPTR_p + OPTMCR_p + OPTMCD_p + OPTOTZ_p, # OP phys. visits
-             design = FYCdsgn) 
+             design = FYCdsgn)
 
   totals %>% as.data.frame()
-  
-  
+
+
 # Mean expenditure per person
 
-  means <- 
+  means <-
     svymean(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
-              OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys. 
+              OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys.
               OPTSLF16 + OPTPTR   + OPTMCR16 + OPTMCD16 + OPTOTZ +  # OP visits
               OPTSLF_p + OPTPTR_p + OPTMCR_p + OPTMCD_p + OPTOTZ_p, # OP phys. visits
-            design = FYCdsgn) 
-  
+            design = FYCdsgn)
+
   means %>% as.data.frame()
 
 
