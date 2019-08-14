@@ -1,43 +1,11 @@
 # Analyzing MEPS data using Stata
 
-[Stata examples](#stata-examples)<br>
 [Loading MEPS data](#loading-meps-data)<br>
 &nbsp; &nbsp; [Manually](#manually)<br>
 &nbsp; &nbsp; [Programmatically](#programmatically)<br>
 &nbsp; &nbsp; [Saving Stata data file (.dta)](#saving-stata-data-file-dta)<br>
 [Stata `svy` commands](#stata-svy-commands)<br>
-
-
-## Stata examples
-
-The following example codes are provided in the [workshop_exercises](workshop_exercises) folder.
-
-#### 1. National health care expenses
-[Exercise1a.do](workshop_exercises/Exercise1a.do): National health care expenses by age group, 2016
-<br>
-[Exercise1b.do](workshop_exercises/Exercise1b.do): National health care expenses by age group and type of service, 2015
-<br>
-
-#### 2. Prescribed medicine purchases
-[Exercise2a.do](workshop_exercises/Exercise2a.do): Trends in antipsychotics purchases and expenses, 2015
-<br>
-[Exercise2b.do](workshop_exercises/Exercise2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
-
-#### 3. Medical conditions
-[Exercise3a.do](workshop_exercises/Exercise3a.do): Use and expenditures for persons with diabetes, 2015
-<br>
-[Exercise3b.do](workshop_exercises/Exercise3b.do): Expenditures for all events associated with diabetes, 2015
-<br>
-
-#### 4. Pooling data files
-[Exercise4a.do](workshop_exercises/Exercise4a.do): Pooling MEPS FYC files, 2015 and 2016
-<br>
-[Exercise4b.do](workshop_exercises/Exercise4b.do): Pooling longitudinal files, panels 17-19
-
-#### 5. Constructing variables
-[Exercise5a.do](workshop_exercises/Exercise5a.do): Constructing family-level variables from person-level data, 2015
-<br>
-[Exercise5b.do](workshop_exercises/Exercise5b.do): Constructing insurance status from monthly insurance variables, 2015
+[Stata examples](#stata-examples)<br>
 
 
 ## Loading MEPS data
@@ -80,3 +48,68 @@ use dupersid perwt14f varpsu varstr totexp14 using "C:\MEPS\Stata\data\h171.dta"
 svyset varpsu [pweight=perwt14f], str(varstr)
 svy: total totexp14
 ```
+
+
+## Stata examples
+
+In order to run the example codes, you must download the relevant MEPS files from the MEPS website and save them to your local computer, as described above.
+
+### Workshop exercises
+The following example codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder:
+
+#### 1. National health care expenses
+[Exercise1a.do](workshop_exercises/Exercise1a.do): National health care expenses by age group, 2016
+<br>
+[Exercise1b.do](workshop_exercises/Exercise1b.do): National health care expenses by age group and type of service, 2015
+<br>
+
+#### 2. Prescribed medicine purchases
+[Exercise2a.do](workshop_exercises/Exercise2a.do): Trends in antipsychotics purchases and expenses, 2015
+<br>
+[Exercise2b.do](workshop_exercises/Exercise2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+
+#### 3. Medical conditions
+[Exercise3a.do](workshop_exercises/Exercise3a.do): Use and expenditures for persons with diabetes, 2015
+<br>
+[Exercise3b.do](workshop_exercises/Exercise3b.do): Expenditures for all events associated with diabetes, 2015
+<br>
+
+#### 4. Pooling data files
+[Exercise4a.do](workshop_exercises/Exercise4a.do): Pooling MEPS FYC files, 2015 and 2016
+<br>
+[Exercise4b.do](workshop_exercises/Exercise4b.do): Pooling longitudinal files, panels 17-19
+
+#### 5. Constructing variables
+[Exercise5a.do](workshop_exercises/Exercise5a.do): Constructing family-level variables from person-level data, 2015
+<br>
+[Exercise5b.do](workshop_exercises/Exercise5b.do): Constructing insurance status from monthly insurance variables, 2015
+
+
+### Summary tables examples
+
+The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS online summary tables](https://meps.ahrq.gov/mepstrends/home/). These example codes are written under the assumption that the .ssp files are saved in the local directory "C:/MEPS/". However, you can customize the programs to point to an alternate directory.
+
+#### Accessibility and quality of care
+[care1_child_dental.do](summary_tables_examples/care1_child_dental.do): Children with dental care, by poverty status, 2016
+<br>
+[care2_diabetes_a1c.do](summary_tables_examples/care2_diabetes_a1c.do): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
+<br>
+[care3_access.do](summary_tables_examples/care3_access.do): Ability to schedule a routine appointment, by insurance coverage, 2016
+
+#### Medical conditions
+[cond1_expenditures.do](summary_tables_examples/cond1_expenditures.do): Utilization and expenditures by medical condition, 2015
+
+#### Health Insurance
+[ins1_age.do](summary_tables_examples/ins1_age.do): Health insurance coverage by age group, 2016
+
+#### Prescribed drugs
+[pmed1_therapeutic_class.do](summary_tables_examples/pmed1_therapeutic_class.do): Purchases and expenditures by Multum therapeutic class, 2016
+<br>
+[pmed2_prescribed_drug.do](summary_tables_examples/pmed2_prescribed_drug.do): Purchases and expenditures by generic drug name, 2016
+
+#### Use, expenditures, and population
+[use1_race_sex.do](summary_tables_examples/use1_race_sex.do): Utilization and expendiutres by race and sex, 2016
+<br>
+[use2_expenditures.do](summary_tables_examples/use2_expenditures.do): Expenditures for office-based and outpatient visits, by source of payment, 2016
+<br>
+[use3_events.do](summary_tables_examples/use3_events.do): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016

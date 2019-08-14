@@ -40,16 +40,25 @@ To download the data, unzip and save the ASCII (.dat) or SAS transport (.ssp) fi
 
 The steps for loading the .dat or .ssp files depends on the programming language being used. Code for loading .ssp files in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
 
-When reading MEPS data directly from the MEPS website, it is often helpful to know the complete name of the zip file. To find the name of the zip file, navigate to the dataset on the MEPS website, right-click on the ZIP link, then select 'Copy link address' to copy the location to the clipboard.
-
-!['Copy link address' selection on MEPS data file website](_images/copy_link_address.png)
-
-This link can then be used to programmatically import MEPS data directly into programming code. Details on this method are provided in the [R](R), [SAS](SAS), and [Stata](Stata) folders.
-
-Shortened file names by data type and year can be found at the quick reference guide [meps_file_names.csv](Quick_Reference_Guides/meps_file_names.csv).
 
 ## Analyzing MEPS-HC data
 The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages including R, SAS, and Stata. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided for [R](R), [SAS](SAS), and [Stata](Stata). Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
+
+#### Sample size and precision
+
+When analyzing MEPS data, it is the user's responsibility to ensure that sample sizes and precision are adequate for the user's purposes. Please refer to [AHRQ's guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) for specific recommendations.
+
+#### MEPS variables across the years
+
+When analyzing multiple years of MEPS data, it is important to note that MEPS variable names may differ across years. Here are just a few examples:
+
+* 1996: Round-specific variables have only one round number (e.g. AGE2X instead of AGE42X)
+* 1996-1998: PERWT variable is WTDPERyy (yy = '96', '97', '98')
+* 1996-2001: VARPSU variable has 2-digit year at end (e.g. VARPSU96)
+
+Users should refer to the documentation that is provided with each data set for more information.
+
+
 
 > **Note to User**: All code provided in this repository is intended as an example for loading and analyzing MEPS data. AHRQ cannot certify the quality of your analysis. It is the user's responsibility to verify the accuracy of the results.
 
