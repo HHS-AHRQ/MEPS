@@ -57,7 +57,6 @@ proc format;
 		3 = "Black"
 		4 = "Amer. Indian, AK Native, or mult. races"
 		5 = "Asian, Hawaiian, or Pacific Islander"
-		9 = "White and other"
 		. = "Missing";
 run;
 

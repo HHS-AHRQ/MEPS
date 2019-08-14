@@ -3,7 +3,7 @@
 /*
 /* Expenditures by event type and source of payment (SOP)
 /*
-/* Example R code to replicate the following estimates in the MEPS-HC summary
+/* Example SAS code to replicate the following estimates in the MEPS-HC summary
 /*  tables, by source of payment (SOP), for selected event types:
 /*  - total expenditures
 /*  - mean expenditure per person
@@ -33,14 +33,14 @@ run;
 
 
 /* Aggregate payment sources *************************************************/
-/*  1996-1999: TRICARE label is CHM (changed to TRI in 2000) 
+/*  1996-1999: TRICARE label is CHM (changed to TRI in 2000)
 /*
 /*  PTR = Private (PRV) + TRICARE (TRI)
 /*  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
 /*         other public (OPU)  + other unclassified sources (OSR) +
 /*         worker's comp (WCP) + Veteran's (VA)                              */
 
-data FYC; 
+data FYC;
 	set h192;
 
 	/* office-based visits */
@@ -70,7 +70,7 @@ data FYC;
     OPTMCR_p = OPVMCR16  + OPSMCR16; * Medicare;
     OPTMCD_p = OPVMCD16  + OPSMCD16; * Medicaid;
     OPTPTR_p = OPVPTR    + OPSPTR;   * private insurance (including TRICARE);
-    OPTOTZ_p = OPVOTZ    + OPSOTZ;   * other sources of payment;              
+    OPTOTZ_p = OPVOTZ    + OPSOTZ;   * other sources of payment;
 
 	/* Define domains for persons with out-of-pocket expense *****************/
 	has_OBVSLF = (OBVSLF16 > 0);
@@ -88,7 +88,7 @@ proc format;
 	value $sop
 		"SLF" = "Out-of-pocket"
 		"PTR" = "Private"
-		"MCR" = "Medicare" 
+		"MCR" = "Medicare"
 		"MCD" = "Medicaid"
 		"OTZ" = "Other";
 run;

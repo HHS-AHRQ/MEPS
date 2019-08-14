@@ -24,9 +24,7 @@ global keep_vars evntidx dupersid xpx varstr varpsu perwt15f
 
 * RX - count number of fills per event
 import sasxport "h178a.ssp", clear
-collapse ///
-	(sum) xpx = rxxp15x ///
-	(count) n_fills = rxxp15x, ///
+collapse  (sum) xpx = rxxp15x 	(count) n_fills = rxxp15x, ///
 	by(dupersid linkidx varstr varpsu perwt15f)
 rename linkidx evntidx
 gen data = "RX"
@@ -169,7 +167,7 @@ replace cond = "Symptoms" 						if inrange(ccnum, 245, 252)
 replace cond = "Allergic reactions" 			if ccnum == 253
 
 * Convert to factor
-encode cond, generate(condition) 
+encode cond, generate(condition)
 
 * De-duplicate by event ID ('evntidx') and collapsed code ('condition')
 duplicates drop dupersid evntidx condition, force
@@ -203,8 +201,3 @@ svy: total n_events, over(condition)  // Number of events
 svy: total pers_XP,  over(condition)  // Total expenditures
 
 svy: mean pers_XP, over(condition)  // Mean expenditure per person with care
-
-
-
-
-

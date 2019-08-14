@@ -4,7 +4,7 @@
 /* Utilization and expenditures by event type and source of payment (SOP)
 /*  based on event files
 /*
-/* Example R code to replicate the following estimates in the MEPS-HC summary
+/* Example SAS code to replicate the following estimates in the MEPS-HC summary
 /*  tables for selected event types:
 /*  - total number of events
 /*  - mean expenditure per event, by source of payment
@@ -41,14 +41,14 @@ ods graphics off;
 
 
 /* Aggregate payment sources for each dataset *********************************/
-/*  1996-1999: TRICARE label is CHM (changed to TRI in 2000) 
+/*  1996-1999: TRICARE label is CHM (changed to TRI in 2000)
 /*
 /*  PTR = Private (PRV) + TRICARE (TRI)
 /*  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
 /*         other public (OPU)  + other unclassified sources (OSR) +
 /*         worker's comp (WCP) + Veteran's (VA)                              */
 
-data OB; 
+data OB;
 	set h188g;
 	if OBXP16X >= 0; /* Remove inapplicable events */
 
@@ -59,7 +59,7 @@ data OB;
 	phys_count = (SEEDOC = 1);
 run;
 
-data OP; 
+data OP;
 	set h188f;
 	if OPXP16X >= 0; /* Remove inapplicable events */
 
@@ -178,7 +178,7 @@ run;
 		by DUPERSID VARSTR VARPSU;
 		var count phys_count PERWT16F;
 		output out = pers_OB
-			sum  = n_events n_phys_events 
+			sum  = n_events n_phys_events
 			mean = m_events m_phys PERWT16F;
 	run;
 
@@ -196,4 +196,3 @@ run;
 		WEIGHT PERWT16F;
 		var n_events n_phys_events;
 	run;
-
