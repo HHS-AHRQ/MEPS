@@ -1,6 +1,6 @@
 # Medical Expenditure Panel Survey (MEPS)
 
-This repository contains instructions and example code for loading and analyzing data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC), as well as presentation slides from the most recent MEPS Workshop. [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
+This repository contains instructions and example code for loading and analyzing data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
 
 [MEPS Workshops](#meps-workshops) <br>
 [Survey Background](#survey-background) <br>
@@ -13,6 +13,8 @@ This repository contains instructions and example code for loading and analyzing
  * [R](R) <br>
  * [SAS](SAS) <br>
  * [Stata](Stata) <br>
+
+ > **Note to User**: All code provided in this repository is intended as an example for loading and analyzing MEPS data. AHRQ cannot certify the quality of your analysis. It is the user's responsibility to verify the accuracy of the results.
 
 ## MEPS Workshops
 
@@ -30,7 +32,7 @@ The MEPS-HC is designed to produce national and regional estimates of the health
 
 ## Accessing MEPS-HC data
 
-Data from the Household Component of MEPS are [available for download](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp) as public use files. Each dataset contains .zip and .exe files in ASCII and SAS transport format.
+Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). Each dataset contains .zip and .exe files in ASCII and SAS transport format.
 
 ![MEPS data files website screenshot](_images/data_documentation_arrow.png)
 
@@ -42,7 +44,7 @@ The steps for loading the .dat or .ssp files depends on the programming language
 
 
 ## Analyzing MEPS-HC data
-The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages including R, SAS, and Stata. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided for [R](R), [SAS](SAS), and [Stata](Stata). Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
+The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided in the [R](R), [SAS](SAS), and [Stata](Stata) folders. Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
 
 #### Sample size and precision
 
@@ -59,12 +61,9 @@ When analyzing multiple years of MEPS data, it is important to note that MEPS va
 Users should refer to the documentation that is provided with each data set for more information.
 
 
-
-> **Note to User**: All code provided in this repository is intended as an example for loading and analyzing MEPS data. AHRQ cannot certify the quality of your analysis. It is the user's responsibility to verify the accuracy of the results.
-
-
 ## Additional Survey Components
-In addition to the Household Component (MEPS-HC), MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees. It also includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size).
+
+In addition to the Household Component (MEPS-HC), MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees. It also includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size). [Summary data tables, chartbooks, and publications](https://meps.ahrq.gov/mepsweb/survey_comp/Insurance.jsp) are available on the MEPS website.
 
 Special permissions are required to access datasets from the MPC and IC components. Access to the MEPS-MPC data can be requested from the [AHRQ data center](https://meps.ahrq.gov/mepsweb/data_stats/onsite_datacenter.jsp). For access to the MEPS-IC data, visit the [Census Bureau's data center website](http://www.census.gov/ces/rdcresearch/).
 

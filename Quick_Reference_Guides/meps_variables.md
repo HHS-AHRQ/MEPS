@@ -9,7 +9,7 @@ To complete the variable name in the following table, replace 'yy' with the two-
 
 ### Source of Payment Keys
 
-To complete variable name in the '[Utilization and Expenditure Variables](#utilization-and-expenditure-variables)' table, replace **\* with a particular source of payment category as identified in the following tables:
+To complete variable name in the '[Utilization and Expenditure Variables](#utilization-and-expenditure-variables)' table above, replace **\* with a particular source of payment category as identified in the following tables:
 
 ![sop category cheat sheet](../_images/qrg_sop_categories.png)
 
