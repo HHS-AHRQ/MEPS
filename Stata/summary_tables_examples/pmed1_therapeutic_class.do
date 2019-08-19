@@ -13,6 +13,12 @@
 clear
 set more off
 
+* Load RX file ----------------------------------------------------------------
+* For 1996-2013, need to merge RX event file with Multum Lexicon Addendum
+*  file to get therapeutic class categories and generic drug names
+
+import sasxport "C:\MEPS\h188a.ssp", clear
+
 
 * Define labels for therapeutic classes ---------------------------------------
 
@@ -38,13 +44,7 @@ set more off
 	254 "Immunologic_agents" ///
 	358 "Metabolic_agents"
 
-* Load datasets ---------------------------------------------------------------
-* For 1996-2013, need to merge RX event file with Multum Lexicon Addendum
-*  file to get therapeutic class categories and generic drug names
-
-* Load RX file
-import sasxport "C:\MEPS\h188a.ssp", clear
-
+	
 label values tc1 TC1name // Apply labels to therapeutic classes
 
 
