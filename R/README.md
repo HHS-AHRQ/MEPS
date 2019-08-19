@@ -1,29 +1,13 @@
 # Analyzing MEPS data using R
 
-[R examples](#r-examples)<br>
+
 [Loading R packages](#loading-r-packages)<br>
 [Loading MEPS data](#loading-meps-data)<br>
 &nbsp; &nbsp; [Manually](#manually)<br>
 &nbsp; &nbsp; [Programmatically](#programmatically)<br>
 &nbsp; &nbsp; [Saving R data file (.Rdata)](#saving-r-data-file-rdata)<br>
 [Survey Package in R](#survey-package-in-r)<br>
-
-
-## R examples
-
-The following codes are provided in this folder:
-
-[exercise_1.R](exercise_1.R): National health care expenses by age group, 2016
-<br>
-[exercise_2.R](exercise_2.R): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
-<br>
-[exercise_3.R](exercise_3.R): Pooling MEPS FYC files, 2015 and 2016
-<br>
-[exercise_4.R](exercise_4.R):  Pooling longitudinal files, panels 17-19
-
-[exercise_5.R](exercise_5.R): Code to calculate some of the estimates from the [MEPS summary table](https://meps.ahrq.gov/mepstrends/hc_use/) for 2013 data.
-<br>
-[exercise_6.R](exercise_6.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml) (includes `ggplot2` example).
+[R examples](#r-examples)<br>
 
 
 ## Loading R packages
@@ -100,3 +84,53 @@ mepsdsgn = svydesign(id = ~VARPSU,
 
 svytotal(~TOTEXP13, design = mepsdsgn)
 ```
+
+## R examples
+
+In order to run the example codes, you must download the relevant MEPS files in SAS transport format (.ssp) from the MEPS website and save them to your local computer, as described above. The codes are written under the assumption that the .ssp files are saved in the local directory "C:/MEPS/". However, you can customize the programs to point to an alternate directory.
+
+
+### Workshop exercises
+The following codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder:
+
+[exercise_1.R](workshop_exercises/exercise_1.R): National health care expenses by age group, 2016
+<br>
+[exercise_2.R](workshop_exercises/exercise_2.R): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+<br>
+[exercise_3.R](workshop_exercises/exercise_3.R): Pooling MEPS FYC files, 2015 and 2016
+<br>
+[exercise_4.R](workshop_exercises/exercise_4.R):  Pooling longitudinal files, panels 17-19
+
+
+### Summary tables examples
+
+The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS online summary tables](https://meps.ahrq.gov/mepstrends/home/):
+
+#### Accessibility and quality of care
+[care1_child_dental.R](summary_tables_examples/care1_child_dental.R): Children with dental care, by poverty status, 2016
+<br>
+[care2_diabetes_a1c.R](summary_tables_examples/care2_diabetes_a1c.R): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
+<br>
+[care3_access.R](summary_tables_examples/care3_access.R): Ability to schedule a routine appointment, by insurance coverage, 2016
+
+#### Medical conditions
+[cond1_expenditures.R](summary_tables_examples/cond1_expenditures.R): Utilization and expenditures by medical condition, 2015
+
+#### Health Insurance
+[ins1_age.R](summary_tables_examples/ins1_age.R): Health insurance coverage by age group, 2016
+
+#### Prescribed drugs
+[pmed1_therapeutic_class.R](summary_tables_examples/pmed1_therapeutic_class.R): Purchases and expenditures by Multum therapeutic class, 2016
+<br>
+[pmed2_prescribed_drug.R](summary_tables_examples/pmed2_prescribed_drug.R): Purchases and expenditures by generic drug name, 2016
+
+#### Use, expenditures, and population
+[use1_race_sex.R](summary_tables_examples/use1_race_sex.R): Utilization and expendiutres by race and sex, 2016
+<br>
+[use2_expenditures.R](summary_tables_examples/use2_expenditures.R): Expenditures for office-based and outpatient visits, by source of payment, 2016
+<br>
+[use3_events.R](summary_tables_examples/use3_events.R): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
+
+<br>
+
+[ggplot_example.R](ggplot_example.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).

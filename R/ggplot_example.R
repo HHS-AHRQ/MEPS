@@ -1,4 +1,4 @@
-# Example 2: Re-producing estimates for Figure 1 of Stat brief #491
+# Example: Reproducing estimates for Figure 1 of Stat brief #491
 
 # Load packages and set options
 install.packages("foreign")  # Only need to run these once
