@@ -11,6 +11,8 @@
 *  - mean expenditure per person
 *  - mean expenditure per person with expense
 *  - median expenditure per person with expense
+*
+* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -66,14 +68,24 @@ tabstat totexp16, by(has_exp) statistics(min, mean, max, n)
 
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
-svy: total persons,  over(sex race) // Number of people
-svy: total totexp16, over(sex race) // Total expenditures
+* Number of people
+quietly svy: total persons, over(sex race)
+estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
 
-svy: mean has_exp,  over(sex race) // Pct of population with expense
-svy: mean totexp16, over(sex race) // Mean expenditure per person
+* Total expenditures
+quietly svy: total totexp16, over(sex race)
+estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
+
+* Percent of population with expense
+svy: mean has_exp,  over(sex race)
+
+* Mean expenditure per person
+svy: mean totexp16, over(sex race)
 
 * Mean expenditure per person with expense
 svy, subpop(has_exp): mean totexp16, over(sex race)
 
 * Median expenditure per person with expense -- using the 'epctile' package
+*  Note: Estimates may vary in R, SAS, and Stata, due to different methods
+*        of estimating survey quantiles
 epctile totexp16, p(50) over(sex race) subpop(has_exp) svy

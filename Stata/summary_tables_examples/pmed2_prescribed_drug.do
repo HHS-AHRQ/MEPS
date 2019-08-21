@@ -8,16 +8,18 @@
 *  - Number of people with purchase
 *  - Total purchases
 *  - Total expenditures
+*
+* Input file: C:\MEPS\h188a.ssp (2016 RX event file)
 * -----------------------------------------------------------------------------
 
 clear
 set more off
 
 * Load datasets ---------------------------------------------------------------
-* For 1996-2013, need to merge RX event file with Multum Lexicon Addendum  
-*  file to get therapeutic class categories and generic drug names         
+* For 1996-2013, need to merge RX event file with Multum Lexicon Addendum
+*  file to get therapeutic class categories and generic drug names
 
-* Load RX file 
+* Load RX file
 import sasxport "C:\MEPS\h188a.ssp", clear
 
 
@@ -46,13 +48,13 @@ tabstat n_people, by(domain) statistics(min, max, n) // QC
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
 * Number of people with purchase
-quietly svy, subpop(domain): total persons, over(rx_factor)  
-estimates table,  b(%20.0fc) se(%20.0fc)
+quietly svy, subpop(domain): total persons, over(rx_factor)
+estimates table,  b(%20.0fc) se(%20.0fc) varwidth(30)
 
 * Number of purchases
-quietly svy, subpop(domain): total n_purchases, over(rx_factor)  
-estimates table,  b(%20.0fc) se(%20.0fc)
+quietly svy, subpop(domain): total n_purchases, over(rx_factor)
+estimates table,  b(%20.0fc) se(%20.0fc) varwidth(30)
 
 * Total expenditures
-quietly svy, subpop(domain): total pers_RXXP, over(rx_factor)  
-estimates table,  b(%20.0fc) se(%20.0fc)
+quietly svy, subpop(domain): total pers_RXXP, over(rx_factor)
+estimates table,  b(%20.0fc) se(%20.0fc) varwidth(30)

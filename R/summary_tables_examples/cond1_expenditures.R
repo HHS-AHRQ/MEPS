@@ -11,6 +11,16 @@
 #  - Number of events
 #  - Total expenditures
 #  - Mean expenditure per person
+#
+# Input files:
+# 	- C:/MEPS/h178a (2015 RX event file)
+# 	- C:/MEPS/h178d (2015 IP event file)
+# 	- C:/MEPS/h178e (2015 ER event file)
+# 	- C:/MEPS/h178f (2015 OP event file)
+# 	- C:/MEPS/h178g (2015 OB event file)
+# 	- C:/MEPS/h178h (2015 HH event file)
+# 	- C:/MEPS/h178if1 (2015 CLNK: Condition-event link file)
+# 	- C:/MEPS/h180 (2015 Conditions file)
 # -----------------------------------------------------------------------------
 
 # Install/load packages and set global options --------------------------------
@@ -39,18 +49,18 @@
     summarize(XPX = sum(RXXP15X), n_fills = n()) %>%
     ungroup %>%
     rename(EVNTIDX = LINKIDX)
-  
+
   IP <- read.xport("C:/MEPS/h178d.ssp") %>% rename(XPX = IPXP15X)
   ER <- read.xport("C:/MEPS/h178e.ssp") %>% rename(XPX = ERXP15X)
   OP <- read.xport("C:/MEPS/h178f.ssp") %>% rename(XPX = OPXP15X)
   OB <- read.xport("C:/MEPS/h178g.ssp") %>% rename(XPX = OBXP15X)
   HH <- read.xport("C:/MEPS/h178h.ssp") %>% rename(XPX = HHXP15X)
 
-  stacked_events <- 
+  stacked_events <-
     bind_rows(RX=RX, IP=IP, ER=ER, OP=OP, OB=OB, HH=HH, .id = "data") %>%
     select(data, EVNTIDX, DUPERSID, XPX, VARSTR, VARPSU, PERWT15F, n_fills) %>%
     mutate(n_events = pmax(n_fills, 1, na.rm = T))
-  
+
 
 # Load in event-condition linking file
   clink1 = read.xport("C:/MEPS/h178if1.ssp") %>%
@@ -65,12 +75,12 @@
 
 # Merge conditions file with the conditions-event link file (CLNK)
   cond_clink <- full_join(conditions, clink1, by = c("DUPERSID", "CONDIDX"))
-  
+
 # Create collapsed condition code variable
   cond_clink <- cond_clink %>% mutate(
-    
+
     ccnum = as.numeric(as.character(CCCODEX)), # factor -> numeric
-    
+
     Condition = case_when(
       ccnum < 0                    ~ "",
       ccnum %in% 1:9               ~ "Infectious diseases",
@@ -136,18 +146,18 @@
       ccnum == 253                 ~ "Allergic reactions",
       TRUE                         ~ "Other"
     ))
-  
-  
-# De-duplicate by event ID ('EVNTIDX') and collapsed code ('Condition')  
-  
+
+
+# De-duplicate by event ID ('EVNTIDX') and collapsed code ('Condition')
+
   cond_clink <- cond_clink %>%
     distinct(DUPERSID, EVNTIDX, Condition, .keep_all = T)
-  
-  
-# Merge conditions and event files -------------------------------------------- 
 
-  all_events <- 
-    full_join(stacked_events, cond_clink, by = c("DUPERSID", "EVNTIDX")) 
+
+# Merge conditions and event files --------------------------------------------
+
+  all_events <-
+    full_join(stacked_events, cond_clink, by = c("DUPERSID", "EVNTIDX"))
 
 # Remove observations with missing 'Condition' or negative/missing expenditures
   all_events <- all_events %>% filter(Condition != "", XPX >= 0)

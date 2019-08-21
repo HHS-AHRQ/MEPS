@@ -3,6 +3,8 @@
 *
 * Example Stata code to replicate number and percentage of people by insurance
 *  coverage and age groups
+*
+* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -10,7 +12,7 @@ set more off
 
 * Load FYC file ---------------------------------------------------------------
 
-import sasxport "C:\MEPS\h192.ssp"
+import sasxport "C:\MEPS\h192.ssp", clear
 
 
 * Define variables ------------------------------------------------------------
@@ -18,18 +20,13 @@ import sasxport "C:\MEPS\h192.ssp"
 * Age groups
 *  - For 1996-2007, AGELAST must be created from AGEyyX, AGE42X, AGE31X
 
-recode agelast 0/4 = 1  5/17 = 2  18/44 = 3  45/64 = 4  65/max = 5, ///
+recode agelast ///
+	(0/4    = 1 "Under_5")  ///
+	(5/17   = 2 "5-17"   )  ///
+	(18/44  = 3 "18-44"  )  ///
+	(45/64  = 4 "45-64"  )  ///
+	(65/max = 5 "65+"    ), ///
 	generate(agegrps)
-
-label define agegrps ///
-	1 "Under 5" ///
-	2 "5-17" ///
-	3 "18-44" ///
-	4 "45-64" ///
-	5 "65+"
-
-label values agegrps agegrps
-
 
 * Insurance coverage
 *  - For 1996-2011, create 'insurc' from 'inscov' and 'ev' variables

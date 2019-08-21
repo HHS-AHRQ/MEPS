@@ -22,6 +22,11 @@
 /*  - Medicaid (MD)
 /*  - Private insurance, including TRICARE (PR)
 /*  - Other (OZ)
+/*
+/* Input files:
+/*	- C:\MEPS\h192.ssp (2016 full-year consolidated)
+/* 	- C:\MEPS\h188f (2016 OP event file)
+/* 	- C:\MEPS\h188g (2016 OB event file)
 /*****************************************************************************/
 
 ods graphics off;

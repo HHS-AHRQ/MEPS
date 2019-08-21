@@ -6,6 +6,8 @@
 /*
 /* Example SAS code to replicate number and percentage of adults with diabetes
 /*  who had a hemoglobin A1c blood test, by race/ethnicity
+/*
+/* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
 
 ods graphics off;

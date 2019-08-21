@@ -8,6 +8,8 @@
 /*  - Number of people with purchase
 /*  - Total purchases
 /*  - Total expenditures
+/*
+/* Input file: C:\MEPS\h188a.ssp (2016 RX event file)
 /*****************************************************************************/
 
 ods graphics off;

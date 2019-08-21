@@ -3,6 +3,8 @@
 /*
 /* Example SAS code to replicate number and percentage of people by insurance
 /*  coverage and age groups
+/*
+/* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
 
 ods graphics off;

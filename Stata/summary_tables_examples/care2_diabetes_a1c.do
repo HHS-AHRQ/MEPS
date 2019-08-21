@@ -6,6 +6,8 @@
 *
 * Example Stata code to replicate number and percentage of adults with diabetes
 *  who had a hemoglobin A1c blood test, by race/ethnicity
+*
+* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -13,7 +15,7 @@ set more off
 
 * Load FYC file ---------------------------------------------------------------
 
-import sasxport "C:\MEPS\h192.ssp"
+import sasxport "C:\MEPS\h192.ssp", clear
 
 
 * Define variables ------------------------------------------------------------
@@ -22,18 +24,12 @@ import sasxport "C:\MEPS\h192.ssp"
 *  - dsa1c53 = 'Times tested for A1c in 2016' (96 = did not have test)
 
 recode dsa1c53 ///
- -9/-7 = -9  ///
-	96 = 0   ///
-  1/95 = 1,  ///
-  generate(diab_a1c)
-
-label define diab_a1c ///
-	-9  "Don't know/Non-response" ///
-	-1  "Inapplicable" ///
-	 0  "Did not have measurement" ///
-	 1  "Had measurement"
-
-label values diab_a1c diab_a1c
+	(-9/-7 = -9 "Don't know/Non-response" )  ///
+	(-1    = -1 "Inapplicable"            )  ///
+	(0     =  0 "Did not have measurement")  ///
+	(96    =  0 "Did not have measurement")  ///
+	(1/95  =  1 "Had measurement"         ), ///
+	generate(diab_a1c)
 
 * Race/ethnicity
 * 1996-2002: race/ethnicity variable based on racethnx (see documentation for details)

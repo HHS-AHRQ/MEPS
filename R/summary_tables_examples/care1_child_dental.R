@@ -5,6 +5,8 @@
 #
 # Example R code to replicate number and percentage of children with dental
 #  care, by poverty status
+#
+# Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
 
 # Install/load packages and set global options --------------------------------

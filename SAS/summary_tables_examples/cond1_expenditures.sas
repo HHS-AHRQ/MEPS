@@ -11,6 +11,16 @@
 /*  - Number of events
 /*  - Total expenditures
 /*  - Mean expenditure per person
+/*
+/* Input files:
+/* 	- C:\MEPS\h178a (2015 RX event file)
+/* 	- C:\MEPS\h178d (2015 IP event file)
+/* 	- C:\MEPS\h178e (2015 ER event file)
+/* 	- C:\MEPS\h178f (2015 OP event file)
+/* 	- C:\MEPS\h178g (2015 OB event file)
+/* 	- C:\MEPS\h178h (2015 HH event file)
+/* 	- C:\MEPS\h178if1 (2015 CLNK: Condition-event link file)
+/* 	- C:\MEPS\h180 (2015 Conditions file)
 /*****************************************************************************/
 
 ods graphics off;

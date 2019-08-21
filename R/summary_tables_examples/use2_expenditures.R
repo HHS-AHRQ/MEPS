@@ -21,6 +21,8 @@
 #  - Medicaid (MCD)
 #  - Private insurance, including TRICARE (PTR)
 #  - Other (OTH)
+#
+# Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
 
 # Install/load packages and set global options --------------------------------

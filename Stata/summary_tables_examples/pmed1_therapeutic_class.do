@@ -8,6 +8,8 @@
 *  - Number of people with purchase
 *  - Total purchases
 *  - Total expenditures
+*
+* Input file: C:\MEPS\h188a.ssp (2016 RX event file)
 * -----------------------------------------------------------------------------
 
 clear
@@ -44,7 +46,7 @@ import sasxport "C:\MEPS\h188a.ssp", clear
 	254 "Immunologic_agents" ///
 	358 "Metabolic_agents"
 
-	
+
 label values tc1 TC1name // Apply labels to therapeutic classes
 
 
@@ -63,6 +65,14 @@ gen persons = 1
 
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
-svy, over(tc1): total persons     // Number of people with purchase
-svy, over(tc1): total n_purchases // Number of purchases
-svy, over(tc1): total pers_RXXP   // Total expenditures
+* Number of people with purchase
+quietly svy, over(tc1): total persons
+estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
+
+* Number of purchases
+quietly svy, over(tc1): total n_purchases
+estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
+
+* Total expenditures
+quietly svy, over(tc1): total pers_RXXP
+estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)

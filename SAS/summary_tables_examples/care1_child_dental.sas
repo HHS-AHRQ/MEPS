@@ -5,6 +5,8 @@
 /*
 /* Example SAS code to replicate number and percentage of children with dental
 /*  care, by poverty status
+/*
+/* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
 
 ods graphics off;
@@ -21,7 +23,7 @@ run;
 
 data MEPS;
   	SET h192;
- 
+
  /* Children receiving dental care */
 	child_2to17 = (1 < AGELAST & AGELAST < 18)*1;
 	child_dental = ((DVTOT16 > 0) & (child_2to17 = 1))*1;

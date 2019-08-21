@@ -6,6 +6,8 @@
 /*
 /* Example SAS code to replicate number and percentage of adults by their ability
 /*  to schedule a routine appointment, by insurance coverage
+/*
+/* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
 
 ods graphics off;

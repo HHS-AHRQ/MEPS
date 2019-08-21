@@ -11,6 +11,8 @@
 #  - mean expenditure per person
 #  - mean expenditure per person with expense
 #  - median expenditure per person with expense
+#
+# Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
 
 # Install/load packages and set global options --------------------------------
@@ -127,6 +129,8 @@
 
 
 # Median expenditure per person with expense, by race and sex
+#   Note: Estimates may vary in R, SAS, and Stata, due to different methods
+#         of estimating survey quantiles
   med_exp <-svyby(~TOTEXP16, FUN = svyquantile,
                   by = ~sex + race, design = has_exp_dsgn,
                   quantiles = c(0.5), ci = T, method = "constant")

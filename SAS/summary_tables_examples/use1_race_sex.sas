@@ -11,6 +11,8 @@
 /*  - mean expenditure per person
 /*  - mean expenditure per person with expense
 /*  - median expenditure per person with expense
+/*
+/* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
 
 ods graphics off;
@@ -115,10 +117,9 @@ proc print data = out_mean noobs label;
 run;
 
 
-/* Median expenditure per person with expense, by race and sex */
-/*  - Estimates may differ from online tables slightly, since  */
-/*    R and SAS use different methods for caculating medians   */
-
+/* Median expenditure per person with expense, by race and sex              */
+/*  Note: Estimates may vary in R, SAS, and Stata, due to different methods */
+/*        of estimating survey quantiles                                    */
 proc print data = out_median noobs label;
 	where has_exp = 1;
 	label Estimate = "Median expenditure per person with expense";

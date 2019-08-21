@@ -21,6 +21,8 @@
 *  - Medicaid (MCD)
 *  - Private insurance, including TRICARE (PTR)
 *  - Other (OTH)
+*
+* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -76,11 +78,13 @@ gen optotz_p = opvotz   + opsotz   // other sources of payment
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
 * Total expenditures
-svy: total ///
+quietly svy: total ///
 	obvslf16 obvptr   obvmcr16 obvmcd16 obvotz   /* office-based visits       */ ///
 	obdslf16 obdptr   obdmcr16 obdmcd16 obdotz   /* office-based phys. visits */ ///
 	optslf16 optptr   optmcr16 optmcd16 optotz   /* OP visits                 */ ///
 	optslf_p optptr_p optmcr_p optmcd_p optotz_p /* OP phys. visits          */
+
+estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
 
 * Mean expenditure per person
 svy: mean ///
