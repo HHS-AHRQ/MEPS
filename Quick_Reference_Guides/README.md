@@ -2,9 +2,7 @@
 
 The following reference guides are provided for convenience:
 
-[Condition Codes - CCS (1996-2015)](#condition-codes-ccs-1996-2015)
-<br>
-[Condition Codes - CCSR (2016 and later)](#condition-codes-ccsr-2016-and-later)
+[Condition Codes](#condition-codes)
 <br>
 [Entity Relationship Diagram](#entity-relationship-diagram)
 <br>
@@ -15,22 +13,17 @@ The following reference guides are provided for convenience:
 [Variable Names](#variable-names)
 
 
-## Condition Codes - CCS (1996-2015)
+## Condition Codes
 
-[meps_ccs_conditions.csv](meps_ccs_conditions.csv) provides a cross-reference between collapsed condition categories commonly used in MEPS analyses and the Healthcare Cost and Utilization Project's (HCUP) Clinical Classification Software (CCS) Codes. Information on how [CCS codes relate to ICD-9](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) codes is available on the HCUP website.
-[![preview of ccs condition codes](../_images/meps_ccs_conditions.png)](meps_ccs_conditions.csv)
+From 1996-2015, household-reported medical conditions in MEPS were coded into ICD-9 codes, which were then collapsed into the broader Clinical Classification Software (CCS) codes created by the Healthcare Cost and Utilization Project (HCUP). Starting in 2016, medical conditions were coded into ICD-10 codes, then collapsed into CCS-Refined (CCSR) codes provided by HCUP.
 
-For more information on Medical Condition data in MEPS, CCS codes, and collapsed condition categories, see ["Understanding and Analyzing MEPS Household Component Medical Condition Data"](https://meps.ahrq.gov/survey_comp/MEPS_condition_data.pdf) by Steven Machlin, Anita Soni, and Zhengyi Fang.
+For analytical purposes (including the creation of the [MEPS summary tables](https://meps.ahrq.gov/mepstrends/home/)), MEPS created even broader condition categories. Some of these collapsed condition categories were revised with the transition from ICD-9 to ICD-10 in 2016. The following spreadsheets provide crosswalks between CCS[R] and MEPS collapsed condition categories, as well as the list of collapsed condition categories that were revised in 2016.
 
+* [meps_ccs_conditions.csv](meps_ccs_conditions.csv): CCS - Collapsed Condition crosswalk (1996-2015)
+* [meps_ccsr_conditions.csv](meps_ccsr_conditions.csv): CCSR - Collapsed Condition crosswalk (2016 and later)
+* [meps_condition_changes.csv](meps_condition_changes.csv): Differences between MEPS collapsed condition categories from 1996-2015 compared with 2016 and later.
 
-## Condition Codes - CCSR (2016 and later)
-
-[meps_ccsr_conditions.csv](meps_ccsr_conditions.csv) provides a cross-reference between collapsed condition categories commonly used in MEPS analyses and the Healthcare Cost and Utilization Project's (HCUP) Clinical Classification Software Refined (CCSR) Codes. Information on how [CCSR codes relate to ICD-10](https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/ccs_refined.jsp) codes is available on the HCUP website.
-[![preview of ccsr condition codes](../_images/meps_ccsr_conditions.png)](meps_ccsr_conditions.csv)
-
-
-
-
+The HCUP website provides more information on the creation of [CCS for ICD-9 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [CCSR for ICD-10 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/ccs_refined.jsp).
 
 
 ## Entity Relationship Diagram
