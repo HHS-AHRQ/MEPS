@@ -227,8 +227,8 @@ INJ024,"Sprains and strains, initial encounter",Trauma-related disorders
 INJ025,"Injury to nerves, muscles and tendons, initial encounter",Trauma-related disorders
 INJ026,Other specified injury,Trauma-related disorders
 INJ027,Other unspecified injury,Trauma-related disorders
-INJ028,"Adverse effects of medical drugs, initial encounter",Poisoning by medical and non-medical substances
-INJ029,"Underdosing of drugs, initial encounter",Other care and screening
+INJ028,"Adverse effects of drugs and medicaments, initial encounter",Poisoning by medical and non-medical substances
+INJ029,"Underdosing of drugs and medicaments, initial encounter",Other care and screening
 INJ030,Drug induced or toxic related condition,Poisoning by medical and non-medical substances
 INJ031,Allergic reactions,Allergic reactions
 INJ032,Maltreatment/abuse,Trauma-related disorders
@@ -264,8 +264,8 @@ INJ061,"Sprains and strains, subsequent encounter",Trauma-related disorders
 INJ062,"Injury to nerves, muscles and tendons, subsequent encounter",Trauma-related disorders
 INJ063,"Other specified injury, subsequent encounter",Trauma-related disorders
 INJ064,"Other unspecified injuries, subsequent encounter",Trauma-related disorders
-INJ065,"Adverse effects of medical drugs, subsequent encounter",Poisoning by medical and non-medical substances
-INJ066,"Underdosing of drugs, subsequent encounter",Other care and screening
+INJ065,"Adverse effects of drugs and medicaments, subsequent encounter",Poisoning by medical and non-medical substances
+INJ066,"Underdosing of drugs and medicaments, subsequent encounter",Other care and screening
 INJ067,"Allergic reactions, subsequent encounter",Allergic reactions
 INJ068,"Maltreatment/abuse, subsequent encounter",Trauma-related disorders
 INJ069,"Complication of cardiovascular device, implant or graft, subsequent encounter",Complications of surgery or device
@@ -300,8 +300,6 @@ MBD011,Somatic disorders,Mental disorders
 MBD012,Suicidal ideation/attempt/intentional self-harm,Mental disorders
 MBD013,Miscellaneous mental and behavioral disorders/conditions,Mental disorders
 MBD014,Neurodevelopmental disorders,Mental disorders
-MBD015,Neonatal abstinence syndrome,Mental disorders
-MBD016,Fetal alcohol syndrome,Mental disorders
 MBD017,Alcohol-related disorders,Mental disorders
 MBD018,Opioid-related disorders,Mental disorders
 MBD019,Cannabis-related disorders,Mental disorders
@@ -329,7 +327,7 @@ MUS006,Osteoarthritis,Osteoarthritis and other non-traumatic joint disorders
 MUS007,Other specified joint disorders,Osteoarthritis and other non-traumatic joint disorders
 MUS008,Immune-mediated/reactive arthropathies,Osteoarthritis and other non-traumatic joint disorders
 MUS009,Tendon and synovial disorders,Osteoarthritis and other non-traumatic joint disorders
-MUS010,Musculoskeletal pain,Osteoarthritis and other non-traumatic joint disorders
+MUS010,"Musculoskeletal pain, not low back pain",Osteoarthritis and other non-traumatic joint disorders
 MUS011,Spondylopathies/spondyloarthropathy (including infective),Back problems
 MUS012,Biomechanical lesions,Other bone and musculoskeletal disease
 MUS013,Osteoporosis,Other bone and musculoskeletal disease
@@ -357,6 +355,7 @@ MUS034,Crystal arthropathies (excluding gout),"Other endocrine, nutritional & im
 MUS035,Osteomalacia,Other bone and musculoskeletal disease
 MUS036,Autoinflammatory syndromes,"Other endocrine, nutritional & immune disorder"
 MUS037,Postprocedural or postoperative musculoskeletal system complication,Complications of surgery or device
+MUS038,Low back pain,Back problems
 NEO001,Head and neck cancers - eye,Cancer
 NEO002,Head and neck cancers - lip and oral cavity,Cancer
 NEO003,Head and neck cancers - throat,Cancer
@@ -466,6 +465,8 @@ PNL010,Newborn affected by maternal conditions or complications of labor/deliver
 PNL011,Hemorrhagic and hematologic disorders of newborn,"Complications of pregnancy/birth, and perinatal conditions"
 PNL012,Neonatal digestive and feeding disorders,"Complications of pregnancy/birth, and perinatal conditions"
 PNL013,Other specified and unspecified perinatal conditions,"Complications of pregnancy/birth, and perinatal conditions"
+PNL014,Neonatal abstinence syndrome,"Complications of pregnancy/birth, and perinatal conditions"
+PNL015,Fetal alcohol syndrome,"Complications of pregnancy/birth, and perinatal conditions"
 PRG001,Antenatal screening,Other care and screening
 PRG002,Gestational weeks,Other care and screening
 PRG003,Spontaneous abortion and complications of spontaneous abortion,"Complications of pregnancy/birth, and perinatal conditions"
