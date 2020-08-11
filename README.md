@@ -40,7 +40,7 @@ To download the data, unzip and save the ASCII (.dat) or SAS transport (.ssp) fi
 
 ![Windows folder containing h171.dat and h171.ssp](_images/directory_cropped.png)
 
-The steps for loading the .dat or .ssp files depends on the programming language being used. Code for loading .ssp files in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
+The steps for loading the .dat or .ssp files depends on the programming language being used and the MEPS data year. Code for loading MEPS data in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
 
 
 ## Analyzing MEPS-HC data

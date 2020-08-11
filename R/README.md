@@ -3,61 +3,163 @@
 
 [Loading R packages](#loading-r-packages)<br>
 [Loading MEPS data](#loading-meps-data)<br>
-&nbsp; &nbsp; [Manually](#manually)<br>
-&nbsp; &nbsp; [Programmatically](#programmatically)<br>
-&nbsp; &nbsp; [Saving R data file (.Rdata)](#saving-r-data-file-rdata)<br>
+&nbsp; &nbsp; [Using the `MEPS` package (all data years)](#using-the-meps-package-all-data-years)<br>
+&nbsp; &nbsp; [Using the `foreign` package (1996-2017)](#using-the-foreign-package-1996-2017)<br>
+&nbsp; &nbsp; [Using the `readr` package (2018 and later)](#using-the-readr-package-2018-and-later)<br>
+&nbsp; &nbsp; [Automating file download](#automating-file-download)<br>
+&nbsp; &nbsp; [Saving R data (.Rdata)](#saving-r-data-rdata)<br>
 [Survey Package in R](#survey-package-in-r)<br>
 [R examples](#r-examples)<br>
-
+&nbsp; &nbsp; [Workshop Exercises](#workshop-exercises)<br>
+&nbsp; &nbsp; [Summary tables examples](#summary-tables-examples)<br>
 
 ## Loading R packages
 
-To load and analyze MEPS data in R, additional packages are needed. Packages are sets of R functions that are downloaded and installed into the R system. A package only needs to be installed once per R installation. Typically, this is done with the `install.packages` function to download the package from the internet and store it on your computer. The `library` function needs to be run every time the R session is re-started. Packages are tailor made to help perform certain statistical, graphical, or data tasks. Since R is used by many analysts, it is typical for only some packages to be loaded for each analysis. For analyzing MEPS data, the `foreign` package allows R to read SAS transport files (.ssp), and the `survey` package is used to analyze MEPS data.
+To load and analyze MEPS data in R, additional packages are needed. Packages are sets of R functions that are downloaded and installed into the R system. A package only needs to be installed once per R installation. Typically, this is done with the `install.packages` function to download the package from the internet and store it on your computer. The `library` function needs to be run every time the R session is re-started. Packages are tailor-made to help perform certain statistical, graphical, or data tasks. Since R is used by many analysts, it is typical for only some packages to be loaded for each analysis.
 
 ``` r
 # Only need to run these once:
   install.packages("foreign")  
   install.packages("survey")
+  install.packages("devtools")
+  install.packages("tidyverse")
 
 # Run these every time you re-start R:
   library(foreign)
   library(survey)
+  library(devtools)
+  library(tidyverse)
 ```
 
 ## Loading MEPS data
-Two methods for downloading MEPS transport files are available. The first requires the user to navigate to the website containing the MEPS dataset and manually download and unzip the SAS transport file. The second method uses the R function `download.file` to automatically download the file by pointing to its location on the MEPS website.
 
-> <b>Warning!</b> R may not preserve SAS formats, labels, or variable types. For instance, a character variable on the SAS dataset could be read as a factor variable in the R dataset. Users are encouraged to be diligent in confirming that variables are stored as the appropriate type before proceeding with analyses.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into R. The ASCII data file format (.dat) must be used instead.
 
-### Manually
+Several methods are available for importing MEPS public use files (PUFs) into R. The easiest method is to use the `read_MEPS` function from the [`MEPS` package](https://github.com/e-mitchell/meps_r_pkg)</b>, which was created to facilitate loading and manipulation of MEPS PUFs. Alternatively, R users can use the `read.xport` function from the `foreign` package to import SAS transport (.ssp) files from data years 1996-2017, or the `read_fwf` function from the `readr` package to import ASCII (.dat) files from data years 2018 and later.
 
-Once the SAS transport file has been saved to a local directory, R can read the file using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h163.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+### Using the `MEPS` Package (all data years)
+
+The MEPS R Package was created to facilitate loading and manipulation of MEPS PUFs. It can be installed using the following commands:
 ``` r
-h163 = read.xport("C:/MEPS/h163.ssp")
+library(devtools)
+
+install_github("e-mitchell/meps_r_pkg/MEPS")
+library(MEPS)
 ```
-> <b>Note:</b> Directory names need to be separated by a forward slash ("/") or a double backslash ("\\\\") in R.
 
-### Programmatically
+The `read_MEPS` function can then be used to import MEPS data into R, either directly from the MEPS website, or from a local directory. This function automatically detects the best file format (.ssp or .dat) to import based on the specified data year.
 
-Alternatively, MEPS data files can be downloaded directly from the MEPS website using the `download.file` and `unzip` functions. The following code downloads the 2013 full year consolidated file (h163) directly from the MEPS website and stores it in R memory:
+In the following example, the 2017 (h197b) and 2018 (h206b) Dental visits files are automatically downloaded from the MEPS website and imported into R. Either the file name or the year and MEPS data type can be specified:
 
 ``` r
-download.file("https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip", temp <- tempfile())
-unzipped_file = unzip(temp)
-h163 = read.xport(unzipped_file)
-unlink(temp)  # Unlink to delete temporary file
+# Specifying year and MEPS data type
+dn2017 <- read_MEPS(year = 2017, type = "DV")
+dn2018 <- read_MEPS(year = 2018, type = "DV")
+
+# Specifying MEPS file name
+dn2017 <- read_MEPS(file = "h197b")
+dn2018 <- read_MEPS(file = "h206b")
+
 ```
-The `unlink` function is used to delete the temporary file, to free up space in memory. To download additional files programmatically, replace 'h163' with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year).
 
-### Saving R data file (.Rdata)
-
-Once the MEPS data has been loaded into R using either of the two previous methods, it can be saved as a permanent R dataset (.Rdata) for faster loading. In the following code, the h163 dataset is saved in the 'R/data' folder, (first create the 'R/data' folder if needed):
+Files can also be read from a local folder using the 'dir' argument. This method is faster, since the file has already been downloaded. In the following example, the 2017 and 2018 Dental visits files have already been manually downloaded, unzipped, and stored in the local directory <b>C:/MEPS</b>:
 ``` r
-save(h163, file = "C:/MEPS/R/data/h163.Rdata")
+dn2017 <- read_MEPS(year = 2017, type = "DV", dir = "C:/MEPS")
+dn2018 <- read_MEPS(year = 2018, type = "DV", dir = "C:/MEPS")
 ```
-The h163 dataset can then be loaded into subsequent R sessions using the code:
+
+For users that prefer not to use the MEPS R package to load MEPS public use files, care must be taken to ensure that the correct version of the file is being imported in accordance with the data year, as detailed in the next sections.
+
+
+### Using the `foreign` package (1996-2017)
+
+The preferred file format for downloading MEPS public use files from data years 1996-2017 is the SAS transport file format (.ssp). These files can be read into R using the `read.xport` function from the `foreign` package. In the following example, the transport file <b>h197b.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+
+```r
+dn2017 <- read.xport("C:/MEPS/h197b.ssp")
+```
+
+### Using the `readr` package (2018 and later)
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format. These CPORT file types are not readable by R. Thus, the ASCII (.dat) files must be used instead.
+
+<i> At this time, the R programming statements are being finalized, but have not been published to the MEPS website. </i> The following code pulls the needed information about the ASCII file from the Stata programming statements, including variable names, formats, and positions. The `read_fwf` function is then used to read the ASCII file using the specified information. In the following example, the transport file <b>h206b.dat</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+
 ``` r
-load(file = "C:/MEPS/R/data/h163.Rdata")
+# Set file name
+filename <- "h206b"
+
+# Read in ASCII data info from Stata programming statements
+foldername <- filename %>% gsub("f[0-9]+", "", .)
+stata_commands <-
+  readLines(sprintf("https://meps.ahrq.gov/data_stats/download_data/pufs/%s/%sstu.txt",
+                    foldername, filename))
+
+infix_start <- which(stata_commands == "infix")
+infix_end  <-  which(tolower(stata_commands) == sprintf("using %s.dat;", filename))
+infix_data <- stata_commands[(infix_start + 1):(infix_end - 1)]
+
+# Convert text data into data frame
+infix_df <- infix_data %>%
+  str_trim %>%
+  gsub("-\\s+", "-", .) %>%
+  tibble::as_tibble() %>%
+  separate(
+    value,
+    into = c("var_type", "var_name", "start", "end"),
+    sep = "\\s+|-", fill = "left") %>%
+  mutate(var_type = replace_na(var_type, "double"))
+
+# Extract positions, names, and variable types
+pos_start <- infix_df %>% pull(start) %>% as.numeric
+pos_end <- infix_df %>% pull(end) %>% as.numeric
+cnames <- infix_df %>% pull(var_name)
+ctypes <- infix_df %>% mutate(
+  typeR = case_when(
+    var_type %in% c("str") ~ "c",
+    var_type %in% c("long", "int", "byte", "double") ~ "n",
+    TRUE ~ "ERROR")) %>%
+  pull(typeR) %>%
+  setNames(cnames)
+
+dn2018 <- read_fwf(
+  "C:/MEPS/h206b.dat",
+  col_positions =
+    fwf_positions(
+      start = pos_start,
+      end   = pos_end,
+      col_names = cnames),
+  col_types = ctypes)
+```
+
+### Automating file download
+
+Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. This can be accomplished using the `download.file` and `unzip` functions. The following code downloads and unzips the 2017 dental visits file, and stores it in a temporary folder (alternatively, the .ssp file can be stored permanently by editing the `exdir` argument). The .ssp file can then be loaded into R using the `read.xport` function:
+``` r
+# Download .ssp file
+url <- "https://meps.ahrq.gov/mepsweb/data_files/pufs/h197bssp.zip"
+download.file(url, temp <- tempfile())
+
+# Unzip and save .ssp file to temporary folder
+meps_file <- unzip(temp, exdir = tempdir())
+
+# Alternatively, this will save a permanent copy of hte .ssp file to the local folder "C:/MEPS/R-downloads"
+# meps_file <- unzip(temp, exdir = "C:/MEPS/R-downloads")
+
+# Read the .ssp file into R
+dn2017 <- read.xport(meps_file)
+```
+
+To download additional files programmatically, replace 'h197b' with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year).
+
+### Saving R data (.Rdata)
+
+Once the MEPS data has been loaded into R using either of the two previous methods, it can be saved as a permanent R dataset (.Rdata) for faster loading. In the following code, the h197b dataset is saved in the 'R/data' folder, (first create the 'R/data' folder if needed):
+``` r
+save(dn2017, file = "C:/MEPS/R/data/h197b.Rdata")
+```
+The h197b dataset can then be loaded into subsequent R sessions using the code:
+``` r
+load(file = "C:/MEPS/R/data/h197b.Rdata")
 ```
 
 
@@ -72,17 +174,18 @@ To analyze MEPS data using R, the [`survey` package](https://cran.r-project.org/
 *   `svyglm`: generalized linear regression
 *   `svyby`: run other survey functions by group
 
-To use functions in the survey package, the `svydesign` function specifies the primary sampling unit, the strata, and the sampling weights for the data frame. The `survey.lonely.psu='adjust'` option ensures accurate standard error estimates when analyzing subsets. Once the survey design object is defined, population estimates can be calculated using functions from the survey package. As an example, the following code will estimate total healthcare expenditures in 2013:
+To use functions in the survey package, the `svydesign` function specifies the primary sampling unit, the strata, and the sampling weights for the data frame. The `survey.lonely.psu='adjust'` option ensures accurate standard error estimates when analyzing subsets. Once the survey design object is defined, population estimates can be calculated using functions from the survey package. As an example, the following code will estimate total dental expenditures in 2017:
 ``` r
 options(survey.lonely.psu='adjust')
 
-mepsdsgn = svydesign(id = ~VARPSU,
-                     strata = ~VARSTR,
-                     weights = ~PERWT13F,
-                     data = h163,
-                     nest = TRUE)  
+mepsdsgn <- svydesign(
+  id = ~VARPSU,
+  strata = ~VARSTR,
+  weights = ~PERWT17F,
+  data = dn2017,
+  nest = TRUE)  
 
-svytotal(~TOTEXP13, design = mepsdsgn)
+svytotal(~DVXP17X, design = mepsdsgn)
 ```
 
 ## R examples

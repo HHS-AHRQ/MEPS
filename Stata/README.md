@@ -1,52 +1,94 @@
 # Analyzing MEPS data using Stata
 
 [Loading MEPS data](#loading-meps-data)<br>
-&nbsp; &nbsp; [Manually](#manually)<br>
-&nbsp; &nbsp; [Programmatically](#programmatically)<br>
-&nbsp; &nbsp; [Saving Stata data file (.dta)](#saving-stata-data-file-dta)<br>
+&nbsp; &nbsp; [SAS transport files (1996-2017)](#sas-transport-files-1996-to-2017)<br>
+&nbsp; &nbsp; [ASCII (.dat) files](#ascii-dat-files)<br>
+&nbsp; &nbsp; [Automating file download](#automating-file-download)<br>
+&nbsp; &nbsp; [Saving Stata data (.dta)](#saving-stata-data-dta)<br>
 [Stata `svy` commands](#stata-svy-commands)<br>
 [Stata examples](#stata-examples)<br>
-
+&nbsp; &nbsp; [Workshop Exercises](#workshop-exercises)<br>
+&nbsp; &nbsp; [Summary tables examples](#summary-tables-examples)<br>
 
 ## Loading MEPS data
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into Stata. The ASCII data file format (.dat) must be used instead. In addition, the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata programming statements used to import ASCII (.dat) files will create all uppercase variable names.
 
-Two methods for downloading MEPS files into Stata are available. The first requires the user to navigate to the website containing the MEPS dataset and manually download and unzip the SAS transport file. The second method uses the `copy` and `unzipfile` commands to automatically download the file by pointing to its location on the MEPS website.
+Stata users can download MEPS files using the SAS transport (.ssp) format for data years 1996-2017, or the ASCII (.dat) data files.
 
-### Manually
+### SAS transport files (1996-2017)
 
-In Stata, SAS transport (.ssp) files can be loaded using the `import` command. In the following example, the transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+In Stata, SAS transport (.ssp) files can be loaded using the `import` command (for 1996-2017 PUFs). In the following example, the transport file for the 2017 Dental Visits file <b>h197b.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\DATA</b> (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` stata
 set more off
-import sasxport "C:\MEPS\h171.ssp"
-```
-
-### Programmatically
-
-Alternatively, Stata can download MEPS data directly from the MEPS website using the `copy` and `unzipfile` commands. The following code downloads the 2014 full year consolidated file (h171) directly from the MEPS website and stores it in Stata memory:
-
-``` stata
-copy "https://meps.ahrq.gov/mepsweb/data_files/pufs/h171ssp.zip" "h171ssp.zip"
-unzipfile "h171ssp.zip"
-import sasxport "h171.ssp", clear
+import sasxport "C:\MEPS\DATA\h197b.ssp"
 
 browse /* View dataset */
 ```
-To download additional files programmatically, replace 'h171' with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year).
 
-### Saving Stata data file (.dta)
+### ASCII (.dat) files
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format. These CPORT file types are not readable by Stata. Thus, the ASCII (.dat) files must be used instead. The following example imports the 2018 Dental visits ASCII file (<b>h206b.dat</b>) by running the Stata programming statements provided on the MEPS website.
 
-Once the MEPS data has been loaded into R using either of the two previous methods, it can be saved as a permanent Stata dataset (.dta). In the following code,  the h171 dataset is saved in the 'Stata\data' folder (first create the 'Stata\data' folder if needed):
+> IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the text file at the URL below, and follow the instructions for loading the ASCII file into Stata.
+
+
+``` stata
+set more off
+do "https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt"
+
+browse /* View dataset */
+```
+
+### Automating file download
+
+Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. This can be accomplished using the `copy` and `unzipfile` commands.
+
+The following code downloads the 2017 Dental Visits (h197b.ssp) directly from the MEPS website and stores it in the "C:/MEPS/DATA" folder. The `import` command is then used to read the .ssp file into Stata:
+
+``` stata
+/* 2017 Dental Visits */
+copy "https://meps.ahrq.gov/mepsweb/data_files/pufs/h197bssp.zip" ///
+"C:/MEPS/DATA/h197bssp.zip"
+
+unzipfile "C:/MEPS/DATA/h197bssp.zip"
+import sasxport "h197b.ssp", clear
+
+browse /* View dataset */
+```
+
+This example downloads the 2018 Dental Visits file (h206b.dat) and calls the Stata programming statements from the MEPS website to load the ASCII (.dat) file.
+
+> IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the text file at the URL below, and follow the instructions for loading the ASCII file into Stata.
+
+``` stata
+/* 2018 Dental Visits */
+copy "https://meps.ahrq.gov/mepsweb/data_files/pufs/h206bdat.zip" ///
+"C:/MEPS/DATA/h206bdat.zip"
+
+unzipfile "C:/MEPS/DATA/h206bdat.zip"
+
+do "https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt"
+
+browse /* View dataset */
+
+```
+
+
+To download additional files programmatically, replace 'h197b' (for 1996-2017 data) or 'h206b' (for 2018 and later) with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year).
+
+### Saving Stata data (.dta)
+
+Once the MEPS data has been loaded into R using either of the two previous methods, it can be saved as a permanent Stata dataset (.dta). In the following code,  the h197b dataset is saved in the 'Stata\data' folder (first create the 'Stata\data' folder if needed):
 ``` Stata
-save "C:\MEPS\Stata\data\h171.dta"
+save "C:\MEPS\Stata\data\h197b.dta"
 clear
 ```
 
 ## Stata `svy` commands
-To analyze MEPS data using Stata, [`svy` commands](http://www.stata.com/manuals13/svysvyestimation.pdf) should be used to ensure unbiased estimates. As an example, the following code will estimate the total healthcare expenditures in 2014:
+To analyze MEPS data using Stata, [`svy` commands](http://www.stata.com/manuals13/svysvyestimation.pdf) should be used to ensure unbiased estimates. As an example, the following code will estimate the total dental expenditures in 2017:
 ``` stata
-use dupersid perwt14f varpsu varstr totexp14 using "C:\MEPS\Stata\data\h171.dta", clear
-svyset varpsu [pweight=perwt14f], str(varstr)
-svy: total totexp14
+use dupersid perwt17f varpsu varstr dvxp17x using "C:\MEPS\Stata\data\h197b.dta", clear
+svyset varpsu [pweight=perwt17f], str(varstr)
+svy: total dvxp17x
 ```
 
 

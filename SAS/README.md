@@ -1,31 +1,51 @@
 # Analyzing MEPS data using SAS
 [Loading MEPS data](#loading-meps-data)<br>
-&nbsp; &nbsp; [Manually](#manually)<br>
-&nbsp; &nbsp; [Programmatically](#programmatically)<br>
-&nbsp; &nbsp; [Saving SAS data file (.sas7bdat)](#saving-sas-data-file-sas7bdat)<br>
+&nbsp; &nbsp; [Using `PROC XCOPY` (1996-2017)](#using-proc-xcopy-1996-2017)<br>
+&nbsp; &nbsp; [Using `PROC CIMPORT` (2018 and later)](#using-proc-cimport-2018-and-later)<br>
+&nbsp; &nbsp; [Automating file download](#automating-file-download)<br>
+&nbsp; &nbsp; [Saving SAS data (.sas7bdat)](#saving-sas-data-sas7bdat)<br>
 [SAS SURVEY procedures](#sas-survey-procedures)<br>
 [SAS examples](#sas-examples)<br>
-
+&nbsp; &nbsp; [Workshop Exercises](#workshop-exercises)<br>
+&nbsp; &nbsp; [Summary tables examples](#summary-tables-examples)<br>
+&nbsp; &nbsp; [Older Exercises (1996 to 2006)](#older-exercises-1996-to-2006)<br>
 
 ## Loading MEPS data
 
-Two methods for downloading MEPS SAS transport files are available. The first requires the user to navigate to the website containing the MEPS dataset and manually download and unzip the SAS transport file. The second method uses a macro to automatically download the file by pointing to its location on the MEPS website.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. The `PROC CIMPORT` procedure must be used to download these files, as detailed in the sections below.
 
-### Manually
+### Using `PROC XCOPY` (1996-2017)
 
-In SAS 9.4 or later, SAS transport (.ssp) files can be read in using PROC XCOPY. In the following example, the SAS transport file <b>h171.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
+In SAS 9.4 or later, SAS transport (.ssp) files can be read in using PROC XCOPY for 1996-2017 PUFs. In the following examples, the SAS transport file for the 2017 Dental Visits file (h197b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` sas
-FILENAME in_h171 'C:\MEPS\h171.ssp';
+FILENAME in_h197b 'C:\MEPS\h197b.ssp';
+PROC XCOPY in = in_h197b out = WORK IMPORT;
+RUN;
 
-proc xcopy in = in_h171 out = WORK IMPORT;
-run;
+/* View first 10 rows of data */
+PROC PRINT data = h197b (obs=10);
+RUN;
 ```
 
-### Programmatically
+### Using `PROC CIMPORT` (2018 and later)
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format. Thus, the `CIMPORT` procedure must be used for to load these files into SAS for data years 2018 and later. In the following examples, the SAS transport file for the 2018 Dental Visits file (h206b.ssp) Dental Visits event files have been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
+``` sas
+FILENAME in_h206b 'C:\MEPS\h206b.ssp';
+PROC CIMPORT data = work.h206b infile = in_h206b;
+RUN;
 
-Alternatively, MEPS data can be downloaded directly from the MEPS website using `proc http`. First, run the macro provided in [load_MEPS_macro.sas](load_MEPS_macro.sas). This macro downloads the .zip file from the MEPS website, unzips it, and loads the SAS transport file (.ssp) into memory.
+/* View first 10 rows of data */
+PROC PRINT data = h206b (obs=10);
+RUN;
+```
+
+### Automating file download
+> <b> Warning!</b> This macro was developed for use with SAS XPORT file types (applicable to MEPS PUFs from 1996-2017), and has not been tested on PUFs from 2018 and later.
+
+Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. This can be accomplished using the `proc http` procedure. First, run the macro provided in [load_MEPS_macro.sas](load_MEPS_macro.sas). This macro downloads the .zip file from the MEPS website, unzips it, and loads the SAS transport file (.ssp) into memory.
 
 Next, use the following code to load MEPS datasets into memory. In this example, the 2014 full year consolidated file (h171) is downloaded directly from the MEPS website and stored in SAS memory in the data file `WORK.h171`:
+
 
 ``` sas
 %load_MEPS(h171);
@@ -36,25 +56,25 @@ Next, use the following code to load MEPS datasets into memory. In this example,
 ```
 To download additional files programmatically, replace 'h171' with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year).
 
-### Saving SAS data file (.sas7bdat)
+### Saving SAS data (.sas7bdat)
 
-Once the MEPS data has been loaded into SAS using either of the two previous methods, it can be saved as a permanent SAS dataset (.sas7bdat). In the following code, the h171 dataset is saved in the 'SAS\data' folder (first create the 'SAS\data' folder if needed):
+Once the MEPS data has been loaded into SAS using either of the two previous methods, it can be saved as a permanent SAS dataset (.sas7bdat). In the following code, the h206b dataset is saved in the 'SAS\data' folder (first create the 'SAS\data' folder if needed):
 ``` sas
 LIBNAME sasdata 'C:\MEPS\SAS\data';
 
-data sasdata.h171;
-  set WORK.h171;
+data sasdata.h197b;
+  set WORK.h197b;
 run;
 ```
 
 ## SAS SURVEY procedures
 To analyze MEPS data using SAS, [SURVEY procedures](https://support.sas.com/rnd/app/stat/procedures/SurveyAnalysis.html) should be used (e.g. SURVEYMEANS, SURVEYREG) to ensure unbiased estimates. As an example, the following code will estimate the total healthcare expenditures in 2014:
 ``` sas
-proc surveymeans data = h171 sum;
+proc surveymeans data = h197b sum;
   stratum VARSTR;
   cluster VARPSU;
-  weight PERWT14F;
-  var TOTEXP14;
+  weight PERWT17F;
+  var DVXP17X;
 run;
 ```
 
