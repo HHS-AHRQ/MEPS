@@ -122,7 +122,7 @@ ctypes <- infix_df %>% mutate(
   setNames(cnames)
 
 dn2018 <- read_fwf(
-  "C:/MEPS/h206b.dat",
+  sprintf("C:/MEPS/%s.dat", filename),
   col_positions =
     fwf_positions(
       start = pos_start,

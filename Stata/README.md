@@ -1,7 +1,7 @@
 # Analyzing MEPS data using Stata
 
 [Loading MEPS data](#loading-meps-data)<br>
-&nbsp; &nbsp; [SAS transport files (1996-2017)](#sas-transport-files-1996-to-2017)<br>
+&nbsp; &nbsp; [SAS transport files (1996-2017)](#sas-transport-files-1996-2017)<br>
 &nbsp; &nbsp; [ASCII (.dat) files](#ascii-dat-files)<br>
 &nbsp; &nbsp; [Automating file download](#automating-file-download)<br>
 &nbsp; &nbsp; [Saving Stata data (.dta)](#saving-stata-data-dta)<br>
