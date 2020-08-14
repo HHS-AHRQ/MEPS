@@ -12,11 +12,11 @@
 
 ## Loading MEPS data
 
-> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. The `PROC CIMPORT` procedure must be used to download these files, as detailed in the sections below.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine (excluding the 2018 Point-in-Time file). The `PROC CIMPORT` procedure must be used to download these files, as detailed in the sections below.
 
 ### Using `PROC XCOPY` (1996-2017)
 
-In SAS 9.4 or later, SAS transport (.ssp) files can be read in using PROC XCOPY for 1996-2017 PUFs. In the following examples, the SAS transport file for the 2017 Dental Visits file (h197b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
+SAS transport (.ssp) files can be read in using PROC XCOPY for 1996-2017 PUFs. In the following examples, the SAS transport file for the 2017 Dental Visits file (h197b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` sas
 FILENAME in_h197b 'C:\MEPS\h197b.ssp';
 PROC XCOPY in = in_h197b out = WORK IMPORT;

@@ -11,31 +11,38 @@
 &nbsp; &nbsp; [Summary tables examples](#summary-tables-examples)<br>
 
 ## Loading MEPS data
-> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into Stata. The ASCII data file format (.dat) must be used instead. In addition, the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata programming statements used to import ASCII (.dat) files will create all uppercase variable names.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into Stata. The ASCII data file format (.dat) must be used instead.
 
-Stata users can download MEPS files using the SAS transport (.ssp) format for data years 1996-2017, or the ASCII (.dat) data files.
+Stata users can download MEPS files using the SAS transport (.ssp) format for data years 1996-2017, or the ASCII (.dat) data files. Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata programming statements used to import ASCII (.dat) files will create all uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
 
 ### SAS transport files (1996-2017)
 
 In Stata, SAS transport (.ssp) files can be loaded using the `import` command (for 1996-2017 PUFs). In the following example, the transport file for the 2017 Dental Visits file <b>h197b.ssp</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS\DATA</b> (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` stata
-set more off
-import sasxport "C:\MEPS\DATA\h197b.ssp"
+/* Note: for Stata version 15 or earlier, use sasxport instead of sasxport5 */
 
-browse /* View dataset */
+set more off
+import sasxport5 "C:\MEPS\DATA\h197b.ssp"
+
+/* View dataset */
+browse
 ```
 
 ### ASCII (.dat) files
 Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format. These CPORT file types are not readable by Stata. Thus, the ASCII (.dat) files must be used instead. The following example imports the 2018 Dental visits ASCII file (<b>h206b.dat</b>) by running the Stata programming statements provided on the MEPS website.
 
-> IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the text file at the URL below, and follow the instructions for loading the ASCII file into Stata.
+> IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the Stata programming statements (.txt file) for each needed MEPS data file, and follow the instructions for loading the ASCII file into Stata. For example, for the 2018 dental visits file, instructions can be found at: https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt
 
 
 ``` stata
 set more off
 do "https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt"
 
-browse /* View dataset */
+/* View dataset */
+browse
+
+/* Optional: convert all variable names to lower-case */
+rename *, lower
 ```
 
 ### Automating file download
@@ -49,15 +56,17 @@ The following code downloads the 2017 Dental Visits (h197b.ssp) directly from th
 copy "https://meps.ahrq.gov/mepsweb/data_files/pufs/h197bssp.zip" ///
 "C:/MEPS/DATA/h197bssp.zip"
 
+/* Note: for Stata version 15 or earlier, use sasxport instead of sasxport5 */
 unzipfile "C:/MEPS/DATA/h197bssp.zip"
-import sasxport "h197b.ssp", clear
+import sasxport5 "h197b.ssp", clear
 
-browse /* View dataset */
+/* View dataset */
+browse
 ```
 
 This example downloads the 2018 Dental Visits file (h206b.dat) and calls the Stata programming statements from the MEPS website to load the ASCII (.dat) file.
 
-> IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the text file at the URL below, and follow the instructions for loading the ASCII file into Stata.
+> IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the Stata programming statements (.txt file) for each needed MEPS data file, and follow the instructions for loading the ASCII file into Stata. For example, for the 2018 dental visits file, instructions can be found at: https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt
 
 ``` stata
 /* 2018 Dental Visits */
@@ -68,7 +77,11 @@ unzipfile "C:/MEPS/DATA/h206bdat.zip"
 
 do "https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt"
 
-browse /* View dataset */
+/* View dataset */
+browse
+
+/* Optional: convert all variable names to lower-case */
+rename *, lower
 
 ```
 
