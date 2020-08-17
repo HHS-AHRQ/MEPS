@@ -11,9 +11,9 @@
 &nbsp; &nbsp; [Summary tables examples](#summary-tables-examples)<br>
 
 ## Loading MEPS data
-> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into Stata. The ASCII data file format (.dat) must be used instead.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into Stata at this time. The ASCII data file format (.dat) must be used instead.
 
-Stata users can download MEPS files using the SAS transport (.ssp) format for data years 1996-2017, or the ASCII (.dat) data files. Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata programming statements used to import ASCII (.dat) files will create all uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
+Stata users can download MEPS files using the SAS transport (.ssp) format for data years 1996-2017, or the ASCII (.dat) data files. Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata programming statements used to import ASCII (.dat) files will generally create uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
 
 ### SAS transport files (1996-2017)
 
@@ -29,7 +29,7 @@ browse
 ```
 
 ### ASCII (.dat) files
-Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format. These CPORT file types are not readable by Stata. Thus, the ASCII (.dat) files must be used instead. The following example imports the 2018 Dental visits ASCII file (<b>h206b.dat</b>) by running the Stata programming statements provided on the MEPS website.
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format. These CPORT file types are not readable by Stata at this time. Thus, the ASCII (.dat) files must be used instead. The following example imports the 2018 Dental visits ASCII file (<b>h206b.dat</b>) by running the Stata programming statements provided on the MEPS website.
 
 > IMPORTANT! The Stata programming statements in the .txt file below require that the ASCII (.dat) file is stored in the <b>C:/MEPS/DATA</b> directory. If that is not possible, the user must navigate to the Stata programming statements (.txt file) for each needed MEPS data file, and follow the instructions for loading the ASCII file into Stata. For example, for the 2018 dental visits file, instructions can be found at: https://meps.ahrq.gov/data_stats/download_data/pufs/h206b/h206bstu.txt
 
