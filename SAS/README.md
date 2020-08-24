@@ -12,7 +12,7 @@
 
 ## Loading MEPS data
 
-> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine (excluding the 2018 Point-in-Time file). The `PROC CIMPORT` procedure must be used to download these files, as detailed in the sections below.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). The `PROC CIMPORT` procedure must be used to download these files, as detailed in the sections below.
 
 ### Using `PROC XCOPY` (1996-2017)
 
@@ -28,7 +28,7 @@ RUN;
 ```
 
 ### Using `PROC CIMPORT` (2018 and later)
-Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file). Thus, the `CIMPORT` procedure must be used for to load these files into SAS for data years 2018 and later. In the following examples, the SAS transport file for the 2018 Dental Visits file (h206b.ssp) Dental Visits event files have been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). Thus, the `CIMPORT` procedure must be used for to load these files into SAS for data years 2018 and later. In the following examples, the SAS transport file for the 2018 Dental Visits file (h206b.ssp) Dental Visits event files have been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
 ``` sas
 FILENAME in_h206b 'C:\MEPS\h206b.ssp';
 PROC CIMPORT data = work.h206b infile = in_h206b;
