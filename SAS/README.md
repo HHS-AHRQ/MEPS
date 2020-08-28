@@ -68,7 +68,13 @@ run;
 ```
 
 ## SAS SURVEY procedures
-To analyze MEPS data using SAS, [SURVEY procedures](https://support.sas.com/rnd/app/stat/procedures/SurveyAnalysis.html) should be used (e.g. SURVEYMEANS, SURVEYREG) to ensure unbiased estimates. As an example, the following code will estimate the total healthcare expenditures in 2014:
+To analyze MEPS data using SAS, the following steps are recommended to ensure unbiased estimates and proper standard errors (from [SAS Global Forum Paper 4113-2020 by David R. Nelson and Siew Wong-Jacobson](https://www.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2020/4113-2020.pdf)):
+1. Always use the SAS [SURVEY procedures](https://support.sas.com/rnd/app/stat/procedures/SurveyAnalysis.html) (e.g. SURVEYMEANS, SURVEYREG)
+2. Always use the cluster (e.g. VARPSU), strata (e.g. VARSTR), and appropriate weights (e.g. PERWT17F)
+3. Do not delete observations or use BY or WHERE statements. Instead, create an analytical
+subset for use as a DOMAIN; analyzing the subgroup alone may affect the standard errors.
+
+As an example, the following code will estimate the total healthcare expenditures in 2014:
 ``` sas
 proc surveymeans data = h197b sum;
   stratum VARSTR;
