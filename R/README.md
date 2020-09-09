@@ -23,12 +23,14 @@ To load and analyze MEPS data in R, additional packages are needed. Packages are
   install.packages("survey")
   install.packages("devtools")
   install.packages("tidyverse")
+  install.packages("readr")
 
 # Run these every time you re-start R:
   library(foreign)
   library(survey)
   library(devtools)
   library(tidyverse)
+  library(readr)
 ```
 
 ## Loading MEPS data
@@ -82,7 +84,21 @@ dn2017 <- read.xport("C:/MEPS/h197b.ssp")
 ### Using the `readr` package (2018 and later)
 Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT file types are not readable by R at this time. Thus, the ASCII (.dat) files must be used instead.
 
-<i> At this time, the R programming statements are being finalized, but have not been published to the MEPS website. </i> The following code pulls the needed information about the ASCII file from the Stata programming statements, including variable names, formats, and positions. The `read_fwf` function is then used to read the ASCII file using the specified information. In the following example, the transport file <b>h206b.dat</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+The following example imports the 2018 Medical Conditions ASCII file (h207.dat) by running the R programming statements provided on the MEPS website.
+``` r
+# Set the location of the .dat file
+meps_path <- "C:/MEPS/h207.dat"  
+
+# Run the R programming statements
+source("https://meps.ahrq.gov/mepsweb/data_stats/download_data/pufs/h207/h207ru.txt")
+
+# View data
+head(h207)
+```
+
+> <i> At this time, not all of the R programming statements for the 2018 files are available on the MEPS website. </i>
+
+For the data files that do not yet have the R programming statements, the following code provides a work-around that pulls the needed information about the ASCII file from the Stata programming statements, including variable names, formats, and positions. The `read_fwf` function is then used to read the ASCII file using the specified information. In the following example, the transport file <b>h206b.dat</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
 
 ``` r
 # Set file name
