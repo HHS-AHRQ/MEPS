@@ -35,7 +35,7 @@ To load and analyze MEPS data in R, additional packages are needed. Packages are
 
 ## Loading MEPS data
 
-> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT data files cannot be read directly into R at this time. The ASCII data file format (.dat) must be used instead.
+> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT data files cannot be read directly into R at this time. The ASCII data file format (.dat) must be used instead. This requirement also applies to the 2017 Full-Year Consolidated file (HC-201).
 
 Several methods are available for importing MEPS public use files (PUFs) into R. The easiest method is to use the `read_MEPS` function from the [`MEPS` package](https://github.com/e-mitchell/meps_r_pkg)</b>, which was created to facilitate loading and manipulation of MEPS PUFs. Alternatively, R users can use the `read.xport` function from the `foreign` package to import SAS transport (.ssp) files from data years 1996-2017, or the `read_fwf` function from the `readr` package to import ASCII (.dat) files from data years 2018 and later.
 
@@ -82,7 +82,7 @@ dn2017 <- read.xport("C:/MEPS/h197b.ssp")
 ```
 
 ### Using the `readr` package (2018 and later)
-Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT file types are not readable by R at this time. Thus, the ASCII (.dat) files must be used instead.
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT file types are not readable by R at this time. Thus, the ASCII (.dat) files must be used instead. This requirement also applies to the 2017 Full-Year Consolidated file (HC-201).
 
 The following example imports the 2018 Medical Conditions ASCII file (h207.dat) by running the R programming statements provided on the MEPS website.
 ``` r
