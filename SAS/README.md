@@ -58,7 +58,7 @@ First, open the SAS code: [Automate_Load.sas](Automate_Load.sas). Next, edit the
 %let MySDS =    C:\Data\MySDS;      /* Save SAS data sets restored from transport files */
 ```
 Then, specify the MEPS data files that you want to download. Files that were created using the XPORT engine should be placed in the `xpt_files` variable, while files created using the CPORT engine should be placed in the `cpt_files` variable. Generally, MEPS public use files from data year 2017 and earlier are in the XPORT format, while those from data year 2018 and later are in the CPORT format, with a few exceptions. The following example downloads these files:
-* Xport format:
+* XPORT format:
   * h183: Panel 19 longitudinal file (2014-2015)
   * h193: Panel 20 longitudinal file (2015-2016)
   * h202: Panel 21 longitudinal file (2016-2017)
@@ -85,7 +85,7 @@ Then, specify the MEPS data files that you want to download. Files that were cre
 %let cpt_files = h201 h209 h206a;
 
 ```
-Once these edits have been made, run the code in its entirety to download and store the datasets to the specified folder. For a detailed list of MEPS file names by data type and year, see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv).
+Once these edits have been made, run the code in its entirety to download and store the datasets in the specified folder. For a detailed list of MEPS file names by data type and year, see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv).
 
 
 
