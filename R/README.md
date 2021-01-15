@@ -86,65 +86,27 @@ Starting in 2018, design changes in the MEPS survey instrument resulted in SAS t
 
 The following example imports the 2018 Medical Conditions ASCII file (h207.dat) by running the R programming statements provided on the MEPS website.
 ``` r
+# Option A: Download the ASCII (.dat) file manually and save to a local directory.
 # Set the location of the .dat file
 meps_path <- "C:/MEPS/h207.dat"  
 
 # Run the R programming statements
 source("https://meps.ahrq.gov/mepsweb/data_stats/download_data/pufs/h207/h207ru.txt")
 
-# View data
-head(h207)
-```
+head(h207) # view data
 
-> <i> At this time, not all of the R programming statements for the 2018 files are available on the MEPS website. </i>
 
-For the data files that do not yet have the R programming statements, the following code provides a work-around that pulls the needed information about the ASCII file from the Stata programming statements, including variable names, formats, and positions. The `read_fwf` function is then used to read the ASCII file using the specified information. In the following example, the transport file <b>h206b.dat</b> has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b> (click [here](../README.md#accessing-meps-hc-data) for details).
+# Option B: Download ASCII file directly from the MEPS website
+url <- "https://meps.ahrq.gov/mepsweb/data_files/pufs/h207dat.zip"
+download.file(url, temp <- tempfile())
 
-``` r
-# Set file name
-filename <- "h206b"
+# Create a temporary directory to store ASCII file and run R programming statements
+meps_path <- unzip(temp, exdir = tempdir())
+source("https://meps.ahrq.gov/mepsweb/data_stats/download_data/pufs/h207/h207ru.txt")
+unlink(temp)  # Unlink to delete temporary file
 
-# Read in ASCII data info from Stata programming statements
-foldername <- filename %>% gsub("f[0-9]+", "", .)
-stata_commands <-
-  readLines(sprintf("https://meps.ahrq.gov/data_stats/download_data/pufs/%s/%sstu.txt",
-                    foldername, filename))
+head(h207) # view data
 
-infix_start <- which(stata_commands == "infix")
-infix_end  <-  which(tolower(stata_commands) == sprintf("using %s.dat;", filename))
-infix_data <- stata_commands[(infix_start + 1):(infix_end - 1)]
-
-# Convert text data into data frame
-infix_df <- infix_data %>%
-  str_trim %>%
-  gsub("-\\s+", "-", .) %>%
-  tibble::as_tibble() %>%
-  separate(
-    value,
-    into = c("var_type", "var_name", "start", "end"),
-    sep = "\\s+|-", fill = "left") %>%
-  mutate(var_type = replace_na(var_type, "double"))
-
-# Extract positions, names, and variable types
-pos_start <- infix_df %>% pull(start) %>% as.numeric
-pos_end <- infix_df %>% pull(end) %>% as.numeric
-cnames <- infix_df %>% pull(var_name)
-ctypes <- infix_df %>% mutate(
-  typeR = case_when(
-    var_type %in% c("str") ~ "c",
-    var_type %in% c("long", "int", "byte", "double") ~ "n",
-    TRUE ~ "ERROR")) %>%
-  pull(typeR) %>%
-  setNames(cnames)
-
-dn2018 <- read_fwf(
-  sprintf("C:/MEPS/%s.dat", filename),
-  col_positions =
-    fwf_positions(
-      start = pos_start,
-      end   = pos_end,
-      col_names = cnames),
-  col_types = ctypes)
 ```
 
 ### Automating file download
@@ -158,7 +120,7 @@ download.file(url, temp <- tempfile())
 # Unzip and save .ssp file to temporary folder
 meps_file <- unzip(temp, exdir = tempdir())
 
-# Alternatively, this will save a permanent copy of hte .ssp file to the local folder "C:/MEPS/R-downloads"
+# Alternatively, this will save a permanent copy of the .ssp file to the local folder "C:/MEPS/R-downloads"
 # meps_file <- unzip(temp, exdir = "C:/MEPS/R-downloads")
 
 # Read the .ssp file into R
