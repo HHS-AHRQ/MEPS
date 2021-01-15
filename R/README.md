@@ -82,52 +82,40 @@ dn2017 <- read.xport("C:/MEPS/h197b.ssp")
 ```
 
 ### Using the `readr` package (2018 and later)
-Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT file types are not readable by R at this time. Thus, the ASCII (.dat) files must be used instead. This requirement also applies to the 2017 Full-Year Consolidated file (HC-201).
+Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). These CPORT file types are not readable by R at this time. Thus, the ASCII (.dat) files must be used instead. This requirement also applies to the 2017 Full-Year Consolidated file (HC-201). 
 
-The following example imports the 2018 Medical Conditions ASCII file (h207.dat) by running the R programming statements provided on the MEPS website.
+In the following example, the ASCII file h207.dat has been downloaded from the MEPS website, unzipped, and saved in the local directory C:/MEPS. The 2018 Medical Conditions ASCII file (h207.dat) is then imported by running the R programming statements provided on the MEPS website.
 ``` r
-# Option A: Download the ASCII (.dat) file manually and save to a local directory.
 # Set the location of the .dat file
 meps_path <- "C:/MEPS/h207.dat"  
 
 # Run the R programming statements
 source("https://meps.ahrq.gov/mepsweb/data_stats/download_data/pufs/h207/h207ru.txt")
 
-head(h207) # view data
-
-
-# Option B: Download ASCII file directly from the MEPS website
-url <- "https://meps.ahrq.gov/mepsweb/data_files/pufs/h207dat.zip"
-download.file(url, temp <- tempfile())
-
-# Create a temporary directory to store ASCII file and run R programming statements
-meps_path <- unzip(temp, exdir = tempdir())
-source("https://meps.ahrq.gov/mepsweb/data_stats/download_data/pufs/h207/h207ru.txt")
-unlink(temp)  # Unlink to delete temporary file
-
-head(h207) # view data
-
+# View data
+head(h207) 
 ```
 
 ### Automating file download
 
-Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. This can be accomplished using the `download.file` and `unzip` functions. The following code downloads and unzips the 2017 dental visits file, and stores it in a temporary folder (alternatively, the .ssp file can be stored permanently by editing the `exdir` argument). The .ssp file can then be loaded into R using the `read.xport` function:
+Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. This can be accomplished using the `download.file` and `unzip` functions. The following code downloads and unzips the 2017 dental visits file, and stores it in a temporary folder (alternatively, the file can be stored permanently by editing the `exdir` argument). The file can then be loaded into R using the `read.xport` function. The same code can be used to download and unzip transport (.ssp) and ASCII (.dat) files. The following example demonstrates this process for the SAS transport (.ssp) file:
 ``` r
-# Download .ssp file
+# Download .ssp (or .dat) file
 url <- "https://meps.ahrq.gov/mepsweb/data_files/pufs/h197bssp.zip"
 download.file(url, temp <- tempfile())
 
-# Unzip and save .ssp file to temporary folder
+# Unzip and save .ssp (or .dat) file to temporary folder
 meps_file <- unzip(temp, exdir = tempdir())
 
-# Alternatively, this will save a permanent copy of the .ssp file to the local folder "C:/MEPS/R-downloads"
+# Alternatively, this will save a permanent copy of the file to the local folder "C:/MEPS/R-downloads"
 # meps_file <- unzip(temp, exdir = "C:/MEPS/R-downloads")
 
-# Read the .ssp file into R
+# Read the .ssp file into R (for .dat files, use the 'source' code above)
 dn2017 <- read.xport(meps_file)
+
 ```
 
-To download additional files programmatically, replace 'h197b' with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year).
+To download additional files programmatically, replace 'h197b' with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year). 
 
 ### Saving R data (.Rdata)
 
