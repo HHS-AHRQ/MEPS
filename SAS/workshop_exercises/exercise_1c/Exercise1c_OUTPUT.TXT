@@ -1,0 +1,194 @@
+                                                                                                                                   1
+
+                                                  Contents of Catalog WORK.FORMATS
+ 
+                                                                                                                Last    Last
+                                                                                       Page   Block   Num of   Block   Block
+#   Name            Type             Create Date         Modified Date   Description   Size    Size   Blocks   Bytes    Size   Pages
+------------------------------------------------------------------------------------------------------------------------------------
+1   AGECAT          FORMAT   03/10/2021 19:38:30   03/10/2021 19:38:30                 4096    4096        1     263     510       1
+2   TOTEXP18_CATE   FORMAT   03/10/2021 19:38:30   03/10/2021 19:38:30                 4096    4096        1     255     510       1
+                                                                                                                                   2
+
+The CONTENTS Procedure
+
+                  Alphabetic List of Variables and Attributes
+ 
+#    Variable                Type    Len    Label
+
+2    AGELAST                 Num       8    PERSON'S AGE LAST TIME ELIGIBLE   
+8    CHAR_WITH_AN_EXPENSE    Char     11                                      
+1    PANEL                   Num       8    PANEL NUMBER                      
+4    PERWT18F                Num       8    FINAL PERSON WEIGHT, 2018         
+3    TOTEXP18                Num       8    TOTAL HEALTH CARE EXP 18          
+6    VARPSU                  Num       8    VARIANCE ESTIMATION PSU - 2018    
+5    VARSTR                  Num       8    VARIANCE ESTIMATION STRATUM - 2018
+7    WITH_AN_EXPENSE         Num       8                                      
+MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             3
+PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 _Method 1
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 117
+Number of Clusters                               257
+Number of Observations                         30461
+Number of Observations Used                    29415
+Number of Obs with Nonpositive Weights          1046
+Sum of Weights                             326327888
+
+
+                Class Level Information
+ 
+Variable             Levels    Values
+
+WITH_AN_EXPENSE           2    No Expense Any Expense  
+
+
+                                          Statistics
+ 
+                                                      Std Error                       Std Error
+Variable           Level               N      Mean      of Mean             Sum          of Sum
+-----------------------------------------------------------------------------------------------
+WITH_AN_EXPENSE    No Expense      4,215     0.133       0.0036      43,498,536       1,431,505
+                   Any Expense    25,200     0.867       0.0036     282,829,352       6,571,909
+-----------------------------------------------------------------------------------------------
+MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             4
+PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 2
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 117
+Number of Clusters                               257
+Number of Observations                         30461
+Number of Observations Used                    29415
+Number of Obs with Nonpositive Weights          1046
+Sum of Weights                             326327888
+
+
+                  Class Level Information
+ 
+Variable                  Levels    Values
+
+CHAR_WITH_AN_EXPENSE           2    Any Expense No Expense  
+
+
+                                             Statistics
+ 
+                                                           Std Error                       Std Error
+Variable                Level               N      Mean      of Mean             Sum          of Sum
+----------------------------------------------------------------------------------------------------
+CHAR_WITH_AN_EXPENSE    Any Expense    25,200     0.867       0.0036     282,829,352       6,571,909
+                        No Expense      4,215     0.133       0.0036      43,498,536       1,431,505
+----------------------------------------------------------------------------------------------------
+MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             5
+PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 3
+
+The SURVEYFREQ Procedure
+
+                    Data Summary
+
+Number of Strata                                 117
+Number of Clusters                               257
+Number of Observations                         30461
+Number of Observations Used                    29415
+Number of Obs with Nonpositive Weights          1046
+Sum of Weights                             326327888
+
+
+                         Table of CHAR_WITH_AN_EXPENSE
+ 
+CHAR_WITH_                     Weighted    Std Err of                Std Err of
+AN_EXPENSE      Frequency     Frequency      Wgt Freq     Percent       Percent
+-------------------------------------------------------------------------------
+Any Expense         25200     282829352       6571909     86.6703        0.3605
+No Expense           4215      43498536       1431505     13.3297        0.3605
+
+Total               29415     326327888       7295775    100.0000              
+-------------------------------------------------------------------------------
+MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             6
+MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AND 65+, 2018
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 117
+Number of Clusters                               257
+Number of Observations                         30461
+Number of Observations Used                    29415
+Number of Obs with Nonpositive Weights          1046
+Sum of Weights                             326327888
+
+
+                                           Statistics
+ 
+                                                        Std Error                       Std Error
+Variable    Label                        N      Mean      of Mean             Sum          of Sum
+-------------------------------------------------------------------------------------------------
+TOTEXP18    TOTAL HEALTH CARE       29,415    6063.1       128.01    1.9785699E12     62127195159
+            EXP 18                                                                               
+-------------------------------------------------------------------------------------------------
+
+
+                                                Quantiles
+ 
+                                                                             Std
+Variable    Label                      Percentile       Estimate           Error    95% Confidence Limits
+---------------------------------------------------------------------------------------------------------
+TOTEXP18    TOTAL HEALTH CARE             50 Median  1316.440031       42.514805    1232.38598 1400.49408
+            EXP 18                                 
+---------------------------------------------------------------------------------------------------------
+MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             7
+MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AND 65+, 2018
+
+The SURVEYMEANS Procedure
+
+                                     Statistics for WITH_AN_EXPENSE Domains
+ 
+WITH_AN_                                                               Std Error                       Std Error
+EXPENSE        Variable    Label                        N      Mean      of Mean             Sum          of Sum
+----------------------------------------------------------------------------------------------------------------
+Any Expense    TOTEXP18    TOTAL HEALTH CARE       25,200    6995.6       138.90    1.9785699E12     62127195159
+                           EXP 18                                                                               
+----------------------------------------------------------------------------------------------------------------
+
+
+                                         Quantiles for WITH_AN_EXPENSE Domains
+ 
+WITH_AN_                                                                                    Std
+EXPENSE        Variable    Label                      Percentile       Estimate           Error    95% Confidence Limits
+------------------------------------------------------------------------------------------------------------------------
+Any Expense    TOTEXP18    TOTAL HEALTH CARE             50 Median  1849.266208       45.369344    1759.56858 1938.96384
+                           EXP 18                                 
+------------------------------------------------------------------------------------------------------------------------
+MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             8
+MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AND 65+, 2018
+
+The SURVEYMEANS Procedure
+
+                                      Statistics for WITH_AN_EXPENSE*AGELAST Domains
+ 
+WITH_AN_                                                                          Std Error                       Std Error
+EXPENSE        AGELAST    Variable    Label                        N      Mean      of Mean             Sum          of Sum
+---------------------------------------------------------------------------------------------------------------------------
+Any Expense    0-64       TOTEXP18    TOTAL HEALTH CARE       19,924    5650.5       133.16    1.3001662E12     47728524403
+                                      EXP 18                                                                               
+               65+        TOTEXP18    TOTAL HEALTH CARE        5,276     12866       328.98    678403612336     24616181502
+                                      EXP 18                                                                               
+---------------------------------------------------------------------------------------------------------------------------
+
+
+                                           Quantiles for WITH_AN_EXPENSE*AGELAST Domains
+ 
+WITH_AN_                                                                                               Std
+EXPENSE        AGELAST    Variable    Label                      Percentile       Estimate           Error    95% Confidence Limits
+-----------------------------------------------------------------------------------------------------------------------------------
+Any Expense    0-64       TOTEXP18    TOTAL HEALTH CARE             50 Median  1401.335930       31.553240    1338.95348 1463.71838
+                                      EXP 18                                 
+               65+        TOTEXP18    TOTAL HEALTH CARE             50 Median  5877.252297      157.380817    5566.10197 6188.40263
+                                      EXP 18                                 
+-----------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,154 @@
+ 2018 MEPS                                                                                                                         1
+
+The SURVEYMEANS Procedure
+
+           Statistics for AGELAST Domains
+ 
+                                           Std Error
+AGELAST    Variable         N      Mean      of Mean
+----------------------------------------------------
+18+        flushot     19,171     0.421       0.0064
+----------------------------------------------------
+PROC SURVEYLOGISTIC With param=ref option on the CLASS statement                                                                   2
+
+The SURVEYLOGISTIC Procedure
+
+                                     Model Information
+
+Data Set                      WORK.MEPS_2018                                                
+Response Variable             flushot                                                       
+Number of Response Levels     2                                                             
+Stratum Variable              VARSTR                      VARIANCE ESTIMATION STRATUM - 2018
+Number of Strata              117                                                           
+Cluster Variable              VARPSU                      VARIANCE ESTIMATION PSU - 2018    
+Number of Clusters            257                                                           
+Weight Variable               SAQWT18F                    FINAL SAQ PERSON WEIGHT, 2018     
+Model                         Binary Logit                                                  
+Optimization Technique        Fisher's Scoring                                              
+Variance Adjustment           Degrees of Freedom (DF)                                       
+
+
+             Variance Estimation
+
+Method                           Taylor Series
+Variance Adjustment    Degrees of Freedom (DF)
+
+
+Number of Observations Read       30461
+Number of Observations Used       19171
+Sum of Weights Read             2.494E8
+Sum of Weights Used            2.4455E8
+
+
+                  Response Profile
+ 
+ Ordered                      Total            Total
+   Value      flushot     Frequency           Weight
+
+       1            0         10939        141605611
+       2            1          8232        102943003
+
+Probability modeled is flushot=1.
+
+NOTE: 11290 observations were deleted due to missing values for the response or explanatory variables.
+
+
+               Class Level Information
+ 
+Class        Value                 Design Variables
+
+SEX          Female             1                     
+             Male               0                     
+
+RACETHX      Hispanic           0      0      0      0
+             NH Asian only      1      0      0      0
+             NH Black only      0      1      0      0
+             NH Other etc       0      0      1      0
+             NH White only      0      0      0      1
+
+INSCOV18     Any Private        0      0              
+             Public Only        1      0              
+             Uninsured          0      1              
+
+
+                    Model Convergence Status
+
+         Convergence criterion (GCONV=1E-8) satisfied.          
+
+
+         Model Fit Statistics
+ 
+                             Intercept
+              Intercept            and
+Criterion          Only     Covariates
+
+AIC           332878170      303810069
+SC            332878188      303810225
+-2 Log L      332878168      303810051
+PROC SURVEYLOGISTIC With param=ref option on the CLASS statement                                                                   3
+
+The SURVEYLOGISTIC Procedure
+
+             Testing Global Null Hypothesis: BETA=0
+ 
+Test                 F Value       Num DF       Den DF     Pr > F
+
+Likelihood Ratio      257.03       7.1248       997.47     <.0001
+Score                 135.19            8          133     <.0001
+Wald                  194.97            8          133     <.0001
+
+         NOTE: Second-order Rao-Scott design correction
+          0.1228 applied to the Likelihood Ratio test.
+
+
+           Type 3 Analysis of Effects
+ 
+Effect      F Value    Num DF    Den DF    Pr > F
+
+AGELAST      673.68         1       140    <.0001
+SEX           66.95         1       140    <.0001
+RACETHX       20.28         4       137    <.0001
+INSCOV18     124.35         2       139    <.0001
+
+
+               Analysis of Maximum Likelihood Estimates
+ 
+                                       Standard
+Parameter                  Estimate       Error    t Value    Pr > |t|
+
+Intercept                   -2.1417      0.0814     -26.32      <.0001
+AGELAST                      0.0313     0.00121      25.96      <.0001
+SEX       Female             0.2729      0.0334       8.18      <.0001
+RACETHX   NH Asian only      0.4255      0.0990       4.30      <.0001
+RACETHX   NH Black only     -0.0661      0.0800      -0.83      0.4097
+RACETHX   NH Other etc       0.2033      0.1099       1.85      0.0665
+RACETHX   NH White only      0.3791      0.0611       6.20      <.0001
+INSCOV18  Public Only       -0.1592      0.0447      -3.57      0.0005
+INSCOV18  Uninsured         -1.3661      0.0868     -15.74      <.0001
+
+         NOTE: The degrees of freedom for the t tests is 140.
+
+
+                         Odds Ratio Estimates
+                                   
+                                          Point       95% Confidence
+Effect                                 Estimate           Limits
+
+AGELAST                                   1.032       1.029       1.034
+SEX      Female vs Male                   1.314       1.230       1.403
+RACETHX  NH Asian only vs Hispanic        1.530       1.258       1.861
+RACETHX  NH Black only vs Hispanic        0.936       0.799       1.096
+RACETHX  NH Other etc  vs Hispanic        1.225       0.986       1.523
+RACETHX  NH White only vs Hispanic        1.461       1.295       1.648
+INSCOV18 Public Only vs Any Private       0.853       0.781       0.932
+INSCOV18 Uninsured   vs Any Private       0.255       0.215       0.303
+
+NOTE: The degrees of freedom in computing the confidence limits is 140.
+
+
+Association of Predicted Probabilities and Observed Responses
+
+Percent Concordant        70.1    Somers' D    0.405
+Percent Discordant        29.5    Gamma        0.407
+Percent Tied               0.4    Tau-a        0.199
+Pairs                 90049848    c            0.703

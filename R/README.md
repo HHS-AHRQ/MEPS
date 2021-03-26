@@ -162,15 +162,34 @@ In order to run the example codes, you must download the relevant MEPS files in 
 ### Workshop exercises
 The following codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder:
 
-[exercise_1.R](workshop_exercises/exercise_1.R): National health care expenses by age group, 2016
+
+#### 1. National health care expenses
+[exercise_1a.R](workshop_exercises/exercise_1a.R): National health care expenses by age group, 2016
 <br>
-[exercise_2.R](workshop_exercises/exercise_2.R): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+[exercise_1b.R](workshop_exercises/exercise_1b.R): National health care expenses by age group, 2018
 <br>
-[exercise_3.R](workshop_exercises/exercise_3.R): Pooling MEPS FYC files, 2015 and 2016
+
+#### 2. Prescribed medicine purchases
+[exercise_2a.R](workshop_exercises/exercise_2a.R): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
 <br>
-[exercise_4.R](workshop_exercises/exercise_4.R):  Pooling longitudinal files, panels 17-19
+[exercise_2b.R](workshop_exercises/exercise_2b.R): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2018
 <br>
+
+#### 3. Pooling data files
+[exercise_3a.R](workshop_exercises/exercise_3a.R): Pooling MEPS FYC files, 2015 and 2016: Out-of-pocket expenditures for unisured persons ages 26-30 with high income
+<br>
+[exercise_3b.R](workshop_exercises/exercise_3b.R):  Pooling longitudinal files, panels 17-19
+<br>
+[exercise_3c.R](workshop_exercises/exercise_3c.R): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
+<br>
+
+#### 4. Regression
+[exercise_4.R](workshop_exercises/exercise_4.R): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
+<br>
+
+#### 5. Plots
 [ggplot_example.R](workshop_exercises/ggplot_example.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
+
 
 ### Summary tables examples
 

@@ -130,28 +130,38 @@ Example codes from previous MEPS workshops are provided in the [workshop_exercis
 <br>
 [exercise_1b](workshop_exercises/exercise_1b): National health care expenses by age group and type of service, 2015
 <br>
+[exercise_1c](workshop_exercises/exercise_1c): National health care expenses by age group, 2018
+<br>
 
 #### 2. Prescribed medicine purchases
 [exercise_2a](workshop_exercises/exercise_2a): Trends in antipsychotics purchases and expenses, 2015
 <br>
 [exercise_2b](workshop_exercises/exercise_2b): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+<br>
+[exercise_2c](workshop_exercises/exercise_2c): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2018
+
 
 #### 3. Medical conditions
 [exercise_3a](workshop_exercises/exercise_3a): Use and expenditures for persons with diabetes, 2015
 <br>
 [exercise_3b](workshop_exercises/exercise_3b): Expenditures for all events associated with diabetes, 2015
-<br>
 
 #### 4. Pooling data files
-[exercise_4a](workshop_exercises/exercise_4a): Pooling MEPS FYC files, 2015 and 2016
+[exercise_4a](workshop_exercises/exercise_4a): Pooling MEPS FYC files, 2015 and 2016: Out-of-pocket expenditures for unisured persons ages 26-30 with high income
 <br>
 [exercise_4b](workshop_exercises/exercise_4b): Pooling longitudinal files, panels 17-19
+<br>
+[exercise_4c](workshop_exercises/exercise_4c): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
+
 
 #### 5. Constructing variables
 [exercise_5a](workshop_exercises/exercise_5a): Constructing family-level variables from person-level data, 2015
 <br>
 [exercise_5b](workshop_exercises/exercise_5b): Constructing insurance status from monthly insurance variables, 2015
 
+#### 6. Regression
+[exercise_6](workshop_exercises/exercise_6): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
+<br>
 
 ### Summary tables examples
 

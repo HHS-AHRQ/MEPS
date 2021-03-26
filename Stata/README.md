@@ -119,11 +119,15 @@ The following example codes from previous MEPS workshops are provided in the [wo
 <br>
 [Exercise1b.do](workshop_exercises/Exercise1b.do): National health care expenses by age group and type of service, 2015
 <br>
+[Exercise1c.do](workshop_exercises/Exercise1c.do): National health care expenses by age group, 2018
+<br>
 
 #### 2. Prescribed medicine purchases
 [Exercise2a.do](workshop_exercises/Exercise2a.do): Trends in antipsychotics purchases and expenses, 2015
 <br>
 [Exercise2b.do](workshop_exercises/Exercise2b.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+<br>
+[Exercise2c.do](workshop_exercises/Exercise2c.do): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2018
 
 #### 3. Medical conditions
 [Exercise3a.do](workshop_exercises/Exercise3a.do): Use and expenditures for persons with diabetes, 2015
@@ -135,12 +139,17 @@ The following example codes from previous MEPS workshops are provided in the [wo
 [Exercise4a.do](workshop_exercises/Exercise4a.do): Pooling MEPS FYC files, 2015 and 2016
 <br>
 [Exercise4b.do](workshop_exercises/Exercise4b.do): Pooling longitudinal files, panels 17-19
+<br>
+[Exercise4b.do](workshop_exercises/Exercise4c.do): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
 
 #### 5. Constructing variables
 [Exercise5a.do](workshop_exercises/Exercise5a.do): Constructing family-level variables from person-level data, 2015
 <br>
 [Exercise5b.do](workshop_exercises/Exercise5b.do): Constructing insurance status from monthly insurance variables, 2015
 
+#### 6. Regression
+[Exercise6.do](workshop_exercises/Exercise6.do): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
+<br>
 
 ### Summary tables examples
 

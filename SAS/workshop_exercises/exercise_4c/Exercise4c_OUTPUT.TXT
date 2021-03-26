@@ -1,0 +1,136 @@
+MEPS 2017-18 combined                                                                                                              1
+
+The FREQ Procedure
+
+                                                           Cumulative    Cumulative
+ARTHDX    JTPAIN    joint_pain    Frequency     Percent     Frequency      Percent
+-----------------------------------------------------------------------------------
+   -15        -1             .          80        0.13            80         0.13  
+    -9        -9             .          11        0.02            91         0.15  
+    -9        -1             .         113        0.18           204         0.33  
+    -8        -8             .          21        0.03           225         0.36  
+    -8        -7             .           3        0.00           228         0.37  
+    -8        -1             .          10        0.02           238         0.38  
+    -8         1             1          12        0.02           250         0.40  
+    -8         2             2           7        0.01           257         0.41  
+    -7        -9             .           2        0.00           259         0.42  
+    -7        -7             .          21        0.03           280         0.45  
+    -7        -1             .          23        0.04           303         0.49  
+    -1        -1             .       15888       25.49         16191        25.97  
+     1        -8             1          11        0.02         16202        25.99  
+     1        -7             1           5        0.01         16207        26.00  
+     1        -1             1        5585        8.96         21792        34.96  
+     1         1             1        4871        7.81         26663        42.77  
+     1         2             1        1577        2.53         28240        45.30  
+     2        -9             2           6        0.01         28246        45.31  
+     2        -8             2         146        0.23         28392        45.54  
+     2        -7             2          37        0.06         28429        45.60  
+     2        -1             .          82        0.13         28511        45.73  
+     2        -1             2         766        1.23         29277        46.96  
+     2         1             1        8509       13.65         37786        60.61  
+     2         2             2       24555       39.39         62341       100.00  
+
+
+                                                     Cumulative    Cumulative
+ARTHDX    JTPAIN    spop    Frequency     Percent     Frequency      Percent
+-----------------------------------------------------------------------------
+   -15        -1       2          80        0.13            80         0.13  
+    -9        -9       2          11        0.02            91         0.15  
+    -9        -1       2         113        0.18           204         0.33  
+    -8        -8       2          21        0.03           225         0.36  
+    -8        -7       2           3        0.00           228         0.37  
+    -8        -1       2          10        0.02           238         0.38  
+    -8         1       1          12        0.02           250         0.40  
+    -8         2       1           7        0.01           257         0.41  
+    -7        -9       2           2        0.00           259         0.42  
+    -7        -7       2          21        0.03           280         0.45  
+    -7        -1       2          23        0.04           303         0.49  
+    -1        -1       2       15888       25.49         16191        25.97  
+     1        -8       1          11        0.02         16202        25.99  
+     1        -7       1           5        0.01         16207        26.00  
+     1        -1       1        5585        8.96         21792        34.96  
+     1         1       1        4871        7.81         26663        42.77  
+     1         2       1        1577        2.53         28240        45.30  
+     2        -9       1           6        0.01         28246        45.31  
+     2        -8       1         146        0.23         28392        45.54  
+     2        -7       1          37        0.06         28429        45.60  
+     2        -1       1         766        1.23         29195        46.83  
+     2        -1       2          82        0.13         29277        46.96  
+     2         1       1        8509       13.65         37786        60.61  
+     2         2       1       24555       39.39         62341       100.00  
+
+
+                                 Cumulative    Cumulative
+spop    Frequency     Percent     Frequency      Percent
+---------------------------------------------------------
+   1       46087       73.93         46087        73.93  
+   2       16254       26.07         62341       100.00  
+
+
+                                       Cumulative    Cumulative
+joint_pain    Frequency     Percent     Frequency      Percent
+---------------------------------------------------------------
+         .       16254       26.07         16254        26.07  
+         1       20570       33.00         36824        59.07  
+         2       25517       40.93         62341       100.00  
+MEPS 2017-18 combined                                                                                                              2
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 282
+Number of Clusters                               621
+Number of Observations                         62341
+Number of Observations Used                    60131
+Number of Obs with Nonpositive Weights          2210
+Sum of Weights                             325553898
+
+
+           Class Level Information
+ 
+Variable        Levels     Missing    Values
+
+joint_pain           2       15498    Yes No  
+MEPS 2017-18 combined                                                                                                              3
+
+The SURVEYMEANS Procedure
+
+                                   Statistics for spop Domains
+ 
+                                                       Std Error                       Std Error
+    spop    Variable      Level         N      Mean      of Mean             Sum          of Sum
+------------------------------------------------------------------------------------------------
+       1    joint_pain    Yes      20,202     0.444       0.0043     110,925,499       2,086,721
+                          No       24,431     0.556       0.0043     138,796,667       2,597,648
+------------------------------------------------------------------------------------------------
+MEPS 2017-18 combined                                                                                                              4
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 282
+Number of Clusters                               621
+Number of Observations                         62341
+Number of Observations Used                    60131
+Number of Obs with Nonpositive Weights          2210
+Sum of Weights                             325553898
+MEPS 2017-18 combined                                                                                                              5
+
+The SURVEYMEANS Procedure
+
+                                         Statistics for spop*joint_pain Domains
+ 
+            joint_                                                            Std Error                       Std Error
+    spop    pain      Variable    Label                        N      Mean      of Mean             Sum          of Sum
+-----------------------------------------------------------------------------------------------------------------------
+       1    Yes       totexp      TOTAL HEALTH CARE       20,202     10071       215.32    1.1171571E12     32753218188
+                                  EXP                                                                                  
+                      totslf      TOTAL AMOUNT PAID -     20,202    1172.6       28.821    130073157471      4265488865
+                                  SELF-FAMILY                                                                          
+            No        totexp      TOTAL HEALTH CARE       24,431    3936.1       109.34    546313848488     18624090506
+                                  EXP                                                                                  
+                      totslf      TOTAL AMOUNT PAID -     24,431    611.07       19.221     84814878044      3215217677
+                                  SELF-FAMILY                                                                          
+-----------------------------------------------------------------------------------------------------------------------
