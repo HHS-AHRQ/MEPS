@@ -21,8 +21,8 @@ For analytical purposes (including the creation of the [MEPS-HC Data Tools](http
 
 * [meps_ccs_conditions.csv](meps_ccs_conditions.csv): CCS - Collapsed Condition crosswalk (1996-2015)
 * [meps_ccsr_conditions.csv](meps_ccsr_conditions.csv): CCSR - Collapsed Condition crosswalk (2016 and later)
-* [meps_cond_icd9_labels.csv](meps_icd9_labels.csv): Labels for ICD9CODX (1996-2015)
-* [meps_cond_icd10_labels.csv](meps_icd10_labels.csv): Labels for ICD10CDX (2016 and later)
+* [meps_cond_icd9_labels.csv](meps_cond_icd9_labels.csv): Labels for ICD9CODX (1996-2015)
+* [meps_cond_icd10_labels.csv](meps_cond_icd10_labels.csv): Labels for ICD10CDX (2016 and later)
 * [meps_condition_changes.csv](meps_condition_changes.csv): Differences between MEPS collapsed condition categories from 1996-2015 compared with 2016 and later.
 
 The HCUP website provides more information on the creation of [CCS for ICD-9 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [CCSR for ICD-10 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/ccs_refined.jsp).
