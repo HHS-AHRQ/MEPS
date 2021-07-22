@@ -153,7 +153,7 @@ The following example codes from previous MEPS workshops are provided in the [wo
 
 ### Summary tables examples
 
-The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS online summary tables](https://meps.ahrq.gov/mepstrends/home/). These example codes are written under the assumption that the .ssp files are saved in the local directory "C:/MEPS/". However, you can customize the programs to point to an alternate directory.
+The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc). These example codes are written under the assumption that the .ssp files are saved in the local directory "C:/MEPS/". However, you can customize the programs to point to an alternate directory.
 
 #### Accessibility and quality of care
 [care1_child_dental.do](summary_tables_examples/care1_child_dental.do): Children with dental care, by poverty status, 2016

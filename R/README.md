@@ -193,7 +193,7 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 
 ### Summary tables examples
 
-The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS online summary tables](https://meps.ahrq.gov/mepstrends/home/):
+The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc):
 
 #### Accessibility and quality of care
 [care1_child_dental.R](summary_tables_examples/care1_child_dental.R): Children with dental care, by poverty status, 2016

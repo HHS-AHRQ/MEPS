@@ -17,10 +17,12 @@ The following reference guides are provided for convenience:
 
 From 1996-2015, household-reported medical conditions in MEPS were coded into ICD-9 codes, which were then collapsed into the broader Clinical Classification Software (CCS) codes created by the Healthcare Cost and Utilization Project (HCUP). Starting in 2016, medical conditions were coded into ICD-10 codes, then collapsed into CCS-Refined (CCSR) codes provided by HCUP.
 
-For analytical purposes (including the creation of the [MEPS summary tables](https://meps.ahrq.gov/mepstrends/home/)), MEPS created even broader condition categories. Some of these collapsed condition categories were revised with the transition from ICD-9 to ICD-10 in 2016. The following spreadsheets provide crosswalks between CCS[R] and MEPS collapsed condition categories, as well as the list of collapsed condition categories that were revised in 2016.
+For analytical purposes (including the creation of the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc)), MEPS created even broader condition categories. Some of these collapsed condition categories were revised with the transition from ICD-9 to ICD-10 in 2016. The following spreadsheets provide crosswalks between CCS[R] and MEPS collapsed condition categories, the list of collapsed condition categories that were revised in 2016, and descriptive labels for the 3-digit top-coded ICD variables on the MEPS Conditions files (ICD9CODX for 1996-2015; ICD10CDX for 2016 and later).
 
 * [meps_ccs_conditions.csv](meps_ccs_conditions.csv): CCS - Collapsed Condition crosswalk (1996-2015)
 * [meps_ccsr_conditions.csv](meps_ccsr_conditions.csv): CCSR - Collapsed Condition crosswalk (2016 and later)
+* [meps_cond_icd9_labels.csv](meps_icd9_labels.csv): Labels for ICD9CODX (1996-2015)
+* [meps_cond_icd10_labels.csv](meps_icd10_labels.csv): Labels for ICD10CDX (2016 and later)
 * [meps_condition_changes.csv](meps_condition_changes.csv): Differences between MEPS collapsed condition categories from 1996-2015 compared with 2016 and later.
 
 The HCUP website provides more information on the creation of [CCS for ICD-9 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [CCSR for ICD-10 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/ccs_refined.jsp).
