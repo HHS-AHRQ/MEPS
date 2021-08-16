@@ -51,7 +51,7 @@ Data from the Household Component of MEPS are [available for download as public 
 <sub><sup>1</sup> Additional programming statements with column widths, types, and names are required to read ASCII files. SAS and Stata programming statements are available for all data files. R programming statements are available for most files from data years 2018 and later.
 <br><sup>2</sup> SAS CPORT files cannot be read into R or Stata.</sub>
 
-Zip files of each data format can be found by navigating to the web page of the desired data file.
+Zip files of each data format can be downloaded from the web page for each MEPS public use file. 
 
 ![GIF of file download](_images/download-video.gif)
 
