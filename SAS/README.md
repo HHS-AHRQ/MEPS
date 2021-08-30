@@ -3,6 +3,7 @@
 - [Loading MEPS data](#loading-meps-data)
   - [Data years 2017 and later: SAS V9 files](#data-years-2017-and-later-sas-v9-files)
   - [Data years 1996-2017: `PROC XCOPY`](#data-years-1996-2017-proc-xcopy)
+- [Automating file download](#automating-file-download)
 - [Saving SAS data (.sas7bdat)](#saving-sas-data-sas7bdat)
 - [SAS SURVEY procedures](#sas-survey-procedures)
 - [SAS examples](#sas-examples)
@@ -14,7 +15,12 @@
 
 For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
-> <b> IMPORTANT! </b> Starting with some 2017 files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. Importing XPORT and CPORT files into SAS requires different procedures. 
+The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2018 and later, and the SAS transport (.ssp) format for data years 1996-2017, with one exceptions:
+
+|Recommended Format| 1996-2016 |	2017 |	2018 and later |
+| --- | :----: | :---: | :---: |
+|Full-Year Consolidated Files | SAS transport (.ssp) |	SAS V9 (.sas7bdat)	 | SAS V9 (.sas7bdat) |
+|Other Files |	SAS transport (.ssp)	| SAS transport (.ssp)|	SAS V9 (.sas7bdat) |
 
 
 ## Data years 2017 and later: SAS V9 files
@@ -67,6 +73,58 @@ RUN;
 PROC PRINT data = h197b (obs=10);
 RUN;
 ```
+
+# Automating file download
+
+Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. 
+
+The following code downloads and unzips the 2018 Dental Visits (h206b) directly from the MEPS website and stores it in the "C:/MEPS" folder. This code is adapted from [SAS blogs by Chris Hemedinger](https://blogs.sas.com/content/sasdummy/2015/05/11/using-filename-zip-to-unzip-and-read-data-files-in-sas/) and a macro created by Pradip Muhuri:
+
+``` sas
+/* You must assign macro variables: MEPS file name, URL, and local directory where files will be stored*/
+%let meps_file = h206b;
+%let meps_url = https://meps.ahrq.gov/mepsweb/data_files/pufs/h206b/h206bv9.zip;
+%let meps_dir = C:/MEPS/sas_data;
+
+
+/* DO NOT EDIT this section *******************************/
+/* Download zip file from MEPS website to specified directory (meps_dir) */
+filename zipfile "&meps_dir/&meps_file.v9.zip";
+
+proc http 
+	url = "&meps_url"
+	out = zipfile;
+run;
+
+/* Unzip SAS dataset and save in specified directory */
+filename inzip ZIP "&meps_dir/&meps_file.v9.zip";	
+filename sasfile "&meps_dir/&meps_file..sas7bdat" ;
+ 
+data _null_;
+	infile inzip(&meps_file..sas7bdat) 
+	  lrecl=256 recfm=F length=length eof=eof unbuf;
+   file sasfile lrecl=256 recfm=N;
+   input;
+   put _infile_ $varying256. length;
+   return;
+ eof:
+   stop;
+run;
+/* End of DO NOT EDIT section ***************************/
+
+/* Read in the saved SAS V9 dataset */
+data dn2018;
+	set "&meps_dir/&meps_file..sas7bdat";
+run;
+
+/* View first 5 rows of dataset */
+proc print data = dn2018 (obs = 5);
+run;
+```
+
+To download additional files programmatically, replace 'h206b' in the above code with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year). The full URL for the `url` macro variable can be found by right-clicking the 'ZIP' hyperlink on the web page for the data file, selecting 'Copy link address', then pasting into a text editor or code editor.
+
+<img src = "../_images/sas_copy_link_address.png" alt = "Screenshot of 'copy link address'" width = 750>
 
 
 # Saving SAS data (.sas7bdat)

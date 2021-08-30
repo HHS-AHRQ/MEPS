@@ -14,9 +14,14 @@
 
 For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
-> <b> IMPORTANT! </b> Starting with some 2017 files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into Stata, and alterative file formats must be used instead.
+The recommended file formats are the Stata data files (.dta) for data years 2018 and later, and the SAS transport (.ssp) format for data years 1996-2017, with one exceptions:
 
-The recommended file formats are the Stata data files (.dta) for data years 2018 and later, and the SAS transport (.ssp) format for data years 1996-2017. Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata (.dta) files generally have uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
+|Recommended Format| 1996-2016 |	2017 |	2018 and later |
+| --- | :----: | :---: | :---: |
+|Full-Year Consolidated Files | SAS transport (.ssp) |	Stata (.dta)	 | Stata (.dta) |
+|Other Files |	SAS transport (.ssp)	| SAS transport (.ssp)|	Stata (.dta) |
+
+Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata (.dta) files generally have uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
 
 
 ## Data years 2017 and later: Stata (.dta) files
@@ -25,6 +30,9 @@ The Stata data format (.dta) is the recommended file format for loading the foll
 * <b>2017</b>:	Full-year consolidated (FYC) file (h201)
 * <b>2018 and later</b>: All files 
 
+
+> <b> IMPORTANT! </b> SAS transport (.ssp) versions of these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into Stata.
+> 
 For the following example, the 2018 Dental Visits files (<b>h206b.dta</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
 
 ``` stata

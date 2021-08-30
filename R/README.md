@@ -41,10 +41,7 @@ To load and analyze MEPS data in R, additional packages are needed. Packages are
 
 # Loading MEPS data
 
-
 For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. 
-
-> <b> IMPORTANT! </b> Starting with some 2017 files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alterative file formats must be used instead.
 
 Different functions are needed for importing these various file formats into R. The most versatile method is to use the `read_MEPS` function from the [`MEPS` package](https://github.com/e-mitchell/meps_r_pkg)</b>, which was created to facilitate loading and manipulation of MEPS PUFs. For users that prefer not to use the MEPS R package to load MEPS public use files, care must be taken to ensure that the correct file format is being imported in accordance with the data year, as detailed in the sections below. 
 
@@ -59,8 +56,6 @@ The following table summarizes the recommended functions and R packages needed t
 | SAS XPORT (.ssp)   | `foreign` | `read.xport` | `read.xport("C:/MEPS/h197b.ssp")` |
 | SAS CPORT (.ssp)   | (none)       | N/A       | N/A
 | Stata (.dta)       | `haven`   | `read_dta`   | `read_dta("C:/MEPS/h206b.dta")` |
-
-
 
 
 
@@ -97,6 +92,8 @@ help(read_MEPS)
 For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2018 and later, as well as the 2017 Full-year consolidated (FYC) file. Due to the fast loading speed and simplicity of code, the Stata data format (.dta) is the recommended file format for loading the following files into R:
 * <b>2017</b>:	Full-year consolidated (FYC) file (h201)
 * <b>2018 and later</b>:	All files 
+
+> <b> IMPORTANT! </b> SAS transport (.ssp) versions of these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alternative file formats must be used instead.
 
 Examples of loading each of the available file types are detailed below. For each example, the 2018 Dental Visits files (<b>h206b</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
 
