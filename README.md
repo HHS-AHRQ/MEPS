@@ -1,13 +1,13 @@
-# Medical Expenditure Panel Survey (MEPS)
+# Medical Expenditure Panel Survey (MEPS) <!-- omit in toc -->
 
 This repository contains instructions and example code for loading and analyzing data from the Agency for Healthcare Research and Quality's [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) <b>Household Component</b> (HC). [Quick reference guides](Quick_Reference_Guides) are also provided for convenience.
 
-[MEPS Workshops](#meps-workshops) <br>
-[Survey Background](#survey-background) <br>
-[Accessing MEPS-HC data](#accessing-meps-hc-data) <br>
-[Analyzing MEPS-HC data](#analyzing-meps-hc-data) <br>
-[Additional Survey Components](#additional-survey-components) <br>
-[Contact MEPS](#contact-meps)
+- [MEPS Workshops](#meps-workshops)
+- [Survey Background](#survey-background)
+- [Accessing MEPS-HC data](#accessing-meps-hc-data)
+- [Analyzing MEPS-HC data](#analyzing-meps-hc-data)
+- [Additional Survey Components](#additional-survey-components)
+- [Contact MEPS](#contact-meps)
 
 <b>Example code</b> for loading and analyzing MEPS data in R, SAS, and Stata is available in the following folders. These folders also include example exercises from recent MEPS workshops. In addition, the SAS folder contains exercises from older workshops (1996-2006):
  * [R](R) <br>
@@ -24,7 +24,7 @@ The agenda, presentation slides, and programming exercises for the most recent w
 
 
 ## Survey Background
-The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Each surveyed household is interviewed five times (rounds) over a two-year period:
+The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Typically, each surveyed household is interviewed five times (rounds) over a two-year period:
 
 ![MEPS over-lapping panel design](_images/panel_design.png)
 
@@ -32,38 +32,54 @@ The MEPS-HC is designed to produce national and regional estimates of the health
 
 ## Accessing MEPS-HC data
 
-Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). Each dataset contains .zip and .exe files in ASCII and SAS transport format.
+> <b> IMPORTANT! </b> Starting with some 2017 files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. Importing XPORT and CPORT files into SAS requires different procedures. In addition, CPORT data files cannot be read directly into R or Stata; alternative file formats must be used. More details are available in the sub-folders for each programming language.
 
-![MEPS data files website screenshot](_images/data_documentation_arrow.png)
+Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS transport (.ssp), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. The following table summarizes the various file formats available by data year:
 
-To download the data, unzip and save the ASCII (.dat) or SAS transport (.ssp) file to your local computer. For example, the 2014 full-year-consolidated files <b>h171.dat</b> and <b>h171.ssp</b> can be stored in a local directory <b>'C:\MEPS\data'</b>:
 
-![Windows folder containing h171.dat and h171.ssp](_images/directory_cropped.png)
 
-The steps for loading the .dat or .ssp files depends on the programming language being used and the MEPS data year. Code for loading MEPS data in [R](R), [SAS](SAS), and [Stata](Stata) are available in the corresponding folders.
+|Data Years     |Files     |ASCII<sup>1</sup>  <br>(.dat) |SAS XPORT <br>(.ssp) |SAS CPORT<sup>2</sup><br>(.ssp) |SAS V9 (.sas7dat) <br> Stata (.dta) <br> Excel (.xlsx) |
+|:--------------|:-----------------------------------|:-----------:|:------------:|:--:|:--:|
+|1996-2016      |All files                           |X            |X             |    |    |
+|2017           |Full-year consolidated (HC-201)     |X            |              |X   |X   |
+|2017           |All other 2017 files                |X            |X             |    |    |
+|2018           |Point-in-time (HC-196)              |X            |X             |    |X   |
+|2018           |All other 2018 files                |X            |              |X   |X   |
+|2019 and later |Pooled linkage (HC-036) <br>BRR replicates (HC-036BRR)  |X  |X   |    |X   |
+|2019 and later |All other 2019 files                |X            |              |X   |X   |
+
+<sub><sup>1</sup> Additional programming statements with column widths, types, and names are required to read ASCII files. SAS and Stata programming statements are available for all data files. R programming statements are available for most files from data years 2018 and later.
+<br><sup>2</sup> SAS CPORT files cannot be read into R or Stata.</sub>
+
+Zip files of each data format can be downloaded from the web page for each MEPS public use file. 
+
+![GIF of file download](_images/download-video.gif)
+
+The steps for loading the MEPS files into [R](R), [SAS](SAS), and [Stata](Stata), depends on the file type being used. Details for loading MEPS data in these languages are available in the corresponding folders.
 
 
 ## Analyzing MEPS-HC data
 The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided in the [R](R), [SAS](SAS), and [Stata](Stata) folders. Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
 
-#### Sample size and precision
+#### Sample size and precision <!-- omit in toc -->
 
 When analyzing MEPS data, it is the user's responsibility to ensure that sample sizes and precision are adequate for the user's purposes. Please refer to [AHRQ's guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) for specific recommendations.
 
-#### MEPS variables across the years
+#### MEPS variables across the years <!-- omit in toc -->
 
 When analyzing multiple years of MEPS data, it is important to note that MEPS variable names may differ across years. Here are just a few examples:
 
 * 1996: Round-specific variables have only one round number (e.g. AGE2X instead of AGE42X)
 * 1996-1998: PERWT variable is WTDPERyy (yy = '96', '97', '98')
 * 1996-2001: VARPSU variable has 2-digit year at end (e.g. VARPSU96)
+* 2018 and later: Panel number is appended to the beginning of Person ID variable (DUPERSID)
 
-Users should refer to the documentation that is provided with each data set for more information.
+The <b>[MEPS-HC Variable Explorer Tool](https://datatools.ahrq.gov/meps-hc#varexpLabel)</b> can be used to search variables and labels across the years of the most commonly used MEPS public-use files. For detailed information on variables in a specific file, refer to the documentation and codebook that is provided with each data file.
 
 
 ## Additional Survey Components
 
-In addition to the Household Component (MEPS-HC), MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees. It also includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size). [Summary data tables, chartbooks, and publications](https://meps.ahrq.gov/mepsweb/survey_comp/Insurance.jsp) are available on the MEPS website.
+In addition to the Household Component (MEPS-HC), MEPS is comprised of two additional components: The <b>MEPS Medical Provider Component (MEPS-MPC)</b> and the <b>MEPS Insurance Component (MEPS-IC)</b>. The MEPS-MPC survey collects information from providers of medical care that supplements the information collected from persons in the MEPS-HC sample in order to provide the most accurate cost data possible. The MEPS-IC survey collects information from employers in the private sector and state and local governments on the health insurance coverage offered to their employees. It also includes information on the number and types of private health insurance plans offered, benefits associated with these plans, annual premiums and contributions to premiums by employers and employees, copayments and coinsurance, by various employer characteristics (for example, State, industry and firm size). [Summary data tables, chartbooks, and publications](https://meps.ahrq.gov/mepsweb/survey_comp/Insurance.jsp) for the MEPS-IC are available on the MEPS website.
 
 Special permissions are required to access datasets from the MPC and IC components. Access to the MEPS-MPC data can be requested from the [AHRQ data center](https://meps.ahrq.gov/mepsweb/data_stats/onsite_datacenter.jsp). For access to the MEPS-IC data, visit the [Census Bureau's data center website](http://www.census.gov/ces/rdcresearch/).
 

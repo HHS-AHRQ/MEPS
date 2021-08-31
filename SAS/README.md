@@ -1,38 +1,51 @@
-# Analyzing MEPS data using SAS
-[Loading MEPS data](#loading-meps-data)<br>
-&nbsp; &nbsp; [Using `PROC XCOPY` (1996-2017)](#using-proc-xcopy-1996-2017)<br>
-&nbsp; &nbsp; [Using `PROC CIMPORT` (2018 and later)](#using-proc-cimport-2018-and-later)<br>
-&nbsp; &nbsp; [Automating file download](#automating-file-download)<br>
-&nbsp; &nbsp; [Saving SAS data (.sas7bdat)](#saving-sas-data-sas7bdat)<br>
-[SAS SURVEY procedures](#sas-survey-procedures)<br>
-[SAS examples](#sas-examples)<br>
-&nbsp; &nbsp; [Workshop Exercises](#workshop-exercises)<br>
-&nbsp; &nbsp; [Summary tables examples](#summary-tables-examples)<br>
-&nbsp; &nbsp; [Older Exercises (1996 to 2006)](#older-exercises-1996-to-2006)<br>
+# Analyzing MEPS data using SAS <!-- omit in toc -->
 
-## Loading MEPS data
+- [Loading MEPS data](#loading-meps-data)
+  - [Data years 2018 and later: SAS V9 files](#data-years-2018-and-later-sas-v9-files)
+  - [Data years 1996-2017: `PROC XCOPY`](#data-years-1996-2017-proc-xcopy)
+- [Automating file download](#automating-file-download)
+- [Saving SAS data (.sas7bdat)](#saving-sas-data-sas7bdat)
+- [SAS SURVEY procedures](#sas-survey-procedures)
+- [SAS examples](#sas-examples)
+  - [Workshop exercises](#workshop-exercises)
+  - [Summary tables examples](#summary-tables-examples)
+  - [Older Exercises (1996 to 2006)](#older-exercises-1996-to-2006)
 
-> <b> IMPORTANT! </b> Starting in 2018, the SAS Transport formats for MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). The `PROC CIMPORT` procedure must be used to download these files, as detailed in the sections below. This requirement also applies to the 2017 Full-Year Consolidated file (HC-201).
+# Loading MEPS data
 
-### Using `PROC XCOPY` (1996-2017)
+For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
-SAS transport (.ssp) files can be read in using PROC XCOPY for 1996-2017 PUFs. In the following examples, the SAS transport file for the 2017 Dental Visits file (h197b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
+The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2018 and later (as well as the 2017 FYC file), and the SAS transport (.ssp) format for data years 1996-2017, as summarized in the following table:
+
+|Recommended Format| 1996-2016 |	2017 |	2018 and later |
+| --- | :----: | :---: | :---: |
+|Full-Year Consolidated (FYC) Files | SAS transport (.ssp) |	SAS V9 (.sas7bdat)	 | SAS V9 (.sas7bdat) |
+|Other Files |	SAS transport (.ssp)	| SAS transport (.ssp)|	SAS V9 (.sas7bdat) |
+
+
+## Data years 2018 and later: SAS V9 files
+
+The <b>SAS V9 (.sas7bdat)</b> format is the recommended format for loading the following files into SAS:
+* <b>2017</b>:	Full-year consolidated (FYC) file (h201)
+* <b>2018 and later</b>: All files 
+
+For the following example, the 2018 Dental Visits files (<b>h206b.sas7bdat</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
+
 ``` sas
-FILENAME in_h197b 'C:\MEPS\h197b.ssp';
-PROC XCOPY in = in_h197b out = WORK IMPORT;
+DATA work.h206b;
+  SET "C:/MEPS/h206b.sas7bdat";
 RUN;
 
 /* View first 10 rows of data */
-PROC PRINT data = h197b (obs=10);
+PROC PRINT data = h206b (obs=10);
 RUN;
 ```
 
-### Using `PROC CIMPORT` (2018 and later)
-Starting in 2018, design changes in the MEPS survey instrument resulted in SAS transport files being converted from the XPORT to the CPORT format (excluding the 2018 Point-in-Time file, HC-036, and HC-036BRR). Thus, the `CIMPORT` procedure must be used for to load these files into SAS for data years 2018 and later. This requirement also applies to the 2017 Full-Year Consolidated file (HC-201).
 
-In the following examples, the SAS transport file for the 2018 Dental Visits file (h206b.ssp) Dental Visits event files have been downloaded from the MEPS website, unzipped, and saved in the local directory '<b>C:\MEPS</b>' (click [here](../README.md#accessing-meps-hc-data) for details).
+Alternatively, the `CIMPORT` procedure can be used to convert the SAS transport  (.ssp) files into SAS data sets:
+
 ``` sas
-FILENAME in_h206b 'C:\MEPS\h206b.ssp';
+FILENAME in_h206b "C:\MEPS\h206b.ssp";
 PROC CIMPORT data = work.h206b infile = in_h206b;
 RUN;
 
@@ -41,91 +54,116 @@ PROC PRINT data = h206b (obs=10);
 RUN;
 ```
 
-### Automating file download
 
-Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. This can be accomplished using the `proc http` procedure. The SAS code [Automate_Load.sas](Automate_Load.sas) includes a macro call that will automatically download the .zip files for the requested MEPS data, convert to SAS datasets, and store the data in a local folder.
 
-First, open the SAS code: [Automate_Load.sas](Automate_Load.sas). Next, edit the following lines to point to pre-created local folders for storing the zip files, xport files, cport files, and the SAS datasets.
+## Data years 1996-2017: `PROC XCOPY`
+
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp) </b> formats are the recommended file type for loading the following files into Stata:
+* <b>1996-2016</b>:	All files	
+* <b>2017</b>:	All files (except Full-year consolidated file)
+
+
+SAS transport (.ssp) files can be read into SAS using `PROC XCOPY`. In the following examples, the SAS transport file for the 2017 Dental Visits file (h197b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b>
+``` sas
+FILENAME in_h197b "C:\MEPS\h197b.ssp";
+PROC XCOPY in = in_h197b out = WORK IMPORT;
+RUN;
+
+/* View first 10 rows of data */
+PROC PRINT data = h197b (obs=10);
+RUN;
+```
+
+# Automating file download
+
+Instead of having to manually download, unzip, and store MEPS data files in a local directory, it may be beneficial to automatically download MEPS data directly from the MEPS website. 
+
+The following code downloads and unzips the 2018 Dental Visits (h206b) directly from the MEPS website and stores it in the "C:/MEPS" folder. This code is adapted from [SAS blogs by Chris Hemedinger](https://blogs.sas.com/content/sasdummy/2015/05/11/using-filename-zip-to-unzip-and-read-data-files-in-sas/) and a macro created by Pradip Muhuri:
 
 ``` sas
-/****************************************************************************************
-* STEP 1: Create 4 global macro variables for naming folders that were already created  *
-*****************************************************************************************/
+/* You must assign macro variables: MEPS file name, URL, and local directory where files will be stored*/
+%let meps_file = h206b;
+%let meps_url = https://meps.ahrq.gov/mepsweb/data_files/pufs/h206b/h206bv9.zip;
+%let meps_dir = C:/MEPS/sas_data;
 
-%let zipfiles = C:\Data\zipfiles ;  /* Save downloaded zipped files */
-%let xptfiles = C:\Data\xptfiles;   /* Save extracted PROC COPY/XPORT-created transport files */
-%let cptfiles = C:\Data\cptfiles;   /* Save extracted PROC CIMPORT-created transport files */
-%let MySDS =    C:\Data\MySDS;      /* Save SAS data sets restored from transport files */
+
+/* DO NOT EDIT this section *******************************/
+/* Download zip file from MEPS website to specified directory (meps_dir) */
+filename zipfile "&meps_dir/&meps_file.v9.zip";
+
+proc http 
+	url = "&meps_url"
+	out = zipfile;
+run;
+
+/* Unzip SAS dataset and save in specified directory */
+filename inzip ZIP "&meps_dir/&meps_file.v9.zip";	
+filename sasfile "&meps_dir/&meps_file..sas7bdat" ;
+ 
+data _null_;
+	infile inzip(&meps_file..sas7bdat) 
+	  lrecl=256 recfm=F length=length eof=eof unbuf;
+   file sasfile lrecl=256 recfm=N;
+   input;
+   put _infile_ $varying256. length;
+   return;
+ eof:
+   stop;
+run;
+/* End of DO NOT EDIT section ***************************/
+
+/* Read in the saved SAS V9 dataset */
+data dn2018;
+	set "&meps_dir/&meps_file..sas7bdat";
+run;
+
+/* View first 5 rows of dataset */
+proc print data = dn2018 (obs = 5);
+run;
 ```
-Then, specify the MEPS data files that you want to download. Files that were created using the XPORT engine should be placed in the `xpt_files` variable, while files created using the CPORT engine should be placed in the `cpt_files` variable. Generally, MEPS public use files from data year 2017 and earlier are in the XPORT format, while those from data year 2018 and later are in the CPORT format, with a few exceptions. The following example downloads these files:
-* XPORT format:
-  * h183: Panel 19 longitudinal file (2014-2015)
-  * h193: Panel 20 longitudinal file (2015-2016)
-  * h202: Panel 21 longitudinal file (2016-2017)
-* CPORT format:
-  * h201: 2017 Full-year consolidated file
-  * h209: 2018 Full-year consolidated file
-  * h206a: 2018 Prescribed medicines event file
 
-``` sas
-/****************************************************************************
-* STEP 2: Create global macro variables containing
-*	- a list of XPORT engine-created transport file names
-*	- a list of PROC CPORT-created transport file names
-*
-*  XPORT files include:
-*   - most MEPS PUFs from data year 2017 and earlier
-*   - h196 (2018 Point-in-time file)
-*  CPORT files include:
-*   - most MEPS PUFs from data year 2018 and later
-*   - h201 (2017 Full-year consolidated file)
-*****************************************************************************/
-/* One has the option to leave blanks for the any one of the macro variables*/;
-%let xpt_files = h183 h193 h202;
-%let cpt_files = h201 h209 h206a;
+To download additional files programmatically, replace 'h206b' in the above code with the desired filename (see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv) for a list of MEPS file names by data type and year). The full URL for the `url` macro variable can be found by right-clicking the 'ZIP' hyperlink on the web page for the data file, selecting 'Copy link address', then pasting into a text editor or code editor.
 
-```
-Once these edits have been made, run the code in its entirety to download and store the datasets in the specified folder. For a detailed list of MEPS file names by data type and year, see [meps_files_names.csv](https://github.com/HHS-AHRQ/MEPS/blob/master/Quick_Reference_Guides/meps_file_names.csv).
+<img src = "../_images/sas_copy_link_address.png" alt = "Screenshot of 'copy link address'" width = 750>
 
 
+# Saving SAS data (.sas7bdat)
 
-### Saving SAS data (.sas7bdat)
-
-Once the MEPS data has been loaded into SAS, it can be saved as a permanent SAS dataset (.sas7bdat). In the following code, the h206b dataset is saved in the 'SAS\data' folder (first create the 'SAS\data' folder if needed):
+Once the MEPS data has been loaded into SAS, it can be saved as a permanent SAS dataset (.sas7bdat). In the following code, the h206b dataset is saved in the 'SAS\data' folder (first create the 'MEPS\SAS\data' folder if needed):
 ``` sas
 LIBNAME sasdata 'C:\MEPS\SAS\data';
 
-data sasdata.h197b;
-  set WORK.h197b;
+data sasdata.dn2018;
+  set WORK.h206b;
 run;
 ```
 
-## SAS SURVEY procedures
+# SAS SURVEY procedures
 To analyze MEPS data using SAS, the following steps are recommended to ensure unbiased estimates and proper standard errors (from [SAS Global Forum Paper 4113-2020 by David R. Nelson and Siew Wong-Jacobson](https://www.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2020/4113-2020.pdf)):
 1. Always use the SAS [SURVEY procedures](https://support.sas.com/rnd/app/stat/procedures/SurveyAnalysis.html) (e.g. SURVEYMEANS, SURVEYREG)
-2. Always use the cluster (e.g. VARPSU), strata (e.g. VARSTR), and appropriate weights (e.g. PERWT17F)
+2. Always use the cluster (e.g. VARPSU), strata (e.g. VARSTR), and appropriate weights (e.g. PERWT18F)
 3. Do not delete observations or use BY or WHERE statements. Instead, create an analytical
 subset for use as a DOMAIN; analyzing the subgroup alone may affect the standard errors.
 
-As an example, the following code will estimate the total healthcare expenditures in 2014:
+As an example, the following code will estimate the total healthcare expenditures in 2018:
 ``` sas
-proc surveymeans data = h197b sum;
+proc surveymeans data = h206b sum;
   stratum VARSTR;
   cluster VARPSU;
-  weight PERWT17F;
-  var DVXP17X;
+  weight PERWT18F;
+  var DVXP18X;
 run;
 ```
 
 
-## SAS examples
+# SAS examples
 
-In order to run the example codes, you must download the relevant MEPS files from the MEPS website and save them to your local computer, as described above.
+In order to run the example codes, you must download the relevant MEPS files from the MEPS website and save them to your local computer.
 
-### Workshop exercises
+## Workshop exercises
 Example codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder. Each exercise contains three files: SAS code (e.g. Exercise1.sas), a SAS log file (e.g. Exercise1_log.TXT) and a SAS output file (e.g. Exercise1_OUTPUT.TXT):
 
-#### 1. National health care expenses
+### 1. National health care expenses <!-- omit in toc -->
 [exercise_1a](workshop_exercises/exercise_1a): National health care expenses by age group, 2016
 <br>
 [exercise_1b](workshop_exercises/exercise_1b): National health care expenses by age group and type of service, 2015
@@ -133,7 +171,7 @@ Example codes from previous MEPS workshops are provided in the [workshop_exercis
 [exercise_1c](workshop_exercises/exercise_1c): National health care expenses by age group, 2018
 <br>
 
-#### 2. Prescribed medicine purchases
+### 2. Prescribed medicine purchases <!-- omit in toc -->
 [exercise_2a](workshop_exercises/exercise_2a): Trends in antipsychotics purchases and expenses, 2015
 <br>
 [exercise_2b](workshop_exercises/exercise_2b): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
@@ -141,12 +179,12 @@ Example codes from previous MEPS workshops are provided in the [workshop_exercis
 [exercise_2c](workshop_exercises/exercise_2c): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2018
 
 
-#### 3. Medical conditions
+### 3. Medical conditions <!-- omit in toc -->
 [exercise_3a](workshop_exercises/exercise_3a): Use and expenditures for persons with diabetes, 2015
 <br>
 [exercise_3b](workshop_exercises/exercise_3b): Expenditures for all events associated with diabetes, 2015
 
-#### 4. Pooling data files
+### 4. Pooling data files <!-- omit in toc -->
 [exercise_4a](workshop_exercises/exercise_4a): Pooling MEPS FYC files, 2015 and 2016: Out-of-pocket expenditures for unisured persons ages 26-30 with high income
 <br>
 [exercise_4b](workshop_exercises/exercise_4b): Pooling longitudinal files, panels 17-19
@@ -154,38 +192,38 @@ Example codes from previous MEPS workshops are provided in the [workshop_exercis
 [exercise_4c](workshop_exercises/exercise_4c): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
 
 
-#### 5. Constructing variables
+### 5. Constructing variables <!-- omit in toc -->
 [exercise_5a](workshop_exercises/exercise_5a): Constructing family-level variables from person-level data, 2015
 <br>
 [exercise_5b](workshop_exercises/exercise_5b): Constructing insurance status from monthly insurance variables, 2015
 
-#### 6. Regression
+### 6. Regression <!-- omit in toc -->
 [exercise_6](workshop_exercises/exercise_6): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
 <br>
 
-### Summary tables examples
+## Summary tables examples
 
 The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc). These example codes are written under the assumption that the .ssp files are saved in the local directory "C:/MEPS/". However, you can customize the programs to point to an alternate directory.
 
-#### Accessibility and quality of care
+### Accessibility and quality of care <!-- omit in toc -->
 [care1_child_dental.sas](summary_tables_examples/care1_child_dental.sas): Children with dental care, by poverty status, 2016
 <br>
 [care2_diabetes_a1c.sas](summary_tables_examples/care2_diabetes_a1c.sas): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
 <br>
 [care3_access.sas](summary_tables_examples/care3_access.sas): Ability to schedule a routine appointment, by insurance coverage, 2016
 
-#### Medical conditions
+### Medical conditions <!-- omit in toc -->
 [cond1_expenditures.sas](summary_tables_examples/cond1_expenditures.sas): Utilization and expenditures by medical condition, 2015
 
-#### Health Insurance
+### Health Insurance <!-- omit in toc -->
 [ins1_age.sas](summary_tables_examples/ins1_age.sas): Health insurance coverage by age group, 2016
 
-#### Prescribed drugs
+### Prescribed drugs <!-- omit in toc -->
 [pmed1_therapeutic_class.sas](summary_tables_examples/pmed1_therapeutic_class.sas): Purchases and expenditures by Multum therapeutic class, 2016
 <br>
 [pmed2_prescribed_drug.sas](summary_tables_examples/pmed2_prescribed_drug.sas): Purchases and expenditures by generic drug name, 2016
 
-#### Use, expenditures, and population
+### Use, expenditures, and population <!-- omit in toc -->
 [use1_race_sex.sas](summary_tables_examples/use1_race_sex.sas): Utilization and expendiutres by race and sex, 2016
 <br>
 [use2_expenditures.sas](summary_tables_examples/use2_expenditures.sas): Expenditures for office-based and outpatient visits, by source of payment, 2016
@@ -193,11 +231,11 @@ The following codes provided in the [summary_tables_examples](summary_tables_exa
 [use3_events.sas](summary_tables_examples/use3_events.sas): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
 
 
-### Older Exercises (1996 to 2006)
+## Older Exercises (1996 to 2006)
 
 Codes provided in the [older_exercises_1996_to_2006](older_exercises_1996_to_2006) folder include older SAS programs for analyzing earlier years of MEPS data. Each folder includes a SAS program (.sas) and SAS output (.pdf)
 
-#### Estimation examples
+### Estimation examples <!-- omit in toc -->
 
 [E1](older_exercises_1996_to_2006/Estimation_examples/E1):
 Person-level estimates (means, proportions, and totals) for healthcare expenditures, 2001
@@ -216,12 +254,12 @@ Person-level estimates (means, proportions, and totals) for healthcare expenditu
 <br>
 [E8](older_exercises_1996_to_2006/Estimation_examples/E8): Expenditures for inpatient stays by source of payment, per stay, per diem, with and without surgery, 2005
 
-#### Employment examples
+### Employment examples <!-- omit in toc -->
 [EM1](older_exercises_1996_to_2006/Employment_examples/EM1): Relationship between health status and current main job weekly earnings, 2002
 <br>
 [EM2](older_exercises_1996_to_2006/Employment_examples/EM2): Determine how many people working at the beginning of the year changed jobs, 2002
 
-#### Linking examples
+### Linking examples <!-- omit in toc -->
 [L1](older_exercises_1996_to_2006/Linking_examples/L1): Merge the 2001 MEPS full-year file and the 2001 MEPS Jobs file
 <br>
 [L1A](older_exercises_1996_to_2006/Linking_examples/L1A): Combine the 2000 and 2001 MEPS Jobs files
@@ -234,7 +272,7 @@ Person-level estimates (means, proportions, and totals) for healthcare expenditu
 <br>
 [L5](older_exercises_1996_to_2006/Linking_examples/L5): Merge 2001 MEPS Medical Conditions file with full-year file and various event files
 
-#### Miscellaneous examples
+### Miscellaneous examples <!-- omit in toc -->
 [M1](older_exercises_1996_to_2006/Misc_examples/M1): Demonstrates need for weight variables when analyzing MEPS data, 2005
 <br>
 [M2](older_exercises_1996_to_2006/Misc_examples/M2): Demonstrates need for using the STRATUM and PSU variables when analyzing MEPS data, 2005
