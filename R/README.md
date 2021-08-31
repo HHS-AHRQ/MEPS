@@ -3,7 +3,7 @@
 - [Loading R packages](#loading-r-packages)
 - [Loading MEPS data](#loading-meps-data)
   - [All data years: Using the `MEPS` package](#all-data-years-using-the-meps-package)
-  - [Data years 2017 and later: ASCII, SAS V9, Stata, and XLSX](#data-years-2017-and-later-ascii-sas-v9-stata-and-xlsx)
+  - [Data years 2018 and later: ASCII, SAS V9, Stata, and XLSX](#data-years-2018-and-later-ascii-sas-v9-stata-and-xlsx)
   - [Data years 1996-2017: SAS XPORT format](#data-years-1996-2017-sas-xport-format)
 - [Automating file download](#automating-file-download)
 - [Saving R data (.Rdata)](#saving-r-data-rdata)
@@ -87,9 +87,9 @@ help(read_MEPS)
 ```
 
 
-## Data years 2017 and later: ASCII, SAS V9, Stata, and XLSX
+## Data years 2018 and later: ASCII, SAS V9, Stata, and XLSX
 
-For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2018 and later, as well as the 2017 Full-year consolidated (FYC) file. Due to the fast loading speed and simplicity of code, the Stata data format (.dta) is the recommended file format for loading the following files into R:
+For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2018 and later, as well as the 2017 Full-year consolidated (FYC) file. Due to the fast loading speed and simplicity of code, the <b>Stata data format (.dta)</b> is the recommended file format for loading the following files into R:
 * <b>2017</b>:	Full-year consolidated (FYC) file (h201)
 * <b>2018 and later</b>:	All files 
 
@@ -170,7 +170,7 @@ head(h207)
 
 ## Data years 1996-2017: SAS XPORT format
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. Since the required R programming statements are not available for the ASCII data files for these years, the SAS transport formats (.ssp) are the recommended file type for loading the following files into R:
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. Since the required R programming statements are not available for the ASCII data files for these years, the <b>SAS transport (.ssp)</b> formats are the recommended file type for loading the following files into R:
 * <b>1996-2016</b>:	All files	
 * <b>2017</b>:	All files (except Full-year consolidated file)
 

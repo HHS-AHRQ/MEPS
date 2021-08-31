@@ -1,7 +1,7 @@
 # Analyzing MEPS data using SAS <!-- omit in toc -->
 
 - [Loading MEPS data](#loading-meps-data)
-  - [Data years 2017 and later: SAS V9 files](#data-years-2017-and-later-sas-v9-files)
+  - [Data years 2018 and later: SAS V9 files](#data-years-2018-and-later-sas-v9-files)
   - [Data years 1996-2017: `PROC XCOPY`](#data-years-1996-2017-proc-xcopy)
 - [Automating file download](#automating-file-download)
 - [Saving SAS data (.sas7bdat)](#saving-sas-data-sas7bdat)
@@ -15,17 +15,17 @@
 
 For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
-The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2018 and later, and the SAS transport (.ssp) format for data years 1996-2017, with one exceptions:
+The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2018 and later (as well as the 2017 FYC file), and the SAS transport (.ssp) format for data years 1996-2017, as summarized in the following table:
 
 |Recommended Format| 1996-2016 |	2017 |	2018 and later |
 | --- | :----: | :---: | :---: |
-|Full-Year Consolidated Files | SAS transport (.ssp) |	SAS V9 (.sas7bdat)	 | SAS V9 (.sas7bdat) |
+|Full-Year Consolidated (FYC) Files | SAS transport (.ssp) |	SAS V9 (.sas7bdat)	 | SAS V9 (.sas7bdat) |
 |Other Files |	SAS transport (.ssp)	| SAS transport (.ssp)|	SAS V9 (.sas7bdat) |
 
 
-## Data years 2017 and later: SAS V9 files
+## Data years 2018 and later: SAS V9 files
 
-The SAS V9 (.sas7bdat) format is the recommended format for loading the following files into SAS:
+The <b>SAS V9 (.sas7bdat)</b> format is the recommended format for loading the following files into SAS:
 * <b>2017</b>:	Full-year consolidated (FYC) file (h201)
 * <b>2018 and later</b>: All files 
 
@@ -42,7 +42,7 @@ RUN;
 ```
 
 
-Alternatively, the `CIMPORT` procedure can be used to load the SAS transport formats (.ssp) for these data files into SAS:
+Alternatively, the `CIMPORT` procedure can be used to convert the SAS transport  (.ssp) files into SAS data sets:
 
 ``` sas
 FILENAME in_h206b "C:\MEPS\h206b.ssp";
@@ -58,7 +58,7 @@ RUN;
 
 ## Data years 1996-2017: `PROC XCOPY`
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The SAS transport formats (.ssp) are the recommended file type for loading the following files into Stata:
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp) </b> formats are the recommended file type for loading the following files into Stata:
 * <b>1996-2016</b>:	All files	
 * <b>2017</b>:	All files (except Full-year consolidated file)
 
