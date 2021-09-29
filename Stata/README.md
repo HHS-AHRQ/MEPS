@@ -140,7 +140,7 @@ The following example codes from previous MEPS workshops are provided in the [wo
 <br>
 [Exercise4b.do](workshop_exercises/Exercise4b.do): Pooling longitudinal files, panels 17-19
 <br>
-[Exercise4b.do](workshop_exercises/Exercise4c.do): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
+[Exercise4c.do](workshop_exercises/Exercise4c.do): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
 
 ### 5. Constructing variables <!-- omit in toc -->
 [Exercise5a.do](workshop_exercises/Exercise5a.do): Constructing family-level variables from person-level data, 2015
