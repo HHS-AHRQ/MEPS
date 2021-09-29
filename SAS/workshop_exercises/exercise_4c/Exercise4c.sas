@@ -1,6 +1,5 @@
 
 /******************************************************************************************
-PROGRAM:      EXERCISE4c.SAS
 
  This program illustrates how to pool MEPS data files from different years. It
  highlights one example of a discontinuity that may be encountered when 
@@ -15,22 +14,23 @@ PROGRAM:      EXERCISE4c.SAS
   - Variables with year-specific names must be renamed before combining files
     (e.g. 'TOTEXP17' and 'TOTEXP18' renamed to 'totexp')
 
-  - For pre-2002 data, see HC-036 (1996-2017 pooled estimation file) for 
-    instructions on pooling and considerations for variance estimation.
+Input files:
+  - 2017 Full-year consolidated file
+  - 2018 Full-year consolidated file
 
- Input files: 
-  - C:/MEPS/h209.dat (2018 Full-year file)
-  - C:/MEPS/h201.dat (2017 Full-year file)
+*/
 
- This program is available at:
- https://github.com/HHS-AHRQ/MEPS-workshop/tree/master/sas_exercises
-*******************************************************************************************/
+/*********************************************************************************
+ IMPORTANT NOTE:  Use the next 5 lines of code, only if you want SAS to create 
+    separate files for SAS log and output.  Otherwise comment  out these lines.
+***********************************************************************************/
 
-%LET RootFolder= C:\Mar2021\sas_exercises\Exercise_4c;
+%LET RootFolder= C:\Sep2021\sas_exercises\Exercise_4c;
 FILENAME MYLOG "&RootFolder\Exercise4c_log.TXT";
 FILENAME MYPRINT "&RootFolder\Exercise4c_OUTPUT.TXT";
 PROC PRINTTO LOG=MYLOG PRINT=MYPRINT NEW;
 RUN;
+
 
 /* Clear log, output, and ODSRESULTS from the previous run automatically */
 DM "Log; clear; output; clear; odsresults; clear";
@@ -43,7 +43,7 @@ WARNING: Multiple lengths were specified for the variable Name by input data set
 OPTIONS varlenchk=nowarn;
 
 /* Create use-defined formats and store them in a catalog called FORMATS 
-   in the work folder. They will be deleted at the end of tjr SAS session.
+   in the work folder. They will be deleted at the end of the SAS session.
 */
 PROC FORMAT;
 
@@ -64,12 +64,12 @@ PROC FORMAT;
 	
 run;
 ***************  MEPS 2017;
-%LET DataFolder = C:\DATA\MySDS;  /* Adjust the folder name, if needed */
+%LET DataFolder = C:\MEPS_Data;  /* Adjust the folder name, if needed */
 libname CDATA "&DataFolder"; 
 
 %let kept_vars_2017 =  VARSTR VARPSU perwt17f agelast ARTHDX JTPAIN31 totexp17 totslf17;
 data meps_2017;
- set CDATA.h201 (keep= &kept_vars_2017
+ set CDATA.h201v9 (keep= &kept_vars_2017
                  rename=(totexp17=totexp
                          totslf17=totslf));
   perwtf = perwt17f/2;;
@@ -94,7 +94,7 @@ run;
 
 %let kept_vars_2018 =  VARSTR VARPSU perwt18f agelast ARTHDX JTPAIN31_M18 totexp18 totslf18;
 data meps_2018;
- set CDATA.h209 (keep= &kept_vars_2018
+ set CDATA.h209v9 (keep= &kept_vars_2018
                  rename=(totexp18=totexp
                          totslf18=totslf));
   perwtf = perwt18f/2;
@@ -154,5 +154,7 @@ RUN;
 TITLE;
 /* THE PROC PRINTTO null step is required to close the PROC PRINTTO, 
  only if used earlier., Otherswise. please comment out the next two lines  */
+
 proc printto;
 run;
+

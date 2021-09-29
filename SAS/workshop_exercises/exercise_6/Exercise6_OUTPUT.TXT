@@ -2,13 +2,13 @@
 
 The SURVEYMEANS Procedure
 
-           Statistics for AGELAST Domains
+                  Statistics for AGELAST Domains
  
-                                           Std Error
-AGELAST    Variable         N      Mean      of Mean
-----------------------------------------------------
-18+        flushot     19,171     0.421       0.0064
-----------------------------------------------------
+                                                          Std Error
+AGELAST    Variable               N            Mean         of Mean
+-------------------------------------------------------------------
+18+        flushot            19171        0.420951        0.006389
+-------------------------------------------------------------------
 PROC SURVEYLOGISTIC With param=ref option on the CLASS statement                                                                   2
 
 The SURVEYLOGISTIC Procedure

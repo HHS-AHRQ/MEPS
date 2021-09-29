@@ -7,39 +7,41 @@
 #    receiving a flu shot
 #
 # Input file: 
-#  - C:/MEPS/h209.dat (2018 Full-year file)
-#
-# This program is available at:
-# https://github.com/HHS-AHRQ/MEPS-workshop/tree/master/r_exercises
+#  - C:/MEPS/h209.dta (2018 Full-year file)
 #
 # -----------------------------------------------------------------------------
 
 # Install and load packages ---------------------------------------------------
+#
+# # Can skip this part if already installed
+# install.packages("survey")   # for survey analysis
+# install.packages("foreign")  # for loading SAS transport (.ssp) files
+# install.packages("haven")    # for loading Stata (.dta) files
+# install.packages("dplyr")    # for data manipulation
+# install.packages("devtools") # for loading "MEPS" package from GitHub
 # 
-#   # Can skip this part if already installed
-#   install.packages("survey")
-#   install.packages("foreign")
-#   install.packages("dplyr")
-#   install.packages("devtools")
-#   
-#   # Run this part each time you re-start R
-#   library(survey)
-#   library(foreign)
-#   library(dplyr)
-#   library(devtools)
-#   
-#   # This package facilitates file import
-#   install_github("e-mitchell/meps_r_pkg/MEPS") 
-#   library(MEPS)
+# # Run this part each time you re-start R
+# library(survey)
+# library(foreign)
+# library(haven)
+# library(dplyr)
+# library(devtools)
+# 
+# # This package facilitates file import
+# install_github("e-mitchell/meps_r_pkg/MEPS") 
+# library(MEPS)
+
 
 # Set options to deal with lonely psu
   options(survey.lonely.psu='adjust');
 
 
 # Read in data from FYC file --------------------------------------------------
-#  !! IMPORTANT -- must use ASCII (.dat) file for 2018 data !!
 
   fyc18 = read_MEPS(year = 2018, type = "FYC") # 2018 FYC
+
+  # # Alternative:
+  # fyc18 = read_dta("C:/MEPS/h209.dta") # 2018 FYC
 
   # View data
   fyc18 %>% select(DUPERSID, ADFLST42, AGELAST, SEX, RACETHX, INSCOV18)

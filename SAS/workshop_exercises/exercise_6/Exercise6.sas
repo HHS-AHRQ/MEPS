@@ -1,22 +1,22 @@
 /*******************************************************************
-PROGRAM:      EXERCISE6.SAS
+
 This program includes a regression example for persons receiving a flu shot
 in the last 12 months for the civilian noninstitutionized population, including:
 - Percentage of people with a flu shot (civilian noninstitutionized population), 2018:
 - Logistic regression: to identify demographic factors associated with receiving a flu shot
 
  Input file: 
-  - C:/MEPS/h209.dat (2018 Full-year file)
+  - 2018 Full-year consolidated file
 
- This program is available at:
- https://github.com/HHS-AHRQ/MEPS-workshop/tree/master/sas_exercises
 ********************************************************************/
 
 /*********************************************************************************
  IMPORTANT NOTE:  Use the next 5 lines of code, only if you want SAS to create 
     separate files for SAS log and output.  Otherwise comment  out these lines.
 ***********************************************************************************/
-%LET RootFolder= C:\Mar2021\sas_exercises\Exercise_6;
+
+
+%LET RootFolder= C:\Sep2021\sas_exercises\Exercise_6;
 FILENAME MYLOG "&RootFolder\Exercise6_log.TXT";
 FILENAME MYPRINT "&RootFolder\Exercise6_OUTPUT.TXT";
 PROC PRINTTO LOG=MYLOG PRINT=MYPRINT NEW;
@@ -68,11 +68,11 @@ VALUE Racethx_fmt
    3 = 'Uninsured';
 run;
 
-%LET DataFolder = C:\DATA\MySDS;  /* Adjust the folder name, if needed */
+%LET DataFolder = C:\MEPS_Data;  /* Adjust the folder name, if needed */
 libname CDATA "&DataFolder"; 
 %let kept_vars_2018 =  VARSTR VARPSU perwt18f saqwt18f ADFLST42  AGELAST RACETHX POVCAT18 INSCOV18 SEX;
 data meps_2018;
- set CDATA.h209 (keep= &kept_vars_2018);
+ set CDATA.h209v9 (keep= &kept_vars_2018);
  
 if ADFLST42 = 1 then flushot =1;
 else if ADFLST42 = 2 then flushot =0;
@@ -107,5 +107,8 @@ title;
 
 /* THE PROC PRINTTO null step is required to close the PROC PRINTTO, 
  only if used earlier., Otherswise. please comment out the next two lines  */
+
+
 proc printto;
 run;
+

@@ -10,25 +10,23 @@
 #    - Median expense per person with an expense, by age group
 #
 # Input file:
-#  - C:/MEPS/h209.dat (2018 Full-year file)
-#
-# This program is available at:
-# https://github.com/HHS-AHRQ/MEPS-workshop/tree/master/r_exercises
+#  - C:/MEPS/h209.dta (2018 Full-year file - Stata format)
 #
 # -----------------------------------------------------------------------------
 
 # Install and load packages ---------------------------------------------------
 
 # Can skip this part if already installed
-  install.packages("survey")
-  install.packages("foreign")
-  install.packages("dplyr")
-  install.packages("devtools")
-  install.packages("readr")  
+  install.packages("survey")   # for survey analysis
+  install.packages("foreign")  # for loading SAS transport (.ssp) files
+  install.packages("haven")    # for loading Stata (.dta) files
+  install.packages("dplyr")    # for data manipulation
+  install.packages("devtools") # for loading "MEPS" package from GitHub
 
 # Run this part each time you re-start R
   library(survey)
   library(foreign)
+  library(haven)
   library(dplyr)
   library(devtools)
 
@@ -41,20 +39,16 @@
 
 
 # Read in data from FYC file --------------------------------------------------
-#  !! IMPORTANT -- must use ASCII (.dat) file for 2018 data !!
-  
+ 
 # Option 1: use 'MEPS' package
   fyc18 = read_MEPS(year = 2018, type = "FYC") # 2018 FYC
 
-# Option 2: Use R programming statements
-#  - creates data frame 'h209'
-
-  meps_path = "C:/MEPS/DATA/h209.dat"
-  source("https://meps.ahrq.gov/mepsweb/data_stats/download_data/pufs/h209/h209ru.txt")
-  fyc18 <- h209 # Rename to something more intuitive
+# Option 2: Use Stata format (recommended for Data Year 2018 and later)
+  fyc18_opt2 = read_dta("C:/MEPS/h209.dta")
 
 # View data
   head(fyc18) 
+  head(fyc18_opt2)
   
 
 # Keep only needed variables --------------------------------------------------

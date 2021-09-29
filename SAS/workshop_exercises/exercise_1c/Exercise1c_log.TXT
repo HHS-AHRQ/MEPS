@@ -1,162 +1,159 @@
 NOTE: PROCEDURE PRINTTO used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-622  
-623  /* Clear log, output, and ODSRESULTS from the previous run automatically */
-624  DM "Log; clear; output; clear; odsresults; clear";
-625  proc datasets lib=work nolist kill;
-NOTE: Deleting WORK.FORMATS (memtype=CATALOG).
-NOTE: Deleting WORK.PUF209 (memtype=DATA).
-NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
-NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
-625!                                     quit;
-
-NOTE: PROCEDURE DATASETS used (Total process time):
       real time           0.01 seconds
       cpu time            0.01 seconds
       
 
-625!                                           /* Delete  all files in the WORK library */
-626  
-627  OPTIONS NOCENTER LS=132 PS=79 NODATE FORMCHAR="|----|+|---+=|-/\<>*" PAGENO=1;
-628  
-629  /* Create user-defined formats and store them in a catalog called FORMATS
-630     in the work folder. They will be automatically deleted at the end of the SAS session.
-631  */
-632  
-633  PROC FORMAT;
-634    VALUE AGECAT
-635         low-64 = '0-64'
-636         65-high = '65+';
+30   
+31   /* Clear log, output, and ODSRESULTS from the previous run automatically */
+32   DM "Log; clear; output; clear; odsresults; clear";
+33   proc datasets lib=work nolist kill;
+NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
+NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
+33 !                                     quit;
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+33 !                                           /* Delete  all files in the WORK library */
+34   
+35   OPTIONS NOCENTER LS=132 PS=79 NODATE FORMCHAR="|----|+|---+=|-/\<>*" PAGENO=1;
+36   
+37   /* Create user-defined formats and store them in a catalog called FORMATS
+38      in the work folder. They will be automatically deleted at the end of the SAS session.
+39   */
+40   
+41   PROC FORMAT;
+42     VALUE AGECAT
+43          low-64 = '0-64'
+44          65-high = '65+';
 NOTE: Format AGECAT has been output.
-637  
-638     VALUE totexp18_cate
-639        0         = 'No Expense'
-640        Other     = 'Any Expense';
+45   
+46      VALUE totexp18_cate
+47         0         = 'No Expense'
+48         Other     = 'Any Expense';
 NOTE: Format TOTEXP18_CATE has been output.
-641  RUN;
+49   RUN;
 
 NOTE: PROCEDURE FORMAT used (Total process time):
-      real time           0.81 seconds
+      real time           0.00 seconds
       cpu time            0.01 seconds
       
 
-642  
-643  
-644  
-645  %LET DataFolder = C:\DATA\MySDS;  /* Create a macro variable. Adjust the folder name, if needed */
-646  %put &DataFolder;  /* Display the name and value of the specific macro variable */
-C:\DATA\MySDS
-647  %put _user_;      /* Display the names and values of all user-defined macro variables */
-GLOBAL DATAFOLDER C:\DATA\MySDS
-GLOBAL KEPT_VARS_2018 VARSTR VARPSU perwt18f saqwt18f ADFLST42  AGELAST RACETHX POVCAT18 INSCOV18 SEX
-GLOBAL ROOTFOLDER C:\Mar2021\sas_exercises\Exercise_1
-648  
-649  libname CDATA "&DataFolder";
+50   
+51   
+52   
+53   %LET DataFolder = C:\MEPS_Data;  /* Create a macro variable. Adjust the folder name, if needed */
+54   %put &DataFolder;  /* Display the name and value of the specific macro variable */
+C:\MEPS_Data
+55   %put _user_;      /* Display the names and values of all user-defined macro variables */
+GLOBAL DATAFOLDER C:\MEPS_Data
+GLOBAL ROOTFOLDER C:\Sep2021\sas_exercises\Exercise_1
+56   
+57   libname CDATA "&DataFolder";
 NOTE: Libref CDATA was successfully assigned as follows: 
       Engine:        V9 
-      Physical Name: C:\DATA\MySDS
-649!                               /* Assign a libref () to a SAS library.
-650  /* READ IN DATA FROM 2018 CONSOLIDATED DATA FILE (HC-209) */
-651  DATA WORK.PUF209;
-652    SET CDATA.H209 (KEEP = TOTEXP18 AGELAST   VARSTR  VARPSU  PERWT18F panel);
-653       WITH_AN_EXPENSE= TOTEXP18; /* Create another version of the TOTEXP18 variable */
-654  
-655       /* Create a character variable based on a numeric variable using a table lookup */
-656       CHAR_WITH_AN_EXPENSE = PUT(TOTEXP18,totexp18_cate.);
-657  
-658    RUN;
+      Physical Name: C:\MEPS_Data
+57 !                               /* Assign a libref () to a SAS library.
+58   /* READ IN DATA FROM 2018 CONSOLIDATED DATA FILE (HC-209) */
+59   DATA WORK.PUF209;
+60     SET CDATA.H209V9 (KEEP = TOTEXP18 AGELAST   VARSTR  VARPSU  PERWT18F panel);
+61        WITH_AN_EXPENSE= TOTEXP18; /* Create another version of the TOTEXP18 variable */
+62   
+63        /* Create a character variable based on a numeric variable using a table lookup */
+64        CHAR_WITH_AN_EXPENSE = PUT(TOTEXP18,totexp18_cate.);
+65   
+66     RUN;
 
-NOTE: There were 30461 observations read from the data set CDATA.H209.
+NOTE: There were 30461 observations read from the data set CDATA.H209V9.
 NOTE: The data set WORK.PUF209 has 30461 observations and 8 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.09 seconds
-      cpu time            0.09 seconds
+      real time           0.33 seconds
+      cpu time            0.04 seconds
       
 
-659  TITLE;
-660  %put %sysfunc(pathname(work));
-C:\Users\PRADIP~1.MUH\AppData\Local\Temp\SAS Temporary Files\_TD4012_HHSLFG772N2_
-661  
-662  proc datasets;
-                                             Directory
+67   TITLE;
+68   %put %sysfunc(pathname(work));
+C:\Users\PRADIP~1.MUH\AppData\Local\Temp\SAS Temporary Files\_TD17112_HHSL76SFC93_
+69   
+70   proc datasets;
+                                              Directory
 
-Libref             WORK                                                                             
-Engine             V9                                                                               
-Physical Name      C:\Users\PRADIP~1.MUH\AppData\Local\Temp\SAS Temporary Files\_TD4012_HHSLFG772N2_
-Filename           C:\Users\PRADIP~1.MUH\AppData\Local\Temp\SAS Temporary Files\_TD4012_HHSLFG772N2_
-Owner Name         ITSC\Pradip.Muhuri                                                               
-File Size          8KB                                                                              
-File Size (bytes)  8192                                                                             
+Libref             WORK                                                                              
+Engine             V9                                                                                
+Physical Name      C:\Users\PRADIP~1.MUH\AppData\Local\Temp\SAS Temporary Files\_TD17112_HHSL76SFC93_
+Filename           C:\Users\PRADIP~1.MUH\AppData\Local\Temp\SAS Temporary Files\_TD17112_HHSL76SFC93_
+Owner Name         ITSC\Pradip.Muhuri                                                                
+File Size          4KB                                                                               
+File Size (bytes)  4096                                                                              
 
 
             Member
 #  Name     Type        File Size  Last Modified
 
-1  FORMATS  CATALOG          17KB  03/10/2021 19:38:30        
-2  PUF209   DATA              2MB  03/10/2021 19:38:30        
-3  SASMACR  CATALOG          21KB  03/10/2021 12:12:14        
-663  quit;
+1  FORMATS  CATALOG          17KB  08/30/2021 14:37:18        
+2  PUF209   DATA              2MB  08/30/2021 14:37:18        
+3  SASMACR  CATALOG           5KB  08/30/2021 13:12:53        
+71   quit;
 
 NOTE: PROCEDURE DATASETS used (Total process time):
       real time           0.01 seconds
       cpu time            0.01 seconds
       
 
-664  proc catalog catalog=work.formats;
-665  contents stat;
-666  run;
+72   proc catalog catalog=work.formats;
+73   contents stat;
+74   run;
 
-667  
+75   
 
 NOTE: PROCEDURE CATALOG used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.03 seconds
+      
+
+76   proc contents data=PUF209;
+77   ods select variables;
+78   run;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
-668  proc contents data=PUF209;
-669  ods select variables;
-670  run;
-
-NOTE: PROCEDURE CONTENTS used (Total process time):
-      real time           0.01 seconds
-      cpu time            0.01 seconds
-      
-
-671  
-672  
-673  TITLE "MEPS FULL-YEAR CONSOLIDATED FILE, 2018";
-674  ODS HTML CLOSE; /* This will make the default HTML output no longer active,
-675                    and the output will not be displayed in the Results Viewer.*/
-676  
-677  ods graphics off; /*Suppress the graphics */
-678  ods listing; /* Open the listing destination*/
-679  TITLE2 'PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 _Method 1';
-680  PROC SURVEYMEANS DATA=WORK.PUF209 NOBS MEAN STDERR sum ;
-681      VAR  WITH_AN_EXPENSE  ;
-682      STRATUM VARSTR;
-683      CLUSTER VARPSU;
-684      WEIGHT PERWT18F;
-685      class WITH_AN_EXPENSE;
-686      FORMAT WITH_AN_EXPENSE TOTEXP18_CATE. ;
-687  RUN;
+79   
+80   
+81   TITLE "MEPS FULL-YEAR CONSOLIDATED FILE, 2018";
+82   ODS HTML CLOSE; /* This will make the default HTML output no longer active,
+83                     and the output will not be displayed in the Results Viewer.*/
+84   
+85   ods graphics off; /*Suppress the graphics */
+86   ods listing; /* Open the listing destination*/
+87   TITLE2 'PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 _Method 1';
+88   PROC SURVEYMEANS DATA=WORK.PUF209 NOBS MEAN STDERR sum ;
+89       VAR  WITH_AN_EXPENSE  ;
+90       STRATUM VARSTR;
+91       CLUSTER VARPSU;
+92       WEIGHT PERWT18F;
+93       class WITH_AN_EXPENSE;
+94       FORMAT WITH_AN_EXPENSE TOTEXP18_CATE. ;
+95   RUN;
 
 NOTE: Due to nonpositive weights, 1046 observation(s) were deleted.
 NOTE: PROCEDURE SURVEYMEANS used (Total process time):
-      real time           0.03 seconds
+      real time           0.02 seconds
       cpu time            0.03 seconds
       
 
-688  
-689  TITLE2 'PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 2';
-690  PROC SURVEYMEANS DATA=WORK.PUF209 NOBS MEAN STDERR sum ;
-691      VAR  CHAR_WITH_AN_EXPENSE  ;
-692      STRATUM VARSTR;
-693      CLUSTER VARPSU;
-694      WEIGHT PERWT18F;
-695  RUN;
+96   
+97   TITLE2 'PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 2';
+98   PROC SURVEYMEANS DATA=WORK.PUF209 NOBS MEAN STDERR sum ;
+99       VAR  CHAR_WITH_AN_EXPENSE  ;
+100      STRATUM VARSTR;
+101      CLUSTER VARPSU;
+102      WEIGHT PERWT18F;
+103  RUN;
 
 NOTE: Due to nonpositive weights, 1046 observation(s) were deleted.
 NOTE: PROCEDURE SURVEYMEANS used (Total process time):
@@ -164,44 +161,46 @@ NOTE: PROCEDURE SURVEYMEANS used (Total process time):
       cpu time            0.01 seconds
       
 
-696  
-697  TITLE2 'PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 3';
-698  PROC SURVEYFREQ DATA=WORK.PUF209 ;
-699      TABLES  CHAR_WITH_AN_EXPENSE ;
-700      STRATUM VARSTR;
-701      CLUSTER VARPSU;
-702      WEIGHT PERWT18F;
-703  RUN;
+104  
+105  TITLE2 'PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 3';
+106  PROC SURVEYFREQ DATA=WORK.PUF209 ;
+107      TABLES  CHAR_WITH_AN_EXPENSE ;
+108      STRATUM VARSTR;
+109      CLUSTER VARPSU;
+110      WEIGHT PERWT18F;
+111  RUN;
 
 NOTE: 1046 observations were omitted due to nonpositive weights.
 NOTE: PROCEDURE SURVEYFREQ used (Total process time):
-      real time           0.03 seconds
-      cpu time            0.03 seconds
+      real time           0.02 seconds
+      cpu time            0.01 seconds
       
 
-704  
-705  TITLE2 'MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AND 65+, 2018';
-706  
-707  PROC SURVEYMEANS DATA= WORK.PUF209 NOBS MEAN STDERR sum median  ;
-708      VAR  totexp18;
-709      STRATUM VARSTR ;
-710      CLUSTER VARPSU ;
-711      WEIGHT  PERWT18F ;
-712      DOMAIN WITH_AN_EXPENSE('Any Expense') WITH_AN_EXPENSE('Any Expense')*AGELAST;
-713      FORMAT WITH_AN_EXPENSE TOTEXP18_CATE. AGELAST agecat.;
-714  RUN;
+112  
+113  TITLE2 'MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AND 65+, 2018';
+114  
+115  PROC SURVEYMEANS DATA= WORK.PUF209 NOBS MEAN STDERR sum median  ;
+116      VAR  totexp18;
+117      STRATUM VARSTR ;
+118      CLUSTER VARPSU ;
+119      WEIGHT  PERWT18F ;
+120      DOMAIN WITH_AN_EXPENSE('Any Expense') WITH_AN_EXPENSE('Any Expense')*AGELAST;
+121      FORMAT WITH_AN_EXPENSE TOTEXP18_CATE. AGELAST agecat.;
+122  RUN;
 
 NOTE: Due to nonpositive weights, 1046 observation(s) were deleted.
 NOTE: Only one cluster in a stratum for WITH_AN_EXPENSE*PERSON'S AGE LAST TIME ELIGIBLE domains for variable(s) TOTEXP18. The 
       estimate of variance for TOTEXP18 will omit this stratum.
 NOTE: PROCEDURE SURVEYMEANS used (Total process time):
-      real time           0.28 seconds
-      cpu time            0.26 seconds
+      real time           0.22 seconds
+      cpu time            0.21 seconds
       
 
-715  title;
-716  /* THE PROC PRINTTO null step is required to close the PROC PRINTTO,  only if used earlier.
-717     Otherswise. please comment out the next two lines */
-718  PROC PRINTTO;
-719  RUN;
+123  title;
+124  /* THE PROC PRINTTO null step is required to close the PROC PRINTTO,  only if used earlier.
+125     Otherswise. please comment out the next two lines */
+126  
+127  
+128  PROC PRINTTO;
+129  RUN;
 

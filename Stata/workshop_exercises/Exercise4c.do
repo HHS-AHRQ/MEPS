@@ -1,5 +1,4 @@
 **********************************************************************************************
-* Exercise 3
 *  This program illustrates how to pool MEPS data files from different years. It
 *  highlights one example of a discontinuity that may be encountered when 
 *  working with data from before and after the 2018 CAPI re-design.
@@ -16,11 +15,9 @@
 *     instructions on pooling and considerations for variance estimation.
 * 
 *  Input files: 
-*   - C:/MEPS/h209.dat (2018 Full-year file)
-*   - C:/MEPS/h201.dat (2017 Full-year file)
+*   - C:/MEPS/h209.dta (2018 Full-year file)
+*   - C:/MEPS/h201.dta (2017 Full-year file)
 * 
-*  This program is available at:
-*  https://github.com/HHS-AHRQ/MEPS-workshop/tree/master/stata_exercises
 **********************************************************************************************
 clear
 set more off
@@ -28,8 +25,14 @@ capture log close
 cd C:\MEPS
 log using Ex3.log, replace
 
+/* Get 2017 Full-Year Data and read into Stata */
+copy "https://meps.ahrq.gov/mepsweb/data_files/pufs/h201/h201dta.zip" "h201dta.zip"
+unzipfile "h201dta.zip", replace
+use h201, clear
+rename *, lower 
+save h201, replace
+
 /* rename 2017 variables, create joint pain indicator */
-use C:\MEPS\DATA\h201, clear
 keep dupersid varpsu varstr perwt17f inscov17 povcat17 totexp17 totslf17 jtpain31 arthdx agelast
 rename (perwt17f inscov17 povcat17 totexp17 totslf17) (perwtf inscov povcat totexp totslf) 
 gen year=2017
@@ -38,7 +41,7 @@ replace any_jtpain=. if jtpain31<0 & arthdx<0
 save h201_temp, replace
 
 /* rename 2018 variables, create joint pain indicator */
-use C:\MEPS\DATA\h209, clear
+use C:\MEPS\h209, clear
 keep dupersid varpsu varstr perwt18f inscov18 povcat18 totexp18 totslf18 jtpain31 arthdx agelast
 rename (perwt18f inscov18 povcat18 totexp18 totslf18) (perwtf inscov povcat totexp totslf) 
 gen year=2018

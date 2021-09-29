@@ -1,5 +1,4 @@
 /*********************************************************************
-PROGRAM: 	EXERCISE2.SAS
 
 This program generates National Totals and Per-person Averages for Narcotic
  analgesics and Narcotic analgesic combos care for the U.S. civilian 
@@ -10,11 +9,9 @@ This program generates National Totals and Per-person Averages for Narcotic
   - Third-party payments        
 
  Input files:
-  - C:/MEPS/h209.dat  (2018 Full-year file)
-  - C:/MEPS/h206a.dat (2018 Prescribed medicines file)
+    - 2018 Prescribed medicines file
+    - 2018 Full-year consolidated file
 
- This program is available at:
- https://github.com/HHS-AHRQ/MEPS-workshop/tree/master/sas_exercises
 ************************************************************************************/
 
 /*********************************************************************************
@@ -22,7 +19,7 @@ This program generates National Totals and Per-person Averages for Narcotic
     separate files for SAS log and output.  Otherwise comment  out these lines.
 ***********************************************************************************/
 
-%LET RootFolder= C:\Mar2021\sas_exercises\Exercise_2c;
+%LET RootFolder= C:\Sep2021\sas_exercises\Exercise_2c;
 FILENAME MYLOG "&RootFolder\Exercise2c_log.TXT";
 FILENAME MYPRINT "&RootFolder\Exercise2c_OUTPUT.TXT";
 PROC PRINTTO LOG=MYLOG PRINT=MYPRINT NEW;
@@ -43,20 +40,20 @@ PROC FORMAT;
      0         = '0'
      0 <- HIGH = '>0' ;
   VALUE SUBPOP    
-          1 = 'PERSONS WITH 1+ Narcotic etc'
+          1 = 'OnePlusNacroticEtc'
 		  2 = 'OTHERS';
 RUN;
 
 /* KEEP THE SPECIFIED VARIABLES WHEN READING THE INPUT DATA SET AND
    RESTRICT TO OBSERVATIONS HAVING THERAPEUTIC CLASSIFICATION (TC) CODES
-   FOR Narcotic analgesics or Narcotic analgesic combos 
+   FOR NARCOTIC ANALGESICS OR NARCOTIC ANALGESIC COMBOS 
 */
 
-%LET DataFolder = C:\DATA\MySDS;  /* Adjust the folder name, if needed */
+%LET DataFolder = C:\MEPS_Data;  /* Adjust the folder name, if needed */
 libname CDATA "&DataFolder"; 
 
 DATA WORK.DRUG;
-  SET CDATA.H206A (KEEP=DUPERSID RXRECIDX LINKIDX TC1S1_1 RXXP18X RXSF18X
+  SET CDATA.H206AV9 (KEEP=DUPERSID RXRECIDX LINKIDX TC1S1_1 RXXP18X RXSF18X
                    WHERE=(TC1S1_1 IN (60, 191))); 
 RUN;
 
@@ -76,7 +73,7 @@ PROC SUMMARY DATA=WORK.DRUG NWAY;
   OUTPUT OUT=WORK.PERDRUG  sum=TOT OOP;
 RUN;
 
-TITLE "A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR Narcotic analgesics or Narcotic analgesic combos";
+TITLE "A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR NARCOTIC ANALGESICS OR NARCOTIC ANALGESIC COMBOS";
 PROC PRINT DATA=PERDRUG (OBS=3);
 SUM _FREQ_;
 RUN;
@@ -89,7 +86,7 @@ DATA WORK.PERDRUG2;
 PROC SORT DATA=WORK.PERDRUG2; BY DUPERSID; RUN;
 
 /*SORT THE FULL-YEAR(FY) CONSOLIDATED FILE*/
-PROC SORT DATA=CDATA.H209 (KEEP=DUPERSID VARSTR VARPSU PERWT18f) OUT=WORK.H209;
+PROC SORT DATA=CDATA.H209V9 (KEEP=DUPERSID VARSTR VARPSU PERWT18f) OUT=WORK.H209;
 BY DUPERSID; RUN;
 
 /*MERGE THE PERSON-LEVEL EXPENDITURES TO THE FY PUF*/
@@ -129,11 +126,13 @@ PROC SURVEYMEANS DATA=WORK.FY NOBS SUMWGT MEAN STDERR SUM;
   STRATA  VARSTR ;
   CLUSTER VARPSU;
   WEIGHT  PERWT18f;
-  DOMAIN  SUBPOP("PERSONS WITH 1+ Narcotic etc");
+  DOMAIN  SUBPOP("OnePlusNacroticEtc");
   FORMAT SUBPOP SUBPOP.;
  RUN;
 title;
 /* THE PROC PRINTTO null step is required to close the PROC PRINTTO, 
  only if used earlier., Otherswise. please comment out the next two lines  */
+
 PROC PRINTTO;
 RUN;
+

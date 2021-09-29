@@ -1,144 +1,149 @@
 NOTE: PROCEDURE PRINTTO used (Total process time):
-      real time           0.01 seconds
-      cpu time            0.01 seconds
-      
-
-1967  
-1968  /* Clear log, output, and ODSRESULTS from the previous run automatically */
-1969  DM "Log; clear; output; clear; odsresults; clear";
-1970  proc datasets lib=work nolist kill;
-NOTE: Deleting WORK.FORMATS (memtype=CATALOG).
-NOTE: Deleting WORK.MEPS_2018 (memtype=DATA).
-NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
-NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
-1970!                                     quit;
-
-NOTE: PROCEDURE DATASETS used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
-1970!                                           /* Delete  all files in the WORK library */
-1971  
-1972  OPTIONS LS=132 PS=79 NODATE FORMCHAR="|----|+|---+=|-/\<>*" PAGENO=1;
-1973  
-1974  /* Create use-defined formats and store them in a catalog called FORMATS
-1975     in the work folder. They will be deleted at the end of the SAS session.
-1976  */
-1977  
-1978  PROC FORMAT;
-1979  
-1980  value age18p_f
-1981      18-high = '18+'
-1982      other = '0-17';
+759  
+760  /* Clear log, output, and ODSRESULTS from the previous run automatically */
+761  DM "Log; clear; output; clear; odsresults; clear";
+762  proc datasets lib=work nolist kill;
+NOTE: Deleting WORK.FORMATS (memtype=CATALOG).
+NOTE: Deleting WORK.MEPS_1718 (memtype=DATA).
+NOTE: Deleting WORK.MEPS_2017 (memtype=DATA).
+NOTE: Deleting WORK.MEPS_2018 (memtype=DATA).
+NOTE: Deleting WORK.SASMAC1 (memtype=CATALOG).
+NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
+NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
+762!                                     quit;
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+762!                                           /* Delete  all files in the WORK library */
+763  
+764  OPTIONS NOCENTER LS=132 PS=79 NODATE FORMCHAR="|----|+|---+=|-/\<>*" PAGENO=1;
+765  
+766  /* Create use-defined formats and store them in a catalog called FORMATS
+767     in the work folder. They will be deleted at the end of the SAS session.
+768  */
+769  
+770  PROC FORMAT;
+771  
+772  value age18p_f
+773      18-high = '18+'
+774      other = '0-17';
 NOTE: Format AGE18P_F has been output.
-1983  
-1984  
-1985  value age_f
-1986      18-34 = '18-34'
-1987      35-64 = '35-64'
-1988      65-High ='65+';
+775  
+776  
+777  value age_f
+778      18-34 = '18-34'
+779      35-64 = '35-64'
+780      65-High ='65+';
 NOTE: Format AGE_F has been output.
-1989  
-1990  value ADFLST42_fmt
-1991      -15 = "Cann't be computed"
-1992      -1 = 'Inapplicable'
-1993      1  = 'Yes'
-1994      0,2  ='No';
+781  
+782  value ADFLST42_fmt
+783      -15 = "Cann't be computed"
+784      -1 = 'Inapplicable'
+785      1  = 'Yes'
+786      0,2  ='No';
 NOTE: Format ADFLST42_FMT has been output.
-1995  
-1996  
-1997  value sex_fmt   1 = 'Male'
-1998                  2 = 'Female';
+787  
+788  
+789  value sex_fmt   1 = 'Male'
+790                  2 = 'Female';
 NOTE: Format SEX_FMT has been output.
-1999  
-2000  
-2001  VALUE Racethx_fmt
-2002    1 = 'Hispanic'
-2003    2 = 'NH White only'
-2004    3 = 'NH Black only'
-2005    4 = 'NH Asian only'
-2006    5 = 'NH Other etc';
+791  
+792  
+793  VALUE Racethx_fmt
+794    1 = 'Hispanic'
+795    2 = 'NH White only'
+796    3 = 'NH Black only'
+797    4 = 'NH Asian only'
+798    5 = 'NH Other etc';
 NOTE: Format RACETHX_FMT has been output.
-2007  
-2008   value INSCOV18_fmt
-2009     1 = 'Any Private'
-2010     2 = 'Public Only'
-2011     3 = 'Uninsured';
+799  
+800   value INSCOV18_fmt
+801     1 = 'Any Private'
+802     2 = 'Public Only'
+803     3 = 'Uninsured';
 NOTE: Format INSCOV18_FMT has been output.
-2012  run;
+804  run;
 
 NOTE: PROCEDURE FORMAT used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
-2013  
-2014  %LET DataFolder = C:\DATA\MySDS;  /* Adjust the folder name, if needed */
-2015  libname CDATA "&DataFolder";
+805  
+806  %LET DataFolder = C:\MEPS_Data;  /* Adjust the folder name, if needed */
+807  libname CDATA "&DataFolder";
 NOTE: Libref CDATA was successfully assigned as follows: 
       Engine:        V9 
-      Physical Name: C:\DATA\MySDS
-2016  %let kept_vars_2018 =  VARSTR VARPSU perwt18f saqwt18f ADFLST42  AGELAST RACETHX POVCAT18 INSCOV18 SEX;
-2017  data meps_2018;
-2018   set CDATA.h209 (keep= &kept_vars_2018);
-2019  
-2020  if ADFLST42 = 1 then flushot =1;
-2021  else if ADFLST42 = 2 then flushot =0;
-2022  else flushot =.;
-2023  run;
+      Physical Name: C:\MEPS_Data
+808  %let kept_vars_2018 =  VARSTR VARPSU perwt18f saqwt18f ADFLST42  AGELAST RACETHX POVCAT18 INSCOV18 SEX;
+809  data meps_2018;
+810   set CDATA.h209v9 (keep= &kept_vars_2018);
+811  
+812  if ADFLST42 = 1 then flushot =1;
+813  else if ADFLST42 = 2 then flushot =0;
+814  else flushot =.;
+815  run;
 
-NOTE: There were 30461 observations read from the data set CDATA.H209.
+NOTE: There were 30461 observations read from the data set CDATA.H209V9.
 NOTE: The data set WORK.MEPS_2018 has 30461 observations and 11 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.07 seconds
-      cpu time            0.07 seconds
+      real time           0.33 seconds
+      cpu time            0.04 seconds
       
 
-2024  
-2025  title " 2018 MEPS";
-2026  
-2027  ods graphics off;
-2028  ods select domain;
-2029  PROC SURVEYMEANS DATA=meps_2018 nobs mean stderr ;
-2030      VAR flushot;
-2031      STRATUM VARSTR;
-2032      CLUSTER VARPSU;
-2033      WEIGHT saqwt18f;
-2034      DOMAIN  agelast('18+');
-2035      format agelast age18p_f.;
-2036  RUN;
+816  
+817  title " 2018 MEPS";
+818  
+819  ods graphics off;
+820  ods select domain;
+821  PROC SURVEYMEANS DATA=meps_2018 nobs mean stderr ;
+822      VAR flushot;
+823      STRATUM VARSTR;
+824      CLUSTER VARPSU;
+825      WEIGHT saqwt18f;
+826      DOMAIN  agelast('18+');
+827      format agelast age18p_f.;
+828  RUN;
 
 NOTE: Due to nonpositive weights, 10891 observation(s) were deleted.
 NOTE: PROCEDURE SURVEYMEANS used (Total process time):
-      real time           0.03 seconds
-      cpu time            0.03 seconds
+      real time           0.02 seconds
+      cpu time            0.01 seconds
       
 
-2037  title 'PROC SURVEYLOGISTIC With param=ref option on the CLASS statement';
-2038      PROC SURVEYLOGISTIC DATA=meps_2018 ;
-2039      STRATUM VARSTR;
-2040      CLUSTER VARPSU;
-2041      WEIGHT saqwt18f;
-2042      CLASS sex (ref='Male') RACETHX (ref='Hispanic') INSCOV18 (ref='Any Private')/param=ref;
-2043           model flushot(ref= '0')= agelast sex RACETHX  INSCOV18;
-2044        format agelast age18p_f.
-2045        sex sex_fmt.
-2046        RACETHX racethx_fmt.
-2047        INSCOV18 INSCOV18_fmt.;
-2048      RUN;
+829  title 'PROC SURVEYLOGISTIC With param=ref option on the CLASS statement';
+830      PROC SURVEYLOGISTIC DATA=meps_2018 ;
+831      STRATUM VARSTR;
+832      CLUSTER VARPSU;
+833      WEIGHT saqwt18f;
+834      CLASS sex (ref='Male') RACETHX (ref='Hispanic') INSCOV18 (ref='Any Private')/param=ref;
+835           model flushot(ref= '0')= agelast sex RACETHX  INSCOV18;
+836        format agelast age18p_f.
+837        sex sex_fmt.
+838        RACETHX racethx_fmt.
+839        INSCOV18 INSCOV18_fmt.;
+840      RUN;
 
 NOTE: PROC SURVEYLOGISTIC is modeling the probability that flushot=1.
 NOTE: Convergence criterion (GCONV=1E-8) satisfied.
 NOTE: PROCEDURE SURVEYLOGISTIC used (Total process time):
       real time           0.17 seconds
-      cpu time            0.17 seconds
+      cpu time            0.12 seconds
       
 
-2049  title;
-2050  
-2051  /* THE PROC PRINTTO null step is required to close the PROC PRINTTO,
-2052   only if used earlier., Otherswise. please comment out the next two lines  */
-2053  proc printto;
-2054  run;
+841  title;
+842  
+843  /* THE PROC PRINTTO null step is required to close the PROC PRINTTO,
+844   only if used earlier., Otherswise. please comment out the next two lines  */
+845  
+846  
+847  proc printto;
+848  run;
 

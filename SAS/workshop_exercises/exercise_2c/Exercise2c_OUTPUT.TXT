@@ -14,7 +14,7 @@ A SAMPLE DUMP FOR PMED RECORDS WITH Narcotic analgesics or Narcotic analgesic co
 2290032102    2290032102010503005    2290032102010503      191        6.10       0.00 
 2290046101    2290046101005403001    2290046101005403      191       29.99       0.00 
 2290046101    2290046101005503001    2290046101005503      191       29.99       0.00 
-A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR Narcotic analgesics or Narcotic analgesic combos                                   2
+A SAMPLE DUMP FOR PERSON-LEVEL EXPENDITURES FOR NARCOTIC ANALGESICS OR NARCOTIC ANALGESIC COMBOS                                   2
 
  Obs     DUPERSID     _TYPE_    _FREQ_     TOT      OOP
 
@@ -41,16 +41,18 @@ The SURVEYMEANS Procedure
 
                                                    Statistics for SUBPOP Domains
  
-                                                                               Sum of          Std Error                   Std Error
-SUBPOP                        Variable     Label                      N       Weights    Mean    of Mean           Sum        of Sum
+                                                                      Sum of                   Std Error                   Std Error
+SUBPOP              Variable     Label                       N       Weights          Mean       of Mean           Sum        of Sum
 ------------------------------------------------------------------------------------------------------------------------------------
-PERSONS WITH 1+ Narcotic etc  N_PHRCHASE   # OF PURCHASES PER     2,700    29,007,201   4.296     0.1121   124,601,298     5,391,816
-                                           PERSON                                                                                   
-                              TOT          TOTAL EXPENSES FOR     2,700    29,007,201  252.77     18.758    7332197904   637,133,876
-                                           NACROTIC ETC                                                                             
-                              OOP          OUT-OF-POCKET          2,700    29,007,201  55.008     5.8876    1595617538   181,942,027
-                                           EXPENSES                                                                                 
-                              THIRD_PAYER  TOTAL EXPENSES MINUS   2,700    29,007,201  197.76     17.084    5736580366   563,384,640
-                                           OUT-OF-POCKET                                                                            
-                                           EXPENSES                                                                                 
+OnePlusNacroticEtc  N_PHRCHASE   # OF PURCHASES           2700      29007201      4.295530      0.112088     124601298       5391816
+                                 PER PERSON                                                                                         
+                    TOT          TOTAL EXPENSES           2700      29007201    252.771646     18.758064    7332197904     637133876
+                                 FOR NACROTIC                                                                                       
+                                 ETC                                                                                                
+                    OOP          OUT-OF-POCKET            2700      29007201     55.007636      5.887614    1595617538     181942027
+                                 EXPENSES                                                                                           
+                    THIRD_PAYER  TOTAL EXPENSES           2700      29007201    197.764010     17.084372    5736580366     563384640
+                                 MINUS                                                                                              
+                                 OUT-OF-POCKET                                                                                      
+                                 EXPENSES                                                                                           
 ------------------------------------------------------------------------------------------------------------------------------------

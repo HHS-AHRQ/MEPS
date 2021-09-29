@@ -6,8 +6,8 @@
                                                                                        Page   Block   Num of   Block   Block
 #   Name            Type             Create Date         Modified Date   Description   Size    Size   Blocks   Bytes    Size   Pages
 ------------------------------------------------------------------------------------------------------------------------------------
-1   AGECAT          FORMAT   03/10/2021 19:38:30   03/10/2021 19:38:30                 4096    4096        1     263     510       1
-2   TOTEXP18_CATE   FORMAT   03/10/2021 19:38:30   03/10/2021 19:38:30                 4096    4096        1     255     510       1
+1   AGECAT          FORMAT   08/30/2021 14:37:18   08/30/2021 14:37:18                 4096    4096        1     263     510       1
+2   TOTEXP18_CATE   FORMAT   08/30/2021 14:37:18   08/30/2021 14:37:18                 4096    4096        1     255     510       1
                                                                                                                                    2
 
 The CONTENTS Procedure
@@ -46,14 +46,14 @@ Variable             Levels    Values
 WITH_AN_EXPENSE           2    No Expense Any Expense  
 
 
-                                          Statistics
+                                                  Statistics
  
-                                                      Std Error                       Std Error
-Variable           Level               N      Mean      of Mean             Sum          of Sum
------------------------------------------------------------------------------------------------
-WITH_AN_EXPENSE    No Expense      4,215     0.133       0.0036      43,498,536       1,431,505
-                   Any Expense    25,200     0.867       0.0036     282,829,352       6,571,909
------------------------------------------------------------------------------------------------
+                                                                     Std Error                       Std Error
+Variable           Level                     N            Mean         of Mean             Sum          of Sum
+--------------------------------------------------------------------------------------------------------------
+WITH_AN_EXPENSE    No Expense             4215        0.133297        0.003605        43498536         1431505
+                   Any Expense           25200        0.866703        0.003605       282829352         6571909
+--------------------------------------------------------------------------------------------------------------
 MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             4
 PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 2
 
@@ -76,14 +76,14 @@ Variable                  Levels    Values
 CHAR_WITH_AN_EXPENSE           2    Any Expense No Expense  
 
 
-                                             Statistics
+                                                    Statistics
  
-                                                           Std Error                       Std Error
-Variable                Level               N      Mean      of Mean             Sum          of Sum
-----------------------------------------------------------------------------------------------------
-CHAR_WITH_AN_EXPENSE    Any Expense    25,200     0.867       0.0036     282,829,352       6,571,909
-                        No Expense      4,215     0.133       0.0036      43,498,536       1,431,505
-----------------------------------------------------------------------------------------------------
+                                                                          Std Error                       Std Error
+Variable                Level                     N            Mean         of Mean             Sum          of Sum
+-------------------------------------------------------------------------------------------------------------------
+CHAR_WITH_AN_EXPENSE    Any Expense           25200        0.866703        0.003605       282829352         6571909
+                        No Expense             4215        0.133297        0.003605        43498536         1431505
+-------------------------------------------------------------------------------------------------------------------
 MEPS FULL-YEAR CONSOLIDATED FILE, 2018                                                                                             5
 PERCENTAGE OF PERSONS WITH AN EXPENSE, 2018 - Method 3
 
@@ -124,14 +124,14 @@ Number of Obs with Nonpositive Weights          1046
 Sum of Weights                             326327888
 
 
-                                           Statistics
+                                                   Statistics
  
-                                                        Std Error                       Std Error
-Variable    Label                        N      Mean      of Mean             Sum          of Sum
--------------------------------------------------------------------------------------------------
-TOTEXP18    TOTAL HEALTH CARE       29,415    6063.1       128.01    1.9785699E12     62127195159
-            EXP 18                                                                               
--------------------------------------------------------------------------------------------------
+                                                                       Std Error                       Std Error
+Variable    Label                              N            Mean         of Mean             Sum          of Sum
+----------------------------------------------------------------------------------------------------------------
+TOTEXP18    TOTAL HEALTH CARE              29415     6063.134458      128.011022    1.9785699E12     62127195159
+            EXP 18                                                                                              
+----------------------------------------------------------------------------------------------------------------
 
 
                                                 Quantiles
@@ -147,14 +147,14 @@ MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AN
 
 The SURVEYMEANS Procedure
 
-                                     Statistics for WITH_AN_EXPENSE Domains
+                                            Statistics for WITH_AN_EXPENSE Domains
  
-WITH_AN_                                                               Std Error                       Std Error
-EXPENSE        Variable    Label                        N      Mean      of Mean             Sum          of Sum
-----------------------------------------------------------------------------------------------------------------
-Any Expense    TOTEXP18    TOTAL HEALTH CARE       25,200    6995.6       138.90    1.9785699E12     62127195159
-                           EXP 18                                                                               
-----------------------------------------------------------------------------------------------------------------
+WITH_AN_                                                                              Std Error                       Std Error
+EXPENSE        Variable    Label                              N            Mean         of Mean             Sum          of Sum
+-------------------------------------------------------------------------------------------------------------------------------
+Any Expense    TOTEXP18    TOTAL HEALTH CARE              25200     6995.631273      138.898348    1.9785699E12     62127195159
+                           EXP 18                                                                                              
+-------------------------------------------------------------------------------------------------------------------------------
 
 
                                          Quantiles for WITH_AN_EXPENSE Domains
@@ -170,16 +170,16 @@ MEAN AND MEDIAN EXPENSE PER PERSON WITH AN EXPENSE, OVEALL and FOR AGES 0-64, AN
 
 The SURVEYMEANS Procedure
 
-                                      Statistics for WITH_AN_EXPENSE*AGELAST Domains
+                                          Statistics for WITH_AN_EXPENSE*AGELAST Domains
  
-WITH_AN_                                                                          Std Error                       Std Error
-EXPENSE        AGELAST    Variable    Label                        N      Mean      of Mean             Sum          of Sum
----------------------------------------------------------------------------------------------------------------------------
-Any Expense    0-64       TOTEXP18    TOTAL HEALTH CARE       19,924    5650.5       133.16    1.3001662E12     47728524403
-                                      EXP 18                                                                               
-               65+        TOTEXP18    TOTAL HEALTH CARE        5,276     12866       328.98    678403612336     24616181502
-                                      EXP 18                                                                               
----------------------------------------------------------------------------------------------------------------------------
+WITH_AN_                                                                                   Std Error                     Std Error
+EXPENSE       AGELAST   Variable   Label                             N           Mean        of Mean            Sum         of Sum
+----------------------------------------------------------------------------------------------------------------------------------
+Any Expense   0-64      TOTEXP18   TOTAL HEALTH CARE             19924    5650.452557     133.161971   1.3001662E12    47728524403
+                                   EXP 18                                                                                         
+              65+       TOTEXP18   TOTAL HEALTH CARE              5276          12866     328.976784   678403612336    24616181502
+                                   EXP 18                                                                                         
+----------------------------------------------------------------------------------------------------------------------------------
 
 
                                            Quantiles for WITH_AN_EXPENSE*AGELAST Domains

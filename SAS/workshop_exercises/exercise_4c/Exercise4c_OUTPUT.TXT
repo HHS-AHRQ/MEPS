@@ -96,14 +96,14 @@ joint_pain           2       15498    Yes No
 
 The SURVEYMEANS Procedure
 
-                                   Statistics for spop Domains
+                                          Statistics for spop Domains
  
-                                                       Std Error                       Std Error
-    spop    Variable      Level         N      Mean      of Mean             Sum          of Sum
-------------------------------------------------------------------------------------------------
-       1    joint_pain    Yes      20,202     0.444       0.0043     110,925,499       2,086,721
-                          No       24,431     0.556       0.0043     138,796,667       2,597,648
-------------------------------------------------------------------------------------------------
+                                                                      Std Error                       Std Error
+    spop    Variable      Level               N            Mean         of Mean             Sum          of Sum
+---------------------------------------------------------------------------------------------------------------
+       1    joint_pain    Yes             20202        0.444196        0.004322       110925499         2086721
+                          No              24431        0.555804        0.004322       138796667         2597648
+---------------------------------------------------------------------------------------------------------------
 MEPS 2017-18 combined                                                                                                              4
 
 The SURVEYMEANS Procedure
@@ -120,17 +120,17 @@ Sum of Weights                             325553898
 
 The SURVEYMEANS Procedure
 
-                                         Statistics for spop*joint_pain Domains
+                                            Statistics for spop*joint_pain Domains
  
-            joint_                                                            Std Error                       Std Error
-    spop    pain      Variable    Label                        N      Mean      of Mean             Sum          of Sum
------------------------------------------------------------------------------------------------------------------------
-       1    Yes       totexp      TOTAL HEALTH CARE       20,202     10071       215.32    1.1171571E12     32753218188
-                                  EXP                                                                                  
-                      totslf      TOTAL AMOUNT PAID -     20,202    1172.6       28.821    130073157471      4265488865
-                                  SELF-FAMILY                                                                          
-            No        totexp      TOTAL HEALTH CARE       24,431    3936.1       109.34    546313848488     18624090506
-                                  EXP                                                                                  
-                      totslf      TOTAL AMOUNT PAID -     24,431    611.07       19.221     84814878044      3215217677
-                                  SELF-FAMILY                                                                          
------------------------------------------------------------------------------------------------------------------------
+           joint_                                                                      Std Error                     Std Error
+    spop   pain     Variable   Label                             N           Mean        of Mean            Sum         of Sum
+------------------------------------------------------------------------------------------------------------------------------
+       1   Yes      totexp     TOTAL HEALTH CARE             20202          10071     215.318322   1.1171571E12    32753218188
+                               EXP                                                                                            
+                    totslf     TOTAL AMOUNT PAID -           20202    1172.617288      28.821391   130073157471     4265488865
+                               SELF-FAMILY                                                                                    
+           No       totexp     TOTAL HEALTH CARE             24431    3936.073245     109.344333   546313848488    18624090506
+                               EXP                                                                                            
+                    totslf     TOTAL AMOUNT PAID -           24431     611.072872      19.220511    84814878044     3215217677
+                               SELF-FAMILY                                                                                    
+------------------------------------------------------------------------------------------------------------------------------
