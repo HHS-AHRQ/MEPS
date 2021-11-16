@@ -206,29 +206,29 @@ Example codes from previous MEPS workshops are provided in the [workshop_exercis
 The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc). These example codes are written under the assumption that the .ssp files are saved in the local directory "C:/MEPS/". However, you can customize the programs to point to an alternate directory.
 
 ### Accessibility and quality of care <!-- omit in toc -->
-[care1_child_dental.sas](summary_tables_examples/care1_child_dental.sas): Children with dental care, by poverty status, 2016
+
+[care_diabetes_a1c_2016.sas](summary_tables_examples/care_diabetes_a1c_2016.sas): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
 <br>
-[care2_diabetes_a1c.sas](summary_tables_examples/care2_diabetes_a1c.sas): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
-<br>
-[care3_access.sas](summary_tables_examples/care3_access.sas): Ability to schedule a routine appointment, by insurance coverage, 2016
+[care_access_2016.sas](summary_tables_examples/care_access_2016.sas): Ability to schedule a routine appointment, by insurance coverage, 2016
 
 ### Medical conditions <!-- omit in toc -->
-[cond1_expenditures.sas](summary_tables_examples/cond1_expenditures.sas): Utilization and expenditures by medical condition, 2015
+[cond_expenditures_2015.sas](summary_tables_examples/cond_expenditures_2015.sas): Utilization and expenditures by medical condition, 2015
 
 ### Health Insurance <!-- omit in toc -->
-[ins1_age.sas](summary_tables_examples/ins1_age.sas): Health insurance coverage by age group, 2016
+[ins_age_2016.sas](summary_tables_examples/ins_age_2016.sas): Health insurance coverage by age group, 2016
 
 ### Prescribed drugs <!-- omit in toc -->
-[pmed1_therapeutic_class.sas](summary_tables_examples/pmed1_therapeutic_class.sas): Purchases and expenditures by Multum therapeutic class, 2016
+[pmed_prescribed_drug_2016.sas](summary_tables_examples/pmed_prescribed_drug_2016.sas): Purchases and expenditures by generic drug name, 2016
 <br>
-[pmed2_prescribed_drug.sas](summary_tables_examples/pmed2_prescribed_drug.sas): Purchases and expenditures by generic drug name, 2016
+[pmed_therapeutic_class_2016.sas](summary_tables_examples/pmed_therapeutic_class_2016.sas): Purchases and expenditures by Multum therapeutic class, 2016
+
 
 ### Use, expenditures, and population <!-- omit in toc -->
-[use1_race_sex.sas](summary_tables_examples/use1_race_sex.sas): Utilization and expendiutres by race and sex, 2016
+[use_race_sex_2016.sas](summary_tables_examples/use_race_sex_2016.sas): Utilization and expendiutres by race and sex, 2016
 <br>
-[use2_expenditures.sas](summary_tables_examples/use2_expenditures.sas): Expenditures for office-based and outpatient visits, by source of payment, 2016
+[use_expenditures_2016.sas](summary_tables_examples/use_expenditures_2016.sas): Expenditures for office-based and outpatient visits, by source of payment, 2016
 <br>
-[use3_events.sas](summary_tables_examples/use3_events.sas): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
+[use_events_2016.sas](summary_tables_examples/use_events_2016.sas): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
 
 
 ## Older Exercises (1996 to 2006)

@@ -288,26 +288,26 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc):
 
 ### Accessibility and quality of care <!-- omit in toc -->
-[care1_child_dental.R](summary_tables_examples/care1_child_dental.R): Children with dental care, by poverty status, 2016
+
+[care_diabetes_a1c_2016.R](summary_tables_examples/care_diabetes_a1c_2016.R): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
 <br>
-[care2_diabetes_a1c.R](summary_tables_examples/care2_diabetes_a1c.R): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
-<br>
-[care3_access.R](summary_tables_examples/care3_access.R): Ability to schedule a routine appointment, by insurance coverage, 2016
+[care_access_2016.R](summary_tables_examples/care_access_2016.R): Ability to schedule a routine appointment, by insurance coverage, 2016
 
 ### Medical conditions <!-- omit in toc -->
-[cond1_expenditures.R](summary_tables_examples/cond1_expenditures.R): Utilization and expenditures by medical condition, 2015
+[cond_expenditures_2015.R](summary_tables_examples/cond_expenditures_2015.R): Utilization and expenditures by medical condition, 2015
 
 ### Health Insurance <!-- omit in toc -->
-[ins1_age.R](summary_tables_examples/ins1_age.R): Health insurance coverage by age group, 2016
+[ins_age_2016.R](summary_tables_examples/ins_age_2016.R): Health insurance coverage by age group, 2016
 
 ### Prescribed drugs <!-- omit in toc -->
-[pmed1_therapeutic_class.R](summary_tables_examples/pmed1_therapeutic_class.R): Purchases and expenditures by Multum therapeutic class, 2016
+[pmed_prescribed_drug_2016.R](summary_tables_examples/pmed_prescribed_drug_2016.R): Purchases and expenditures by generic drug name, 2016
 <br>
-[pmed2_prescribed_drug.R](summary_tables_examples/pmed2_prescribed_drug.R): Purchases and expenditures by generic drug name, 2016
+[pmed_therapeutic_class_2016.R](summary_tables_examples/pmed_therapeutic_class_2016.R): Purchases and expenditures by Multum therapeutic class, 2016
+
 
 ### Use, expenditures, and population <!-- omit in toc -->
-[use1_race_sex.R](summary_tables_examples/use1_race_sex.R): Utilization and expendiutres by race and sex, 2016
+[use_race_sex_2016.R](summary_tables_examples/use_race_sex_2016.R): Utilization and expendiutres by race and sex, 2016
 <br>
-[use2_expenditures.R](summary_tables_examples/use2_expenditures.R): Expenditures for office-based and outpatient visits, by source of payment, 2016
+[use_expenditures_2016.R](summary_tables_examples/use_expenditures_2016.R): Expenditures for office-based and outpatient visits, by source of payment, 2016
 <br>
-[use3_events.R](summary_tables_examples/use3_events.R): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
+[use_events_2016.R](summary_tables_examples/use_events_2016.R): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
