@@ -1,11 +1,9 @@
 # -----------------------------------------------------------------------------
-# Accessibility and quality of care, 2016
+# Accessibility and quality of care: Quality of Care, 2016
 #
-# Self-administered questionnaire (SAQ):
-#  Ability to schedule a routine appointment (adults)
-#
-# Example R code to replicate number and percentage of adults by their ability
-#  to schedule a routine appointment, by insurance coverage
+# Self-administered questionnaire (SAQ): 
+#  - Number/percent of Adults by ability to schedule a routine appointment
+#  - By Insurance Coverage Status
 #
 # Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -80,7 +78,7 @@
 
 
 # Define survey design and calculate estimates --------------------------------
-#  - use SAQWT16F weight variable
+#  - use SAQWT16F weight variable, since outcome variable comes from SAQ
 
   SAQdsgn <- svydesign(
     id = ~VARPSU,
