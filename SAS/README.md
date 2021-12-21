@@ -1,8 +1,8 @@
 # Analyzing MEPS data using SAS <!-- omit in toc -->
 
 - [Loading MEPS data](#loading-meps-data)
-  - [Data years 2018 and later: SAS V9 files](#data-years-2018-and-later-sas-v9-files)
-  - [Data years 1996-2017: `PROC XCOPY`](#data-years-1996-2017-proc-xcopy)
+  - [Data years 2017 and later: SAS V9 files](#data-years-2017-and-later-sas-v9-files)
+  - [Data years 1996-2016: `PROC XCOPY`](#data-years-1996-2016-proc-xcopy)
 - [Automating file download](#automating-file-download)
 - [Saving SAS data (.sas7bdat)](#saving-sas-data-sas7bdat)
 - [SAS SURVEY procedures](#sas-survey-procedures)
@@ -23,13 +23,9 @@ The recommended file formats are the SAS V9 data files (.sas7bdat) for data year
 |Other Files |	SAS transport (.ssp)	| SAS transport (.ssp)|	SAS V9 (.sas7bdat) |
 
 
-## Data years 2018 and later: SAS V9 files
+## Data years 2017 and later: SAS V9 files
 
-The <b>SAS V9 (.sas7bdat)</b> format is the recommended format for loading the following files into SAS:
-* <b>2017</b>:	Full-year consolidated (FYC) file (h201)
-* <b>2018 and later</b>: All files 
-
-For the following example, the 2018 Dental Visits files (<b>h206b.sas7bdat</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
+The <b>SAS V9 (.sas7bdat)</b> format is the recommended format for loading MEPS data files from 2017 and later. For the following example, the 2018 Dental Visits files (<b>h206b.sas7bdat</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
 
 ``` sas
 DATA work.h206b;
@@ -41,36 +37,18 @@ PROC PRINT data = h206b (obs=10);
 RUN;
 ```
 
+## Data years 1996-2016: `PROC XCOPY`
 
-Alternatively, the `CIMPORT` procedure can be used to convert the SAS transport  (.ssp) files into SAS data sets:
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp) </b> format is the recommended file type for loading MEPS data files from 1996-2016.
 
+SAS transport (.ssp) files can be read into SAS using `PROC XCOPY`. In the following examples, the SAS transport file for the 2016 Dental Visits file (h188b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b>
 ``` sas
-FILENAME in_h206b "C:\MEPS\h206b.ssp";
-PROC CIMPORT data = work.h206b infile = in_h206b;
+FILENAME in_h188b "C:\MEPS\h188b.ssp";
+PROC XCOPY in = in_h188b out = WORK IMPORT;
 RUN;
 
 /* View first 10 rows of data */
-PROC PRINT data = h206b (obs=10);
-RUN;
-```
-
-
-
-## Data years 1996-2017: `PROC XCOPY`
-
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp) </b> formats are the recommended file type for loading the following files into Stata:
-* <b>1996-2016</b>:	All files	
-* <b>2017</b>:	All files (except Full-year consolidated file)
-
-
-SAS transport (.ssp) files can be read into SAS using `PROC XCOPY`. In the following examples, the SAS transport file for the 2017 Dental Visits file (h197b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b>
-``` sas
-FILENAME in_h197b "C:\MEPS\h197b.ssp";
-PROC XCOPY in = in_h197b out = WORK IMPORT;
-RUN;
-
-/* View first 10 rows of data */
-PROC PRINT data = h197b (obs=10);
+PROC PRINT data = h188b (obs=10);
 RUN;
 ```
 

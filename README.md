@@ -32,24 +32,17 @@ The MEPS-HC is designed to produce national and regional estimates of the health
 
 ## Accessing MEPS-HC data
 
-> <b> IMPORTANT! </b> Starting with some 2017 files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. Importing XPORT and CPORT files into SAS requires different procedures. In addition, CPORT data files cannot be read directly into R or Stata; alternative file formats must be used. More details are available in the sub-folders for each programming language.
-
-Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS transport (.ssp), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. The following table summarizes the various file formats available by data year:
+Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. The following table summarizes the various file formats available by data year:
 
 
 
-|Data Years     |Files     |ASCII<sup>1</sup>  <br>(.dat) |SAS XPORT <br>(.ssp) |SAS CPORT<sup>2</sup><br>(.ssp) |SAS V9 (.sas7dat) <br> Stata (.dta) <br> Excel (.xlsx) |
-|:--------------|:-----------------------------------|:-----------:|:------------:|:--:|:--:|
-|1996-2016      |All files                           |X            |X             |    |    |
-|2017           |Full-year consolidated (HC-201)     |X            |              |X   |X   |
-|2017           |All other 2017 files                |X            |X             |    |    |
-|2018           |Point-in-time (HC-196)              |X            |X             |    |X   |
-|2018           |All other 2018 files                |X            |              |X   |X   |
-|2019 and later |Pooled linkage (HC-036) <br>BRR replicates (HC-036BRR)  |X  |X   |    |X   |
-|2019 and later |All other 2019 files                |X            |              |X   |X   |
+|Data Years         |ASCII<sup>1</sup>  <br>(.dat) |SAS XPORT <br>(.ssp) |SAS V9 (.sas7dat) <br> Stata (.dta) <br> Excel (.xlsx) |
+|:-----------------|:----:|:--------:|:--:|
+|1996-2016         |X     |X         |    |
+|2017 and later    |X     | (not recommended) <sup>2</sup>       |X   |
 
 <sub><sup>1</sup> Additional programming statements with column widths, types, and names are required to read ASCII files. SAS and Stata programming statements are available for all data files. R programming statements are available for most files from data years 2018 and later.
-<br><sup>2</sup> SAS CPORT files cannot be read into R or Stata.</sub>
+<br><sup>2</sup> Starting with 2017 data files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. Importing XPORT and CPORT files into SAS requires different procedures. In addition, CPORT data files cannot be read directly into R or Stata; alternative file formats must be used. More details are available in the sub-folders for each programming language.</sub>
 
 Zip files of each data format can be downloaded from the web page for each MEPS public use file. 
 

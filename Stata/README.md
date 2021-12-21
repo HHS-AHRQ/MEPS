@@ -1,8 +1,8 @@
 # Analyzing MEPS data using Stata  <!-- omit in toc -->
 
 - [Loading MEPS data](#loading-meps-data)
-  - [Data years 2018 and later: Stata (.dta) files](#data-years-2018-and-later-stata-dta-files)
-  - [Data years 1996-2017: SAS XPORT format](#data-years-1996-2017-sas-xport-format)
+  - [Data years 2017 and later: Stata (.dta) files](#data-years-2017-and-later-stata-dta-files)
+  - [Data years 1996-2016: SAS XPORT format](#data-years-1996-2016-sas-xport-format)
 - [Automating file download](#automating-file-download)
 - [Saving Stata data (.dta)](#saving-stata-data-dta)
 - [Stata `svy` commands](#stata-svy-commands)
@@ -24,11 +24,11 @@ The recommended file formats are the Stata data files (.dta) for data years 2018
 Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata (.dta) files generally have uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
 
 
-## Data years 2018 and later: Stata (.dta) files
+## Data years 2017 and later: Stata (.dta) files
 
-The <b>Stata data (.dta)</b> format is the recommended file format for loading the following files into Stata:
-* <b>2017</b>:	Full-year consolidated (FYC) file (h201)
-* <b>2018 and later</b>: All files 
+The <b>Stata data (.dta)</b> format is the recommended file format for loading MEPS data files from 2017 and later. 
+
+> <b> IMPORTANT! </b> SAS transport (.ssp) versions of most these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alternative file formats must be used instead.
 
 For the following example, the 2018 Dental Visits files (<b>h206b.dta</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
 
@@ -43,21 +43,17 @@ browse
 rename *, lower
 ```
 
-Although the SAS transport (.ssp) versions of these files are available, they were created using the SAS CPORT engine, which cannot be read directly into Stata.
+## Data years 1996-2016: SAS XPORT format
 
-## Data years 1996-2017: SAS XPORT format
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp)</b> format is the recommended file type for loading MEPS data files from 1996-2016.
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp)</b> formats are the recommended file type for loading the following files into Stata:
-* <b>1996-2016</b>:	All files	
-* <b>2017</b>:	All files (except Full-year consolidated file)
-
-These files can be loaded using the `import` command. In the following example, the transport file for the 2017 Dental Visits file (<b>h197b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
+These files can be loaded using the `import` command. In the following example, the transport file for the 2016 Dental Visits file (<b>h188b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
 
 ``` stata
 /* Note: for Stata version 15 or earlier, use sasxport instead of sasxport5 */
 
 set more off
-import sasxport5 "C:/MEPS/h197b.ssp", clear
+import sasxport5 "C:/MEPS/h188b.ssp", clear
 
 /* View dataset */
 browse

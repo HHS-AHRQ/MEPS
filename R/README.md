@@ -3,8 +3,8 @@
 - [Loading R packages](#loading-r-packages)
 - [Loading MEPS data](#loading-meps-data)
   - [All data years: Using the `MEPS` package](#all-data-years-using-the-meps-package)
-  - [Data years 2018 and later: ASCII, SAS V9, Stata, and XLSX](#data-years-2018-and-later-ascii-sas-v9-stata-and-xlsx)
-  - [Data years 1996-2017: SAS XPORT format](#data-years-1996-2017-sas-xport-format)
+  - [Data years 2017 and later: ASCII, SAS V9, Stata, and XLSX](#data-years-2017-and-later-ascii-sas-v9-stata-and-xlsx)
+  - [Data years 1996-2016: SAS XPORT format](#data-years-1996-2016-sas-xport-format)
 - [Automating file download](#automating-file-download)
 - [Saving R data (.Rdata)](#saving-r-data-rdata)
 - [Survey package in R](#survey-package-in-r)
@@ -71,14 +71,16 @@ library(MEPS)
 
 The `read_MEPS` function can then be used to import MEPS data into R directly from the MEPS website. This function automatically detects the best file format to import based on the specified data year and file.
 
-In the following example, the 2017 (h197b) and 2018 (h206b) Dental Visits files are automatically downloaded from the MEPS website and imported into R. Either the file name or the year and MEPS data type can be specified:
+In the following example, the 2016 (h188b), 2017 (h197b), and 2018 (h206b) Dental Visits files are automatically downloaded from the MEPS website and imported into R. Either the file name or the year and MEPS data type can be specified:
 
 ``` r
 # Specifying year and MEPS data type
+dn2016 = read_MEPS(year = 2016, type = "DV")
 dn2017 = read_MEPS(year = 2017, type = "DV")
 dn2018 = read_MEPS(year = 2018, type = "DV")
 
 # Specifying MEPS file name
+dn2016 = read_MEPS(file = "h188b")
 dn2017 = read_MEPS(file = "h197b")
 dn2018 = read_MEPS(file = "h206b")
 
@@ -87,15 +89,29 @@ help(read_MEPS)
 ```
 
 
-## Data years 2018 and later: ASCII, SAS V9, Stata, and XLSX
+## Data years 2017 and later: ASCII, SAS V9, Stata, and XLSX
 
-For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2018 and later, as well as the 2017 Full-year consolidated (FYC) file. Due to the fast loading speed and simplicity of code, the <b>Stata data format (.dta)</b> is the recommended file format for loading the following files into R:
-* <b>2017</b>:	Full-year consolidated (FYC) file (h201)
-* <b>2018 and later</b>:	All files 
+For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2017 and later. Due to the fast loading speed and simplicity of code, the <b>Stata data format (.dta)</b> is the recommended file format.
 
-> <b> IMPORTANT! </b> SAS transport (.ssp) versions of these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alternative file formats must be used instead.
+> <b> IMPORTANT! </b> SAS transport (.ssp) versions of most these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alternative file formats must be used instead.
 
 Examples of loading each of the available file types are detailed below. For each example, the 2018 Dental Visits files (<b>h206b</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
+
+<b> Stata (.dta) files -- recommended</b>
+
+Stata files can be loaded into R using the `read_dta` function from the `haven` package. These are the recommended file formats, since Stata files are generally the fastest to load into R among the available formats.
+``` r
+library(haven)
+dn2018 = read_dta("C:/MEPS/h206b.dta")
+```
+
+<b>SAS V9 (.sas7bdat) files</b>
+
+SAS V9 files can be loaded into R using the `read_sas` function from the `haven` package:
+``` r
+library(haven)
+dn2018 = read_sas("C:/MEPS/h206b.sas7bdat")
+```
 
 <b>ASCII (.dat) files</b>
 
@@ -109,20 +125,6 @@ library(readxl)
 dn2018 = read_excel("C:/MEPS/h206b.xlsx")
 ```
 
-<b>SAS V9 (.sas7bdat) files</b>
-
-SAS V9 files can be loaded into R using the `read_sas` function from the `haven` package:
-``` r
-library(haven)
-dn2018 = read_sas("C:/MEPS/h206b.sas7bdat")
-```
-<b> Stata (.dta) files -- recommended</b>
-
-Stata files can be loaded into R using the `read_dta` function from the `haven` package. These are the recommended file formats, since Stata files are generally the fastest to load into R among the available formats.
-``` r
-library(haven)
-dn2018 = read_dta("C:/MEPS/h206b.dta")
-```
 
 
 <!-- > I think I don't want to include so much info here, since this is not the best method...
@@ -168,18 +170,15 @@ head(h207)
 ```
 <-->
 
-## Data years 1996-2017: SAS XPORT format
+## Data years 1996-2016: SAS XPORT format
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. Since the required R programming statements are not available for the ASCII data files for these years, the <b>SAS transport (.ssp)</b> formats are the recommended file type for loading the following files into R:
-* <b>1996-2016</b>:	All files	
-* <b>2017</b>:	All files (except Full-year consolidated file)
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. Since the required R programming statements are not available for the ASCII data files for these years, the <b>SAS transport (.ssp)</b> formats are the recommended file type.
 
-
-These files can be read into R using the `read.xport` function from the `foreign` package.  In the following example, the SAS XPORT format of the 2017 Dental Visits file (<b>h197b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
+These files can be read into R using the `read.xport` function from the `foreign` package.  In the following example, the SAS XPORT format of the 2016 Dental Visits file (<b>h188b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
 
 ```r
 library(foreign)
-dn2017 = read.xport("C:/MEPS/h197b.ssp")
+dn2016 = read.xport("C:/MEPS/h188b.ssp")
 ```
 
 # Automating file download
