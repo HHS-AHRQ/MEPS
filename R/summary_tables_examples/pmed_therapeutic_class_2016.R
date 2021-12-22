@@ -1,10 +1,9 @@
 # -----------------------------------------------------------------------------
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+#
 # Prescribed drugs, 2016
 #
-# Purchases and expenditures by Multum therapeutic class name
-#
-# Example R code to replicate the following estimates in the MEPS-HC summary
-#  tables by Multum therapeutic class:
+# Purchases and expenditures by Multum therapeutic class name (TC1)
 #  - Number of people with purchase
 #  - Total purchases
 #  - Total expenditures

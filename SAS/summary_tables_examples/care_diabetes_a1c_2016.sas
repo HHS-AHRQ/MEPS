@@ -1,13 +1,13 @@
 /*****************************************************************************/
-/* Accessibility and quality of care, 2016
+/* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 /*
-/* Diabetes care survey (DCS):
-/*  Adults receiving hemoglobin A1c blood test
+/* Accessibility and quality of care: Diabetes Care, 2016
 /*
-/* Example SAS code to replicate number and percentage of adults with diabetes
-/*  who had a hemoglobin A1c blood test, by race/ethnicity
+/* Diabetes care survey (DCS): 
+/*  - Number/percent of adults with diabetes receiving hemoglobin A1c blood test 
+/*  - By race/ethnicity
 /*
-/* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
+/* Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
 
 ods graphics off;
@@ -23,7 +23,7 @@ run;
 data MEPS;
   	SET h192;
 
-/* Define domain and adjust weights to keep all people in analysis */
+/* Define domain and adjust weights so SAS doesn't drop observations */
 	domain = (DIABW16F > 0);
 	if domain = 0 then DIABW16F = 1;
 
@@ -49,20 +49,28 @@ run;
 proc format;
 	value diab_a1c
 		-9,-8,-7 = "Don't know/Non-response"
-		-1 = "Inapplicable"
+		-1   = "Inapplicable"
 		0,96 = "Did not have measurement"
 		1-95 = "Had measurement";
 
 	value race
-		1 = "Hispanic"
-		2 = "White"
-		3 = "Black"
-		4 = "Amer. Indian, AK Native, or mult. races"
-		5 = "Asian, Hawaiian, or Pacific Islander"
+		1 = "1 Hispanic"
+		2 = "2 White"
+		3 = "3 Black"
+		4 = "4 Amer. Indian, AK Native, or mult. races"
+		5 = "5 Asian, Hawaiian, or Pacific Islander"
 		. = "Missing";
 run;
 
+/* QC new variables */
+proc freq data = MEPS;
+	format race race. ;
+	tables RACETHX*RACEV1X*hisp*white*black*native*asian*race / list;
+run;
+
+
 /* Calculate estimates using survey procedures *******************************/
+/* - use DIABW16F weight variable, since outcome variable comes from DCS     */
 
 ods output CrossTabs = out;
 proc surveyfreq data = MEPS missing;
@@ -73,7 +81,10 @@ proc surveyfreq data = MEPS missing;
 	TABLES domain*race*DSA1C53 / row;
 run;
 
+/* Adults with diabetes with hemoglobin A1C measurement in 2016, by race */
 proc print data = out noobs label;
 	where domain = 1 and DSA1C53 ne . and race ne .;
-	var DSA1C53 race WgtFreq StdDev Frequency RowPercent RowStdErr;
+	var DSA1C53 race Frequency
+	/* number  */ WgtFreq StdDev  
+	/* percent */ RowPercent RowStdErr;
 run;

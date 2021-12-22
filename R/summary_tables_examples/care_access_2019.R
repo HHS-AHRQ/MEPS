@@ -1,9 +1,11 @@
 # -----------------------------------------------------------------------------
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+#
 # Accessibility and quality of care: Access to Care, 2019
 #
 # Did not receive treatment because couldn't afford it
-#  - Number/percent
-#  - By Poverty Status
+#  - Number/percent of people
+#  - By poverty status
 #
 # Input file: C:/MEPS/h216.dta (2019 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -70,7 +72,7 @@ FYCdsgn <- svydesign(
 # Subset to persons eligible to receive the 'access to care' supplement
 sub_dsgn <- subset(FYCdsgn, ACCELI42==1)
 
-# Did not receive treatment because of cost 
+# Did not receive treatment because of cost, by poverty status
 svyby(~afford_ANY + afford_MD + afford_DN + afford_PM, FUN = svytotal, by = ~poverty, design = sub_dsgn) # number
 svyby(~afford_ANY + afford_MD + afford_DN + afford_PM, FUN = svymean,  by = ~poverty, design = sub_dsgn) # percent
 

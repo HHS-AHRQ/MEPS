@@ -1,32 +1,23 @@
 /*****************************************************************************/
-/* Use, expenditures, and population
+/* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+/*
+/* Use, expenditures, and population, 2016
 /*
 /* Utilization and expenditures by event type and source of payment (SOP)
-/*  based on event files
+/*  - Total number of events
+/*  - Mean expenditure per event, by source of payment
+/*  - Mean events per person, for office-based visits
 /*
-/* Example SAS code to replicate the following estimates in the MEPS-HC summary
-/*  tables for selected event types:
-/*  - total number of events
-/*  - mean expenditure per event, by source of payment
-/*  - mean events per person, for office-based visits
-
 /* Selected event types:
 /*  - Office-based medical visits (OBV)
 /*  - Office-based physician visits (OBD)
 /*  - Outpatient visits (OPT)
 /*  - Outpatient physician visits (OPV)
 /*
-/* Sources of payment (SOPs):
-/*  - Out-of-pocket (SF)
-/*  - Medicare (MR)
-/*  - Medicaid (MD)
-/*  - Private insurance, including TRICARE (PR)
-/*  - Other (OZ)
-/*
 /* Input files:
 /*	- C:\MEPS\h192.ssp (2016 full-year consolidated)
-/* 	- C:\MEPS\h188f (2016 OP event file)
-/* 	- C:\MEPS\h188g (2016 OB event file)
+/* 	- C:\MEPS\h188f.ssp (2016 OP event file)
+/* 	- C:\MEPS\h188g.ssp (2016 OB event file)
 /*****************************************************************************/
 
 ods graphics off;
@@ -46,12 +37,22 @@ ods graphics off;
 
 
 /* Aggregate payment sources for each dataset *********************************/
-/*  1996-1999: TRICARE label is CHM (changed to TRI in 2000)
 /*
-/*  PTR = Private (PRV) + TRICARE (TRI)
-/*  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
-/*         other public (OPU)  + other unclassified sources (OSR) +
-/*         worker's comp (WCP) + Veteran's (VA)                              */
+/*  Notes:
+/*   - For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+/*
+/*   - For 1996-2006: combined facility + SBD variables for hospital-type events
+/*      are not on PUF
+/*
+/*   - Starting in 2019, 'Other public' (OPU) and 'Other private' (OPR) are  
+/*      dropped from the files  
+/*
+/*
+/*  PR = Private (PV) + TRICARE (TR)
+/*
+/*  OZ = other federal (OF)  + State/local (SL) + other private (OR) +
+/*        other public (OU)  + other unclassified sources (OT) +
+/*        worker's comp (WC) + Veteran's (VA)                                */
 
 data OB;
 	set h188g;
@@ -86,7 +87,9 @@ run;
 
 
 /* Merge with FYC to retain all PSUs *****************************************/
-proc sort data = h192 (keep = DUPERSID VARSTR VARPSU PERWT16F) out = FYC; by DUPERSID; run;
+proc sort data = h192 (keep = DUPERSID VARSTR VARPSU PERWT16F) out = FYC; 
+	by DUPERSID; 
+run;
 
 proc sort data = OB (drop = VARSTR VARPSU PERWT16F); by DUPERSID; run;
 proc sort data = OP (drop = VARSTR VARPSU PERWT16F); by DUPERSID; run;
@@ -103,9 +106,15 @@ run;
 
 
 /* Calculate estimates using survey procedures *******************************/
+/*
+/* Sources of payment (SOP) abbreviations:
+/*  - SF: Out-of-pocket
+/*  - PR: Private insurance, including TRICARE (PTR)
+/*  - MR: Medicare 
+/*  - MD: Medicaid
+/*  - OZ: Other 
 
-
-/* Office-based visits: Number of events and Mean expenditure per event ******/
+/* Office-based visits: Total number of events and Mean expenditure per event ******/
 ods output Statistics = OB_out Domain = OB_domain_out ;
 proc surveymeans data = OB_FYC sum mean missing;
 	STRATA VARSTR;

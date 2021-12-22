@@ -1,26 +1,24 @@
-/*****************************************************************************/
-/* Medical Conditions, 2015
+/* ****************************************************************************/
+/* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 /*
-/* Note: Starting in 2016, conditions were coded to ICD-10 codes (ICD-9 codes
-/*  were used from 1996-2015). CCS codes are not on the medical conditions PUFs
-/*  for 2016 or 2017
-/*
-/* Example SAS code to replicate the following estimates in the MEPS-HC summary
-/*  tables by medical condition:
+/* Medical Conditions, 2015:
 /*  - Number of people with care
 /*  - Number of events
 /*  - Total expenditures
 /*  - Mean expenditure per person
 /*
+/* Note: Starting in 2016, conditions were converted from ICD-9 and CCS codes
+/*  to ICD-10 and CCSR codes 
+/*
 /* Input files:
-/* 	- C:\MEPS\h178a (2015 RX event file)
-/* 	- C:\MEPS\h178d (2015 IP event file)
-/* 	- C:\MEPS\h178e (2015 ER event file)
-/* 	- C:\MEPS\h178f (2015 OP event file)
-/* 	- C:\MEPS\h178g (2015 OB event file)
-/* 	- C:\MEPS\h178h (2015 HH event file)
-/* 	- C:\MEPS\h178if1 (2015 CLNK: Condition-event link file)
-/* 	- C:\MEPS\h180 (2015 Conditions file)
+/* 	- C:\MEPS\h178a.ssp (2015 RX event file)
+/* 	- C:\MEPS\h178d.ssp (2015 IP event file)
+/* 	- C:\MEPS\h178e.ss (2015 ER event file)
+/* 	- C:\MEPS\h178f.ss (2015 OP event file)
+/* 	- C:\MEPS\h178g.ss (2015 OB event file)
+/* 	- C:\MEPS\h178h.ss (2015 HH event file)
+/* 	- C:\MEPS\h178if1.ss (2015 CLNK: Condition-event link file)
+/* 	- C:\MEPS\h180.ss (2015 Conditions file)
 /*****************************************************************************/
 
 ods graphics off;

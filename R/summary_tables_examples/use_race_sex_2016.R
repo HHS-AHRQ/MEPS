@@ -1,16 +1,15 @@
 # -----------------------------------------------------------------------------
-# Use, expenditures, and population
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+#
+# Use, expenditures, and population, 2016
 #
 # Expenditures by race and sex
-#
-# Example R code to replicate the following estimates in the MEPS-HC summary
-#  tables, by race and sex:
-#  - number of people
-#  - percent of population with an expense
-#  - total expenditures
-#  - mean expenditure per person
-#  - mean expenditure per person with expense
-#  - median expenditure per person with expense
+#  - Number of people
+#  - Percent of population with an expense
+#  - Total expenditures
+#  - Mean expenditure per person
+#  - Mean expenditure per person with expense
+#  - Median expenditure per person with expense
 #
 # Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -104,35 +103,25 @@
   has_exp_dsgn <- subset(FYCdsgn, has_exp == 1)
 
 
-# Totals (population, expenditures)
-  totals <- svyby(~persons + TOTEXP16,
-                  FUN = svytotal, by = ~sex + race, design = FYCdsgn)
+# Number of people
+  svyby(~persons, FUN = svytotal, by = ~sex + race, design = FYCdsgn)
 
-  totals %>% select(persons)               # Number of people
-  totals %>% select(TOTEXP16, se.TOTEXP16) # Total expenditures
+# Percent of population with an expense
+  svyby(~has_exp, FUN = svymean, by = ~sex + race, design = FYCdsgn)
 
+# Total expenditures
+  svyby(~persons, FUN = svytotal, by = ~sex + race, design = FYCdsgn)
 
-# Means (pct. with expense, expenditures)
+# Mean expenditure per person
+  svyby(~TOTEXP16, FUN = svymean, by = ~sex + race, design = FYCdsgn)
 
-  means <- svyby(~has_exp + TOTEXP16,
-                 FUN = svymean, by = ~sex + race, design = FYCdsgn)
+# Mean expenditure per person with expense
+  svyby(~TOTEXP16, FUN = svymean, by = ~sex + race, design = has_exp_dsgn)
 
-  means %>% select(has_exp, se.has_exp)   # Pct of population with expense
-  means %>% select(TOTEXP16, se.TOTEXP16) # Mean expenditure per person
-
-
-# Mean expenditure per person with expense, by race and sex
-  mean_exp <- svyby(~TOTEXP16, FUN = svymean,
-                    by = ~sex + race, design = has_exp_dsgn)
-
-  mean_exp %>% select(TOTEXP16, se)
-
-
-# Median expenditure per person with expense, by race and sex
+# Median expenditure per person with expense
 #   Note: Estimates may vary in R, SAS, and Stata, due to different methods
 #         of estimating survey quantiles
-  med_exp <-svyby(~TOTEXP16, FUN = svyquantile,
-                  by = ~sex + race, design = has_exp_dsgn,
-                  quantiles = c(0.5), ci = T, method = "constant")
+  svyby(~TOTEXP16, FUN = svyquantile, by = ~sex + race, design = has_exp_dsgn,
+        quantiles = c(0.5), method = "constant")
 
-  med_exp %>% select(TOTEXP16, se)
+  

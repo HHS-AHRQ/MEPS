@@ -1,26 +1,18 @@
 # -----------------------------------------------------------------------------
-# Use, expenditures, and population
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+#
+# Use, expenditures, and population, 2016
 #
 # Expenditures by event type and source of payment (SOP)
-#
-# Example R code to replicate the following estimates in the MEPS-HC summary
-#  tables, by source of payment (SOP), for selected event types:
-#  - total expenditures
-#  - mean expenditure per person
-#  - mean out-of-pocket (SLF) payment per person with a SLF payment
+#  - Total expenditures
+#  - Mean expenditure per person
+#  - Mean out-of-pocket (SLF) payment per person with an out-of-pocket expense
 #
 # Selected event types:
 #  - Office-based medical visits (OBV)
 #  - Office-based physician visits (OBD)
 #  - Outpatient visits (OPT)
 #  - Outpatient physician visits (OPV)
-#
-# Sources of payment (SOPs):
-#  - Out-of-pocket (SLF)
-#  - Medicare (MCR)
-#  - Medicaid (MCD)
-#  - Private insurance, including TRICARE (PTR)
-#  - Other (OTH)
 #
 # Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -46,13 +38,24 @@
   FYC <- read.xport("C:/MEPS/h192.ssp")
 
 # Aggregate payment sources ---------------------------------------------------
-#  For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+#
+#  Notes:
+#   - For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+#
+#   - For 1996-2006: combined facility + SBD variables for hospital-type events
+#      are not on PUF
+#
+#   - Starting in 2019, 'Other public' (OPU) and 'Other private' (OPR) are  
+#      dropped from the files 
+#
 #
 #  PTR = Private (PRV) + TRICARE (TRI)
+#
 #  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
 #         other public (OPU)  + other unclassified sources (OSR) +
 #         worker's comp (WCP) + Veteran's (VA)
 
+  
   FYC <- FYC %>% mutate(
 
   # office-based visits
@@ -90,7 +93,7 @@
   )
 
 
-# Define survey design and calculate estimates --------------------------------
+# Define survey design -------------------------------------------------------- 
 
   FYCdsgn <- svydesign(
     id = ~VARPSU,
@@ -98,9 +101,18 @@
     weights = ~PERWT16F,
     data = FYC,
     nest = TRUE)
-
-
-# Total expenditures
+  
+# Calculate estimates ---------------------------------------------------------
+#
+# Sources of payment (SOP) abbreviations:
+#  - SLF: Out-of-pocket
+#  - PTR: Private insurance, including TRICARE (PTR)
+#  - MCR: Medicare 
+#  - MCD: Medicaid
+#  - OTZ: Other 
+  
+  
+# Total expenditures, by event type and source of payment
 
   totals <-
     svytotal(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
@@ -112,7 +124,7 @@
   totals %>% as.data.frame()
 
 
-# Mean expenditure per person
+# Mean expenditure per person, by event type and source of payment
 
   means <-
     svymean(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
@@ -124,7 +136,8 @@
   means %>% as.data.frame()
 
 
-# Mean out-of-pocket expense per person with an out-of-pocket expense
+# Mean expenditure per person with expense
+#  - Mean out-of-pocket expense per person with an out-of-pocket expense
 
   svymean(~OBVSLF16, design = subset(FYCdsgn, OBVSLF16 > 0)) # office-based visits
   svymean(~OBDSLF16, design = subset(FYCdsgn, OBDSLF16 > 0)) # office-based phys. visits

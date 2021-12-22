@@ -1,8 +1,9 @@
 /*****************************************************************************/
-/* Health insurance
+/* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 /*
-/* Example SAS code to replicate number and percentage of people by insurance
-/*  coverage and age groups
+/* Health insurance, 2016:
+/*  - Number/percent of people
+/*  - By insurance coverage and age groups
 /*
 /* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
@@ -62,6 +63,7 @@ proc surveyfreq data = h192 missing;
 	TABLES AGELAST*INSURC16 / row;
 run;
 
+/* Insurance coverage status by age groups */
 proc print data = out noobs label;
 	where Frequency > 0 and AGELAST ne . and INSURC16 ne .;
 	var AGELAST INSURC16 WgtFreq StdDev Row: ;

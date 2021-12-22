@@ -1,9 +1,11 @@
 # -----------------------------------------------------------------------------
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+#
 # Accessibility and quality of care: Quality of Care, 2016
 #
 # Self-administered questionnaire (SAQ): 
-#  - Number/percent of Adults by ability to schedule a routine appointment
-#  - By Insurance Coverage Status
+#  - Number/percent of adults by ability to schedule a routine appointment
+#  - By insurance coverage status
 #
 # Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -90,6 +92,6 @@
   # Subset to adults who made an appointment
   sub_dsgn <- subset(SAQdsgn, ADRTCR42 == 1 & AGELAST >= 18)
 
-# Ability to schedule a routine appointment (adults)
+# Ability to schedule a routine appointment (adults), by insurance coverage
   svyby(~adult_routine, FUN = svytotal, by = ~insurance, design = sub_dsgn) # number
   svyby(~adult_routine, FUN = svymean,  by = ~insurance, design = sub_dsgn) # percent

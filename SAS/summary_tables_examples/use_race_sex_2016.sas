@@ -1,16 +1,15 @@
 /*****************************************************************************/
-/* Use, expenditures, and population
+/* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+/*
+/* Use, expenditures, and population, 2016
 /*
 /* Expenditures by race and sex
-/*
-/* Example SAS code to replicate the following estimates in the MEPS-HC summary
-/*  tables, by race and sex:
-/*  - number of people
-/*  - percent of population with an expense
-/*  - total expenditures
-/*  - mean expenditure per person
-/*  - mean expenditure per person with expense
-/*  - median expenditure per person with expense
+/*  - Number of people
+/*  - Percent of population with an expense
+/*  - Total expenditures
+/*  - Mean expenditure per person
+/*  - Mean expenditure per person with expense
+/*  - Median expenditure per person with expense
 /*
 /* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 /*****************************************************************************/
@@ -35,7 +34,6 @@ run;
       asian  = (RACETHX > 3 and RACEV1X in (4,5));
 
 /*  - For 2012 and later, use RACETHX and RACEV1X: */
-
 	data MEPS; set h192;
 		hisp   = (RACETHX = 1);
 		white  = (RACETHX = 2);
@@ -74,27 +72,33 @@ proc surveymeans data = MEPS mean sum missing;
 	VAR person has_exp TOTEXP16;
 run;
 
-/* Number of people, by race and sex */
+/* Number of people */
 proc print data = out noobs label;
 	label Sum = "Number of people" ;
 	where VarName = "person";
-	var SEX race Sum;
+	var SEX race Sum StdDev;
 run;
 
-/* Percent of population with any expense in 2016, by race and sex */
+/* Percent of population with an expense */
 proc print data = out noobs label;
 	label Mean = "Percent of population with an expense";
 	where VarName = "has_exp";
 	var SEX race Mean StdErr;
 run;
 
-/* Total and mean expenditures per person, by race and sex */
+/* Total expenditures */
 proc print data = out noobs label;
 	label Sum = "Total expenditures"  Mean = "Mean expenditure per person";;
 	where VarName = "TOTEXP16";
-	var SEX race Sum StdDev Mean StdErr;
+	var SEX race Sum StdDev ;
 run;
 
+/* Mean expenditure per person */
+proc print data = out noobs label;
+	label Sum = "Total expenditures"  Mean = "Mean expenditure per person";;
+	where VarName = "TOTEXP16";
+	var SEX race Mean StdErr;
+run;
 
 
 /* Mean and median expenditure per person with expense ***********************/
@@ -108,20 +112,18 @@ proc surveymeans data = MEPS mean median missing;
 	VAR TOTEXP16;
 run;
 
-
-/* Mean expenditure per person with expense, by race and sex */
+/* Mean expenditure per person with expense */
 proc print data = out_mean noobs label;
 	where has_exp = 1;
 	label Mean = "Mean expenditure per person with expense";
 	var SEX race Mean StdErr;
 run;
 
-
-/* Median expenditure per person with expense, by race and sex              */
+/* Median expenditure per person with expense                               */
 /*  Note: Estimates may vary in R, SAS, and Stata, due to different methods */
 /*        of estimating survey quantiles                                    */
 proc print data = out_median noobs label;
 	where has_exp = 1;
 	label Estimate = "Median expenditure per person with expense";
-	var SEX race Estimate StdErr LowerCL UpperCL;
+	var SEX race Estimate StdErr;
 run;

@@ -1,11 +1,11 @@
 # -----------------------------------------------------------------------------
-# Accessibility and quality of care, 2016
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 #
-# Diabetes care survey (DCS):
-#  Adults receiving hemoglobin A1c blood test
+# Accessibility and quality of care: Diabetes Care, 2016
 #
-# Example R code to replicate number and percentage of adults with diabetes
-#  who had a hemoglobin A1c blood test, by race/ethnicity
+# Diabetes care survey (DCS): 
+#  - Number/percent of adults with diabetes receiving hemoglobin A1c blood test 
+#  - By race/ethnicity
 #
 # Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -79,7 +79,7 @@
 
 
 # Define survey design and calculate estimates --------------------------------
-#  - use DIABW16F weight variable
+#  - use DIABW16F weight variable, since outcome variable comes from DCS
 
   DIABdsgn <- svydesign(
     id = ~VARPSU,
@@ -88,6 +88,6 @@
     data = FYC,
     nest = TRUE)
 
-# Adults with diabetes with hemoglobin A1C measurement in 2016
+# Adults with diabetes with hemoglobin A1C measurement in 2016, by race
   svyby(~diab_a1c, FUN = svytotal, by = ~race, design = DIABdsgn) # number
   svyby(~diab_a1c, FUN = svymean,  by = ~race, design = DIABdsgn) # percent

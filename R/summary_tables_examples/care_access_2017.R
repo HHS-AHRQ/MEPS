@@ -1,9 +1,11 @@
 # -----------------------------------------------------------------------------
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+#
 # Accessibility and quality of care: Access to Care, 2017
 #
 # Reasons for difficulty receiving needed care
-#  - Number/percent
-#  - By Poverty Status
+#  - Number/percent of people
+#  - By poverty status
 #
 # Input file: C:/MEPS/h201.dta (2017 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -96,7 +98,7 @@ FYCdsgn <- svydesign(
 
 sub_dsgn <- subset(FYCdsgn, ACCELI42==1 & delay_ANY==1)
 
-# Reasons for difficulty receiving any needed care
+# Reasons for difficulty receiving any needed care, by poverty status
 svyby(~afford_ANY + insure_ANY + other_ANY, FUN = svytotal, by = ~poverty, design = sub_dsgn) # number
 svyby(~afford_ANY + insure_ANY + other_ANY, FUN = svymean,  by = ~poverty, design = sub_dsgn) # percent
 

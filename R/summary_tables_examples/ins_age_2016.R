@@ -1,8 +1,9 @@
 # -----------------------------------------------------------------------------
-# Health insurance
+# Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 #
-# Example R code to replicate number and percentage of people by insurance
-#  coverage and age groups
+# Health insurance, 2016:
+#  - Number/percent of people
+#  - By insurance coverage and age groups
 #
 # Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 # -----------------------------------------------------------------------------
@@ -24,7 +25,7 @@
 
 # Load FYC file ---------------------------------------------------------------
 
-  FYC <- read.xport("C:/MEPS/h192.ssp")
+  FYC <- read.xport("C:/MEPS/h192.ssp")s
 
 
 # Define variables ------------------------------------------------------------
@@ -83,6 +84,6 @@
     data = FYC,
     nest = TRUE)
 
-# Insurance coverage by age groups
+# Insurance coverage status by age groups
   svyby(~insurance, FUN = svytotal, by = ~agegrps, design = FYCdsgn) # number
   svyby(~insurance, FUN = svymean,  by = ~agegrps, design = FYCdsgn) # percent
