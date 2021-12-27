@@ -72,7 +72,7 @@ FYCdsgn <- svydesign(
 # Subset to persons eligible to receive the 'access to care' supplement
 sub_dsgn <- subset(FYCdsgn, ACCELI42==1)
 
-# Did not receive treatment because of cost, by poverty status
+# Did not receive treatment because couldn't afford it, by poverty status
 svyby(~afford_ANY + afford_MD + afford_DN + afford_PM, FUN = svytotal, by = ~poverty, design = sub_dsgn) # number
 svyby(~afford_ANY + afford_MD + afford_DN + afford_PM, FUN = svymean,  by = ~poverty, design = sub_dsgn) # percent
 

@@ -59,9 +59,9 @@ run;
 
 /* Calculate estimates using survey procedures *******************************/
 
-/* Did not receive treatment because of cost, by poverty status */
-/*  sum  = Number of people    			                        */
-/* 	mean = Percent of people                                    */
+/* Did not receive treatment because couldn't afford it, by poverty status */
+/*  sum  = Number of people    			                                   */
+/* 	mean = Percent of people                                               */
 
 proc surveymeans data = MEPS missing sum mean;
 	FORMAT POVCAT19 poverty.;
