@@ -286,17 +286,31 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 
 The following codes provided in the [summary_tables_examples](summary_tables_examples) folder re-create selected statistics from the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc):
 
-### Accessibility and quality of care <!-- omit in toc -->
+### Accessibility and Quality of Care  <!-- omit in toc -->
 
-[care_diabetes_a1c_2016.R](summary_tables_examples/care_diabetes_a1c_2016.R): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
+#### Access to Care <!-- omit in toc -->
+[care_access_2017.R](summary_tables_examples/care_access_2017.R):
+Reasons for difficulty receiving needed care, by poverty status, 2017
 <br>
-[care_access_2016.R](summary_tables_examples/care_access_2016.R): Ability to schedule a routine appointment, by insurance coverage, 2016
+[care_access_2019.R](summary_tables_examples/care_access_2019.R):
+Number and percent of people who did not receive treatment because they couldn't afford it, by poverty status, 2019
+
+#### Diabetes Care <!-- omit in toc -->
+[care_diabetes_a1c_2016.R](summary_tables_examples/care_diabetes_a1c_2016.R): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
+
+#### Quality of Care <!-- omit in toc -->
+[care_quality_2016.R](summary_tables_examples/care_quality_2016.R): Ability to schedule a routine appointment, by insurance coverage, 2016
+
 
 ### Medical conditions <!-- omit in toc -->
-[cond_expenditures_2015.R](summary_tables_examples/cond_expenditures_2015.R): Utilization and expenditures by medical condition, 2015
+[cond_expenditures_2015.R](summary_tables_examples/cond_expenditures_2015.R): Utilization and expenditures by medical condition, 2015 -- Conditions defined by collapsed ICD-9/CCS codes
+<br>
+[cond_expenditures_2018.R](summary_tables_examples/cond_expenditures_2018.R): Utilization and expenditures by medical condition, 2018 -- Conditions defined by collapsed ICD-10/CCSR codes
+
 
 ### Health Insurance <!-- omit in toc -->
 [ins_age_2016.R](summary_tables_examples/ins_age_2016.R): Health insurance coverage by age group, 2016
+
 
 ### Prescribed drugs <!-- omit in toc -->
 [pmed_prescribed_drug_2016.R](summary_tables_examples/pmed_prescribed_drug_2016.R): Purchases and expenditures by generic drug name, 2016
@@ -305,8 +319,10 @@ The following codes provided in the [summary_tables_examples](summary_tables_exa
 
 
 ### Use, expenditures, and population <!-- omit in toc -->
-[use_race_sex_2016.R](summary_tables_examples/use_race_sex_2016.R): Utilization and expendiutres by race and sex, 2016
+[use_events_2016.R](summary_tables_examples/use_events_2016.R): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
 <br>
 [use_expenditures_2016.R](summary_tables_examples/use_expenditures_2016.R): Expenditures for office-based and outpatient visits, by source of payment, 2016
 <br>
-[use_events_2016.R](summary_tables_examples/use_events_2016.R): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
+[use_expenditures_2019.R](summary_tables_examples/use_expenditures_2016.R): Mean expenditure per person, by event type and source of payment, 2019.
+<br>
+[use_race_sex_2016.R](summary_tables_examples/use_race_sex_2016.R): Utilization and expenditures by race and sex, 2016
