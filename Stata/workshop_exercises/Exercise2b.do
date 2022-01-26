@@ -28,7 +28,7 @@ cd \\programs.ahrq.local\programs\MEPS\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2018_
 */
 
 // 1) identify Narcotic analgesics or Narcotic analgesic combos using therapeutic classification (tc) codes
-import sasxport "C:\MEPS\h188a.ssp"
+import sasxport5 "C:\MEPS\h188a.ssp"
 keep dupersid rxrecidx linkidx tc1s1_1 rxxp16x rxsf16x
 keep if (tc1s1_1==60 | tc1s1_1==191)
 
@@ -50,7 +50,7 @@ gen third_payer   = tot - oop
 tempfile perdrug
 save "`perdrug'"
 
-import sasxport "C:\MEPS\h192.ssp"
+import sasxport5 "C:\MEPS\h192.ssp"
 keep dupersid varstr varpsu perwt16f
 sort dupersid
 

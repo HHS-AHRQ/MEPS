@@ -1,10 +1,11 @@
 * -----------------------------------------------------------------------------
-* Health insurance
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 *
-* Example Stata code to replicate number and percentage of people by insurance
-*  coverage and age groups
+* Health insurance, 2016:
+*  - Number/percent of people
+*  - By insurance coverage and age groups
 *
-* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
+* Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -12,7 +13,7 @@ set more off
 
 * Load FYC file ---------------------------------------------------------------
 
-import sasxport "C:\MEPS\h192.ssp", clear
+import sasxport5 "C:\MEPS\h192.ssp", clear
 
 
 * Define variables ------------------------------------------------------------
@@ -65,5 +66,6 @@ tab insurance insurc16, missing
 
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
+* Insurance coverage status by age groups
 svy: tab agegrps insurance, count se format(%12.0fc) // number
 svy: proportion insurance, over(agegrps) // percent

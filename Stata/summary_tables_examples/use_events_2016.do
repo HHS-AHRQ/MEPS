@@ -1,32 +1,23 @@
 * -----------------------------------------------------------------------------
-* Use, expenditures, and population
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+*
+* Use, expenditures, and population, 2016
 *
 * Utilization and expenditures by event type and source of payment (SOP)
-*  based on event files
+*  - Total number of events
+*  - Mean expenditure per event, by source of payment
+*  - Mean events per person, for office-based visits
 *
-* Example Stata code to replicate the following estimates in the MEPS-HC summary
-*  tables for selected event types:
-*  - total number of events
-*  - mean expenditure per event, by source of payment
-*  - mean events per person, for office-based visits
-
 * Selected event types:
 *  - Office-based medical visits (OBV)
 *  - Office-based physician visits (OBD)
 *  - Outpatient visits (OPT)
 *  - Outpatient physician visits (OPV)
 *
-* Sources of payment (SOPs):
-*  - Out-of-pocket (SF)
-*  - Medicare (MR)
-*  - Medicaid (MD)
-*  - Private insurance, including TRICARE (PR)
-*  - Other (OZ)
-*
 * Input files:
-*  - C:\MEPS\h192.ssp (2016 full-year consolidated)
-*  - C:\MEPS\h188f (2016 OP event file)
-*  - C:\MEPS\h188g (2016 OB event file)
+*  - C:/MEPS/h192.ssp  (2016 full-year consolidated)
+*  - C:/MEPS/h188f.ssp (2016 OP event file)
+*  - C:/MEPS/h188g.ssp (2016 OB event file)
 * -----------------------------------------------------------------------------
 
 clear
@@ -35,13 +26,32 @@ set more off
 cd "C:\MEPS"
 
 * Load FYC file and keep only needed variables --------------------------------
-import sasxport "h192.ssp", clear
+import sasxport5 "h192.ssp", clear
 keep dupersid perwt16f varstr varpsu
 save "FYC2016_temp.dta", replace
 
 
+* For event files, aggregate payment sources for each dataset -----------------
+*
+*  Notes:
+*   - For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+*
+*   - For 1996-2006: combined facility + SBD variables for hospital-type events
+*      are not on PUF
+*
+*   - Starting in 2019, 'Other public' (OPU) and 'Other private' (OPR) are  
+*      dropped from the files  
+*
+*
+*  PR = Private (PV) + TRICARE (TR)
+*
+*  OZ = other federal (OF)  + State/local (SL) + other private (OR) +
+*        other public (OU)  + other unclassified sources (OT) +
+*        worker's comp (WC) + Veteran's (VA)
+
+
 * Office-based visits ---------------------------------------------------------
-import sasxport "h188g.ssp", clear
+import sasxport5 "h188g.ssp", clear
 
 * aggregate payment sources
 gen pr = obpv16x + obtr16x
@@ -58,18 +68,16 @@ merge m:1 dupersid using FYC2016_temp
 * Define survey design and calculate estimates ----------------------
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
-* Total number of events
+* Total number of events, by event type
 svy: total count, subpop(if obxp16x != .)                // office visits
 svy: total count, subpop(if obxp16x != . & seedoc == 1)  // office phys. visits
 
-* Mean expenditure per event, by source of payment
+* Mean expenditure per event, by event type and source of payment
 svy: mean obsf16x pr obmr16 obmd16x oz, subpop(if obxp16x != .)
 svy: mean obsf16x pr obmr16 obmd16x oz, subpop(if obxp16x != . & seedoc == 1)
 
 
-* Mean events per person --------------------------------------------
-
-* Aggregate to person-level
+* Mean events per person (first, aggregate to person-level)
 
 gen phys_count = count*(seedoc == 1)
 
@@ -86,7 +94,7 @@ svy: mean n_events n_phys_events
 
 
 * Outpatient events -----------------------------------------------------------
-import sasxport "h188f.ssp", clear
+import sasxport5 "h188f.ssp", clear
 
 * aggregate payment sources
 gen pr_fac = opfpv16x + opftr16x
@@ -113,11 +121,11 @@ merge m:1 dupersid using FYC2016_temp
 * Define survey design and calculate estimates ----------------------
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
-* Total number of events
+* Total number of events, by event type
 svy: total count, subpop(if opxp16x != .)               // OP visits
 svy: total count, subpop(if opxp16x != . & seedoc == 1) // OP phys. visits
 
-* Mean expenditure per event, by source of payment
+* Mean expenditure per event, by event type and source of payment
 svy: mean sf pr mr md oz, subpop(if opxp16x != .)
 svy: mean sf pr mr md oz, subpop(if opxp16x != . & seedoc == 1)
 

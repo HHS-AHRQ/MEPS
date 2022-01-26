@@ -1,18 +1,17 @@
 * -----------------------------------------------------------------------------
-* Use, expenditures, and population
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+*
+* Use, expenditures, and population, 2016
 *
 * Expenditures by race and sex
+*  - Number of people
+*  - Percent of population with an expense
+*  - Total expenditures
+*  - Mean expenditure per person
+*  - Mean expenditure per person with expense
+*  - Median expenditure per person with expense
 *
-* Example Stata code to replicate the following estimates in the MEPS-HC summary
-*  tables, by race and sex:
-*  - number of people
-*  - percent of population with an expense
-*  - total expenditures
-*  - mean expenditure per person
-*  - mean expenditure per person with expense
-*  - median expenditure per person with expense
-*
-* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
+* Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -20,7 +19,7 @@ set more off
 
 * Load FYC file ---------------------------------------------------------------
 
-import sasxport "C:\MEPS\h192.ssp"
+import sasxport5 "C:\MEPS\h192.ssp"
 
 
 * Define variables ------------------------------------------------------------
@@ -72,12 +71,12 @@ svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleun
 quietly svy: total persons, over(sex race)
 estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
 
+* Percent of population with expense
+svy: mean has_exp,  over(sex race)
+
 * Total expenditures
 quietly svy: total totexp16, over(sex race)
 estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
-
-* Percent of population with expense
-svy: mean has_exp,  over(sex race)
 
 * Mean expenditure per person
 svy: mean totexp16, over(sex race)
@@ -88,4 +87,7 @@ svy, subpop(has_exp): mean totexp16, over(sex race)
 * Median expenditure per person with expense -- using the 'epctile' package
 *  Note: Estimates may vary in R, SAS, and Stata, due to different methods
 *        of estimating survey quantiles
+
+net install epctile.pkg
+
 epctile totexp16, p(50) over(sex race) subpop(has_exp) svy

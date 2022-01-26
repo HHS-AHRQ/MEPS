@@ -86,5 +86,5 @@
                   by = ~TC1name, FUN = svytotal, design = TC1dsgn)
 
   totals %>% select(persons, se.persons)         # Number of people with purchase
-  totals %>% select(n_purchases, se.n_purchases) # Number of purchases
+  totals %>% select(n_purchases, se.n_purchases) # Total purchases
   totals %>% select(pers_RXXP, se.pers_RXXP)     # Total expenditures

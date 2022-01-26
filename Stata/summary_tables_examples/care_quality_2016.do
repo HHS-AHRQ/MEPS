@@ -1,11 +1,11 @@
 * -----------------------------------------------------------------------------
-* Accessibility and quality of care, 2016
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 *
-* Self-administered questionnaire (SAQ):
-*  Ability to schedule a routine appointment (adults)
+* Accessibility and quality of care: Quality of Care, 2016
 *
-* Example Stata code to replicate number and percentage of adults by their ability
-*  to schedule a routine appointment, by insurance coverage
+* Self-administered questionnaire (SAQ): 
+*  - Number/percent of adults by ability to schedule a routine appointment
+*  - By insurance coverage status
 *
 * Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
@@ -15,20 +15,20 @@ set more off
 
 * Load FYC file ---------------------------------------------------------------
 
-import sasxport "C:\MEPS\h192.ssp", clear
+import sasxport5 "C:\MEPS\h192.ssp", clear
 
 
 * Define variables ------------------------------------------------------------
 
 * Ability to schedule a routine appt. (adults)
-recode adrtww42  -9/-7 = -9  1/2 = 1, generate(adult_routine)
+recode adrtww42 -9/-7=99 -1=91 1/2=1, generate(adult_routine)
 
 label define frequency ///
 	 4 "Always" ///
 	 3 "Usually" ///
 	 1 "Sometimes/Never" ///
-	-9 "Don't know/Non-response" ///
-	-1 "Inapplicable"
+	99 "Don't know/Non-response" ///
+	91 "Inapplicable"
 
 label values adult_routine frequency
 
@@ -65,12 +65,17 @@ label values insurance insurance
 
 
 * Define survey design and calculate estimates --------------------------------
-*  - use SAQWT16F weight variable
+*  - use SAQWT16F weight variable, since outcome variable comes from SAQ
 *  - subset to adults who made an appointment
 
 gen domain = (adrtcr42 == 1 & agelast >= 18)
 
 svyset [pweight = saqwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
-svy, subpop(domain): tab adult_routine insurance, count se format(%12.0fc) // number
+
+* Ability to schedule a routine appointment (adults), by insurance coverage
+svy, subpop(domain): tab insurance adult_routine, count se     /// number
+	stubw(30) format(%12.0fc)
+	
 svy, subpop(domain): proportion adult_routine, over(insurance) // percent
+

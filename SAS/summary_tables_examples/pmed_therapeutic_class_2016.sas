@@ -86,9 +86,9 @@ proc print data = out noobs label;
 	var TC1 Sum StdDev;
 run;
 
-/* Number of purchases */
+/* Total purchases */
 proc print data = out noobs label;
-	label Sum = "Number of purchases" ;
+	label Sum = "Total purchases" ;
 	where VarName = "n_purchases";
 	var TC1 Sum StdDev;
 run;

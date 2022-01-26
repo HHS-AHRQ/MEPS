@@ -1,26 +1,24 @@
 * -----------------------------------------------------------------------------
-* Medical Conditions, 2015
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
 *
-* Note: Starting in 2016, conditions were coded to ICD-10 codes (ICD-9 codes
-*  were used from 1996-2015). CCS codes are not on the medical conditions PUFs
-*  for 2016 or 2017
-*
-* Example Stata code to replicate the following estimates in the MEPS-HC summary
-*  tables by medical condition:
+* Medical Conditions, 2015:
 *  - Number of people with care
 *  - Number of events
 *  - Total expenditures
 *  - Mean expenditure per person
 *
+* Note: Starting in 2016, conditions were converted from ICD-9 and CCS codes
+*  to ICD-10 and CCSR codes 
+*
 * Input files:
-* 	- C:\MEPS\h178a (2015 RX event file)
-* 	- C:\MEPS\h178d (2015 IP event file)
-* 	- C:\MEPS\h178e (2015 ER event file)
-* 	- C:\MEPS\h178f (2015 OP event file)
-* 	- C:\MEPS\h178g (2015 OB event file)
-* 	- C:\MEPS\h178h (2015 HH event file)
-* 	- C:\MEPS\h178if1 (2015 CLNK: Condition-event link file)
-* 	- C:\MEPS\h180 (2015 Conditions file)
+* 	- C:/MEPS/h178a.ssp (2015 RX event file)
+* 	- C:/MEPS/h178d.ssp (2015 IP event file)
+* 	- C:/MEPS/h178e.ssp (2015 ER event file)
+* 	- C:/MEPS/h178f.ssp (2015 OP event file)
+* 	- C:/MEPS/h178g.ssp (2015 OB event file)
+* 	- C:/MEPS/h178h.ssp (2015 HH event file)
+* 	- C:/MEPS/h178if1.ssp (2015 CLNK: Condition-event link file)
+* 	- C:/MEPS/h180.ssp    (2015 Conditions file)
 * -----------------------------------------------------------------------------
 
 clear
@@ -33,7 +31,7 @@ cd "C:\MEPS"
 global keep_vars evntidx dupersid xpx varstr varpsu perwt15f
 
 * RX - count number of fills per event
-import sasxport "h178a.ssp", clear
+import sasxport5 "h178a.ssp", clear
 collapse  (sum) xpx = rxxp15x 	(count) n_fills = rxxp15x, ///
 	by(dupersid linkidx varstr varpsu perwt15f)
 rename linkidx evntidx
@@ -41,35 +39,35 @@ gen data = "RX"
 save "RX2015_tmp.dta", replace
 
 * IP
-import sasxport "h178d.ssp", clear
+import sasxport5 "h178d.ssp", clear
 rename ipxp15x xpx
 keep $keep_vars
 gen data = "IP"
 save "IP2015_tmp.dta", replace
 
 * ER
-import sasxport "h178e.ssp", clear
+import sasxport5 "h178e.ssp", clear
 rename erxp15x xpx
 keep $keep_vars
 gen data = "ER"
 save "ER2015_tmp.dta", replace
 
 * OP
-import sasxport "h178f.ssp", clear
+import sasxport5 "h178f.ssp", clear
 rename opxp15x xpx
 keep $keep_vars
 gen data = "OP"
 save "OP2015_tmp.dta", replace
 
 * OB
-import sasxport "h178g.ssp", clear
+import sasxport5 "h178g.ssp", clear
 rename obxp15x xpx
 keep $keep_vars
 gen data = "OB"
 save "OB2015_tmp.dta", replace
 
 * HH
-import sasxport "h178h.ssp", clear
+import sasxport5 "h178h.ssp", clear
 rename hhxp15x xpx
 keep $keep_vars
 gen data = "HH"
@@ -87,12 +85,12 @@ save "stacked_events.dta", replace
 * Load and merge conditions and CLNK file -------------------------------------
 
 * Event-condition linking (CLNK) file
-import sasxport "h178if1.ssp", clear
+import sasxport5 "h178if1.ssp", clear
 keep dupersid condidx evntidx
 save "CLNK2015_tmp.dta", replace
 
 * Conditions file -- load and merge with CLNK file
-import sasxport "h180.ssp", clear
+import sasxport5 "h180.ssp", clear
 keep dupersid condidx cccodex
 merge 1:m condidx dupersid using CLNK2015_tmp
 
@@ -200,6 +198,7 @@ collapse ///
 	by(dupersid varstr varpsu condition)
 
 gen persons = 1
+
 
 * Define survey design and calculate estimates --------------------------------
 

@@ -116,7 +116,7 @@
 
   totals <-
     svytotal(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
-               OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys.
+               OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys. visits
                OPTSLF16 + OPTPTR   + OPTMCR16 + OPTMCD16 + OPTOTZ +  # OP visits
                OPTSLF_p + OPTPTR_p + OPTMCR_p + OPTMCD_p + OPTOTZ_p, # OP phys. visits
              design = FYCdsgn)
@@ -128,7 +128,7 @@
 
   means <-
     svymean(~OBVSLF16 + OBVPTR + OBVMCR16 + OBVMCD16 + OBVOTZ +     # OB visits
-              OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys.
+              OBDSLF16 + OBDPTR + OBDMCR16 + OBDMCD16 + OBDOTZ +    # OB phys. visits
               OPTSLF16 + OPTPTR   + OPTMCR16 + OPTMCD16 + OPTOTZ +  # OP visits
               OPTSLF_p + OPTPTR_p + OPTMCR_p + OPTMCD_p + OPTOTZ_p, # OP phys. visits
             design = FYCdsgn)

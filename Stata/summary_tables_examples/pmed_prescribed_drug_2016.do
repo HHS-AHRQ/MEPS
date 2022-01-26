@@ -1,26 +1,25 @@
 * -----------------------------------------------------------------------------
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+*
 * Prescribed drugs, 2016
 *
-* Purchases and expenditures by generic drug name
-*
-* Example Stata code to replicate the following estimates in the MEPS-HC summary
-*  tables by generic drug name:
+* Purchases and expenditures by generic drug name (RXDRGNAM)
 *  - Number of people with purchase
 *  - Total purchases
 *  - Total expenditures
 *
-* Input file: C:\MEPS\h188a.ssp (2016 RX event file)
+* Input file: C:/MEPS/h188a.ssp (2016 RX event file)
 * -----------------------------------------------------------------------------
 
 clear
 set more off
 
 * Load datasets ---------------------------------------------------------------
-* For 1996-2013, need to merge RX event file with Multum Lexicon Addendum
-*  file to get therapeutic class categories and generic drug names
+* For 1996-2013, need to merge with RX Multum Lexicon Addendum files to get
+*  therapeutic class categories and generic drug names
 
 * Load RX file
-import sasxport "C:\MEPS\h188a.ssp", clear
+import sasxport5 "C:\MEPS\h188a.ssp", clear
 
 
 * Aggregate to person-level ---------------------------------------------------
@@ -37,13 +36,15 @@ collapse ///
 
 gen persons = 1
 
+
+* Define survey design and calculate estimates --------------------------------
+
+
 * Define domain to limit to groups with at least 60 people (makes svy faster)
 egen n_people = count(persons), by(rx_factor)
 gen domain = (n_people >= 60)
 tabstat n_people, by(domain) statistics(min, max, n) // QC
 
-
-* Define survey design and calculate estimates --------------------------------
 
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
@@ -51,7 +52,7 @@ svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleun
 quietly svy, subpop(domain): total persons, over(rx_factor)
 estimates table,  b(%20.0fc) se(%20.0fc) varwidth(30)
 
-* Number of purchases
+* Total purchases
 quietly svy, subpop(domain): total n_purchases, over(rx_factor)
 estimates table,  b(%20.0fc) se(%20.0fc) varwidth(30)
 

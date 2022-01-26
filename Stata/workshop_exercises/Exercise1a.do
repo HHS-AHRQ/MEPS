@@ -22,7 +22,7 @@ cd \\programs.ahrq.local\programs\MEPS\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2018_
 */
 
 /* read in data from 2016 consolidated data file (hc-192) */
-import sasxport "C:\MEPS\h192.ssp"
+import sasxport5 "C:\MEPS\h192.ssp"
 keep totexp16 age16x age42x age31x varstr varpsu perwt16f
 
 /* define expenditure variables  */

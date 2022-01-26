@@ -1,13 +1,12 @@
 * -----------------------------------------------------------------------------
-* Use, expenditures, and population
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+*
+* Use, expenditures, and population, 2016
 *
 * Expenditures by event type and source of payment (SOP)
-*
-* Example Stata code to replicate the following estimates in the MEPS-HC summary
-*  tables, by source of payment (SOP), for selected event types:
-*  - total expenditures
-*  - mean expenditure per person
-*  - mean out-of-pocket (SLF) payment per person with a SLF payment
+*  - Total expenditures
+*  - Mean expenditure per person
+*  - Mean out-of-pocket (SLF) payment per person with an out-of-pocket expense
 *
 * Selected event types:
 *  - Office-based medical visits (OBV)
@@ -15,14 +14,7 @@
 *  - Outpatient visits (OPT)
 *  - Outpatient physician visits (OPV)
 *
-* Sources of payment (SOPs):
-*  - Out-of-pocket (SLF)
-*  - Medicare (MCR)
-*  - Medicaid (MCD)
-*  - Private insurance, including TRICARE (PTR)
-*  - Other (OTH)
-*
-* Input file: C:\MEPS\h192.ssp (2016 full-year consolidated)
+* Input file: C:/MEPS/h192.ssp (2016 full-year consolidated)
 * -----------------------------------------------------------------------------
 
 clear
@@ -30,13 +22,23 @@ set more off
 
 * Load FYC file ---------------------------------------------------------------
 
-import sasxport "C:\MEPS\h192.ssp", clear
+import sasxport5 "C:\MEPS\h192.ssp", clear
 
 
 * Aggregate payment sources ---------------------------------------------------
-*  For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+*
+*  Notes:
+*   - For 1996-1999: TRICARE label is CHM (changed to TRI in 2000)
+*
+*   - For 1996-2006: combined facility + SBD variables for hospital-type events
+*      are not on PUF
+*
+*   - Starting in 2019, 'Other public' (OPU) and 'Other private' (OPR) are  
+*      dropped from the files 
+*
 *
 *  PTR = Private (PRV) + TRICARE (TRI)
+*
 *  OTZ = other federal (OFD)  + State/local (STL) + other private (OPR) +
 *         other public (OPU)  + other unclassified sources (OSR) +
 *         worker's comp (WCP) + Veteran's (VA)
@@ -74,27 +76,37 @@ gen optotz_p = opvotz   + opsotz   // other sources of payment
 
 
 * Define survey design and calculate estimates --------------------------------
+*
+* Sources of payment (SOP) abbreviations:
+*  - SLF: Out-of-pocket
+*  - PTR: Private insurance, including TRICARE (PTR)
+*  - MCR: Medicare 
+*  - MCD: Medicaid
+*  - OTZ: Other 
 
 svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleunit(missing)
 
-* Total expenditures
+* Total expenditures, by event type and source of payment
 quietly svy: total ///
-	obvslf16 obvptr   obvmcr16 obvmcd16 obvotz   /* office-based visits       */ ///
-	obdslf16 obdptr   obdmcr16 obdmcd16 obdotz   /* office-based phys. visits */ ///
-	optslf16 optptr   optmcr16 optmcd16 optotz   /* OP visits                 */ ///
-	optslf_p optptr_p optmcr_p optmcd_p optotz_p /* OP phys. visits          */
+	obvslf16 obvptr   obvmcr16 obvmcd16 obvotz   /* OB visits       */ ///
+	obdslf16 obdptr   obdmcr16 obdmcd16 obdotz   /* OB phys. visits */ ///
+	optslf16 optptr   optmcr16 optmcd16 optotz   /* OP visits       */ ///
+	optslf_p optptr_p optmcr_p optmcd_p optotz_p /* OP phys. visits */
 
 estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
 
-* Mean expenditure per person
+* Mean expenditure per person, by event type and source of payment
 svy: mean ///
-	obvslf16 obvptr   obvmcr16 obvmcd16 obvotz   /* office-based visits       */ ///
-	obdslf16 obdptr   obdmcr16 obdmcd16 obdotz   /* office-based phys. visits */ ///
-	optslf16 optptr   optmcr16 optmcd16 optotz   /* OP visits                 */ ///
-	optslf_p optptr_p optmcr_p optmcd_p optotz_p /* OP phys. visits           */
+	obvslf16 obvptr   obvmcr16 obvmcd16 obvotz   /* OB visits        */ ///
+	obdslf16 obdptr   obdmcr16 obdmcd16 obdotz   /* OB phys. visits  */ ///
+	optslf16 optptr   optmcr16 optmcd16 optotz   /* OP visits        */ ///
+	optslf_p optptr_p optmcr_p optmcd_p optotz_p /* OP phys. visits  */
 
-* Mean out-of-pocket expense per person with an out-of-pocket expense
+* Mean expenditure per person with expense
+*  - Mean out-of-pocket expense per person with an out-of-pocket expense
+
 svy, subpop(if obvslf16 > 0): mean obvslf16 // office-based visits
 svy, subpop(if obdslf16 > 0): mean obdslf16 // office-based phys. visits
+
 svy, subpop(if optslf16 > 0): mean optslf16 // OP visits
 svy, subpop(if optslf_p > 0): mean optslf_p // OP phys. visits

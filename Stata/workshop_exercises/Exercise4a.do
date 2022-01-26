@@ -28,7 +28,7 @@ cd \\programs.ahrq.local\programs\MEPS\AHRQ4_CY2\B_CFACT\BJ001DVK\Workshop_2018_
 */
 
 // rename year specific variables prior to combining files
-import sasxport "C:\MEPS\h181.ssp"
+import sasxport5 "C:\MEPS\h181.ssp"
 keep dupersid inscov15 perwt15f varstr varpsu povcat15 agelast totslf15
 
 rename inscov15 inscov
@@ -38,7 +38,7 @@ rename totslf15 totslf
 tempfile yr1
 save "`yr1'"
 
-import sasxport "C:\MEPS\h192.ssp"
+import sasxport5 "C:\MEPS\h192.ssp"
 keep dupersid inscov16 perwt16f varstr varpsu povcat16 agelast totslf16
 
 rename inscov16 inscov

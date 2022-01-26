@@ -1,32 +1,34 @@
 * -----------------------------------------------------------------------------
+* Example code to replicate estimates from the MEPS-HC Data Tools summary tables
+*
 * Prescribed drugs, 2016
 *
-* Purchases and expenditures by Multum therapeutic class name
-*
-* Example Stata code to replicate the following estimates in the MEPS-HC summary
-*  tables by Multum therapeutic class:
+* Purchases and expenditures by Multum therapeutic class name (TC1)
 *  - Number of people with purchase
 *  - Total purchases
 *  - Total expenditures
 *
-* Input file: C:\MEPS\h188a.ssp (2016 RX event file)
+* Input file: C:/MEPS/h188a.ssp (2016 RX event file)
 * -----------------------------------------------------------------------------
 
 clear
 set more off
 
 * Load RX file ----------------------------------------------------------------
-* For 1996-2013, need to merge RX event file with Multum Lexicon Addendum
-*  file to get therapeutic class categories and generic drug names
+* For 1996-2013, need to merge with RX Multum Lexicon Addendum files to get
+*  therapeutic class categories and generic drug names
 
-import sasxport "C:\MEPS\h188a.ssp", clear
+import sasxport5 "C:\MEPS\h188a.ssp", clear
 
 
 * Define labels for therapeutic classes ---------------------------------------
 
+* Recode negative values (not allowed for factors in svy statement)
+recode tc1 -9=999 -1=991 
+
  label define TC1name ///
-	 -9 "Not_ascertained" ///
-	 -1 "Inapplicable" ///
+	999 "Not_ascertained" ///
+	991 "Inapplicable" ///
 	  1 "Anti-infectives" ///
 	 19 "Antihyperlipidemic_agents" ///
 	 20 "Antineoplastics" ///
@@ -69,7 +71,7 @@ svyset [pweight = perwt16f], strata(varstr) psu(varpsu) vce(linearized) singleun
 quietly svy, over(tc1): total persons
 estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
 
-* Number of purchases
+* Total purchases
 quietly svy, over(tc1): total n_purchases
 estimates table, b(%20.0fc) se(%20.0fc) varwidth(30)
 
