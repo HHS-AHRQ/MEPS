@@ -187,6 +187,6 @@ Number and percent of people who did not receive treatment because they couldn't
 <br>
 [use_expenditures_2016.do](summary_tables_examples/use_expenditures_2016.do): Expenditures for office-based and outpatient visits, by source of payment, 2016
 <br>
-[use_expenditures_2019.do](summary_tables_examples/use_expenditures_2016.do): Mean expenditure per person, by event type and source of payment, 2019.
+[use_expenditures_2019.do](summary_tables_examples/use_expenditures_2019.do): Mean expenditure per person, by event type and source of payment, 2019.
 <br>
 [use_race_sex_2016.do](summary_tables_examples/use_race_sex_2016.do): Utilization and expenditures by race and sex, 2016
