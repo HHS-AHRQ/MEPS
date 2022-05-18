@@ -41,7 +41,7 @@ To load and analyze MEPS data in R, additional packages are needed. Packages are
 
 # Loading MEPS data
 
-For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. 
+For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. 
 
 Different functions are needed for importing these various file formats into R. The most versatile method is to use the `read_MEPS` function from the [`MEPS` package](https://github.com/e-mitchell/meps_r_pkg)</b>, which was created to facilitate loading and manipulation of MEPS PUFs. For users that prefer not to use the MEPS R package to load MEPS public use files, care must be taken to ensure that the correct file format is being imported in accordance with the data year, as detailed in the sections below. 
 
@@ -53,7 +53,7 @@ The following table summarizes the recommended functions and R packages needed t
 | ASCII (.dat)       | `readr`   | `read_fwf`   | `read_fwf("C:/MEPS/h206b.dat", col_positions,  col_types)`      |
 | Excel (.xlsx)      | `readxl`  | `read_excel` | `read_excel("C:/MEPS/h206b.xlsx")`|
 | SAS V9 (.sas7bdat) | `haven`   | `read_sas`   | `read_sas("C:/MEPS/h206b.sas7bdat")` |
-| SAS XPORT (.ssp)   | `foreign` | `read.xport` | `read.xport("C:/MEPS/h197b.ssp")` |
+| SAS XPORT (.ssp)   | `foreign` | `read.xport` | `read.xport("C:/MEPS/h188b.ssp")` |
 | SAS CPORT (.ssp)   | (none)       | N/A       | N/A
 | Stata (.dta)       | `haven`   | `read_dta`   | `read_dta("C:/MEPS/h206b.dta")` |
 

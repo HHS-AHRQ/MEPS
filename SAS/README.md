@@ -13,14 +13,9 @@
 
 # Loading MEPS data
 
-For data years 2018 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
+For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
-The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2018 and later (as well as the 2017 FYC file), and the SAS transport (.ssp) format for data years 1996-2017, as summarized in the following table:
-
-|Recommended Format| 1996-2016 |	2017 |	2018 and later |
-| --- | :----: | :---: | :---: |
-|Full-Year Consolidated (FYC) Files | SAS transport (.ssp) |	SAS V9 (.sas7bdat)	 | SAS V9 (.sas7bdat) |
-|Other Files |	SAS transport (.ssp)	| SAS transport (.ssp)|	SAS V9 (.sas7bdat) |
+The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2017 and later, and the SAS transport (.ssp) format for data years 1996-2016.
 
 
 ## Data years 2017 and later: SAS V9 files

@@ -1,36 +1,37 @@
-Year,Old Panel,New Panel,PIT,FYC,Conditions,PMED Events,Events,Jobs,PRPL,Longitudinal,CLNK,RXLK,Multum,PSAQ,MOS,FS
-1996,-,1,h01,h12,h06r,h10a,h10*f1,h07,h24,-,h10if1,h10if2,h68f1,-,-,-
-1997,1,2,h05,h20,h18,h16a,h16*f1,h19,h47f1,h23,h16if1,h16if2,h68f2,-,-,-
-1998,2,3,h09,h28,h27,h26a,h26*f1,h25,h47f2,h35,h26if1,h26if2,h68f3,-,-,-
-1999,3,4,h13,h38,h37,h33a,h33*,h32,h47f3,h48,h33if1,h33if2,h68f4,-,-,-
-2000,4,5,h22,h50,h52,h51a,h51*,h40,h47f4,h58,h51if1,h51if2,h68f5,-,-,-
-2001,5,6,h34,h60,h61,h59a,h59*,h56,h57,h65,h59if1,h59if2,h68f6,-,-,-
-2002,6,7,h53,h70,h69,h67a,h67*,h63,h66,h71,h67if1,h67if2,h68f7,-,-,-
-2003,7,8,h64,h79,h78,h77a,h77*,h74,h76,h80,h77if1,h77if2,h68f8,-,-,-
-2004,8,9,h75,h89,h87,h85a,h85*,h83,h88,h86,h85if1,h85if2,h68f9,-,-,-
-2005,9,10,h84,h97,h96,h94a,h94*,h91,h95,h98,h94if1,h94if2,h68f10,-,-,-
-2006,10,11,h93,h105,h104,h102a,h102*,h100,h103,h106,h102if1,h102if2,h68f11,-,-,-
-2007,11,12,h101,h113,h112,h110a,h110*,h108,h111,h114,h110if1,h110if2,h68f12,-,-,-
-2008,12,13,h109,h121,h120,h118a,h118*,h116,h119,h122,h118if1,h118if2,h68f13,-,-,-
-2009,13,14,h117,h129,h128,h126a,h126*,h124,h127,h130,h126if1,h126if2,h68f14,-,-,-
-2010,14,15,h125,h138,h137,h135a,h135*,h133,h136,h139,h135if1,h135if2,h68f15,-,-,-
-2011,15,16,h134,h147,h146,h144a,h144*,h142,h145,h148,h144if1,h144if2,h68f16,-,-,-
-2012,16,17,h143,h155,h154,h152a,h152*,h150,h153,h156,h152if1,h152if2,h68f17,-,-,-
-2013,17,18,h151,h163,h162,h160a,h160*,h158,h161,h164,h160if1,h160if2,h68f18,-,-,-
-2014,18,19,h159,h171,h170,h168a,h168*,h166,h169,h172,h168if1,h168if2,-,h173,-,-
-2015,19,20,h167,h181,h180,h178a,h178*,h176,h179,h183,h178if1,h178if2,-,-,h182,-
-2016,20,21,h177,h192,h190,h188a,h188*,h185,h191,h193,h188if1,h188if2,-,-,h187,h189
-2017,21,22,h186,h201,h199,h197a,h197*,h195,h200,h202,h197if1,h197if2,-,-,-,h198
-2018,22,23,h196,h209,h207,h206a,h206*,h203,h208,h210,h206if1,h206if2,-,-,-,-
-2019,23,24,h205,h216,h214,h213a,h213*,h211,h215,h217,h213if1,h213if2,-,-,-,-
-,,,,,,,,,,,,,,,,
-* Event letters:,,Abbrev: ,,,,,,,,,,,,,,
-b = Dental,,FYC , Full-Year-Consolidated,,,,,,,,,,,,,
-c = Other Medical,,PIT , Point-in-time,,,,,,,,,,,,,
-d = Inpatient,,PRPL , Person-Round-Plan,,,,,,,,,,,,,
-e = ER,,PMED, Prescription Medicines,,,,,,,,,,,,,
-f = Outpatient,,CLNK , Condition Event Link file,,,,,,,,,,,,,
-g = Office-based,,RXLK , Prescribed Medicines Link file,,,,,,,,,,,,,
-h = Home health,,MOS,Medical Organizations Survey,,,,,,,,,,,,,
-,,FS,Food Security file,,,,,,,,,,,,,
-,,PSAQ,Preventive Care Self-Administered Questionnaire,,,,,,,,,,,,,
+Year,Panels,PIT,FYC,Conditions,PMED Events,Events,Jobs,PRPL,Longitudinal,CLNK,RXLK,Multum,PSAQ,MOS,FS
+1996,1,h01,h12,h06r,h10a,h10*f1,h07,h24,-,h10if1,h10if2,h68f1,-,-,-
+1997,"1, 2",h05,h20,h18,h16a,h16*f1,h19,h47f1,h23,h16if1,h16if2,h68f2,-,-,-
+1998,"2, 3",h09,h28,h27,h26a,h26*f1,h25,h47f2,h35,h26if1,h26if2,h68f3,-,-,-
+1999,"3, 4",h13,h38,h37,h33a,h33*,h32,h47f3,h48,h33if1,h33if2,h68f4,-,-,-
+2000,"4, 5",h22,h50,h52,h51a,h51*,h40,h47f4,h58,h51if1,h51if2,h68f5,-,-,-
+2001,"5, 6",h34,h60,h61,h59a,h59*,h56,h57,h65,h59if1,h59if2,h68f6,-,-,-
+2002,"6, 7",h53,h70,h69,h67a,h67*,h63,h66,h71,h67if1,h67if2,h68f7,-,-,-
+2003,"7, 8",h64,h79,h78,h77a,h77*,h74,h76,h80,h77if1,h77if2,h68f8,-,-,-
+2004,"8, 9",h75,h89,h87,h85a,h85*,h83,h88,h86,h85if1,h85if2,h68f9,-,-,-
+2005,"9, 10",h84,h97,h96,h94a,h94*,h91,h95,h98,h94if1,h94if2,h68f10,-,-,-
+2006,"10, 11",h93,h105,h104,h102a,h102*,h100,h103,h106,h102if1,h102if2,h68f11,-,-,-
+2007,"11, 12",h101,h113,h112,h110a,h110*,h108,h111,h114,h110if1,h110if2,h68f12,-,-,-
+2008,"12, 13",h109,h121,h120,h118a,h118*,h116,h119,h122,h118if1,h118if2,h68f13,-,-,-
+2009,"13, 14",h117,h129,h128,h126a,h126*,h124,h127,h130,h126if1,h126if2,h68f14,-,-,-
+2010,"14, 15",h125,h138,h137,h135a,h135*,h133,h136,h139,h135if1,h135if2,h68f15,-,-,-
+2011,"15, 16",h134,h147,h146,h144a,h144*,h142,h145,h148,h144if1,h144if2,h68f16,-,-,-
+2012,"16, 17",h143,h155,h154,h152a,h152*,h150,h153,h156,h152if1,h152if2,h68f17,-,-,-
+2013,"17, 18",h151,h163,h162,h160a,h160*,h158,h161,h164,h160if1,h160if2,h68f18,-,-,-
+2014,"18, 19",h159,h171,h170,h168a,h168*,h166,h169,h172,h168if1,h168if2,-,h173,-,-
+2015,"19, 20",h167,h181,h180,h178a,h178*,h176,h179,h183,h178if1,h178if2,-,-,h182,-
+2016,"20, 21",h177,h192,h190,h188a,h188*,h185,h191,h193,h188if1,h188if2,-,-,h187,h189
+2017,"21, 22",h186,h201,h199,h197a,h197*,h195,h200,h202,h197if1,h197if2,-,-,-,h198
+2018,"22, 23",h196,h209,h207,h206a,h206*,h203,h208,h210,h206if1,h206if2,-,-,-,-
+2019,"23, 24",h205,h216,h214,h213a,h213*,h211,h215,h217,h213if1,h213if2,-,-,-,-
+2020,"23, 24, 25",,,,,,h218,,,,,,,,
+,,,,,,,,,,,,,,,
+* Event letters:,Abbrev: ,,,,,,,,,,,,,,
+b = Dental,FYC , Full-Year-Consolidated,,,,,,,,,,,,,
+c = Other Medical,PIT , Point-in-time,,,,,,,,,,,,,
+d = Inpatient,PRPL , Person-Round-Plan,,,,,,,,,,,,,
+e = ER,PMED, Prescription Medicines,,,,,,,,,,,,,
+f = Outpatient,CLNK , Condition Event Link file,,,,,,,,,,,,,
+g = Office-based,RXLK , Prescribed Medicines Link file,,,,,,,,,,,,,
+h = Home health,MOS,Medical Organizations Survey,,,,,,,,,,,,,
+,FS,Food Security file,,,,,,,,,,,,,
+,PSAQ,Preventive Care Self-Administered Questionnaire,,,,,,,,,,,,,
