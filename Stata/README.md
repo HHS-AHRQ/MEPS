@@ -132,7 +132,9 @@ The following example codes from previous MEPS workshops are provided in the [wo
 [Exercise4b.do](workshop_exercises/Exercise4b.do): Pooling longitudinal files, panels 17-19
 <br>
 [Exercise4c.do](workshop_exercises/Exercise4c.do): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
-
+<br>
+[Exercise4d.do](workshop_exercises/Exercise4d.do): Pooling MEPS FYC files, 2017-2019: People with joint pain, using [Pooled Linkage Variance file](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-036) for correct standard error calculation (required when pooling before and after 2019)
+<br>
 ### 5. Constructing variables <!-- omit in toc -->
 [Exercise5a.do](workshop_exercises/Exercise5a.do): Constructing family-level variables from person-level data, 2015
 <br>

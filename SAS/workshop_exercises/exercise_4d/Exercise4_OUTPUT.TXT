@@ -1,0 +1,56 @@
+Pooled estiamtes for MEPS 2017-19                                                                                                  1
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 282
+Number of Clusters                               658
+Number of Observations                         90853
+Number of Observations Used                    87779
+Number of Obs with Nonpositive Weights          3074
+Sum of Weights                             326168163
+Pooled estiamtes for MEPS 2017-19                                                                                                  2
+
+The SURVEYMEANS Procedure
+
+                                                  Statistics for spop Domains
+ 
+                                                                                     Std Error                       Std Error
+    spop    Variable      Level                              N            Mean         of Mean             Sum          of Sum
+------------------------------------------------------------------------------------------------------------------------------
+       1    joint_pain    Yes                            30142        0.445711        0.004058       111557524         2848957
+                          No                             35606        0.554289        0.004058       138733792         3858374
+------------------------------------------------------------------------------------------------------------------------------
+Pooled estiamtes for MEPS 2017-19                                                                                                  3
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 282
+Number of Clusters                               658
+Number of Observations                         90853
+Number of Observations Used                    87779
+Number of Obs with Nonpositive Weights          3074
+Sum of Weights                             326168163
+Pooled estiamtes for MEPS 2017-19                                                                                                  4
+
+The SURVEYMEANS Procedure
+
+                                               Statistics for spop*joint_pain Domains
+ 
+                                                                                               Std Error                   Std Error
+    spop  joint_pain            Variable  Label                            N          Mean       of Mean           Sum        of Sum
+------------------------------------------------------------------------------------------------------------------------------------
+       1  Yes                   totexp    TOTAL HEALTH CARE            30142         10436    169.936165  1.1642509E12   35106311082
+                                          EXPENSES 2017-19                                                                          
+                                totslf    AMOUNT PAID BY               30142   1230.224572     27.269626  137240807263    4832434502
+                                          SELF/FAMILY                                                                               
+                                          2017-2019                                                                                 
+          No                    totexp    TOTAL HEALTH CARE            35606   4071.988740     95.694551  564922440824   19678011811
+                                          EXPENSES 2017-19                                                                          
+                                totslf    AMOUNT PAID BY               35606    633.539049     16.974409   87893274935    3481122830
+                                          SELF/FAMILY                                                                               
+                                          2017-2019                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------
