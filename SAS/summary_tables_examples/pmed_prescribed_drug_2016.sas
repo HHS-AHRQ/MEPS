@@ -27,7 +27,6 @@ run;
 /* Remove missing drug names */
 data RX;
 	set h188a;
-	where RXNDC ne "-9" and RXDRGNAM ne "-9";
 run;
 
 proc sort data = RX;
