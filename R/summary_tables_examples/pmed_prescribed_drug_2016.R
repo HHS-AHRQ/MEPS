@@ -37,7 +37,6 @@
 # Aggregate to person-level ---------------------------------------------------
 
   RX_pers <- RX %>%
-    filter(RXNDC != "-9" & RXDRGNAM != "-9") %>%  # Remove missing drug names
     group_by(DUPERSID, VARSTR, VARPSU, RXDRGNAM) %>%
     summarise(
       PERWT16F = mean(PERWT16F),
