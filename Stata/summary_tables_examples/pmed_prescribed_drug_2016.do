@@ -24,8 +24,6 @@ import sasxport5 "C:\MEPS\h188a.ssp", clear
 
 * Aggregate to person-level ---------------------------------------------------
 
-keep if rxndc != "-9" & rxdrgnam != "-9" // Remove missing drug names
-
 encode rxdrgnam, generate(rx_factor) // convert rxdrgnam to factor
 
 collapse ///
