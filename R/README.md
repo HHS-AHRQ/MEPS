@@ -280,7 +280,7 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 ### 4. Regression <!-- omit in toc -->
 [exercise_4a.R](workshop_exercises/exercise_4a.R): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
 <br>
-[exercise_4b.R](workshop_exercises/exercise_4b.R): Logistic regression for persons that delayed medical care because of COVID
+[exercise_4b.R](workshop_exercises/exercise_4b.R): Logistic regression for persons that delayed medical care because of COVID, 2020
 <br>
 
 ### 5. Plots <!-- omit in toc -->

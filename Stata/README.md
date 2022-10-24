@@ -143,7 +143,7 @@ The following example codes from previous MEPS workshops are provided in the [wo
 ### 6. Regression <!-- omit in toc -->
 [Exercise6a.do](workshop_exercises/Exercise6a.do): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
 <br>
-[Exercise6b.do](workshop_exercises/Exercise6b.do): Logistic regression for persons that delayed medical care because of COVID
+[Exercise6b.do](workshop_exercises/Exercise6b.do): Logistic regression for persons that delayed medical care because of COVID, 2020
 <br>
 
 ## Summary tables examples
