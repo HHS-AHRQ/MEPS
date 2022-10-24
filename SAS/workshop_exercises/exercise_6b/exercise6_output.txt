@@ -1,0 +1,517 @@
+proportion of persons with delayed care events                                                                                     1
+
+The SURVEYMEANS Procedure
+
+                    Data Summary
+
+Number of Strata                                 105
+Number of Clusters                               281
+Number of Observations                         27805
+Number of Observations Used                    26847
+Number of Obs with Nonpositive Weights           958
+Sum of Weights                             328545297
+
+
+                            Statistics
+ 
+                                                          Std Error
+Variable                          N            Mean         of Mean
+-------------------------------------------------------------------
+delayed_care_med              26460        0.155573        0.004061
+delayed_care_dental           26467        0.251809        0.005540
+delayed_care_pmeds            26468        0.013365        0.000812
+-------------------------------------------------------------------
+proc surveylogistic with param=ref option on the class statement                                                                   2
+dependent variable: delayed medical care
+
+The SURVEYLOGISTIC Procedure
+
+                                     Model Information
+
+Data Set                      WORK.MEPS_2020                                                
+Response Variable             delayed_care_med                                              
+Number of Response Levels     2                                                             
+Stratum Variable              VARSTR                      VARIANCE ESTIMATION STRATUM - 2020
+Number of Strata              105                                                           
+Cluster Variable              VARPSU                      VARIANCE ESTIMATION PSU - 2020    
+Number of Clusters            281                                                           
+Weight Variable               PERWT20F                    FINAL PERSON WEIGHT, 2020         
+Model                         Binary Logit                                                  
+Optimization Technique        Fisher's Scoring                                              
+Variance Adjustment           Degrees of Freedom (DF)                                       
+
+
+             Variance Estimation
+
+Method                           Taylor Series
+Variance Adjustment    Degrees of Freedom (DF)
+
+
+Number of Observations Read       27805
+Number of Observations Used       26460
+Sum of Weights Read            3.2855E8
+Sum of Weights Used            3.2371E8
+
+
+                  Response Profile
+ 
+ Ordered     delayed_         Total            Total
+   Value     care_med     Frequency           Weight
+
+       1            0         22217        273346834
+       2            1          4243         50360133
+
+Probability modeled is delayed_care_med=1.
+
+NOTE: 407 observations were deleted due to missing values for the response or explanatory variables.
+
+NOTE: 938 observations having nonpositive frequencies or weights were excluded since they do not contribute to the analysis.
+
+
+                 Class Level Information
+ 
+Class        Value                    Design Variables
+
+SEX          1. male               0                     
+             2. female             1                     
+
+RACETHX      1. hispanic           0      0      0      0
+             2. nh white only      1      0      0      0
+             3. nh black only      0      1      0      0
+             4. nh asian only      0      0      1      0
+             5. nh other etc       0      0      0      1
+
+INSCOV20     1. any private        0      0              
+             2. public only        1      0              
+             3. uninsured          0      1              
+
+region       1. northeast          0      0      0       
+             2. midwest            1      0      0       
+             3. south              0      1      0       
+             4. west               0      0      1       
+
+
+                    Model Convergence Status
+
+         Convergence criterion (GCONV=1E-8) satisfied.          
+
+
+proc surveylogistic with param=ref option on the class statement                                                                   3
+dependent variable: delayed medical care
+
+The SURVEYLOGISTIC Procedure
+
+         Model Fit Statistics
+ 
+                             Intercept
+              Intercept            and
+Criterion          Only     Covariates
+
+AIC           279848432      273216973
+SC            279848449      273217184
+-2 Log L      279848430      273216949
+
+
+             Testing Global Null Hypothesis: BETA=0
+ 
+Test                 F Value       Num DF       Den DF     Pr > F
+
+Likelihood Ratio       25.96       9.4666      1666.13     <.0001
+Score                  25.63           11          166     <.0001
+Wald                   26.96           11          166     <.0001
+
+         NOTE: Second-order Rao-Scott design correction
+          0.1620 applied to the Likelihood Ratio test.
+
+
+           Type 3 Analysis of Effects
+ 
+Effect      F Value    Num DF    Den DF    Pr > F
+
+AGELAST      127.48         1       176    <.0001
+SEX           44.45         1       176    <.0001
+RACETHX        1.72         4       173    0.1474
+INSCOV20      11.16         2       175    <.0001
+region         8.22         3       174    <.0001
+
+
+                Analysis of Maximum Likelihood Estimates
+ 
+                                          Standard
+Parameter                     Estimate       Error    t Value    Pr > |t|
+
+Intercept                      -2.1677      0.1110     -19.54      <.0001
+AGELAST                         0.0115     0.00102      11.29      <.0001
+SEX       2. female             0.2624      0.0394       6.67      <.0001
+RACETHX   2. nh white only      0.1925      0.0782       2.46      0.0148
+RACETHX   3. nh black only      0.1729      0.1198       1.44      0.1508
+RACETHX   4. nh asian only      0.1150      0.1540       0.75      0.4563
+RACETHX   5. nh other etc     -0.00922      0.1506      -0.06      0.9512
+INSCOV20  2. public only       -0.0121      0.0623      -0.19      0.8464
+INSCOV20  3. uninsured         -0.6933      0.1474      -4.70      <.0001
+region    2. midwest           -0.3848      0.0909      -4.23      <.0001
+region    3. south             -0.3751      0.0904      -4.15      <.0001
+region    4. west              -0.1451      0.0987      -1.47      0.1435
+
+          NOTE: The degrees of freedom for the t tests is 176.
+
+
+                            Odds Ratio Estimates
+                                      
+                                                Point       95% Confidence
+Effect                                       Estimate           Limits
+
+AGELAST                                         1.012       1.010       1.014
+SEX      2. female vs 1. male                   1.300       1.203       1.405
+RACETHX  2. nh white only vs 1. hispanic        1.212       1.039       1.415
+RACETHX  3. nh black only vs 1. hispanic        1.189       0.938       1.506
+RACETHX  4. nh asian only vs 1. hispanic        1.122       0.828       1.520
+RACETHX  5. nh other etc  vs 1. hispanic        0.991       0.736       1.334
+INSCOV20 2. public only vs 1. any private       0.988       0.874       1.117
+INSCOV20 3. uninsured   vs 1. any private       0.500       0.374       0.669
+region   2. midwest vs 1. northeast             0.681       0.569       0.814
+region   3. south   vs 1. northeast             0.687       0.575       0.821
+region   4. west    vs 1. northeast             0.865       0.712       1.051
+
+   NOTE: The degrees of freedom in computing the confidence limits is 176.
+proc surveylogistic with param=ref option on the class statement                                                                   4
+dependent variable: delayed medical care
+
+The SURVEYLOGISTIC Procedure
+
+Association of Predicted Probabilities and Observed Responses
+
+Percent Concordant        60.9    Somers' D    0.228
+Percent Discordant        38.1    Gamma        0.230
+Percent Tied               1.0    Tau-a        0.061
+Pairs                 94266731    c            0.614
+proc surveylogistic with param=ref option on the class statement                                                                   5
+dependent variable: delayed  dental care
+
+The SURVEYLOGISTIC Procedure
+
+                                     Model Information
+
+Data Set                      WORK.MEPS_2020                                                
+Response Variable             delayed_care_dental                                           
+Number of Response Levels     2                                                             
+Stratum Variable              VARSTR                      VARIANCE ESTIMATION STRATUM - 2020
+Number of Strata              105                                                           
+Cluster Variable              VARPSU                      VARIANCE ESTIMATION PSU - 2020    
+Number of Clusters            281                                                           
+Weight Variable               PERWT20F                    FINAL PERSON WEIGHT, 2020         
+Model                         Binary Logit                                                  
+Optimization Technique        Fisher's Scoring                                              
+Variance Adjustment           Degrees of Freedom (DF)                                       
+
+
+             Variance Estimation
+
+Method                           Taylor Series
+Variance Adjustment    Degrees of Freedom (DF)
+
+
+Number of Observations Read       27805
+Number of Observations Used       26467
+Sum of Weights Read            3.2855E8
+Sum of Weights Used             3.239E8
+
+
+                  Response Profile
+ 
+             delayed_
+ Ordered     care_            Total            Total
+   Value     dental       Frequency           Weight
+
+       1            0         20044        242340911
+       2            1          6423         81561719
+
+Probability modeled is delayed_care_dental=1.
+
+NOTE: 395 observations were deleted due to missing values for the response or explanatory variables.
+
+NOTE: 943 observations having nonpositive frequencies or weights were excluded since they do not contribute to the analysis.
+
+
+                 Class Level Information
+ 
+Class        Value                    Design Variables
+
+SEX          1. male               0                     
+             2. female             1                     
+
+RACETHX      1. hispanic           0      0      0      0
+             2. nh white only      1      0      0      0
+             3. nh black only      0      1      0      0
+             4. nh asian only      0      0      1      0
+             5. nh other etc       0      0      0      1
+
+INSCOV20     1. any private        0      0              
+             2. public only        1      0              
+             3. uninsured          0      1              
+
+region       1. northeast          0      0      0       
+             2. midwest            1      0      0       
+             3. south              0      1      0       
+             4. west               0      0      1       
+
+
+                    Model Convergence Status
+
+         Convergence criterion (GCONV=1E-8) satisfied.          
+
+
+proc surveylogistic with param=ref option on the class statement                                                                   6
+dependent variable: delayed  dental care
+
+The SURVEYLOGISTIC Procedure
+
+         Model Fit Statistics
+ 
+                             Intercept
+              Intercept            and
+Criterion          Only     Covariates
+
+AIC           365565729      358018995
+SC            365565746      358019206
+-2 Log L      365565727      358018971
+
+
+             Testing Global Null Hypothesis: BETA=0
+ 
+Test                 F Value       Num DF       Den DF     Pr > F
+
+Likelihood Ratio       28.34       9.0891      1599.69     <.0001
+Score                  17.70           11          166     <.0001
+Wald                   17.90           11          166     <.0001
+
+         NOTE: Second-order Rao-Scott design correction
+          0.2102 applied to the Likelihood Ratio test.
+
+
+           Type 3 Analysis of Effects
+ 
+Effect      F Value    Num DF    Den DF    Pr > F
+
+AGELAST       10.27         1       176    0.0016
+SEX           49.16         1       176    <.0001
+RACETHX        5.18         4       173    0.0006
+INSCOV20      35.47         2       175    <.0001
+region         9.86         3       174    <.0001
+
+
+                Analysis of Maximum Likelihood Estimates
+ 
+                                          Standard
+Parameter                     Estimate       Error    t Value    Pr > |t|
+
+Intercept                      -1.1193      0.1000     -11.19      <.0001
+AGELAST                        0.00316    0.000988       3.20      0.0016
+SEX       2. female             0.2172      0.0310       7.01      <.0001
+RACETHX   2. nh white only      0.2630      0.0643       4.09      <.0001
+RACETHX   3. nh black only      0.0383      0.0880       0.44      0.6637
+RACETHX   4. nh asian only      0.3132      0.1083       2.89      0.0043
+RACETHX   5. nh other etc       0.2597      0.1423       1.83      0.0697
+INSCOV20  2. public only       -0.2739      0.0539      -5.09      <.0001
+INSCOV20  3. uninsured         -0.9554      0.1229      -7.78      <.0001
+region    2. midwest           -0.3155      0.0996      -3.17      0.0018
+region    3. south             -0.4618      0.0865      -5.34      <.0001
+region    4. west              -0.2103      0.0862      -2.44      0.0157
+
+          NOTE: The degrees of freedom for the t tests is 176.
+
+
+                            Odds Ratio Estimates
+                                      
+                                                Point       95% Confidence
+Effect                                       Estimate           Limits
+
+AGELAST                                         1.003       1.001       1.005
+SEX      2. female vs 1. male                   1.243       1.169       1.321
+RACETHX  2. nh white only vs 1. hispanic        1.301       1.146       1.477
+RACETHX  3. nh black only vs 1. hispanic        1.039       0.873       1.236
+RACETHX  4. nh asian only vs 1. hispanic        1.368       1.105       1.694
+RACETHX  5. nh other etc  vs 1. hispanic        1.296       0.979       1.717
+INSCOV20 2. public only vs 1. any private       0.760       0.684       0.846
+INSCOV20 3. uninsured   vs 1. any private       0.385       0.302       0.490
+region   2. midwest vs 1. northeast             0.729       0.599       0.888
+region   3. south   vs 1. northeast             0.630       0.531       0.747
+region   4. west    vs 1. northeast             0.810       0.684       0.961
+
+   NOTE: The degrees of freedom in computing the confidence limits is 176.
+proc surveylogistic with param=ref option on the class statement                                                                   7
+dependent variable: delayed  dental care
+
+The SURVEYLOGISTIC Procedure
+
+Association of Predicted Probabilities and Observed Responses
+
+Percent Concordant         60.1    Somers' D    0.211
+Percent Discordant         39.0    Gamma        0.213
+Percent Tied                0.9    Tau-a        0.078
+Pairs                 128742612    c            0.605
+proc surveylogistic with param=ref option on the class statement                                                                   8
+dependent variable: delayed prescribed medicines
+
+The SURVEYLOGISTIC Procedure
+
+                                     Model Information
+
+Data Set                      WORK.MEPS_2020                                                
+Response Variable             delayed_care_pmeds                                            
+Number of Response Levels     2                                                             
+Stratum Variable              VARSTR                      VARIANCE ESTIMATION STRATUM - 2020
+Number of Strata              105                                                           
+Cluster Variable              VARPSU                      VARIANCE ESTIMATION PSU - 2020    
+Number of Clusters            281                                                           
+Weight Variable               PERWT20F                    FINAL PERSON WEIGHT, 2020         
+Model                         Binary Logit                                                  
+Optimization Technique        Fisher's Scoring                                              
+Variance Adjustment           Degrees of Freedom (DF)                                       
+
+
+             Variance Estimation
+
+Method                           Taylor Series
+Variance Adjustment    Degrees of Freedom (DF)
+
+
+Number of Observations Read       27805
+Number of Observations Used       26468
+Sum of Weights Read            3.2855E8
+Sum of Weights Used            3.2389E8
+
+
+                  Response Profile
+ 
+             delayed_
+ Ordered     care_            Total            Total
+   Value     pmeds        Frequency           Weight
+
+       1            0         26064        319560013
+       2            1           404          4328936
+
+Probability modeled is delayed_care_pmeds=1.
+
+NOTE: 391 observations were deleted due to missing values for the response or explanatory variables.
+
+NOTE: 946 observations having nonpositive frequencies or weights were excluded since they do not contribute to the analysis.
+
+
+                 Class Level Information
+ 
+Class        Value                    Design Variables
+
+SEX          1. male               0                     
+             2. female             1                     
+
+RACETHX      1. hispanic           0      0      0      0
+             2. nh white only      1      0      0      0
+             3. nh black only      0      1      0      0
+             4. nh asian only      0      0      1      0
+             5. nh other etc       0      0      0      1
+
+INSCOV20     1. any private        0      0              
+             2. public only        1      0              
+             3. uninsured          0      1              
+
+region       1. northeast          0      0      0       
+             2. midwest            1      0      0       
+             3. south              0      1      0       
+             4. west               0      0      1       
+
+
+                    Model Convergence Status
+
+         Convergence criterion (GCONV=1E-8) satisfied.          
+
+
+proc surveylogistic with param=ref option on the class statement                                                                   9
+dependent variable: delayed prescribed medicines
+
+The SURVEYLOGISTIC Procedure
+
+         Model Fit Statistics
+ 
+                             Intercept
+              Intercept            and
+Criterion          Only     Covariates
+
+AIC            45959157       44703890
+SC             45959175       44704101
+-2 Log L       45959155       44703866
+
+
+             Testing Global Null Hypothesis: BETA=0
+ 
+Test                 F Value       Num DF       Den DF     Pr > F
+
+Likelihood Ratio        7.51       9.4494      1663.09     <.0001
+Score                   6.87           11          166     <.0001
+Wald                    8.05           11          166     <.0001
+
+         NOTE: Second-order Rao-Scott design correction
+          0.1641 applied to the Likelihood Ratio test.
+
+
+           Type 3 Analysis of Effects
+ 
+Effect      F Value    Num DF    Den DF    Pr > F
+
+AGELAST       38.88         1       176    <.0001
+SEX            8.78         1       176    0.0035
+RACETHX        0.42         4       173    0.7944
+INSCOV20       6.16         2       175    0.0026
+region         3.85         3       174    0.0107
+
+
+                Analysis of Maximum Likelihood Estimates
+ 
+                                          Standard
+Parameter                     Estimate       Error    t Value    Pr > |t|
+
+Intercept                      -5.3626      0.2689     -19.95      <.0001
+AGELAST                         0.0165     0.00265       6.24      <.0001
+SEX       2. female             0.3042      0.1027       2.96      0.0035
+RACETHX   2. nh white only      0.0291      0.1754       0.17      0.8682
+RACETHX   3. nh black only     -0.0844      0.2485      -0.34      0.7347
+RACETHX   4. nh asian only      0.1136      0.3615       0.31      0.7536
+RACETHX   5. nh other etc       0.3353      0.3543       0.95      0.3452
+INSCOV20  2. public only        0.4776      0.1370       3.49      0.0006
+INSCOV20  3. uninsured          0.3092      0.3086       1.00      0.3178
+region    2. midwest           -0.2578      0.1924      -1.34      0.1820
+region    3. south             -0.1600      0.1962      -0.82      0.4160
+region    4. west               0.2519      0.1791       1.41      0.1612
+
+          NOTE: The degrees of freedom for the t tests is 176.
+
+
+                            Odds Ratio Estimates
+                                      
+                                                Point       95% Confidence
+Effect                                       Estimate           Limits
+
+AGELAST                                         1.017       1.011       1.022
+SEX      2. female vs 1. male                   1.355       1.107       1.660
+RACETHX  2. nh white only vs 1. hispanic        1.030       0.728       1.455
+RACETHX  3. nh black only vs 1. hispanic        0.919       0.563       1.501
+RACETHX  4. nh asian only vs 1. hispanic        1.120       0.549       2.287
+RACETHX  5. nh other etc  vs 1. hispanic        1.398       0.695       2.814
+INSCOV20 2. public only vs 1. any private       1.612       1.230       2.112
+INSCOV20 3. uninsured   vs 1. any private       1.362       0.741       2.505
+region   2. midwest vs 1. northeast             0.773       0.529       1.130
+region   3. south   vs 1. northeast             0.852       0.579       1.255
+region   4. west    vs 1. northeast             1.286       0.904       1.832
+
+   NOTE: The degrees of freedom in computing the confidence limits is 176.
+proc surveylogistic with param=ref option on the class statement                                                                  10
+dependent variable: delayed prescribed medicines
+
+The SURVEYLOGISTIC Procedure
+
+Association of Predicted Probabilities and Observed Responses
+
+Percent Concordant        60.8    Somers' D    0.290
+Percent Discordant        31.8    Gamma        0.314
+Percent Tied               7.4    Tau-a        0.009
+Pairs                 10529856    c            0.645

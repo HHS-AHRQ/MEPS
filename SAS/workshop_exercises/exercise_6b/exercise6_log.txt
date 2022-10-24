@@ -1,0 +1,157 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+417  
+418  /* create use-defined formats and store the the work folder */
+419  proc format;
+420  
+421  value sex_fmt   1 = '1. male'
+422                  2 = '2. female';
+NOTE: Format SEX_FMT has been output.
+423  
+424  value region_fmt 1 = '1. northeast'
+425           2 = '2. midwest'
+426           3 = '3. south'
+427           4 = '4. west';
+NOTE: Format REGION_FMT has been output.
+428  
+429   value inscov20_fmt
+430     1 = '1. any private'
+431     2 = '2. public only'
+432     3 = '3. uninsured';
+NOTE: Format INSCOV20_FMT has been output.
+433  
+434  value racethx_fmt
+435    1 = '1. hispanic'
+436    2 = '2. nh white only'
+437    3 = '3. nh black only'
+438    4 = '4. nh asian only'
+439    5 = '5. nh other etc';
+NOTE: Format RACETHX_FMT has been output.
+440  run;
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+441  
+442  %let datafolder = c:\meps_data;  /* adjust the folder name, if needed */
+443  libname cdata "&datafolder";
+NOTE: Libref CDATA refers to the same physical library as NEW.
+NOTE: Libref CDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: c:\meps_data
+444  %let kept_vars_2020 =  %cmpres(varstr varpsu perwt20f cvdlayca53 cvdlaypm53 cvdlaydn53
+445                         agelast sex racethx povcat20 inscov20 region53);
+446  %put &=kept_vars_2020;
+KEPT_VARS_2020=varstr varpsu perwt20f cvdlayca53 cvdlaypm53 cvdlaydn53 agelast sex racethx povcat20 inscov20 region53
+447  
+448  data meps_2020;
+449   set cdata.h224 (keep= &kept_vars_2020);
+450   region = region53; if region53 = -1 then region =.; /* region recode */
+451   array x[3] cvdlayca53  cvdlaydn53 cvdlaypm53;
+452   array y{3] delayed_care_med delayed_care_dental delayed_care_pmeds;
+453   do i = 1 to 3;
+454      if x[i] = 1 then y[i] = 1;
+455      else if x[i] = 2 then y[i] = 0;
+456      else if x[i] <0 then y[i] = .;
+457   end;
+458  run;
+
+NOTE: There were 27805 observations read from the data set CDATA.H224.
+NOTE: The data set WORK.MEPS_2020 has 27805 observations and 17 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.14 seconds
+      
+
+459  
+460  title 'proportion of persons with delayed care events';
+461  ods graphics off;
+462  proc surveymeans data=meps_2020 nobs mean stderr ;
+463      var delayed_care_med delayed_care_dental delayed_care_pmeds;
+464      stratum varstr;
+465      cluster varpsu;
+466      weight perwt20f;
+467     run;
+
+NOTE: Due to nonpositive weights, 958 observation(s) were deleted.
+NOTE: PROCEDURE SURVEYMEANS used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.03 seconds
+      
+
+468  title 'proc surveylogistic with param=ref option on the class statement';
+469  title2 "dependent variable: delayed medical care";
+470      proc surveylogistic data=meps_2020 ;
+471      stratum varstr;
+472      cluster varpsu;
+473      weight perwt20f;
+474      class sex (ref='1. male') racethx (ref='1. hispanic') inscov20 (ref='1. any private')
+475            region (ref='1. northeast') /param=ref;
+476       model delayed_care_med (ref= '0')= agelast sex racethx  inscov20 region;
+477      format   sex sex_fmt.
+478               racethx racethx_fmt.
+479               inscov20 inscov20_fmt.
+480               region region_fmt. ;
+481      run;
+
+NOTE: PROC SURVEYLOGISTIC is modeling the probability that delayed_care_med=1.
+NOTE: Convergence criterion (GCONV=1E-8) satisfied.
+NOTE: PROCEDURE SURVEYLOGISTIC used (Total process time):
+      real time           0.19 seconds
+      cpu time            0.20 seconds
+      
+
+482  title2 'dependent variable: delayed  dental care';
+483      proc surveylogistic data=meps_2020 ;
+484      stratum varstr;
+485      cluster varpsu;
+486      weight perwt20f;
+487      class sex (ref='1. male') racethx (ref='1. hispanic') inscov20 (ref='1. any private')
+488            region (ref='1. northeast') /param=ref;
+489      model delayed_care_dental (ref= '0')= agelast sex racethx  inscov20 region;
+490      format   sex sex_fmt.
+491               racethx racethx_fmt.
+492               inscov20 inscov20_fmt.
+493               region region_fmt.;
+494      run;
+
+NOTE: PROC SURVEYLOGISTIC is modeling the probability that delayed_care_dental=1.
+NOTE: Convergence criterion (GCONV=1E-8) satisfied.
+NOTE: PROCEDURE SURVEYLOGISTIC used (Total process time):
+      real time           0.21 seconds
+      cpu time            0.20 seconds
+      
+
+495     title2 'dependent variable: delayed prescribed medicines';
+496      proc surveylogistic data=meps_2020 ;
+497      stratum varstr;
+498      cluster varpsu;
+499      weight perwt20f;
+500      class sex (ref='1. male') racethx (ref='1. hispanic') inscov20 (ref='1. any private')
+501            region (ref='1. northeast') /param=ref;
+502      model delayed_care_pmeds (ref= '0')= agelast sex racethx  inscov20 region;
+503      format   sex sex_fmt.
+504               racethx racethx_fmt.
+505               inscov20 inscov20_fmt.
+506               region region_fmt. ;
+507      run;
+
+NOTE: PROC SURVEYLOGISTIC is modeling the probability that delayed_care_pmeds=1.
+NOTE: Convergence criterion (GCONV=1E-8) satisfied.
+NOTE: PROCEDURE SURVEYLOGISTIC used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.20 seconds
+      
+
+508  title; /* cancel the TITLE and TITLE2 statements */
+509  
+510  /* uncomment the next two lines of code to close the proc printto, only if used earlier. */
+511  
+512  proc printto;
+513  run;
+

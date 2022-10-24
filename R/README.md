@@ -276,8 +276,11 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 [exercise_3d.R](workshop_exercises/exercise_3d.R): Pooling MEPS FYC files, 2017-2019: People with joint pain, using [Pooled Linkage Variance file](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-036) for correct standard error calculation (required when pooling before and after 2019)
 <br>
 
+
 ### 4. Regression <!-- omit in toc -->
-[exercise_4.R](workshop_exercises/exercise_4.R): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
+[exercise_4a.R](workshop_exercises/exercise_4a.R): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
+<br>
+[exercise_4b.R](workshop_exercises/exercise_4b.R): Logistic regression for persons that delayed medical care because of COVID
 <br>
 
 ### 5. Plots <!-- omit in toc -->

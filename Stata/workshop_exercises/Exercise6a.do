@@ -13,7 +13,7 @@ clear
 set more off
 capture log close
 cd c:\MEPS
-log using Ex4.log, replace
+log using Ex6.log, replace
 
 // Data was already downloaded and saved in Stata format in previous programs; just reading it here
 use C:\MEPS\h209, clear
