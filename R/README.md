@@ -41,7 +41,7 @@ To load and analyze MEPS data in R, additional packages are needed. Packages are
 
 # Loading MEPS data
 
-For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. 
+For data years 2017 and later (and also for the 2016 Medical Conditions file), .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. 
 
 Different functions are needed for importing these various file formats into R. The most versatile method is to use the `read_MEPS` function from the [`MEPS` package](https://github.com/e-mitchell/meps_r_pkg)</b>, which was created to facilitate loading and manipulation of MEPS PUFs. For users that prefer not to use the MEPS R package to load MEPS public use files, care must be taken to ensure that the correct file format is being imported in accordance with the data year, as detailed in the sections below. 
 
@@ -91,7 +91,7 @@ help(read_MEPS)
 
 ## Data years 2017 and later: ASCII, SAS V9, Stata, and XLSX
 
-For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2017 and later. Due to the fast loading speed and simplicity of code, the <b>Stata data format (.dta)</b> is the recommended file format.
+For users that prefer not to use the `MEPS` package, multiple data formats are available for MEPS public use files from data years 2017 and later (and also for the 2016 Medical Conditions file). Due to the fast loading speed and simplicity of code, the <b>Stata data format (.dta)</b> is the recommended file format.
 
 > <b> IMPORTANT! </b> SAS transport (.ssp) versions of most these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alternative file formats must be used instead.
 
@@ -172,7 +172,7 @@ head(h207)
 
 ## Data years 1996-2016: SAS XPORT format
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. Since the required R programming statements are not available for the ASCII data files for these years, the <b>SAS transport (.ssp)</b> formats are the recommended file type.
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. Since the required R programming statements are not available for the ASCII data files for these years, the <b>SAS transport (.ssp)</b> formats are the recommended file type (excluding the 2016 Medical Conditions file).
 
 These files can be read into R using the `read.xport` function from the `foreign` package.  In the following example, the SAS XPORT format of the 2016 Dental Visits file (<b>h188b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
 

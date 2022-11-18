@@ -32,17 +32,20 @@ The MEPS-HC is designed to produce national and regional estimates of the health
 
 ## Accessing MEPS-HC data
 
-Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. The following table summarizes the various file formats available by data year:
+Data from the Household Component of MEPS are [available for download as public use files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp). For data years 2017 and later (and also for the 2016 Medical Conditions file), .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets. The following table summarizes the various file formats available by data year:
 
 
 
 |Data Years         |ASCII<sup>1</sup>  <br>(.dat) |SAS XPORT <br>(.ssp) |SAS V9 (.sas7dat) <br> Stata (.dta) <br> Excel (.xlsx) |
 |:-----------------|:----:|:--------:|:--:|
-|1996-2016         |X     |X         |    |
 |2017 and later    |X     | (not recommended) <sup>2</sup>       |X   |
+|2016 Medical Conditions file  |X | (not recommended) <sup>2</sup>  |X   |
+|All Other 2016 files  |X     |X         |    |
+|1996-2015              |X     |X         |    |
+
 
 <sub><sup>1</sup> Additional programming statements with column widths, types, and names are required to read ASCII files. SAS and Stata programming statements are available for all data files. R programming statements are available for most files from data years 2018 and later.
-<br><sup>2</sup> Starting with 2017 data files, SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. Importing XPORT and CPORT files into SAS requires different procedures. In addition, CPORT data files cannot be read directly into R or Stata; alternative file formats must be used. More details are available in the sub-folders for each programming language.</sub>
+<br><sup>2</sup> Starting with 2017 data files (and also for the 2016 Medical Conditions file), SAS Transport formats for most of the MEPS Public Use Files were converted from the SAS XPORT to the SAS CPORT engine. Importing XPORT and CPORT files into SAS requires different procedures. In addition, CPORT data files cannot be read directly into R or Stata; alternative file formats must be used. More details are available in the sub-folders for each programming language.</sub>
 
 Zip files of each data format can be downloaded from the web page for each MEPS public use file. 
 

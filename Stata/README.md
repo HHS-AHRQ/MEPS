@@ -12,16 +12,16 @@
 
 # Loading MEPS data
 
-For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
+For data years 2017 and later (and also for the 2016 Medical Conditions file), .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
-The recommended file formats are the Stata data files (.dta) for data years 2017 and later, and the SAS transport (.ssp) format for data years 1996-2016.
+The recommended file formats are the Stata data files (.dta) for data years 2017 and later (and also for the 2016 Medical Conditions file), and the SAS transport (.ssp) format for data years 1996-2016 (excluding the 2016 Medical Conditions file).
 
 Note that the case of variable names may differ depending on which type of data file is used. Loading SAS transport (.ssp) files typically results in all lowercase variable names, while the Stata (.dta) files generally have uppercase variable names. Users may wish to use the `rename *, lower` command to convert all variables to lowercase for consistency.
 
 
 ## Data years 2017 and later: Stata (.dta) files
 
-The <b>Stata data (.dta)</b> format is the recommended file format for loading MEPS data files from 2017 and later. 
+The <b>Stata data (.dta)</b> format is the recommended file format for loading MEPS data files from 2017 and later (and also for the 2016 Medical Conditions file). 
 
 > <b> IMPORTANT! </b> SAS transport (.ssp) versions of most these files were created using the SAS CPORT engine. These CPORT data files cannot be read directly into R, and alternative file formats must be used instead.
 
@@ -40,7 +40,7 @@ rename *, lower
 
 ## Data years 1996-2016: SAS XPORT format
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp)</b> format is the recommended file type for loading MEPS data files from 1996-2016.
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp)</b> format is the recommended file type for loading MEPS data files from 1996-2016 (excluding the 2016 Medical Conditions file).
 
 These files can be loaded using the `import` command. In the following example, the transport file for the 2016 Dental Visits file (<b>h188b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
 

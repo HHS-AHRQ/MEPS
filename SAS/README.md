@@ -13,14 +13,14 @@
 
 # Loading MEPS data
 
-For data years 2017 and later, .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
+For data years 2017 and later (and also for the 2016 Medical Conditions file), .zip files for multiple file formats are available, including ASCII (.dat), SAS V9 (.sas7bdat), Stata (.dta), and Excel (.xlsx). Prior to 2017, ASCII (.dat) and SAS transport (.ssp) files are provided for all datasets.
 
 The recommended file formats are the SAS V9 data files (.sas7bdat) for data years 2017 and later, and the SAS transport (.ssp) format for data years 1996-2016.
 
 
 ## Data years 2017 and later: SAS V9 files
 
-The <b>SAS V9 (.sas7bdat)</b> format is the recommended format for loading MEPS data files from 2017 and later. For the following example, the 2018 Dental Visits files (<b>h206b.sas7bdat</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
+The <b>SAS V9 (.sas7bdat)</b> format is the recommended format for loading MEPS data files from 2017 and later (and also for the 2016 Medical Conditions file). For the following example, the 2018 Dental Visits files (<b>h206b.sas7bdat</b>) has been [downloaded from the MEPS website](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-206B), unzipped, and saved in the local directory <b>C:/MEPS</b>:
 
 ``` sas
 DATA work.h206b;
@@ -34,7 +34,7 @@ RUN;
 
 ## Data years 1996-2016: `PROC XCOPY`
 
-For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp) </b> format is the recommended file type for loading MEPS data files from 1996-2016.
+For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp) </b> format is the recommended file type for loading MEPS data files from 1996-2016 (excluding the 2016 Medical Conditions file).
 
 SAS transport (.ssp) files can be read into SAS using `PROC XCOPY`. In the following examples, the SAS transport file for the 2016 Dental Visits file (h188b.ssp) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:\MEPS</b>
 ``` sas
