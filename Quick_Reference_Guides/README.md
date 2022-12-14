@@ -30,11 +30,26 @@ The HCUP website provides more information on the creation of [CCS for ICD-9 cod
 
 ## Entity Relationship Diagram
 [meps_erd.pdf](meps_erd.pdf) is a printable entity relationship diagram of the most commonly used MEPS public use files (PUFs). Short descriptions of the datasets and example programming codes in SAS, R, and Stata are available on page 2.
+
 [<img src = "../_images/meps_erd.png" alt = "preview of ERD" width = 500>](meps_erd.pdf)
 
 ## File names
-[meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically.
+[meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically. Longitudinal files are split into separate columns, since these files span multiple years of data.
+
 [![preview of file names](../_images/meps_file_names.png)](meps_file_names.csv)
+
+**Abbreviations used in file:**
+* CLNK:	Condition Event Link file
+* FS:	Food Security file
+* FYC: 	Full-Year-Consolidated
+* Long: Longitudinal
+* MOS:	Medical Organizations Survey
+* PIT:	Point-in-time
+* PMED:	Prescription Medicines
+* PRPL: Person-Round-Plan
+* PSAQ:	Preventive Care Self-Administered Questionnaire
+* RXLK: Prescribed Medicines Link file
+
 
 ## Programming Statements
 [meps_programming_statements.md](meps_programming_statements.md) offers a quick reference of programming statements needed to analyze MEPS data using survey methods in R, SAS, and Stata.
