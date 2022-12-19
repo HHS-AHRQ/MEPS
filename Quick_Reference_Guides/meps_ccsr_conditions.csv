@@ -50,6 +50,10 @@ CIR036,Postthrombotic syndrome and venous insufficiency/hypertension,"Other circ
 CIR037,Vasculitis,"Other circulatory conditions of arteries, veins, and lymphatics"
 CIR038,Postprocedural or postoperative circulatory system complication,Complications of surgery or device
 CIR039,Other specified diseases of veins and lymphatics,"Other circulatory conditions of arteries, veins, and lymphatics"
+DEN000,Dental Diseases,Dental Conditions
+DEN001,Any dental condition including traumatic injury,Dental Conditions
+DEN002,Nontraumatic dental conditions,Dental Conditions
+DEN003,"Caries, periodontitis, and other preventable dental conditions",Dental Conditions
 DIG000,Diseases of the Digestive System,Other stomach and intestinal disorders
 DIG001,Intestinal infection,Intestinal infection
 DIG002,Disorders of teeth and gingiva,Disorders of teeth and jaws
@@ -454,7 +458,7 @@ NVS002,Encephalitis,Nervous system disorders
 NVS003,Other specified CNS infection and poliomyelitis,Nervous system disorders
 NVS004,Parkinson`s disease,Nervous system disorders
 NVS005,Multiple sclerosis,Nervous system disorders
-NVS006,Other specified hereditary and degenerative nervous system conditions,Nervous system disorders
+NVS006,Other nervous system disorders (often hereditary or degenerative),Nervous system disorders
 NVS007,Cerebral palsy,Nervous system disorders
 NVS008,Paralysis (other than cerebral palsy),Nervous system disorders
 NVS009,Epilepsy; convulsions,Epilepsy and convulsions
@@ -468,7 +472,7 @@ NVS016,Sleep wake disorders,Nervous system disorders
 NVS017,Nerve and nerve root disorders,Nervous system disorders
 NVS018,Myopathies,Nervous system disorders
 NVS019,Nervous system pain and pain syndromes,Nervous system disorders
-NVS020,Other specified nervous system disorders,Nervous system disorders
+NVS020,Other nervous system disorders (neither hereditary nor degenerative),Nervous system disorders
 NVS021,Postprocedural or postoperative nervous system complication,Complications of surgery or device
 NVS022,Sequela of specified nervous system conditions,Nervous system disorders
 PNL000,Certain Conditions Originating in the Perinatal Period,"Complications of pregnancy/birth, and perinatal conditions"
