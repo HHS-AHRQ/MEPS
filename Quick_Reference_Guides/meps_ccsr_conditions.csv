@@ -214,7 +214,7 @@ INF008,Viral infection,Infectious disease
 INF009,"Parasitic, other specified and unspecified infections",Infectious disease
 INF010,Sexually transmitted infections (excluding HIV and hepatitis),Infectious disease
 INF011,Sequela of specified infectious disease conditions,Infectious disease
-INF012,Coronavirus disease – 2019 (COVID-19),Coronavirus disease (COVID-19)
+INF012,Coronavirus disease - 2019 (COVID-19),Coronavirus disease (COVID-19)
 INJ000,"Injury, Poisoning and Certain Other Consequences of External Causes",Trauma-related disorders
 INJ001,"Fracture of head and neck, initial encounter",Trauma-related disorders
 INJ002,"Fracture of the spine and back, initial encounter",Trauma-related disorders
