@@ -15,17 +15,42 @@ The following reference guides are provided for convenience:
 
 ## Condition Codes
 
-From 1996-2015, household-reported medical conditions in MEPS were coded into ICD-9 codes, which were then collapsed into the broader Clinical Classification Software (CCS) codes created by the Healthcare Cost and Utilization Project (HCUP). Starting in 2016, medical conditions were coded into ICD-10 codes, then collapsed into CCS-Refined (CCSR) codes provided by HCUP.
+Household-reported medical conditions in MEPS are coded into ICD-10 codes, which are then collapsed into the broader Clinical Classification Software Refined (CCSR) codes created by the Healthcare Cost and Utilization Project (HCUP). Prior to 2016, medical conditions were coded into ICD-9 codes, a predecessor to the ICD-10 codes, and were collapsed into Clinical Classification Software (CCS) codes. The HCUP website provides more information on the creation of [CCS for ICD-9 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [CCSR for ICD-10 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/ccs_refined.jsp).
 
-For analytical purposes (including the creation of the [MEPS-HC Data Tools](https://datatools.ahrq.gov/meps-hc)), MEPS created even broader condition categories. Some of these collapsed condition categories were revised with the transition from ICD-9 to ICD-10 in 2016. The following spreadsheets provide crosswalks between CCS[R] and MEPS collapsed condition categories, the list of collapsed condition categories that were revised in 2016, and descriptive labels for the 3-digit top-coded ICD variables on the MEPS Conditions files (ICD9CODX for 1996-2015; ICD10CDX for 2016 and later).
+For analytical purposes (including the creation of the [MEPS-HC Medical Conditions Data Tool](https://datatools.ahrq.gov/meps-hc/?tab=medical-conditions&dash=17)), MEPS created broader condition categories based on the CCS[R] codes. The following spreadsheets provide crosswalks between CCS[R] and MEPS collapsed condition categories, as well as descriptive labels for the 3-digit top-coded ICD variables on the MEPS Conditions files (ICD9CODX for 1996-2015; ICD10CDX for 2016 and later). The CCS[R] crosswalks also contain a Category Body System label, which is derived from the body systems defined by the CCSR codes. For collapsed categories that contain multiple CCSR body systems (e.g. "Complications of surgery or device"), the most common CCSR body system was selected as the "Category Body System".
 
-* [meps_ccs_conditions.csv](meps_ccs_conditions.csv): CCS - Collapsed Condition crosswalk (1996-2015)
-* [meps_ccsr_conditions.csv](meps_ccsr_conditions.csv): CCSR - Collapsed Condition crosswalk (2016 and later)
-* [meps_cond_icd9_labels.csv](meps_cond_icd9_labels.csv): Labels for ICD9CODX (1996-2015)
-* [meps_cond_icd10_labels.csv](meps_cond_icd10_labels.csv): Labels for ICD10CDX (2016 and later)
-* [meps_condition_changes.csv](meps_condition_changes.csv): Differences between MEPS collapsed condition categories from 1996-2015 compared with 2016 and later.
+**ICD-10/CCSR (2016 and later)**
+* [meps_ccsr_conditions.csv](meps_ccsr_conditions.csv): CCSR - Collapsed Condition crosswalk 
+* [meps_cond_icd10_labels.csv](meps_cond_icd10_labels.csv): Labels for ICD10CDX 
 
-The HCUP website provides more information on the creation of [CCS for ICD-9 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccs/ccs.jsp) and [CCSR for ICD-10 codes](https://www.hcup-us.ahrq.gov/toolssoftware/ccsr/ccs_refined.jsp).
+**ICD-9/CCS (1996-2015)**
+* [meps_ccs_conditions.csv](meps_ccs_conditions.csv): CCS - Collapsed Condition crosswalk 
+* [meps_cond_icd9_labels.csv](meps_cond_icd9_labels.csv): Labels for ICD9CODX 
+
+
+
+
+### <i>Updated categories - August 2023</i>
+The collapsing of the CCSR codes underwent extensive review and were updated in August 2023. This process included a systematic review with the goal of balancing continuity from the previous codes with increased precision based on natural splits in the MEPS data as well as clinical relevance. The collapsed categories were updated according to the following general guidelines:
+
+
+  | Guideline                                                   | Example                                                    | Exceptions                                        |
+  |------------------------------------------------------------|------------------------------------------------------------|--------------------------------------------------|
+   | Collapsed Codes should not cross CCSR body systems     | All CCSR codes in "Nervous system disorders" should start with "NVS", and should not include "EAR" codes | "Complications of Surgery or Device" and "Symptoms" can cross body systems |
+  | Generic or masked CCSRs (ending in "000") should be in an "Other" category | "Other diseases of circulatory system"               |                                                  |
+  | Only 1 "Other" category within each body system    | "Other eye disorders" is the only "Other" category in the "EYE" body system     | "CIR" and "MUS" have more specific "Other" categories (e.g. "Other cardiovascular disease", Other conditions of circulatory system")  |
+  | Add plain language to include common condition names  | Hypertension (high blood pressure); Acute bronchitis and URI (including common cold)|                                                  |
+  | Combine categories with low treated prevalence* | | Categories that are rare and difficult to combine with other groups (e.g. "External cause codes", "Complications of surgery or device"); Categories that are clinically relevant or have very different expenditures (e.g. "Multiple sclerosis") |                                                  |
+  | Split categories with high prevalence* |  | Generic categories will include many CCSRs |
+
+\* prevalence is defined based on MEPS data
+
+
+The collapsed categories derived from the ICD-9/CCS classifications (for 1996-2015) were *not* regrouped or recategorized during this process. However, some label changes were made for consistency with the newly-revised CCSR-based categories (e.g. "Other urinary" changed to "Other genitourinary conditions" and "Trauma-related disorders" changed to "Injury"). In addition, the category body systems were backwards mapped to apply to the CCS-based condition categories.
+
+Older versions of the crosswalks provided above can be found in the [archive](archive) folder.
+
+
 
 
 ## Entity Relationship Diagram

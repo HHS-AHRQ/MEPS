@@ -1,265 +1,265 @@
-CCS Code,CCS Description,MEPS collapsed condition category
-1,Tuberculosis,Infectious diseases
-2,Septicemia (except in labor),Infectious diseases
-3,Bacterial infection; unspecified site,Infectious diseases
-4,Mycoses,Infectious diseases
-5,HIV infection,Infectious diseases
-6,Hepatitis,Infectious diseases
-7,Viral infection,Infectious diseases
-8,Other infections; including parasitic,Infectious diseases
-9,Sexually transmitted infections (not HIV or hepatitis),Infectious diseases
-11,Cancer of head and neck,Cancer
-12,Cancer of esophagus,Cancer
-13,Cancer of stomach,Cancer
-14,Cancer of colon,Cancer
-15,Cancer of rectum and anus,Cancer
-16,Cancer of liver and intrahepatic bile duct,Cancer
-17,Cancer of pancreas,Cancer
-18,Cancer of other GI organs; peritoneum,Cancer
-19,Cancer of bronchus; lung,Cancer
-20,Cancer; other respiratory and intrathoracic,Cancer
-21,Cancer of bone and connective tissue,Cancer
-22,Melanomas of skin,Cancer
-23,Other non-epithelial cancer of skin,Cancer
-24,Cancer of breast,Cancer
-25,Cancer of uterus,Cancer
-26,Cancer of cervix,Cancer
-27,Cancer of ovary,Cancer
-28,Cancer of other female genital organs,Cancer
-29,Cancer of prostate,Cancer
-30,Cancer of testis,Cancer
-31,Cancer of other male genital organs,Cancer
-32,Cancer of bladder,Cancer
-33,Cancer of kidney and renal pelvis,Cancer
-34,Cancer of other urinary organs,Cancer
-35,Cancer of brain and nervous system,Cancer
-36,Cancer of thyroid,Cancer
-37,Hodgkin`s disease,Cancer
-38,Non-Hodgkin`s lymphoma,Cancer
-39,Leukemias,Cancer
-40,Multiple myeloma,Cancer
-41,Cancer; other and unspecified primary,Cancer
-42,Secondary malignancies,Cancer
-43,Malignant neoplasm without specification of site,Cancer
-44,Neoplasms of unspecified nature or uncertain behavior,Cancer
-45,Maintenance chemotherapy; radiotherapy,Cancer
-46,Benign neoplasm of uterus,Non-malignant neoplasm
-47,Other and unspecified benign neoplasm,Non-malignant neoplasm
-48,Thyroid disorders,Thyroid disease
-49,Diabetes mellitus without complication,Diabetes mellitus
-50,Diabetes mellitus with complications,Diabetes mellitus
-51,Other endocrine disorders,"Other endocrine, nutritional & immune disorder"
-52,Nutritional deficiencies,"Other endocrine, nutritional & immune disorder"
-54,Gout and other crystal arthropathies,"Other endocrine, nutritional & immune disorder"
-55,Fluid and electrolyte disorders,"Other endocrine, nutritional & immune disorder"
-56,Cystic fibrosis,"Other endocrine, nutritional & immune disorder"
-57,Immunity disorders,"Other endocrine, nutritional & immune disorder"
-58,Other nutritional; endocrine; and metabolic disorders,"Other endocrine, nutritional & immune disorder"
-53,Disorders of lipid metabolism,Hyperlipidemia
-60,Acute posthemorrhagic anemia,"Hemorrhagic, coagulation, and disorders of White Blood cells"
-61,Sickle cell anemia,"Hemorrhagic, coagulation, and disorders of White Blood cells"
-62,Coagulation and hemorrhagic disorders,"Hemorrhagic, coagulation, and disorders of White Blood cells"
-63,Diseases of white blood cells,"Hemorrhagic, coagulation, and disorders of White Blood cells"
-64,Other hematologic conditions,"Hemorrhagic, coagulation, and disorders of White Blood cells"
-59,Deficiency and other anemia,Anemia and other deficiencies
-65-75,(older codes),Mental disorders
-650,Adjustment disorders,Mental disorders
-651,Anxiety disorders,Mental disorders
-652,"Attention-deficit, conduct, and disruptive behavior disorders",Mental disorders
-653,"Delirium, dementia, and amnestic and other cognitive disorders",Mental disorders
-654,Developmental disorders,Mental disorders
-655,"Disorders usually diagnosed in infancy, childhood, or adolescence",Mental disorders
-656,"Impulse control disorders, NEC",Mental disorders
-657,Mood disorders,Mental disorders
-658,Personality disorders,Mental disorders
-659,Schizophrenia and other psychotic disorders,Mental disorders
-660,Alcohol-related disorders,Mental disorders
-661,Substance-related disorders,Mental disorders
-662,Suicide and intentional self-inflicted injury,Mental disorders
-663,Screening and history of mental health and substance abuse codes,Mental disorders
-670,Miscellaneous mental health disorders    ,Mental disorders
-76,Meningitis (except that caused by tuberculosis or sexually transmitted disease),CNS infection
-77,Encephalitis (except that caused by tuberculosis or sexually transmitted disease),CNS infection
-78,Other CNS infection and poliomyelitis,CNS infection
-79,Parkinson's disease,"Hereditary, degenerative and other nervous system disorders"
-80,Multiple sclerosis,"Hereditary, degenerative and other nervous system disorders"
-81,Other hereditary and degenerative nervous system conditions,"Hereditary, degenerative and other nervous system disorders"
-82,Paralysis,Paralysis
-84,Headache; including migraine,Headache
-83,Epilepsy; convulsions,Epilepsy and convulsions
-85,Coma; stupor; and brain damage,"Coma, brain damage"
-86,Cataract,Cataract
-88,Glaucoma,Glaucoma
-87,Retinal detachments; defects; vascular occlusion; and retinopathy,Other eye disorders
-89,Blindness and vision defects,Other eye disorders
-90,Inflammation; infection of eye (except that caused by tuberculosis or sexually transmitteddisease),Other eye disorders
-91,Other eye disorders,Other eye disorders
-92,Otitis media and related conditions,Otitis media
-93,Conditions associated with dizziness or vertigo,Other CNS disorders
-94,Other ear and sense organ disorders,Other CNS disorders
-95,Other nervous system disorders,Other CNS disorders
-98,Essential hypertension,Hypertension
-99,Hypertension with complications and secondary hypertension,Hypertension
-96,Heart valve disorders,Heart disease
-97,Peri-; endo-; and myocarditis; cardiomyopathy (except that caused by tuberculosis or sexually transmitted disease),Heart disease
-100,Acute myocardial infarction,Heart disease
-101,Coronary atherosclerosis and other heart disease,Heart disease
-102,Nonspecific chest pain,Heart disease
-103,Pulmonary heart disease,Heart disease
-104,Other and ill-defined heart disease,Heart disease
-105,Conduction disorders,Heart disease
-106,Cardiac dysrhythmias,Heart disease
-107,Cardiac arrest and ventricular fibrillation,Heart disease
-108,Congestive heart failure; nonhypertensive,Heart disease
-109,Acute cerebrovascular disease,Cerebrovascular disease
-110,Occlusion or stenosis of precerebral arteries,Cerebrovascular disease
-111,Other and ill-defined cerebrovascular disease,Cerebrovascular disease
-112,Transient cerebral ischemia,Cerebrovascular disease
-113,Late effects of cerebrovascular disease,Cerebrovascular disease
-114,Peripheral and visceral atherosclerosis,"Other circulatory conditions arteries, veins, and lymphatics"
-115,Aortic; peripheral; and visceral artery aneurysms,"Other circulatory conditions arteries, veins, and lymphatics"
-116,Aortic and peripheral arterial embolism or thrombosis,"Other circulatory conditions arteries, veins, and lymphatics"
-117,Other circulatory disease,"Other circulatory conditions arteries, veins, and lymphatics"
-118,Phlebitis; thrombophlebitis and thromboembolism,"Other circulatory conditions arteries, veins, and lymphatics"
-119,Varicose veins of lower extremity,"Other circulatory conditions arteries, veins, and lymphatics"
-120,Hemorrhoids,"Other circulatory conditions arteries, veins, and lymphatics"
-121,Other diseases of veins and lymphatics,"Other circulatory conditions arteries, veins, and lymphatics"
-122,Pneumonia (except that caused by tuberculosis or sexually transmitted disease),Pneumonia
-123,Influenza,Influenza
-124,Acute and chronic tonsillitis,Tonsillitis
-125,Acute bronchitis,Acute Bronchitis and URI
-126,Other upper respiratory infections,Acute Bronchitis and URI
-127,Chronic obstructive pulmonary disease and bronchiectasis,"COPD, asthma"
-128,Asthma,"COPD, asthma"
-129,Aspiration pneumonitis; food/vomitus,"COPD, asthma"
-130,Pleurisy; pneumothorax; pulmonary collapse,"COPD, asthma"
-131,Respiratory failure; insufficiency; arrest (adult),"COPD, asthma"
-132,Lung disease due to external agents,"COPD, asthma"
-133,Other lower respiratory disease,"COPD, asthma"
-134,Other upper respiratory disease,"COPD, asthma"
-135,Intestinal infection,Intestinal infection
-136,Disorders of teeth and jaw,Disorders of teeth and jaws
-137,Diseases of mouth; excluding dental,Disorders of mouth and esophagus
-138,Esophageal disorders,Disorders of the upper GI
-139,Gastroduodenal ulcer (except hemorrhage),Disorders of the upper GI
-140,Gastritis and duodenitis,Disorders of the upper GI
-141,Other disorders of stomach and duodenum,Disorders of the upper GI
-142,Appendicitis and other appendiceal conditions,Appendicitis
-143,Abdominal hernia,Hernias
-144,Regional enteritis and ulcerative colitis,Other stomach and intestinal disorders
-145,Intestinal obstruction without hernia,Other stomach and intestinal disorders
-146,Diverticulosis and diverticulitis,Other stomach and intestinal disorders
-147,Anal and rectal conditions,Other stomach and intestinal disorders
-148,Peritonitis and intestinal abscess,Other stomach and intestinal disorders
-153,Gastrointestinal hemorrhage,Other GI
-154,Noninfectious gastroenteritis,Other GI
-155,Other gastrointestinal disorders,Other GI
-149,Biliary tract disease,"Gallbladder, pancreatic, and liver disease"
-150,Liver disease; alcohol-related,"Gallbladder, pancreatic, and liver disease"
-151,Other liver diseases,"Gallbladder, pancreatic, and liver disease"
-152,Pancreatic disorders (not diabetes),"Gallbladder, pancreatic, and liver disease"
-156,Nephritis; nephrosis; renal sclerosis,Kidney Disease
-157,Acute and unspecified renal failure,Kidney Disease
-158,Chronic kidney disease,Kidney Disease
-160,Calculus of urinary tract,Kidney Disease
-161,Other diseases of kidney and ureters,Kidney Disease
-159,Urinary tract infections,Urinary tract infections
-162,Other diseases of bladder and urethra,Other urinary
-163,Genitourinary symptoms and ill-defined conditions,Other urinary
-164,Hyperplasia of prostate,Male genital disorders
-165,Inflammatory conditions of male genital organs,Male genital disorders
-166,Other male genital disorders,Male genital disorders
-167,Nonmalignant breast conditions,Non-malignant breast disease
-177,Spontaneous abortion,Complications of pregnancy and birth
-178,Induced abortion,Complications of pregnancy and birth
-179,Postabortion complications,Complications of pregnancy and birth
-180,Ectopic pregnancy,Complications of pregnancy and birth
-181,Other complications of pregnancy,Complications of pregnancy and birth
-182,Hemorrhage during pregnancy; abruptio placenta; placenta previa,Complications of pregnancy and birth
-183,Hypertension complicating pregnancy; childbirth and the puerperium,Complications of pregnancy and birth
-184,Early or threatened labor,Complications of pregnancy and birth
-185,Prolonged pregnancy,Complications of pregnancy and birth
-186,Diabetes or abnormal glucose tolerance complicating pregnancy; childbirth; or the puerperium,Complications of pregnancy and birth
-187,Malposition; malpresentation,Complications of pregnancy and birth
-188,Fetopelvic disproportion; obstruction,Complications of pregnancy and birth
-189,Previous C-section,Complications of pregnancy and birth
-190,Fetal distress and abnormal forces of labor,Complications of pregnancy and birth
-191,Polyhydramnios and other problems of amniotic cavity,Complications of pregnancy and birth
-192,Umbilical cord complication,Complications of pregnancy and birth
-193,OB-related trauma to perineum and vulva,Complications of pregnancy and birth
-194,Forceps delivery,Complications of pregnancy and birth
-195,Other complications of birth; puerperium affecting management of mother,Complications of pregnancy and birth
-168,Inflammatory diseases of female pelvic organs,"Female genital disorders, and contraception"
-169,Endometriosis,"Female genital disorders, and contraception"
-170,Prolapse of female genital organs,"Female genital disorders, and contraception"
-171,Menstrual disorders,"Female genital disorders, and contraception"
-172,Ovarian cyst,"Female genital disorders, and contraception"
-173,Menopausal disorders,"Female genital disorders, and contraception"
-174,Female infertility,"Female genital disorders, and contraception"
-175,Other female genital disorders,"Female genital disorders, and contraception"
-176,Contraceptive and procreative management,"Female genital disorders, and contraception"
-196,Other pregnancy and delivery including normal,Normal birth/live born
-218,Liveborn,Normal birth/live born
-197,Skin and subcutaneous tissue infections,Skin disorders
-198,Other inflammatory condition of skin,Skin disorders
-199,Chronic ulcer of skin,Skin disorders
-200,Other skin disorders,Skin disorders
-201,Infective arthritis and osteomyelitis (except that caused by tuberculosis or sexually transmitted disease),Osteoarthritis and other non-traumatic joint disorders
-202,Rheumatoid arthritis and related disease,Osteoarthritis and other non-traumatic joint disorders
-203,Osteoarthritis,Osteoarthritis and other non-traumatic joint disorders
-204,Other non-traumatic joint disorders,Osteoarthritis and other non-traumatic joint disorders
-205,Spondylosis; intervertebral disc disorders; other back problems,Back problems
-206,Osteoporosis,Other bone and musculoskeletal disease
-207,Pathological fracture,Other bone and musculoskeletal disease
-208,Acquired foot deformities,Other bone and musculoskeletal disease
-209,Other acquired deformities,Other bone and musculoskeletal disease
-212,Other bone disease and musculoskeletal deformities,Other bone and musculoskeletal disease
-210,Systemic lupus erythematosus and connective tissue disorders,Systemic lupus and connective tissues disorders
-211,Other connective tissue disease,Systemic lupus and connective tissues disorders
-213,Cardiac and circulatory congenital anomalies,Congenital anomalies
-214,Digestive congenital anomalies,Congenital anomalies
-215,Genitourinary congenital anomalies,Congenital anomalies
-216,Nervous system congenital anomalies,Congenital anomalies
-217,Other congenital anomalies,Congenital anomalies
-219,Short gestation; low birth weight; and fetal growth retardation,Perinatal Conditions
-220,Intrauterine hypoxia and birth asphyxia,Perinatal Conditions
-221,Respiratory distress syndrome,Perinatal Conditions
-222,Hemolytic jaundice and perinatal jaundice,Perinatal Conditions
-223,Birth trauma,Perinatal Conditions
-224,Other perinatal conditions,Perinatal Conditions
-225,Joint disorders and dislocations; trauma-related,Trauma-related disorders
-226,Fracture of neck of femur (hip),Trauma-related disorders
-227,Spinal cord injury,Trauma-related disorders
-228,Skull and face fractures,Trauma-related disorders
-229,Fracture of upper limb,Trauma-related disorders
-230,Fracture of lower limb,Trauma-related disorders
-231,Other fractures,Trauma-related disorders
-232,Sprains and strains,Trauma-related disorders
-233,Intracranial injury,Trauma-related disorders
-234,Crushing injury or internal injury,Trauma-related disorders
-235,Open wounds of head; neck; and trunk,Trauma-related disorders
-236,Open wounds of extremities,Trauma-related disorders
-239,Superficial injury; contusion,Trauma-related disorders
-240,Burns,Trauma-related disorders
-244,Other injuries and conditions due to external causes,Trauma-related disorders
-237,Complication of device; implant or graft,Complications of surgery or device
-238,Complications of surgical procedures or medical care,Complications of surgery or device
-241,Poisoning by psychotropic agents,Poisoning by medical and non-medical substances
-242,Poisoning by other medications and drugs,Poisoning by medical and non-medical substances
-243,Poisoning by nonmedicinal substances,Poisoning by medical and non-medical substances
-259,Residual codes; unclassified,Residual Codes
-10,Immunizations and screening for infectious disease,Other care and screening
-254,Rehabilitation care; fitting of prostheses; and adjustment of devices,Other care and screening
-255,Administrative/social admission,Other care and screening
-256,Medical examination/evaluation,Other care and screening
-257,Other aftercare,Other care and screening
-258,Other screening for suspected conditions (not mental disorders or infectious disease),Other care and screening
-245,Syncope,Symptoms
-246,Fever of unknown origin,Symptoms
-247,Lymphadenitis,Symptoms
-248,Gangrene,Symptoms
-249,Shock,Symptoms
-250,Nausea and vomiting,Symptoms
-251,Abdominal pain,Symptoms
-252,Malaise and fatigue,Symptoms
-253,Allergic reactions,Allergic reactions
+CCS Code,CCS Description,MEPS collapsed condition category,Category Body System
+1,Tuberculosis,Infectious disease,INF: Certain infectious and parasitic diseases
+2,Septicemia (except in labor),Infectious disease,INF: Certain infectious and parasitic diseases
+3,Bacterial infection; unspecified site,Infectious disease,INF: Certain infectious and parasitic diseases
+4,Mycoses,Infectious disease,INF: Certain infectious and parasitic diseases
+5,HIV infection,Infectious disease,INF: Certain infectious and parasitic diseases
+6,Hepatitis,Infectious disease,INF: Certain infectious and parasitic diseases
+7,Viral infection,Infectious disease,INF: Certain infectious and parasitic diseases
+8,Other infections; including parasitic,Infectious disease,INF: Certain infectious and parasitic diseases
+9,Sexually transmitted infections (not HIV or hepatitis),Infectious disease,INF: Certain infectious and parasitic diseases
+11,Cancer of head and neck,Cancer,NEO: Neoplasms
+12,Cancer of esophagus,Cancer,NEO: Neoplasms
+13,Cancer of stomach,Cancer,NEO: Neoplasms
+14,Cancer of colon,Cancer,NEO: Neoplasms
+15,Cancer of rectum and anus,Cancer,NEO: Neoplasms
+16,Cancer of liver and intrahepatic bile duct,Cancer,NEO: Neoplasms
+17,Cancer of pancreas,Cancer,NEO: Neoplasms
+18,Cancer of other GI organs; peritoneum,Cancer,NEO: Neoplasms
+19,Cancer of bronchus; lung,Cancer,NEO: Neoplasms
+20,Cancer; other respiratory and intrathoracic,Cancer,NEO: Neoplasms
+21,Cancer of bone and connective tissue,Cancer,NEO: Neoplasms
+22,Melanomas of skin,Cancer,NEO: Neoplasms
+23,Other non-epithelial cancer of skin,Cancer,NEO: Neoplasms
+24,Cancer of breast,Cancer,NEO: Neoplasms
+25,Cancer of uterus,Cancer,NEO: Neoplasms
+26,Cancer of cervix,Cancer,NEO: Neoplasms
+27,Cancer of ovary,Cancer,NEO: Neoplasms
+28,Cancer of other female genital organs,Cancer,NEO: Neoplasms
+29,Cancer of prostate,Cancer,NEO: Neoplasms
+30,Cancer of testis,Cancer,NEO: Neoplasms
+31,Cancer of other male genital organs,Cancer,NEO: Neoplasms
+32,Cancer of bladder,Cancer,NEO: Neoplasms
+33,Cancer of kidney and renal pelvis,Cancer,NEO: Neoplasms
+34,Cancer of other urinary organs,Cancer,NEO: Neoplasms
+35,Cancer of brain and nervous system,Cancer,NEO: Neoplasms
+36,Cancer of thyroid,Cancer,NEO: Neoplasms
+37,Hodgkin`s disease,Cancer,NEO: Neoplasms
+38,Non-Hodgkin`s lymphoma,Cancer,NEO: Neoplasms
+39,Leukemias,Cancer,NEO: Neoplasms
+40,Multiple myeloma,Cancer,NEO: Neoplasms
+41,Cancer; other and unspecified primary,Cancer,NEO: Neoplasms
+42,Secondary malignancies,Cancer,NEO: Neoplasms
+43,Malignant neoplasm without specification of site,Cancer,NEO: Neoplasms
+44,Neoplasms of unspecified nature or uncertain behavior,Cancer,NEO: Neoplasms
+45,Maintenance chemotherapy; radiotherapy,Cancer,NEO: Neoplasms
+46,Benign neoplasm of uterus,Non-malignant neoplasm,NEO: Neoplasms
+47,Other and unspecified benign neoplasm,Non-malignant neoplasm,NEO: Neoplasms
+48,Thyroid disorders,Thyroid disorders,"END: Endocrine, nutritional and metabolic diseases"
+49,Diabetes mellitus without complication,Diabetes mellitus,"END: Endocrine, nutritional and metabolic diseases"
+50,Diabetes mellitus with complications,Diabetes mellitus,"END: Endocrine, nutritional and metabolic diseases"
+51,Other endocrine disorders,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+52,Nutritional deficiencies,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+54,Gout and other crystal arthropathies,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+55,Fluid and electrolyte disorders,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+56,Cystic fibrosis,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+57,Immunity disorders,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+58,Other nutritional; endocrine; and metabolic disorders,"Other endocrine, nutritional & immune disorder","END: Endocrine, nutritional and metabolic diseases"
+53,Disorders of lipid metabolism,Hyperlipidemia (High cholesterol),"END: Endocrine, nutritional and metabolic diseases"
+60,Acute posthemorrhagic anemia,Other disorders of blood and immune system,BLD: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+61,Sickle cell anemia,Other disorders of blood and immune system,BLD: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+62,Coagulation and hemorrhagic disorders,Other disorders of blood and immune system,BLD: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+63,Diseases of white blood cells,Other disorders of blood and immune system,BLD: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+64,Other hematologic conditions,Other disorders of blood and immune system,BLD: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+59,Deficiency and other anemia,Anemia,BLD: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+65-75,(older codes),Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+650,Adjustment disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+651,Anxiety disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+652,"Attention-deficit, conduct, and disruptive behavior disorders",Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+653,"Delirium, dementia, and amnestic and other cognitive disorders",Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+654,Developmental disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+655,"Disorders usually diagnosed in infancy, childhood, or adolescence",Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+656,"Impulse control disorders, NEC",Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+657,Mood disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+658,Personality disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+659,Schizophrenia and other psychotic disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+660,Alcohol-related disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+661,Substance-related disorders,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+662,Suicide and intentional self-inflicted injury,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+663,Screening and history of mental health and substance abuse codes,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+670,Miscellaneous mental health disorders    ,Mental and substance use disorders,"MBD: Mental, behavioral and neurodevelopmental disorders"
+76,Meningitis (except that caused by tuberculosis or sexually transmitted disease),CNS infection,NVS: Diseases of the nervous system
+77,Encephalitis (except that caused by tuberculosis or sexually transmitted disease),CNS infection,NVS: Diseases of the nervous system
+78,Other CNS infection and poliomyelitis,CNS infection,NVS: Diseases of the nervous system
+79,Parkinson's disease,"Hereditary, degenerative and other nervous system disorders",NVS: Diseases of the nervous system
+80,Multiple sclerosis,"Hereditary, degenerative and other nervous system disorders",NVS: Diseases of the nervous system
+81,Other hereditary and degenerative nervous system conditions,"Hereditary, degenerative and other nervous system disorders",NVS: Diseases of the nervous system
+82,Paralysis,Paralysis,NVS: Diseases of the nervous system
+84,Headache; including migraine,Headache / migraine,NVS: Diseases of the nervous system
+83,Epilepsy; convulsions,Epilepsy and convulsions,NVS: Diseases of the nervous system
+85,Coma; stupor; and brain damage,"Coma, brain damage",NVS: Diseases of the nervous system
+86,Cataract,Cataract,EYE: Diseases of the eye and adnexa
+88,Glaucoma,Glaucoma,EYE: Diseases of the eye and adnexa
+87,Retinal detachments; defects; vascular occlusion; and retinopathy,Other eye disorders,EYE: Diseases of the eye and adnexa
+89,Blindness and vision defects,Other eye disorders,EYE: Diseases of the eye and adnexa
+90,Inflammation; infection of eye (except that caused by tuberculosis or sexually transmitteddisease),Other eye disorders,EYE: Diseases of the eye and adnexa
+91,Other eye disorders,Other eye disorders,EYE: Diseases of the eye and adnexa
+92,Otitis media and related conditions,Otitis media and related conditions,EAR: Diseases of the ear and mastoid process
+93,Conditions associated with dizziness or vertigo,Other CNS disorders,NVS: Diseases of the nervous system
+94,Other ear and sense organ disorders,Other CNS disorders,NVS: Diseases of the nervous system
+95,Other nervous system disorders,Other CNS disorders,NVS: Diseases of the nervous system
+98,Essential hypertension,Hypertension (High blood pressure),CIR: Diseases of the circulatory system
+99,Hypertension with complications and secondary hypertension,Hypertension (High blood pressure),CIR: Diseases of the circulatory system
+96,Heart valve disorders,Heart disease,CIR: Diseases of the circulatory system
+97,Peri-; endo-; and myocarditis; cardiomyopathy (except that caused by tuberculosis or sexually transmitted disease),Heart disease,CIR: Diseases of the circulatory system
+100,Acute myocardial infarction,Heart disease,CIR: Diseases of the circulatory system
+101,Coronary atherosclerosis and other heart disease,Heart disease,CIR: Diseases of the circulatory system
+102,Nonspecific chest pain,Heart disease,CIR: Diseases of the circulatory system
+103,Pulmonary heart disease,Heart disease,CIR: Diseases of the circulatory system
+104,Other and ill-defined heart disease,Heart disease,CIR: Diseases of the circulatory system
+105,Conduction disorders,Heart disease,CIR: Diseases of the circulatory system
+106,Cardiac dysrhythmias,Heart disease,CIR: Diseases of the circulatory system
+107,Cardiac arrest and ventricular fibrillation,Heart disease,CIR: Diseases of the circulatory system
+108,Congestive heart failure; nonhypertensive,Heart disease,CIR: Diseases of the circulatory system
+109,Acute cerebrovascular disease,Cerebrovascular disease,CIR: Diseases of the circulatory system
+110,Occlusion or stenosis of precerebral arteries,Cerebrovascular disease,CIR: Diseases of the circulatory system
+111,Other and ill-defined cerebrovascular disease,Cerebrovascular disease,CIR: Diseases of the circulatory system
+112,Transient cerebral ischemia,Cerebrovascular disease,CIR: Diseases of the circulatory system
+113,Late effects of cerebrovascular disease,Cerebrovascular disease,CIR: Diseases of the circulatory system
+114,Peripheral and visceral atherosclerosis,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+115,Aortic; peripheral; and visceral artery aneurysms,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+116,Aortic and peripheral arterial embolism or thrombosis,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+117,Other circulatory disease,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+118,Phlebitis; thrombophlebitis and thromboembolism,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+119,Varicose veins of lower extremity,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+120,Hemorrhoids,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+121,Other diseases of veins and lymphatics,Other conditions of the circulatory system,CIR: Diseases of the circulatory system
+122,Pneumonia (except that caused by tuberculosis or sexually transmitted disease),Pneumonia,RSP: Diseases of the respiratory system
+123,Influenza,Influenza,RSP: Diseases of the respiratory system
+124,Acute and chronic tonsillitis,Tonsillitis,RSP: Diseases of the respiratory system
+125,Acute bronchitis,Acute Bronchitis and URI (including common cold),RSP: Diseases of the respiratory system
+126,Other upper respiratory infections,Acute Bronchitis and URI (including common cold),RSP: Diseases of the respiratory system
+127,Chronic obstructive pulmonary disease and bronchiectasis,"COPD, asthma",RSP: Diseases of the respiratory system
+128,Asthma,"COPD, asthma",RSP: Diseases of the respiratory system
+129,Aspiration pneumonitis; food/vomitus,"COPD, asthma",RSP: Diseases of the respiratory system
+130,Pleurisy; pneumothorax; pulmonary collapse,"COPD, asthma",RSP: Diseases of the respiratory system
+131,Respiratory failure; insufficiency; arrest (adult),"COPD, asthma",RSP: Diseases of the respiratory system
+132,Lung disease due to external agents,"COPD, asthma",RSP: Diseases of the respiratory system
+133,Other lower respiratory disease,"COPD, asthma",RSP: Diseases of the respiratory system
+134,Other upper respiratory disease,"COPD, asthma",RSP: Diseases of the respiratory system
+135,Intestinal infection,Intestinal infection,DIG: Diseases of the digestive system
+136,Disorders of teeth and jaw,Disorders of teeth and jaws,DIG: Diseases of the digestive system
+137,Diseases of mouth; excluding dental,Disorders of mouth and esophagus (including acid reflux),DIG: Diseases of the digestive system
+138,Esophageal disorders,Disorders of the upper GI,DIG: Diseases of the digestive system
+139,Gastroduodenal ulcer (except hemorrhage),Disorders of the upper GI,DIG: Diseases of the digestive system
+140,Gastritis and duodenitis,Disorders of the upper GI,DIG: Diseases of the digestive system
+141,Other disorders of stomach and duodenum,Disorders of the upper GI,DIG: Diseases of the digestive system
+142,Appendicitis and other appendiceal conditions,Appendicitis,DIG: Diseases of the digestive system
+143,Abdominal hernia,Hernias,DIG: Diseases of the digestive system
+144,Regional enteritis and ulcerative colitis,Other stomach and intestinal disorders,DIG: Diseases of the digestive system
+145,Intestinal obstruction without hernia,Other stomach and intestinal disorders,DIG: Diseases of the digestive system
+146,Diverticulosis and diverticulitis,Other stomach and intestinal disorders,DIG: Diseases of the digestive system
+147,Anal and rectal conditions,Other stomach and intestinal disorders,DIG: Diseases of the digestive system
+148,Peritonitis and intestinal abscess,Other stomach and intestinal disorders,DIG: Diseases of the digestive system
+153,Gastrointestinal hemorrhage,Other GI,DIG: Diseases of the digestive system
+154,Noninfectious gastroenteritis,Other GI,DIG: Diseases of the digestive system
+155,Other gastrointestinal disorders,Other GI,DIG: Diseases of the digestive system
+149,Biliary tract disease,"Gallbladder, pancreatic, and liver disease",DIG: Diseases of the digestive system
+150,Liver disease; alcohol-related,"Gallbladder, pancreatic, and liver disease",DIG: Diseases of the digestive system
+151,Other liver diseases,"Gallbladder, pancreatic, and liver disease",DIG: Diseases of the digestive system
+152,Pancreatic disorders (not diabetes),"Gallbladder, pancreatic, and liver disease",DIG: Diseases of the digestive system
+156,Nephritis; nephrosis; renal sclerosis,Kidney Disease and related conditions,GEN: Diseases of the genitourinary system
+157,Acute and unspecified renal failure,Kidney Disease and related conditions,GEN: Diseases of the genitourinary system
+158,Chronic kidney disease,Kidney Disease and related conditions,GEN: Diseases of the genitourinary system
+160,Calculus of urinary tract,Kidney Disease and related conditions,GEN: Diseases of the genitourinary system
+161,Other diseases of kidney and ureters,Kidney Disease and related conditions,GEN: Diseases of the genitourinary system
+159,Urinary tract infections,Urinary tract infections,GEN: Diseases of the genitourinary system
+162,Other diseases of bladder and urethra,Other genitourinary conditions,GEN: Diseases of the genitourinary system
+163,Genitourinary symptoms and ill-defined conditions,Other genitourinary conditions,GEN: Diseases of the genitourinary system
+164,Hyperplasia of prostate,Male genital disorders,GEN: Diseases of the genitourinary system
+165,Inflammatory conditions of male genital organs,Male genital disorders,GEN: Diseases of the genitourinary system
+166,Other male genital disorders,Male genital disorders,GEN: Diseases of the genitourinary system
+167,Nonmalignant breast conditions,Non-malignant breast conditions,GEN: Diseases of the genitourinary system
+177,Spontaneous abortion,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+178,Induced abortion,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+179,Postabortion complications,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+180,Ectopic pregnancy,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+181,Other complications of pregnancy,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+182,Hemorrhage during pregnancy; abruptio placenta; placenta previa,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+183,Hypertension complicating pregnancy; childbirth and the puerperium,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+184,Early or threatened labor,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+185,Prolonged pregnancy,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+186,Diabetes or abnormal glucose tolerance complicating pregnancy; childbirth; or the puerperium,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+187,Malposition; malpresentation,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+188,Fetopelvic disproportion; obstruction,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+189,Previous C-section,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+190,Fetal distress and abnormal forces of labor,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+191,Polyhydramnios and other problems of amniotic cavity,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+192,Umbilical cord complication,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+193,OB-related trauma to perineum and vulva,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+194,Forceps delivery,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+195,Other complications of birth; puerperium affecting management of mother,Complications of pregnancy and birth,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+168,Inflammatory diseases of female pelvic organs,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+169,Endometriosis,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+170,Prolapse of female genital organs,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+171,Menstrual disorders,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+172,Ovarian cyst,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+173,Menopausal disorders,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+174,Female infertility,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+175,Other female genital disorders,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+176,Contraceptive and procreative management,"Female genital disorders, and contraception",GEN: Diseases of the genitourinary system
+196,Other pregnancy and delivery including normal,"Normal pregnancy/birth, and live born","PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+218,Liveborn,"Normal pregnancy/birth, and live born","PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+197,Skin and subcutaneous tissue infections,Skin disorders,SKN: Diseases of the skin and subcutaneous tissue
+198,Other inflammatory condition of skin,Skin disorders,SKN: Diseases of the skin and subcutaneous tissue
+199,Chronic ulcer of skin,Skin disorders,SKN: Diseases of the skin and subcutaneous tissue
+200,Other skin disorders,Skin disorders,SKN: Diseases of the skin and subcutaneous tissue
+201,Infective arthritis and osteomyelitis (except that caused by tuberculosis or sexually transmitted disease),Osteoarthritis and other non-traumatic joint disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+202,Rheumatoid arthritis and related disease,Osteoarthritis and other non-traumatic joint disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+203,Osteoarthritis,Osteoarthritis and other non-traumatic joint disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+204,Other non-traumatic joint disorders,Osteoarthritis and other non-traumatic joint disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+205,Spondylosis; intervertebral disc disorders; other back problems,Back problems,MUS: Diseases of the musculoskeletal system and connective tissue
+206,Osteoporosis,Other bone and musculoskeletal disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+207,Pathological fracture,Other bone and musculoskeletal disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+208,Acquired foot deformities,Other bone and musculoskeletal disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+209,Other acquired deformities,Other bone and musculoskeletal disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+212,Other bone disease and musculoskeletal deformities,Other bone and musculoskeletal disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+210,Systemic lupus erythematosus and connective tissue disorders,Systemic lupus and connective tissues disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+211,Other connective tissue disease,Systemic lupus and connective tissues disorders,MUS: Diseases of the musculoskeletal system and connective tissue
+213,Cardiac and circulatory congenital anomalies,Congenital anomalies,"MAL: Congenital malformations, deformations and chromosomal abnormalities"
+214,Digestive congenital anomalies,Congenital anomalies,"MAL: Congenital malformations, deformations and chromosomal abnormalities"
+215,Genitourinary congenital anomalies,Congenital anomalies,"MAL: Congenital malformations, deformations and chromosomal abnormalities"
+216,Nervous system congenital anomalies,Congenital anomalies,"MAL: Congenital malformations, deformations and chromosomal abnormalities"
+217,Other congenital anomalies,Congenital anomalies,"MAL: Congenital malformations, deformations and chromosomal abnormalities"
+219,Short gestation; low birth weight; and fetal growth retardation,Perinatal Conditions,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+220,Intrauterine hypoxia and birth asphyxia,Perinatal Conditions,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+221,Respiratory distress syndrome,Perinatal Conditions,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+222,Hemolytic jaundice and perinatal jaundice,Perinatal Conditions,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+223,Birth trauma,Perinatal Conditions,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+224,Other perinatal conditions,Perinatal Conditions,"PNL/PRG: Pregnancy, childbirth, puerperium and perinatal conditions"
+225,Joint disorders and dislocations; trauma-related,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+226,Fracture of neck of femur (hip),Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+227,Spinal cord injury,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+228,Skull and face fractures,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+229,Fracture of upper limb,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+230,Fracture of lower limb,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+231,Other fractures,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+232,Sprains and strains,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+233,Intracranial injury,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+234,Crushing injury or internal injury,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+235,Open wounds of head; neck; and trunk,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+236,Open wounds of extremities,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+239,Superficial injury; contusion,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+240,Burns,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+244,Other injuries and conditions due to external causes,Injury,"INJ: Injury, poisoning and certain other consequences of external causes"
+237,Complication of device; implant or graft,"Complications of surgery, device, or medical care","INJ: Injury, poisoning and certain other consequences of external causes"
+238,Complications of surgical procedures or medical care,"Complications of surgery, device, or medical care","INJ: Injury, poisoning and certain other consequences of external causes"
+241,Poisoning by psychotropic agents,Poisoning and other toxic effects,"INJ: Injury, poisoning and certain other consequences of external causes"
+242,Poisoning by other medications and drugs,Poisoning and other toxic effects,"INJ: Injury, poisoning and certain other consequences of external causes"
+243,Poisoning by nonmedicinal substances,Poisoning and other toxic effects,"INJ: Injury, poisoning and certain other consequences of external causes"
+259,Residual codes; unclassified,Residual Codes,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+10,Immunizations and screening for infectious disease,Other care and screening,FAC: Factors influencing health status and contact with health services
+254,Rehabilitation care; fitting of prostheses; and adjustment of devices,Other care and screening,FAC: Factors influencing health status and contact with health services
+255,Administrative/social admission,Other care and screening,FAC: Factors influencing health status and contact with health services
+256,Medical examination/evaluation,Other care and screening,FAC: Factors influencing health status and contact with health services
+257,Other aftercare,Other care and screening,FAC: Factors influencing health status and contact with health services
+258,Other screening for suspected conditions (not mental disorders or infectious disease),Other care and screening,FAC: Factors influencing health status and contact with health services
+245,Syncope,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+246,Fever of unknown origin,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+247,Lymphadenitis,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+248,Gangrene,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+249,Shock,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+250,Nausea and vomiting,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+251,Abdominal pain,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+252,Malaise and fatigue,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+253,Allergic reactions,Allergic reactions,"INJ: Injury, poisoning and certain other consequences of external causes"
