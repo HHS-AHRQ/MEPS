@@ -8,7 +8,6 @@
 - [SAS SURVEY procedures](#sas-survey-procedures)
 - [SAS examples](#sas-examples)
   - [Workshop exercises](#workshop-exercises)
-    - [7. Linking Medical Conditions and Event Files](#7-linking-medical-conditions-and-event-files)
   - [Summary tables examples](#summary-tables-examples)
   - [Older Exercises (1996 to 2006)](#older-exercises-1996-to-2006)
 
@@ -179,7 +178,7 @@ Example codes from previous MEPS workshops and webinars are provided in the [wor
 [exercise_6b](workshop_exercises/exercise_6b): Logistic regression for persons that delayed medical care because of COVID, 2020
 <br>
 
-### 7. Linking Medical Conditions and Event Files
+### 7. Linking Medical Conditions and Event Files  <!-- omit in toc -->
 [cond_pmed_2020.sas](workshop_exercises/cond_pmed_2020.sas): Utilization and expenditures for prescribed medicine purchases for hyperlipidemia, 2020
 <br>
 [cond_mv_2020.sas](workshop_exercises/cond_mv_2020.sas): Utilization and expenditures for office-based visits for mental health, 2020

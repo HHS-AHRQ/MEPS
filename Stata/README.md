@@ -8,7 +8,6 @@
 - [Stata `svy` commands](#stata-svy-commands)
 - [Stata examples](#stata-examples)
   - [Workshop exercises](#workshop-exercises)
-    - [7. Linking Medical Conditions and Event Files](#7-linking-medical-conditions-and-event-files)
   - [Summary tables examples](#summary-tables-examples)
 
 # Loading MEPS data
@@ -147,7 +146,7 @@ The following example codes from previous MEPS workshops and webinars are provid
 [Exercise6b.do](workshop_exercises/Exercise6b.do): Logistic regression for persons that delayed medical care because of COVID, 2020
 <br>
 
-### 7. Linking Medical Conditions and Event Files
+### 7. Linking Medical Conditions and Event Files <!-- omit in toc -->
 
 [cond_mv_2020.do](workshop_exercises/cond_mv_2020.do): Utilization and expenditures for office-based visits for mental health, 2020
 

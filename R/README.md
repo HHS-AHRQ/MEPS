@@ -10,7 +10,6 @@
 - [Survey package in R](#survey-package-in-r)
 - [R examples](#r-examples)
   - [Workshop exercises](#workshop-exercises)
-    - [6. Linking Medical Conditions and Event Files](#6-linking-medical-conditions-and-event-files)
   - [Summary tables examples](#summary-tables-examples)
 
 
@@ -286,7 +285,7 @@ The following codes from previous MEPS workshops and webinars are provided in th
 ### 5. Plots <!-- omit in toc -->
 [ggplot_example.R](workshop_exercises/ggplot_example.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
 
-### 6. Linking Medical Conditions and Event Files
+### 6. Linking Medical Conditions and Event Files  <!-- omit in toc -->
 [cond_pmed_2020.R](workshop_exercises/cond_pmed_2020.R): Utilization and expenditures for prescribed medicine purchases for hyperlipidemia, 2020
 <br>
 [cond_mv_2020.R](workshop_exercises/cond_mv_2020.R): Utilization and expenditures for office-based visits for mental health, 2020
