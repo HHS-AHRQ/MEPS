@@ -8,6 +8,7 @@
 - [SAS SURVEY procedures](#sas-survey-procedures)
 - [SAS examples](#sas-examples)
   - [Workshop exercises](#workshop-exercises)
+    - [7. Linking Medical Conditions and Event Files](#7-linking-medical-conditions-and-event-files)
   - [Summary tables examples](#summary-tables-examples)
   - [Older Exercises (1996 to 2006)](#older-exercises-1996-to-2006)
 
@@ -134,7 +135,7 @@ run;
 In order to run the example codes, you must download the relevant MEPS files from the MEPS website and save them to your local computer.
 
 ## Workshop exercises
-Example codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder. Each exercise contains three files: SAS code (e.g. Exercise1.sas), a SAS log file (e.g. Exercise1_log.TXT) and a SAS output file (e.g. Exercise1_OUTPUT.TXT):
+Example codes from previous MEPS workshops and webinars are provided in the [workshop_exercises](workshop_exercises) folder. Each exercise contains three files: SAS code (e.g. Exercise1.sas), a SAS log file (e.g. Exercise1_log.TXT) and a SAS output file (e.g. Exercise1_OUTPUT.TXT):
 
 ### 1. National health care expenses <!-- omit in toc -->
 [exercise_1a](workshop_exercises/exercise_1a): National health care expenses by age group, 2016
@@ -177,6 +178,11 @@ Example codes from previous MEPS workshops are provided in the [workshop_exercis
 <br>
 [exercise_6b](workshop_exercises/exercise_6b): Logistic regression for persons that delayed medical care because of COVID, 2020
 <br>
+
+### 7. Linking Medical Conditions and Event Files
+[cond_pmed_2020.sas](workshop_exercises/cond_pmed_2020.sas): Utilization and expenditures for prescribed medicine purchases for hyperlipidemia, 2020
+<br>
+[cond_mv_2020.sas](workshop_exercises/cond_mv_2020.sas): Utilization and expenditures for office-based visits for mental health, 2020
 
 ## Summary tables examples
 

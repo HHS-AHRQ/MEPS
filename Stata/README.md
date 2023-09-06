@@ -8,6 +8,7 @@
 - [Stata `svy` commands](#stata-svy-commands)
 - [Stata examples](#stata-examples)
   - [Workshop exercises](#workshop-exercises)
+    - [7. Linking Medical Conditions and Event Files](#7-linking-medical-conditions-and-event-files)
   - [Summary tables examples](#summary-tables-examples)
 
 # Loading MEPS data
@@ -103,7 +104,7 @@ svy: total DVXP18X
 In order to run the example codes, you must download the relevant MEPS files from the MEPS website and save them to your local computer.
 
 ## Workshop exercises
-The following example codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder:
+The following example codes from previous MEPS workshops and webinars are provided in the [workshop_exercises](workshop_exercises) folder:
 
 ### 1. National health care expenses  <!-- omit in toc -->
 [Exercise1a.do](workshop_exercises/Exercise1a.do): National health care expenses by age group, 2016
@@ -145,6 +146,10 @@ The following example codes from previous MEPS workshops are provided in the [wo
 <br>
 [Exercise6b.do](workshop_exercises/Exercise6b.do): Logistic regression for persons that delayed medical care because of COVID, 2020
 <br>
+
+### 7. Linking Medical Conditions and Event Files
+
+[cond_mv_2020.do](workshop_exercises/cond_mv_2020.do): Utilization and expenditures for office-based visits for mental health, 2020
 
 ## Summary tables examples
 

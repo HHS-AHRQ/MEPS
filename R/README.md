@@ -10,6 +10,7 @@
 - [Survey package in R](#survey-package-in-r)
 - [R examples](#r-examples)
   - [Workshop exercises](#workshop-exercises)
+    - [6. Linking Medical Conditions and Event Files](#6-linking-medical-conditions-and-event-files)
   - [Summary tables examples](#summary-tables-examples)
 
 
@@ -251,7 +252,7 @@ In order to run the example codes, you must download the relevant MEPS files fro
 
 
 ## Workshop exercises
-The following codes from previous MEPS workshops are provided in the [workshop_exercises](workshop_exercises) folder:
+The following codes from previous MEPS workshops and webinars are provided in the [workshop_exercises](workshop_exercises) folder:
 
 
 ### 1. National health care expenses <!-- omit in toc -->
@@ -276,7 +277,6 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 [exercise_3d.R](workshop_exercises/exercise_3d.R): Pooling MEPS FYC files, 2017-2019: People with joint pain, using [Pooled Linkage Variance file](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-036) for correct standard error calculation (required when pooling before and after 2019)
 <br>
 
-
 ### 4. Regression <!-- omit in toc -->
 [exercise_4a.R](workshop_exercises/exercise_4a.R): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
 <br>
@@ -286,6 +286,10 @@ The following codes from previous MEPS workshops are provided in the [workshop_e
 ### 5. Plots <!-- omit in toc -->
 [ggplot_example.R](workshop_exercises/ggplot_example.R): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
 
+### 6. Linking Medical Conditions and Event Files
+[cond_pmed_2020.R](workshop_exercises/cond_pmed_2020.R): Utilization and expenditures for prescribed medicine purchases for hyperlipidemia, 2020
+<br>
+[cond_mv_2020.R](workshop_exercises/cond_mv_2020.R): Utilization and expenditures for office-based visits for mental health, 2020
 
 ## Summary tables examples
 
