@@ -59,15 +59,20 @@ Older versions of the crosswalks provided above can be found in the [archive](ar
 [<img src = "../_images/meps_erd.png" alt = "preview of ERD" width = 500>](meps_erd.pdf)
 
 ## File names
-[meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically. Longitudinal files are split into separate columns, since these files span multiple years of data.
+[meps_file_names.csv](meps_file_names.csv) lists the names of the MEPS Public Use Files (PUFs). These can be helpful when users are downloading MEPS datasets programatically. 
+
+[meps_longitudinal_file_names.csv](meps_longitudinal_file_names.csv) contains the names of the MEPS Longitudinal files, where each file contains multiple rounds for a single panel.
+
+> **Note**: Panels 23 and 24 were extended for 4 years of data collection, so these panels have 3-year and 4-year longitudinal files along with the typical 2-year files
+
 
 [![preview of file names](../_images/meps_file_names.png)](meps_file_names.csv)
+
 
 **Abbreviations used in file:**
 * CLNK:	Condition Event Link file
 * FS:	Food Security file
 * FYC: 	Full-Year-Consolidated
-* Long: Longitudinal
 * MOS:	Medical Organizations Survey
 * PIT:	Point-in-time
 * PMED:	Prescription Medicines
