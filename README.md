@@ -26,7 +26,7 @@ The agenda, presentation slides, and programming exercises for the most recent w
 ## Survey Background
 The Medical Expenditure Panel Survey, which began in 1996, is a set of large-scale surveys of families and individuals, their medical providers (doctors, hospitals, pharmacies, etc.), and employers across the United States. The <b>MEPS Household Component (MEPS-HC)</b> survey collects information from families and individuals pertaining to medical expenditures, conditions, and events; demographics (e.g., age, ethnicity, and income); health insurance coverage; access to care; health status; and jobs held. Historically, each surveyed household was interviewed five times (rounds) over a two-year period. However, in the spring of 2020, the COVID-19 pandemic created significant challenges to in-person data collection. To offset the decrease in the number of cases for 2020 data, Panels 23 and 24 were extended to nine rounds (four years) of data collection, so that data year 2020 includes Rounds 6-7 from Panel 23, Rounds 3-5 from Panel 24, and Rounds 1-3 from Panel 25:
 
-![MEPS over-lapping panel design](_images/panel_design.png)
+![MEPS over-lapping panel design](_images/panel_design_2020-2023.png)
 
 The MEPS-HC is designed to produce national and regional estimates of the health care use, expenditures, sources of payment, and insurance coverage of the <b>U.S. civilian noninstitutionalized population</b>. The sample design of the survey includes weighting, stratification, clustering, multiple stages of selection, and disproportionate sampling.
 
