@@ -85,7 +85,7 @@ dn2017 = read_MEPS(file = "h197b")
 dn2018 = read_MEPS(file = "h206b")
 
 # Access the help page for a full list of allowable "type" values:
-help(read_MEPS)
+help(get_puf_names)
 ```
 
 
