@@ -175,6 +175,11 @@ FAC022,Acquired absence of limb or organ,Other care and screening,FAC: Factors i
 FAC023,Organ transplant status,Other care and screening,FAC: Factors influencing health status and contact with health services
 FAC024,Carrier status,Other care and screening,FAC: Factors influencing health status and contact with health services
 FAC025,Other specified status,Other care and screening,FAC: Factors influencing health status and contact with health services
+FAC026,Personal history of nicotine dependence,Other care and screening,FAC: Factors influencing health status and contact with health services
+FAC027,Personal history of malignant neoplasm,Other care and screening,FAC: Factors influencing health status and contact with health services
+FAC028,Family history of disease,Other care and screening,FAC: Factors influencing health status and contact with health services
+FAC029,Genetic susceptibility to disease,Other care and screening,FAC: Factors influencing health status and contact with health services
+FAC030,Personal history of other disease,Other care and screening,FAC: Factors influencing health status and contact with health services
 GEN000,Diseases of the Genitourinary System,Other genitourinary conditions,GEN: Diseases of the genitourinary system
 GEN001,Nephritis; nephrosis; renal sclerosis,Kidney Disease,GEN: Diseases of the genitourinary system
 GEN002,Acute and unspecified renal failure,Kidney Disease,GEN: Diseases of the genitourinary system
@@ -452,6 +457,10 @@ NEO071,"Malignant neoplasm, unspecified",Cancer,NEO: Neoplasms
 NEO072,Neoplasms of unspecified nature or uncertain behavior,Cancer,NEO: Neoplasms
 NEO073,Benign neoplasms,Non-malignant neoplasm,NEO: Neoplasms
 NEO074,Conditions due to neoplasm or the treatment of neoplasm,Cancer,NEO: Neoplasms
+NEO075,Leukemia in remission,Cancer,NEO: Neoplasms
+NEO076,Hodgkin lymphoma in remission,Cancer,NEO: Neoplasms
+NEO077,Non-Hodgkin lymphoma in remission,Cancer,NEO: Neoplasms
+NEO078,Myeloma in remission,Cancer,NEO: Neoplasms
 NVS000,Diseases of the Nervous System,Other nervous system disorders,NVS: Diseases of the nervous system
 NVS001,Meningitis,Other nervous system disorders,NVS: Diseases of the nervous system
 NVS002,Encephalitis,Other nervous system disorders,NVS: Diseases of the nervous system
@@ -566,3 +575,4 @@ SYM014,Skin/Subcutaneous signs and symptoms,Skin disorders,SKN: Diseases of the 
 SYM015,General sensation/perception signs and symptoms,General sensation/perception signs and symptoms (including vertigo and dizziness),"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
 SYM016,Other general signs and symptoms,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
 SYM017,Abnormal findings without diagnosis,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
+SYM018,Prediabetes,Symptoms,"SYM: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified"
