@@ -138,7 +138,7 @@ CCS Code,CCS Description,MEPS collapsed condition category,Category Body System
 133,Other lower respiratory disease,"COPD, asthma",RSP: Diseases of the respiratory system
 134,Other upper respiratory disease,"COPD, asthma",RSP: Diseases of the respiratory system
 135,Intestinal infection,Intestinal infection,DIG: Diseases of the digestive system
-136,Disorders of teeth and jaw,Disorders of teeth and jaws,DIG: Diseases of the digestive system
+136,Disorders of teeth and jaw,Disorders of teeth and jaws,DEN: Dental Conditions
 137,Diseases of mouth; excluding dental,Disorders of mouth and esophagus (including acid reflux),DIG: Diseases of the digestive system
 138,Esophageal disorders,Disorders of the upper GI,DIG: Diseases of the digestive system
 139,Gastroduodenal ulcer (except hemorrhage),Disorders of the upper GI,DIG: Diseases of the digestive system
