@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-06-11T18:11:19.233947Z",
+  "_captured_run_id": "r_019eb7e113df7140b3b629535150f676",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote CONDINFO",
+    "PROC PRINT",
+    "FORMAT YESNO defined"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "_captured_at": "2026-06-11T18:00:30.215443Z",
+  "_captured_run_id": "r_019eb7d6acec7f9187f775fd7da34d41",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote H60 (24 rows, 10 columns).",
+    "NOTE: PROC SURVEYREG completed.",
+    "NOTE: PROC SURVEYMEANS completed.",
+    "NOTE: FORMAT AGEF defined (2 ranges)."
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

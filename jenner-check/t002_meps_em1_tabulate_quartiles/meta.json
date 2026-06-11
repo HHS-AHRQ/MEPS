@@ -1,0 +1,8 @@
+{
+  "bundle": "t002_meps_em1_tabulate_quartiles",
+  "source_file": "SAS/older_exercises_1996_to_2006/Employment_examples/EM1/EM1.sas",
+  "source_blob_sha": "3fc83e5aba233001b15e016dc058946aac07cc3e",
+  "source_commit": "02fbdd634959e97bd3584c3e9abdc62f84291d70",
+  "tier": "mock_data",
+  "notes": "MEPS employment example EM1: builds an analytic file, derives weekly earnings, splits the weighted sample into equal-weight quartiles with a two-pass DATA step, then summarizes perceived health status by quartile via PROC FREQ, PROC TABULATE (PCTN), and PROC SURVEYMEANS DOMAIN. External LIBNAME CMEPS V8 replaced by a 16-row mock HC-062 file (autoexec) whose rows satisfy EM1's WHERE filter. QUARTILE's category format moved onto the DATA step so the SURVEYMEANS DOMAIN reports labeled quartiles."
+}

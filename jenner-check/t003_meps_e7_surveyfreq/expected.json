@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-06-11T18:11:19.129749Z",
+  "_captured_run_id": "r_019eb7e0e07b7be3a5054cfa19c14df1",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote PUF97",
+    "PROC SURVEYFREQ",
+    "FORMAT AGECAT defined"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

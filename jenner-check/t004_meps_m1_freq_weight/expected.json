@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-06-11T18:11:19.193060Z",
+  "_captured_run_id": "r_019eb7e10f7773d3bd2b558fadb6b11b",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote PCT (4 rows",
+    "PROC FREQ",
+    "FORMAT RACETHNB defined"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

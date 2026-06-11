@@ -1,0 +1,66 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA CMEPS_H60
+
+NOTE: Processing inline DATALINES (24 lines)
+
+NOTE: Read 24 rows from DATALINES.
+NOTE: Wrote CMEPS_H60 (24 rows, 8 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE changed to AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004.
+NOTE: Option TITLE2 changed to HEALTHCARE EXPENDITURES, 2001.
+NOTE: Option TITLE3 changed to  .
+NOTE: PROC FORMAT library=WORK
+
+NOTE: FORMAT AGEF defined (2 ranges).
+NOTE: FORMAT SEXF defined (2 ranges).
+NOTE: DATA H60
+
+
+NOTE: Read 24 rows from CMEPS_H60.
+NOTE: Wrote H60 (24 rows, 10 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE4 changed to WEIGHTED MEAN FOR PERSON-LEVEL TOTAL EXPENDITURES.
+NOTE: Option TITLE5 changed to AND SUBGROUP ANALYSES FOR AGE AND SEX.
+NOTE: PROC SURVEYMEANS data=H60
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveymeans_ci.spec.json
+NOTE: PROC SURVEYMEANS completed.
+NOTE: Option TITLE4 changed to COMPARING MEAN EXPENDITURE DIFFERENCES.
+NOTE: Option TITLE5 changed to  .
+NOTE: Option TITLE6 changed to MALE [1] VERSUS FEMALE [0].
+NOTE: DATA H60V2
+
+
+NOTE: Read 24 rows from H60.
+NOTE: Wrote H60V2 (24 rows, 10 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SURVEYREG data=H60V2
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveyreg_residuals_vs_predicted.spec.json
+NOTE: ODS plot written: surveyreg_residual_histogram_panel.spec.json
+NOTE: ODS plot written: surveyreg_residuals_vs_obs_order.spec.json
+NOTE: ODS plot written: surveyreg_qq_plot.spec.json
+NOTE: PROC SURVEYREG completed.
+NOTE: Option TITLE4 changed to MEAN OF THE DICHOTOMOUS VARIABLE ANY_EXP.
+NOTE: PROC SURVEYMEANS data=H60
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveymeans_ci.spec.json
+NOTE: PROC SURVEYMEANS completed.
+NOTE: Option TITLE changed to OVERALL TOTAL HEALTHCARE EXPENDITURES.
+NOTE: PROC SURVEYMEANS data=H60
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveymeans_ci.spec.json
+NOTE: PROC SURVEYMEANS completed.

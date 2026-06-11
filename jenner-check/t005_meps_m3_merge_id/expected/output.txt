@@ -1,0 +1,78 @@
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                ILLUSTRATING THE USE OF ID VARIABLES (DUPERSID, CONDIDX)                                
+                        PRINT OF SELECTED HC-097 (2005 FULL-YEAR FILE) RECORDS TO SHOW DUPERSID                         
+
+
+  Obs  DUID  PID  DUPERSID  PANEL  AGE05X       SEX
+-----  ----  ---  --------  -----  ------  --------
+    1  1001  101  10010101      9      34    1 MALE
+    2  1002  101  10020101      9       7  2 FEMALE
+    3  1003  101  10030101      9      52  2 FEMALE
+    4  1004  101  10040101      9      71    1 MALE
+    5  1005  101  10050101      9      19    1 MALE
+    6  1006  101  10060101      9      66  2 FEMALE
+    7  1007  101  10070101      9       3    1 MALE
+    8  1008  101  10080101      9      41  2 FEMALE
+    9  1009  101  10090101      9      58    1 MALE
+   10  1010  101  10100101      9      12  2 FEMALE
+
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                ILLUSTRATING THE USE OF ID VARIABLES (DUPERSID, CONDIDX)                                
+                            PRINT OF SELECTED HC-096 (2005 CONDITIONS FILE) RECORDS TO SHOW                             
+                                                  DUPERSID AND CONDIDX                                                  
+
+
+  Obs  DUPERSID  PANEL  CONDN    CONDIDX  INJURY  ICD9CODX
+-----  --------  -----  -----  ---------  ------  --------
+    1  10010101      9      1  100101011    2 NO  401
+    2  10010101      9      2  100101012   1 YES  873
+    3  10030101      9      1  100301011    2 NO  250
+    4  10040101      9      1  100401011    2 NO  414
+    5  10040101      9      2  100401012    2 NO  427
+    6  10060101      9      1  100601011   1 YES  813
+    7  10080101      9      1  100801011    2 NO  311
+    8  10090101      9      1  100901011    2 NO  715
+    9  10090101      9      2  100901012    2 NO  530
+   10  10100101      9      1  101001011   1 YES  850
+
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                ILLUSTRATING THE USE OF ID VARIABLES (DUPERSID, CONDIDX)                                
+                              PRINT OF SELECTED RECORDS FROM MERGED, CONDITION-LEVEL, FILE                              
+                                                  DUPERSID AND CONDIDX                                                  
+
+
+  Obs  DUPERSID  PANEL    CONDIDX  AGE05X       SEX  INJURY  ICD9CODX
+-----  --------  -----  ---------  ------  --------  ------  --------
+    1  10010101      9  100101011      34    1 MALE    2 NO  401
+    2  10010101      9  100101012      34    1 MALE   1 YES  873
+    3  10020101      9                  7  2 FEMALE       .
+    4  10030101      9  100301011      52  2 FEMALE    2 NO  250
+    5  10040101      9  100401011      71    1 MALE    2 NO  414
+    6  10040101      9  100401012      71    1 MALE    2 NO  427
+    7  10050101      9                 19    1 MALE       .
+    8  10060101      9  100601011      66  2 FEMALE   1 YES  813
+    9  10070101      9                  3    1 MALE       .
+   10  10080101      9  100801011      41  2 FEMALE    2 NO  311
+   11  10090101      9  100901011      58    1 MALE    2 NO  715
+   12  10090101      9  100901012      58    1 MALE    2 NO  530
+   13  10100101      9  101001011      12  2 FEMALE   1 YES  850
+
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                ILLUSTRATING THE USE OF ID VARIABLES (DUPERSID, CONDIDX)                                
+                              PRINT OF SELECTED RECORDS FROM MERGED, CONDITION-LEVEL, FILE                              
+                                          WHERE ONLY MATCHED RECORDS WERE KEPT                                          
+
+
+  Obs  DUPERSID  PANEL    CONDIDX  AGE05X       SEX  INJURY  ICD9CODX
+-----  --------  -----  ---------  ------  --------  ------  --------
+    1  10010101      9  100101011      34    1 MALE    2 NO  401
+    2  10010101      9  100101012      34    1 MALE   1 YES  873
+    3  10030101      9  100301011      52  2 FEMALE    2 NO  250
+    4  10040101      9  100401011      71    1 MALE    2 NO  414
+    5  10040101      9  100401012      71    1 MALE    2 NO  427
+    6  10060101      9  100601011      66  2 FEMALE   1 YES  813
+    7  10080101      9  100801011      41  2 FEMALE    2 NO  311
+    8  10090101      9  100901011      58    1 MALE    2 NO  715
+    9  10090101      9  100901012      58    1 MALE    2 NO  530
+   10  10100101      9  101001011      12  2 FEMALE   1 YES  850
+

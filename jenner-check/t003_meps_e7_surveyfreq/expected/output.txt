@@ -1,0 +1,70 @@
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                 COLONOSCOPY SCREENING AMONG ADULTS 50 AND OLDER, 2005                                  
+                                         MEPS STAT BRIEF #188, FIGURE 1 (TOTAL)                                         
+
+
+                        The SURVEYFREQ Procedure
+
+  Table of AGECAT by BOWEL53
+
+AGECAT        BOWEL53        Frequency      Wgt Freq     Percent
+----------------------------------------------------------------
+1.0           2.0                    7      61959.80       36.10
+1.0           1.0                    0          0.00        0.00
+2.0           2.0                    2      22892.90       13.34
+2.0           1.0                    6      57179.40       33.31
+3.0           2.0                    1       4502.80        2.62
+3.0           1.0                    4      25113.50       14.63
+1.0           2.0                    7      61959.80       36.10
+1.0           1.0                    0          0.00        0.00
+2.0           2.0                    3      27395.70       15.96
+2.0           1.0                   10      82292.90       47.94
+----------------------------------------------------------------
+
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                 COLONOSCOPY SCREENING AMONG ADULTS 50 AND OLDER, 2005                                  
+                                    MEPS STAT BRIEF #188, FIGURE 2 (RACE/ETHNICITY)                                     
+
+
+                        The SURVEYFREQ Procedure
+
+  Table of NEWRACE by BOWEL53
+
+NEWRACE       BOWEL53        Frequency      Wgt Freq     Percent
+----------------------------------------------------------------
+2.0           2.0                    3      26731.20       43.14
+1.0           2.0                    3      26337.90       42.51
+4.0           2.0                    1       8890.70       14.35
+2.0           1.0                    5      48549.20       44.26
+2.0           2.0                    1       4502.80        4.11
+3.0           1.0                    4      23533.00       21.45
+3.0           2.0                    0          0.00        0.00
+1.0           1.0                    0          0.00        0.00
+1.0           2.0                    1      11890.60       10.84
+5.0           1.0                    0          0.00        0.00
+5.0           2.0                    1      11002.30       10.03
+4.0           1.0                    1      10210.70        9.31
+4.0           2.0                    0          0.00        0.00
+----------------------------------------------------------------
+
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                 COLONOSCOPY SCREENING AMONG ADULTS 50 AND OLDER, 2005                                  
+                                       MEPS STAT BRIEF #188, FIGURE 3 (EDUCATION)                                       
+
+
+                        The SURVEYFREQ Procedure
+
+  Table of HIGHEDUC by BOWEL53
+
+HIGHEDUC      BOWEL53        Frequency      Wgt Freq     Percent
+----------------------------------------------------------------
+3.0           2.0                    5      48835.70       78.82
+2.0           2.0                    2      13124.10       21.18
+2.0           1.0                    1      11233.00       10.24
+2.0           2.0                    1      11890.60       10.84
+1.0           1.0                    5      30234.40       27.56
+1.0           2.0                    0          0.00        0.00
+3.0           1.0                    4      40825.50       37.22
+3.0           2.0                    2      15505.10       14.14
+----------------------------------------------------------------
+

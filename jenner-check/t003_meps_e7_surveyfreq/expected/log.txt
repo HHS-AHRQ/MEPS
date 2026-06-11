@@ -1,0 +1,47 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA CDATA_H97
+
+NOTE: Processing inline DATALINES (20 lines)
+
+NOTE: Read 20 rows from DATALINES.
+NOTE: Wrote CDATA_H97 (20 rows, 13 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE changed to AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008.
+NOTE: Option TITLE2 changed to COLONOSCOPY SCREENING AMONG ADULTS 50 AND OLDER, 2005.
+NOTE: PROC FORMAT library=WORK
+
+NOTE: FORMAT NUMFMT defined (1 ranges).
+NOTE: FORMAT AGEF defined (3 ranges).
+NOTE: FORMAT AGECAT defined (3 ranges).
+NOTE: FORMAT AGE50P defined (2 ranges).
+NOTE: FORMAT YESNO defined (4 ranges).
+NOTE: FORMAT EDUCF defined (9 ranges).
+NOTE: FORMAT RACEF defined (9 ranges).
+NOTE: DATA PUF97
+
+
+NOTE: Read 20 rows from CDATA_H97.
+NOTE: Wrote PUF97 (20 rows, 20 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE3 changed to MEPS STAT BRIEF #188, FIGURE 1 (TOTAL).
+NOTE: PROC SURVEYFREQ data=PUF97
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: PROC SURVEYFREQ completed.
+NOTE: Option TITLE3 changed to MEPS STAT BRIEF #188, FIGURE 2 (RACE/ETHNICITY).
+NOTE: PROC SURVEYFREQ data=PUF97
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: PROC SURVEYFREQ completed.
+NOTE: Option TITLE3 changed to MEPS STAT BRIEF #188, FIGURE 3 (EDUCATION).
+NOTE: PROC SURVEYFREQ data=PUF97
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: PROC SURVEYFREQ completed.

@@ -1,0 +1,8 @@
+{
+  "bundle": "t003_meps_e7_surveyfreq",
+  "source_file": "SAS/older_exercises_1996_to_2006/Estimation_examples/E7/E7.sas",
+  "source_blob_sha": "d4ab554a672ec5dcb946afb0a9ad6a0ddb24ffdf",
+  "source_commit": "02fbdd634959e97bd3584c3e9abdc62f84291d70",
+  "tier": "mock_data",
+  "notes": "MEPS estimation example E7 (Statistical Brief #188, colonoscopy screening): derives age/race/education categories then runs PROC SURVEYFREQ with one-, two-, and three-way crosstabs (ROW option) under the complex survey design. External LIBNAME CDATA replaced by a 20-row mock HC-097 file (autoexec) spanning the age, race/ethnicity, education and screening categories the tables exercise. FORMAT statements kept inside SURVEYFREQ."
+}

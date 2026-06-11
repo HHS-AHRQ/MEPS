@@ -1,0 +1,8 @@
+{
+  "bundle": "t001_meps_e1_surveymeans_domain",
+  "source_file": "SAS/older_exercises_1996_to_2006/Estimation_examples/E1/E1.sas",
+  "source_blob_sha": "167ba43467e992db389bce4daf3fe449f357bc76",
+  "source_commit": "02fbdd634959e97bd3584c3e9abdc62f84291d70",
+  "tier": "mock_data",
+  "notes": "MEPS estimation example E1: person-level expenditure estimates via PROC SURVEYMEANS (DOMAIN AGE/SEX, STRATA/CLUSTER/WEIGHT for the complex survey design) plus PROC SURVEYREG. External LIBNAME CMEPS V8 replaced by a 24-row mock HC-060 file (autoexec) matching the KEEP= variable shape. Category formats moved from the SURVEYMEANS FORMAT statement onto the DATA step so the labeled DOMAIN groups are preserved; all analysis logic unchanged."
+}

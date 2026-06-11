@@ -1,0 +1,76 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA CDATA_H97
+
+NOTE: Processing inline DATALINES (10 lines)
+
+NOTE: Read 10 rows from DATALINES.
+NOTE: Wrote CDATA_H97 (10 rows, 9 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA CDATA_H96
+
+NOTE: Processing inline DATALINES (10 lines)
+
+NOTE: Read 10 rows from DATALINES.
+NOTE: Wrote CDATA_H96 (10 rows, 6 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE changed to AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008.
+NOTE: Option TITLE2 changed to ILLUSTRATING THE USE OF ID VARIABLES (DUPERSID, CONDIDX).
+NOTE: PROC FORMAT library=WORK
+
+NOTE: FORMAT YESNO defined (4 ranges).
+NOTE: FORMAT SEXF defined (2 ranges).
+NOTE: PROC SORT data=CDATA_H97
+
+NOTE: Unlicensed mode - input limited to 100 observations.
+NOTE: Read 10 rows from CDATA_H97.
+NOTE: Wrote FY2005 (10 rows, 9 columns).
+NOTE: PROC SORT statement used.
+NOTE: Option TITLE3 changed to PRINT OF SELECTED HC-097 (2005 FULL-YEAR FILE) RECORDS TO SHOW DUPERSID.
+NOTE: PROC PRINT data=FY2005
+
+NOTE: PROC PRINT completed: 10 observations printed, 6 variables
+NOTE: PROC SORT data=CDATA_H96
+
+NOTE: Unlicensed mode - input limited to 100 observations.
+NOTE: Read 10 rows from CDATA_H96.
+NOTE: Wrote COND2005 (10 rows, 6 columns).
+NOTE: PROC SORT statement used.
+NOTE: Option TITLE3 changed to PRINT OF SELECTED HC-096 (2005 CONDITIONS FILE) RECORDS TO SHOW.
+NOTE: Option TITLE4 changed to DUPERSID AND CONDIDX.
+NOTE: PROC PRINT data=COND2005
+
+NOTE: PROC PRINT completed: 10 observations printed, 6 variables
+NOTE: DATA CONDINFO
+
+NOTE: Stream 1 processed 10 rows, max BY-group size: 1 (O(1) memory verified)
+NOTE: Stream 2 processed 10 rows, max BY-group size: 2 (O(1) memory verified)
+
+NOTE: Wrote CONDINFO (13 rows, 13 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE3 changed to PRINT OF SELECTED RECORDS FROM MERGED, CONDITION-LEVEL, FILE.
+NOTE: PROC PRINT data=CONDINFO
+
+NOTE: PROC PRINT completed: 13 observations printed, 7 variables
+NOTE: DATA CONDINFO_B
+
+NOTE: Stream 1 processed 10 rows, max BY-group size: 1 (O(1) memory verified)
+NOTE: Stream 2 processed 10 rows, max BY-group size: 2 (O(1) memory verified)
+
+NOTE: Wrote CONDINFO_B (10 rows, 13 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE3 changed to PRINT OF SELECTED RECORDS FROM MERGED, CONDITION-LEVEL, FILE.
+NOTE: Option TITLE4 changed to WHERE ONLY MATCHED RECORDS WERE KEPT.
+NOTE: PROC PRINT data=CONDINFO_B
+
+NOTE: PROC PRINT completed: 10 observations printed, 7 variables

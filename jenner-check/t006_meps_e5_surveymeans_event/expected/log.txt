@@ -1,0 +1,53 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA CMEPS_H59D
+
+NOTE: Processing inline DATALINES (10 lines)
+
+NOTE: Read 10 rows from DATALINES.
+NOTE: Wrote CMEPS_H59D (10 rows, 5 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA CMEPS_H59G
+
+NOTE: Processing inline DATALINES (12 lines)
+
+NOTE: Read 12 rows from DATALINES.
+NOTE: Wrote CMEPS_H59G (12 rows, 5 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE changed to AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004.
+NOTE: Option TITLE2 changed to COMPUTING EVENT-LEVEL ESTIMATES.
+NOTE: Option TITLE3 changed to  .
+NOTE: Option TITLE4 changed to MEAN FACILITY EXPENSE PER INPATIENT STAY.
+NOTE: DATA IP2001
+
+
+NOTE: Read 10 rows from CMEPS_H59D.
+NOTE: Wrote IP2001 (10 rows, 5 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SURVEYMEANS data=IP2001
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveymeans_ci.spec.json
+NOTE: PROC SURVEYMEANS completed.
+NOTE: Option TITLE4 changed to MEAN EXPENSE PER OFFICE VISIT TO A MEDICAL PROVIDER.
+NOTE: DATA OB2001
+
+
+NOTE: Read 12 rows from CMEPS_H59G.
+NOTE: Wrote OB2001 (12 rows, 5 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SURVEYMEANS data=OB2001
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveymeans_ci.spec.json
+NOTE: PROC SURVEYMEANS completed.

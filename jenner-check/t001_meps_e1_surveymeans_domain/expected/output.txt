@@ -1,0 +1,155 @@
+                               AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004                               
+                                             HEALTHCARE EXPENDITURES, 2001                                              
+                                                                                                                        
+                                   WEIGHTED MEAN FOR PERSON-LEVEL TOTAL EXPENDITURES                                    
+                                         AND SUBGROUP ANALYSES FOR AGE AND SEX                                          
+
+
+                        The SURVEYMEANS Procedure
+
+     Number of Observations Read         24
+     Number of Observations Used         24
+     Sum of Weights                      206671.40
+     Stratum Variable: VARSTR01                8 Strata
+     Cluster Variable: VARPSU01             2 Clusters
+
+         AGE           SEX  Variable                N            Mean       Std Error        Lower CL        Upper CL          CV        Sum Wgts
+-------------------------------------------------------------------------------------------------------------------------------------------------
+                            2001 EXPENSES          24       2085.1133        805.0155        228.7442       3941.4823     38.6078     206671.4000
+                            2001 EXPENSES           1          0.0000                                                                  12330.8000
+                            2001 EXPENSES           1          0.0000                                                                  12044.2000
+                            2001 EXPENSES           1          0.0000                                                                  11002.3000
+                            2001 EXPENSES           1          0.0000                                                                  11233.0000
+                            2001 EXPENSES           1          0.0000                                                                  11500.4000
+                            2001 EXPENSES           1        178.0000                                                                  11890.6000
+                            2001 EXPENSES           1        410.0000                                                                  10880.5000
+                            2001 EXPENSES           1        233.0000                                                                  10567.1000
+                            2001 EXPENSES           1        305.0000                                                                  10210.7000
+                            2001 EXPENSES           1        640.0000                                                                   9450.0000
+                            2001 EXPENSES           1       1240.0000                                                                   9821.5000
+                            2001 EXPENSES           1       2150.0000                                                                   9120.6000
+                            2001 EXPENSES           1        920.0000                                                                   8890.7000
+                            2001 EXPENSES           1        560.0000                                                                   8675.9000
+                            2001 EXPENSES           1       1290.0000                                                                   8233.8000
+                            2001 EXPENSES           1        582.0000                                                                   8420.3000
+                            2001 EXPENSES           1       1180.0000                                                                   7990.1000
+                            2001 EXPENSES           1       3375.0000                                                                   6701.4000
+                            2001 EXPENSES           1       7720.0000                                                                   5980.2000
+                            2001 EXPENSES           1       4810.0000                                                                   5120.9000
+                            2001 EXPENSES           1       5230.0000                                                                   4890.3000
+                            2001 EXPENSES           1      15630.0000                                                                   4502.8000
+                            2001 EXPENSES           1      18420.0000                                                                   4011.6000
+                            2001 EXPENSES           1      24890.0000                                                                   3201.7000
+                            2001 EXPENSES          12       2506.5121        295.4871       1686.1085       3326.9158     11.7888     104159.2000
+                            2001 EXPENSES          12       1656.9441        772.7326       -802.2359       4116.1240     46.6360     102512.2000
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+                               AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004                               
+                                             HEALTHCARE EXPENDITURES, 2001                                              
+                                                                                                                        
+                                         COMPARING MEAN EXPENDITURE DIFFERENCES                                         
+                                                                                                                        
+                                               MALE [1] VERSUS FEMALE [0]                                               
+
+
+                         The SURVEYREG Procedure
+
+  Number of Observations          24
+
+  Dependent Variable: 2001 EXPENSES
+
+  Stratum Variables: VARSTR01
+  Cluster Variables: VARPSU01
+  Weight Variable: PERWT01F
+
+                      Estimated Regression Coefficients
+
+Parameter                   Estimate       Std Error     t Value    Pr > |t|
+----------------------------------------------------------------------------
+Intercept                1656.944055      871.986977      1.9002      0.3084
+SEX                       849.568070     1190.608299      0.7136      0.6054
+----------------------------------------------------------------------------
+
+                      Model-Based Standard Errors
+
+Parameter                 |Estimate|   Model Std Err  Design Std Err
+--------------------------------------------------------------------
+Intercept                1656.944055     1380.263075      871.986977
+SEX                       849.568070     1944.255082     1190.608299
+--------------------------------------------------------------------
+
+  R-Square = 0.0086
+  Root MSE = 441926.0953
+  Dependent Mean = 2085.1133
+  Denominator DF = 1
+  Model DF = 22
+  MSE = 195298673684.2202
+
+                               AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004                               
+                                             HEALTHCARE EXPENDITURES, 2001                                              
+                                                                                                                        
+                                        MEAN OF THE DICHOTOMOUS VARIABLE ANY_EXP                                        
+                                                                                                                        
+                                               MALE [1] VERSUS FEMALE [0]                                               
+
+
+                        The SURVEYMEANS Procedure
+
+     Number of Observations Read         24
+     Number of Observations Used         24
+     Sum of Weights                      206671.40
+     Stratum Variable: VARSTR01                8 Strata
+     Cluster Variable: VARPSU01             2 Clusters
+
+         AGE           SEX  Variable                N            Mean       Std Error        Lower CL        Upper CL        Sum Wgts
+-------------------------------------------------------------------------------------------------------------------------------------
+                            SOME EXPENSES IN 2001        24         71.8826          7.5376         54.5008         89.2644     206671.4000
+                            SOME EXPENSES IN 2001         1          0.0000                                                      12330.8000
+                            SOME EXPENSES IN 2001         1          0.0000                                                      12044.2000
+                            SOME EXPENSES IN 2001         1          0.0000                                                      11002.3000
+                            SOME EXPENSES IN 2001         1          0.0000                                                      11233.0000
+                            SOME EXPENSES IN 2001         1          0.0000                                                      11500.4000
+                            SOME EXPENSES IN 2001         1        100.0000                                                      11890.6000
+                            SOME EXPENSES IN 2001         1        100.0000                                                      10880.5000
+                            SOME EXPENSES IN 2001         1        100.0000                                                      10567.1000
+                            SOME EXPENSES IN 2001         1        100.0000                                                      10210.7000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       9450.0000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       9821.5000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       9120.6000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       8890.7000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       8675.9000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       8233.8000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       8420.3000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       7990.1000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       6701.4000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       5980.2000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       5120.9000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       4890.3000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       4502.8000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       4011.6000
+                            SOME EXPENSES IN 2001         1        100.0000                                                       3201.7000
+                            SOME EXPENSES IN 2001        12         66.0354          1.5657         61.6883         70.3824     104159.2000
+                            SOME EXPENSES IN 2001        12         77.8237          1.5742         72.8140         82.8334     102512.2000
+-------------------------------------------------------------------------------------------------------------------------------------
+
+                                         OVERALL TOTAL HEALTHCARE EXPENDITURES                                          
+                                             HEALTHCARE EXPENDITURES, 2001                                              
+                                                                                                                        
+                                        MEAN OF THE DICHOTOMOUS VARIABLE ANY_EXP                                        
+                                                                                                                        
+                                               MALE [1] VERSUS FEMALE [0]                                               
+
+
+                        The SURVEYMEANS Procedure
+
+     Number of Observations Read         24
+     Number of Observations Used         24
+     Sum of Weights                      206671.40
+     Stratum Variable: VARSTR01                8 Strata
+     Cluster Variable: VARPSU01             2 Clusters
+
+Variable                N             Sum       Std Error         Std Dev    Lower CL Sum    Upper CL Sum        Sum Wgts
+-------------------------------------------------------------------------------------------------------------------------
+2001 EXPENSES          24  430933278.2000  149216740.4423       4677.7712   86838857.6984  775027698.7016     206671.4000
+-------------------------------------------------------------------------------------------------------------------------
+

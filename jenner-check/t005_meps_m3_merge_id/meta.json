@@ -1,0 +1,8 @@
+{
+  "bundle": "t005_meps_m3_merge_id",
+  "source_file": "SAS/older_exercises_1996_to_2006/Misc_examples/M3/M3.sas",
+  "source_blob_sha": "c85e01801d6f175f20fea404a7a9d9c60438f54a",
+  "source_commit": "02fbdd634959e97bd3584c3e9abdc62f84291d70",
+  "tier": "mock_data",
+  "notes": "MEPS miscellaneous example M3: illustrates the person-level (DUPERSID) and condition-level (CONDIDX) identifiers and how they link MEPS public-use files, via PROC SORT, MERGE BY DUPERSID PANEL, an IN= match-only merge, and PROC PRINT. External LIBNAME CDATA replaced by mock HC-097 (10 persons) and HC-096 (10 conditions) files with aligned keys (autoexec). PROC PRINT FIRSTOBS/OBS windows resized to the sample."
+}

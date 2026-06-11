@@ -1,0 +1,20 @@
+{
+  "_captured_at": "2026-06-11T18:11:19.047919Z",
+  "_captured_run_id": "r_019eb7e0cef9733084e3b7435a3806d4",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote H62B",
+    "PROC TABULATE",
+    "PROC SURVEYMEANS completed.",
+    "FORMAT QUARTF defined"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

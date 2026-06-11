@@ -1,0 +1,11 @@
+                                    AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008                                     
+                                 EFFECT OF WEIGHT VARIABLE ON RACE/ETHNICITY PERCENTAGE                                 
+
+
+RACETHNX  UNWEIGHTED PERCENTAGE  WEIGHTED PERCENTAGE
+--------  ---------------------  -------------------
+       1                  37.50                42.85
+       2                  29.17                26.08
+       3                  16.67                16.07
+       4                  16.67                15.01
+

@@ -1,0 +1,66 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA CMEPS_H62
+
+NOTE: Processing inline DATALINES (16 lines)
+
+NOTE: Read 16 rows from DATALINES.
+NOTE: Wrote CMEPS_H62 (16 rows, 14 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE changed to AHRQ MEPS DATA USERS WORKSHOP (EMPLOYMENT) -- NOV/DEC 2004.
+NOTE: Option TITLE2 changed to PERCEIVED HEALTH STATUS AND WEEKLY EARNINGS - 2002 DATA.
+NOTE: Option TITLE3 changed to  .
+NOTE: PROC FORMAT library=WORK
+
+NOTE: FORMAT GTZF defined (2 ranges).
+NOTE: FORMAT HLTHF defined (5 ranges).
+NOTE: FORMAT QUARTF defined (4 ranges).
+NOTE: FORMAT WKLYF defined (4 ranges).
+NOTE: DATA H62A
+
+
+NOTE: Read 16 rows from CMEPS_H62.
+NOTE: Wrote H62A (16 rows, 17 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SORT data=H62A
+
+NOTE: Unlicensed mode - input limited to 100 observations.
+NOTE: Read 16 rows from H62A.
+NOTE: Wrote H62A (16 rows, 17 columns).
+NOTE: PROC SORT statement used.
+NOTE: DATA H62B
+
+
+NOTE: Read 16 rows from H62A.
+NOTE: Read 32 rows from H62A.
+NOTE: Wrote H62B (16 rows, 6 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE4 changed to H62B: WEIGHTED FREQUENCY OF QUARTILES AND WKLYEARN.
+NOTE: PROC FREQ
+NOTE: ODS plot written: freq_quartile.spec.json
+NOTE: ODS plot written: freq_wklyearn.spec.json
+NOTE: PROC FREQ statement used.
+NOTE: Option TITLE4 changed to H62B: UNWEIGHTED FREQUENCY OF WKLYEARN.
+NOTE: PROC FREQ
+NOTE: ODS plot written: freq_wklyearn.spec.json
+NOTE: PROC FREQ statement used.
+NOTE: Option TITLE4 changed to  .
+NOTE: PROC FREQ
+NOTE: ODS plot written: freq_mosaic_quartile_rthlth42.spec.json
+NOTE: PROC FREQ statement used.
+NOTE: PROC TABULATE
+NOTE: Option TITLE4 changed to MEAN REPORTED HEALTH STATUS BY WEEKLY EARNINGS QUARTILE.
+NOTE: Option TITLE5 changed to 1=EXCELLENT, 2=VERY GOOD, 3=GOOD, 4=FAIR, 5=POOR.
+NOTE: PROC SURVEYMEANS data=H62B
+
+NOTE: Using Python scipy version 1.16.3
+NOTE: ODS plot written: surveymeans_ci.spec.json
+NOTE: PROC SURVEYMEANS completed.

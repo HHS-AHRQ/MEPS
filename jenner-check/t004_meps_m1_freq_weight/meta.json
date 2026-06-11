@@ -1,0 +1,8 @@
+{
+  "bundle": "t004_meps_m1_freq_weight",
+  "source_file": "SAS/older_exercises_1996_to_2006/Misc_examples/M1/M1.sas",
+  "source_blob_sha": "385b179b20857b131887be9dc173fe60462c22bf",
+  "source_commit": "02fbdd634959e97bd3584c3e9abdc62f84291d70",
+  "tier": "mock_data",
+  "notes": "MEPS miscellaneous example M1: shows the effect of the survey weight on a race/ethnicity distribution by running PROC FREQ twice (unweighted and PERWT05F-weighted) with OUT= datasets, then merging the two percent tables for a side-by-side PROC PRINT. External LIBNAME CDATA replaced by a 24-row mock HC-097 file (autoexec) carrying RACETHNX and PERWT05F."
+}

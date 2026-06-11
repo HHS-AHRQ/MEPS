@@ -1,0 +1,38 @@
+                               AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004                               
+                                            COMPUTING EVENT-LEVEL ESTIMATES                                             
+                                                                                                                        
+                                        MEAN FACILITY EXPENSE PER INPATIENT STAY                                        
+
+
+                        The SURVEYMEANS Procedure
+
+     Number of Observations Read         10
+     Number of Observations Used         10
+     Sum of Weights                      87123.40
+     Stratum Variable: VARSTR01                2 Strata
+     Cluster Variable: VARPSU01             2 Clusters
+
+Variable                N            Mean       Std Error        Lower CL        Upper CL        Sum Wgts
+---------------------------------------------------------------------------------------------------------
+TOTAL HOSP. STAY EXPENSES        10      10014.2157       2861.4915      -2297.7885      22326.2199      87123.4000
+---------------------------------------------------------------------------------------------------------
+
+                               AHRQ MEPS DATA USERS WORKSHOP (ESTIMATION) -- NOV/DEC 2004                               
+                                            COMPUTING EVENT-LEVEL ESTIMATES                                             
+                                                                                                                        
+                                  MEAN EXPENSE PER OFFICE VISIT TO A MEDICAL PROVIDER                                   
+
+
+                        The SURVEYMEANS Procedure
+
+     Number of Observations Read         12
+     Number of Observations Used         12
+     Sum of Weights                      108177.90
+     Stratum Variable: VARSTR01                2 Strata
+     Cluster Variable: VARPSU01             2 Clusters
+
+Variable                N            Mean       Std Error        Lower CL        Upper CL        Sum Wgts
+---------------------------------------------------------------------------------------------------------
+TOTAL OFFICE VISIT EXPENSES        12        168.9429         19.9573         83.0738        254.8121     108177.9000
+---------------------------------------------------------------------------------------------------------
+

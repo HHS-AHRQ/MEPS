@@ -1,0 +1,8 @@
+{
+  "bundle": "t006_meps_e5_surveymeans_event",
+  "source_file": "SAS/older_exercises_1996_to_2006/Estimation_examples/E5/E5.sas",
+  "source_blob_sha": "9d68669cb2aaba94f26bca5699e41f5d2be8ae98",
+  "source_commit": "02fbdd634959e97bd3584c3e9abdc62f84291d70",
+  "tier": "mock_data",
+  "notes": "MEPS estimation example E5: event-level estimates -- mean facility expense per inpatient stay (HC-059D) and mean expense per office-based visit (HC-059G), each via PROC SURVEYMEANS with STRATA/CLUSTER/WEIGHT. External LIBNAME CMEPS V8 replaced by two small mock event files (autoexec); no FORMAT statement needed, so the proc logic is verbatim."
+}

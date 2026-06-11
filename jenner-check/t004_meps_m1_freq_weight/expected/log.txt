@@ -1,0 +1,44 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA CDATA_H97
+
+NOTE: Processing inline DATALINES (24 lines)
+
+NOTE: Read 24 rows from DATALINES.
+NOTE: Wrote CDATA_H97 (24 rows, 2 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: Option TITLE changed to AHRQ MEPS DATA USERS WORKSHOP -- SEPTEMBER 2008.
+NOTE: Option TITLE2 changed to EFFECT OF WEIGHT VARIABLE ON RACE/ETHNICITY PERCENTAGE.
+NOTE: PROC FORMAT library=WORK
+
+NOTE: FORMAT RACETHNB defined (5 ranges).
+NOTE: DATA PUF97
+
+
+NOTE: Read 24 rows from CDATA_H97.
+NOTE: Wrote PUF97 (24 rows, 2 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC FREQ
+NOTE: Output dataset UNWT has 4 observations and 2 variables.
+NOTE: PROC FREQ statement used.
+NOTE: PROC FREQ
+NOTE: Output dataset WT has 4 observations and 2 variables.
+NOTE: PROC FREQ statement used.
+NOTE: DATA PCT
+
+NOTE: Stream 1 processed 4 rows, max BY-group size: 1 (O(1) memory verified)
+NOTE: Stream 2 processed 4 rows, max BY-group size: 1 (O(1) memory verified)
+
+NOTE: Wrote PCT (4 rows, 3 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC PRINT data=PCT
+
+NOTE: PROC PRINT completed: 4 observations printed, 3 variables

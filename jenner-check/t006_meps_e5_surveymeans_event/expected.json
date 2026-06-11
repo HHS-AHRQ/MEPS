@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-06-11T18:11:19.285089Z",
+  "_captured_run_id": "r_019eb7d8bf8d7ce1a83ae80db2828140",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote IP2001",
+    "NOTE: Wrote OB2001",
+    "PROC SURVEYMEANS completed."
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

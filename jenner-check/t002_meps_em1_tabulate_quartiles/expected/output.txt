@@ -1,0 +1,142 @@
+                               AHRQ MEPS DATA USERS WORKSHOP (EMPLOYMENT) -- NOV/DEC 2004                               
+                                PERCEIVED HEALTH STATUS AND WEEKLY EARNINGS - 2002 DATA                                 
+                                                                                                                        
+                                   H62B: WEIGHTED FREQUENCY OF QUARTILES AND WKLYEARN                                   
+
+                                                   The FREQ Procedure
+
+                                                      Cumulative    Cumulative
+WEEKLY EARNINGS QUARTILE    Frequency    Percent     Frequency      Percent
+---------------------------------------------------------------------------------
+   1 LOWEST                     28357     19.71        28357        19.71
+   2                            43159     30.00        71517        49.71
+   3                            35735     24.84       107252        74.55
+   4 HIGHEST                    36607     25.45       143859       100.00
+
+                                             Cumulative    Cumulative
+WEEKLY EARNINGS    Frequency    Percent     Frequency      Percent
+------------------------------------------------------------------------
+1125                    8420      5.85         8420         5.85
+1497.6                  6701      4.66        15121        10.51
+193.2                   8233      5.72        23355        16.23
+2250                    5980      4.16        29335        20.39
+234                     8890      6.18        38226        26.57
+288.75                 11233      7.81        49459        34.38
+3000                    4502      3.13        53962        37.51
+345.8                  10567      7.35        64529        44.86
+378                    11890      8.27        76419        53.12
+440.7                  10880      7.56        87300        60.68
+500                     9821      6.83        97121        67.51
+560                     9450      6.57       106571        74.08
+630                     5120      3.56       111692        77.64
+772.8                  12044      8.37       123737        86.01
+809.75                  9120      6.34       132857        92.35
+994.4                  11002      7.65       143859       100.00
+                               AHRQ MEPS DATA USERS WORKSHOP (EMPLOYMENT) -- NOV/DEC 2004                               
+                                PERCEIVED HEALTH STATUS AND WEEKLY EARNINGS - 2002 DATA                                 
+                                                                                                                        
+                                         H62B: UNWEIGHTED FREQUENCY OF WKLYEARN                                         
+
+                                                   The FREQ Procedure
+
+                                             Cumulative    Cumulative
+WEEKLY EARNINGS    Frequency    Percent     Frequency      Percent
+------------------------------------------------------------------------
+1125                       1      6.25            1         6.25
+1497.6                     1      6.25            2        12.50
+193.2                      1      6.25            3        18.75
+2250                       1      6.25            4        25.00
+234                        1      6.25            5        31.25
+288.75                     1      6.25            6        37.50
+3000                       1      6.25            7        43.75
+345.8                      1      6.25            8        50.00
+378                        1      6.25            9        56.25
+440.7                      1      6.25           10        62.50
+500                        1      6.25           11        68.75
+560                        1      6.25           12        75.00
+630                        1      6.25           13        81.25
+772.8                      1      6.25           14        87.50
+809.75                     1      6.25           15        93.75
+994.4                      1      6.25           16       100.00
+                               AHRQ MEPS DATA USERS WORKSHOP (EMPLOYMENT) -- NOV/DEC 2004                               
+                                PERCEIVED HEALTH STATUS AND WEEKLY EARNINGS - 2002 DATA                                 
+                                                                                                                        
+                                                                                                                        
+
+                                                   The FREQ Procedure
+
+Table of WEEKLY EARNINGS QUARTILE by RTHLTH42
+
+WEEKLY EARNINGS QUARTILE    RTHLTH42    Frequency    Percent    Cumulative    Cumulative
+                                                                 Frequency       Percent
+--------------------------------------------------------------------------------
+   1 LOWEST                 1                   0      0.00             0         0.00
+   1 LOWEST                 2                   1      6.25             1         6.25
+   1 LOWEST                 3                   0      0.00             1         6.25
+   1 LOWEST                 4                   1      6.25             2        12.50
+   1 LOWEST                 5                   1      6.25             3        18.75
+   2                        1                   1      6.25             4        25.00
+   2                        2                   0      0.00             4        25.00
+   2                        3                   2     12.50             6        37.50
+   2                        4                   1      6.25             7        43.75
+   2                        5                   0      0.00             7        43.75
+   3                        1                   2     12.50             9        56.25
+   3                        2                   2     12.50            11        68.75
+   3                        3                   0      0.00            11        68.75
+   3                        4                   0      0.00            11        68.75
+   3                        5                   0      0.00            11        68.75
+   4 HIGHEST                1                   2     12.50            13        81.25
+   4 HIGHEST                2                   2     12.50            15        93.75
+   4 HIGHEST                3                   1      6.25            16       100.00
+   4 HIGHEST                4                   0      0.00            16       100.00
+   4 HIGHEST                5                   0      0.00            16       100.00
+
+Total Frequency = 16
+
+                               AHRQ MEPS DATA USERS WORKSHOP (EMPLOYMENT) -- NOV/DEC 2004                               
+                                PERCEIVED HEALTH STATUS AND WEEKLY EARNINGS - 2002 DATA                                 
+                                                                                                                        
+                                                                                                                        
+
+--------------------------------------------------------------------------------------
+|                        |                         RTHLTH42                          |
+|                        |-----------------------------------------------------------|
+|                        | 1 EXCELLENT | 2 VERY GOOD |   3 GOOD    | 4 FAIR | 5 POOR |
+|                        |-------------+-------------+-------------+--------+--------|
+|                        |    PCTN     |    PCTN     |    PCTN     |  PCTN  |  PCTN  |
+|------------------------+-------------+-------------+-------------+--------+--------|
+|WEEKLY EARNINGS QUARTILE|             |             |             |        |        |
+|------------------------|             |             |             |        |        |
+|1 LOWEST                |            0|           20|            0|      50|     100|
+|------------------------+-------------+-------------+-------------+--------+--------|
+|2                       |           20|            0| 66.666666667|      50|       0|
+|------------------------+-------------+-------------+-------------+--------+--------|
+|3                       |           40|           40|            0|       0|       0|
+|------------------------+-------------+-------------+-------------+--------+--------|
+|4 HIGHEST               |           40|           40| 33.333333333|       0|       0|
+--------------------------------------------------------------------------------------
+
+                               AHRQ MEPS DATA USERS WORKSHOP (EMPLOYMENT) -- NOV/DEC 2004                               
+                                PERCEIVED HEALTH STATUS AND WEEKLY EARNINGS - 2002 DATA                                 
+                                                                                                                        
+                                MEAN REPORTED HEALTH STATUS BY WEEKLY EARNINGS QUARTILE                                 
+                                    1=EXCELLENT, 2=VERY GOOD, 3=GOOD, 4=FAIR, 5=POOR                                    
+
+
+                        The SURVEYMEANS Procedure
+
+     Number of Observations Read         16
+     Number of Observations Used         16
+     Sum of Weights                      143859.90
+     Stratum Variable: VARSTR                5 Strata
+     Cluster Variable: VARPSU             2 Clusters
+
+WEEKLY EARNINGS QUARTILE  Variable                N            Mean       Std Error        Lower CL        Upper CL        Sum Wgts
+-----------------------------------------------------------------------------------------------------------------------------------
+              RTHLTH42               16          2.2860          0.3530          1.3785          3.1934     143859.9000
+              RTHLTH42                3          3.5213          0.0000                                      28357.5000
+              RTHLTH42                4          2.7897          0.0049          2.7272          2.8522      43159.7000
+              RTHLTH42                4          1.4077          0.2607         -1.9046          4.7200      35735.7000
+              RTHLTH42                5          1.5924          0.1314         -0.0765          3.2614      36607.0000
+-----------------------------------------------------------------------------------------------------------------------------------
+
