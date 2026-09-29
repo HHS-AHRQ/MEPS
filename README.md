@@ -9,7 +9,8 @@ This repository contains instructions and example code for loading and analyzing
 - [Additional Survey Components](#additional-survey-components)
 - [Contact MEPS](#contact-meps)
 
-<b>Example code</b> for loading and analyzing MEPS data in R, SAS, and Stata is available in the following folders. These folders also include example exercises from recent MEPS workshops. In addition, the SAS folder contains exercises from older workshops (1996-2006):
+<b>Example code</b> for loading and analyzing MEPS data in Python, R, SAS, and Stata is available in the following folders. These folders also include example exercises from recent MEPS workshops. In addition, the SAS folder contains exercises from older workshops (1996-2006):
+ * [Python](Python) <br>
  * [R](R) <br>
  * [SAS](SAS) <br>
  * [Stata](Stata) <br>
@@ -51,11 +52,11 @@ Zip files of each data format can be downloaded from the web page for each MEPS 
 
 ![GIF of file download](_images/download-video.gif)
 
-The steps for loading the MEPS files into [R](R), [SAS](SAS), and [Stata](Stata), depends on the file type being used. Details for loading MEPS data in these languages are available in the corresponding folders.
+The steps for loading the MEPS files into [Python](Python), [R](R), [SAS](SAS), and [Stata](Stata), depends on the file type being used. Details for loading MEPS data in these languages are available in the corresponding folders.
 
 
 ## Analyzing MEPS-HC data
-The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided in the [R](R), [SAS](SAS), and [Stata](Stata) folders. Additional examples comparing these three languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
+The complex survey design of MEPS requires special methods for analyzing MEPS data. These tools are available in many common programming languages. Failure to account for the survey design can result in biased estimates. Details and examples of using the appropriate survey methods are provided in the [Python](Python), [R](R), [SAS](SAS), and [Stata](Stata) folders. Additional examples comparing these four languages can be found in the quick reference guide [meps_programming_statements.md](Quick_Reference_Guides/meps_programming_statements.md).
 
 #### Sample size and precision <!-- omit in toc -->
 

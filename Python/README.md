@@ -159,7 +159,7 @@ To analyze MEPS data using Python, the [`svy` package](https://pypi.org/project/
 *   `estimation.mean`, `estimation.prop`: means and proportions
 *   `estimation.median`, `estimation.quantile`: quantiles (e.g. median)
 *   `estimation.ratio`: ratio statistics (e.g. percentage of total expenditures)
-*   `glm`: generalized linear regression
+*   `glm.fit`: generalized linear regression
 
 Estimates for subgroups are requested with the `by` argument (e.g. `by="age_cat"`), and for subpopulations with the `where` argument (e.g. `where=pl.col("TOTEXP18") > 0`). Using `where` instead of filtering the data keeps the full survey design, which is needed for correct standard errors.
 
@@ -192,6 +192,35 @@ The following codes from previous MEPS workshops and webinars are provided in th
 [exercise_1b.py](workshop_exercises/exercise_1b.py): National health care expenses by age group, 2018
 <br>
 
+### 2. Prescribed medicine purchases <!-- omit in toc -->
+[exercise_2a.py](workshop_exercises/exercise_2a.py): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2016
+<br>
+[exercise_2b.py](workshop_exercises/exercise_2b.py): Purchases and expenses for narcotic analgesics or narcotic analgesic combos, 2018
+<br>
+
+### 3. Pooling data files <!-- omit in toc -->
+[exercise_3a.py](workshop_exercises/exercise_3a.py): Pooling MEPS FYC files, 2015 and 2016: Out-of-pocket expenditures for unisured persons ages 26-30 with high income
+<br>
+[exercise_3b.py](workshop_exercises/exercise_3b.py):  Pooling longitudinal files, panels 17-19
+<br>
+[exercise_3c.py](workshop_exercises/exercise_3c.py): Pooling MEPS FYC files, 2017 and 2018: People with joint pain, using JTPAIN31 for 2017 and JTPAIN31_M18 for 2018
+<br>
+[exercise_3d.py](workshop_exercises/exercise_3d.py): Pooling MEPS FYC files, 2017-2019: People with joint pain, using [Pooled Linkage Variance file](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-036) for correct standard error calculation (required when pooling before and after 2019)
+<br>
+
+### 4. Regression <!-- omit in toc -->
+[exercise_4a.py](workshop_exercises/exercise_4a.py): Logistic regression to identify demographic factors associated with receiving a flu shot in 2018 (using SAQ population)
+<br>
+[exercise_4b.py](workshop_exercises/exercise_4b.py): Logistic regression for persons that delayed medical care because of COVID, 2020
+<br>
+
+### 5. Plots <!-- omit in toc -->
+[plot_example.py](workshop_exercises/plot_example.py): Code to re-create the data and plot for Figure 1 in [Statistical brief \#491](https://meps.ahrq.gov/data_files/publications/st491/stat491.shtml).
+
+### 6. Linking Medical Conditions and Event Files  <!-- omit in toc -->
+[cond_pmed_2020.py](workshop_exercises/cond_pmed_2020.py): Utilization and expenditures for prescribed medicine purchases for hyperlipidemia, 2020
+<br>
+[cond_mv_2020.py](workshop_exercises/cond_mv_2020.py): Utilization and expenditures for office-based visits for mental health, 2020
 
 ## Summary tables examples
 
@@ -202,11 +231,38 @@ The following codes provided in the [summary_tables_examples](summary_tables_exa
 #### Access to Care <!-- omit in toc -->
 [care_access_2017.py](summary_tables_examples/care_access_2017.py):
 Reasons for difficulty receiving needed care, by poverty status, 2017
+<br>
+[care_access_2019.py](summary_tables_examples/care_access_2019.py):
+Number and percent of people who did not receive treatment because they couldn't afford it, by poverty status, 2019
+
+#### Diabetes Care <!-- omit in toc -->
+[care_diabetes_a1c_2016.py](summary_tables_examples/care_diabetes_a1c_2016.py): Adults with diabetes receiving hemoglobin A1c blood test, by race/ethnicity, 2016
+
+#### Quality of Care <!-- omit in toc -->
+[care_quality_2016.py](summary_tables_examples/care_quality_2016.py): Ability to schedule a routine appointment, by insurance coverage, 2016
+
+
+### Medical conditions <!-- omit in toc -->
+[cond_expenditures_2015.py](summary_tables_examples/cond_expenditures_2015.py): Utilization and expenditures by medical condition, 2015 -- Conditions defined by collapsed ICD-9/CCS codes
+<br>
+[cond_expenditures_2018.py](summary_tables_examples/cond_expenditures_2018.py): Utilization and expenditures by medical condition, 2018 -- Conditions defined by collapsed ICD-10/CCSR codes
 
 
 ### Health Insurance <!-- omit in toc -->
 [ins_age_2016.py](summary_tables_examples/ins_age_2016.py): Health insurance coverage by age group, 2016
 
 
+### Prescribed drugs <!-- omit in toc -->
+[pmed_prescribed_drug_2016.py](summary_tables_examples/pmed_prescribed_drug_2016.py): Purchases and expenditures by generic drug name, 2016
+<br>
+[pmed_therapeutic_class_2016.py](summary_tables_examples/pmed_therapeutic_class_2016.py): Purchases and expenditures by Multum therapeutic class, 2016
+
+
 ### Use, expenditures, and population <!-- omit in toc -->
+[use_events_2016.py](summary_tables_examples/use_events_2016.py): Number of events and mean expenditure per event, for office-based and outpatient events, by source of payment, 2016
+<br>
+[use_expenditures_2016.py](summary_tables_examples/use_expenditures_2016.py): Expenditures for office-based and outpatient visits, by source of payment, 2016
+<br>
 [use_expenditures_2019.py](summary_tables_examples/use_expenditures_2019.py): Mean expenditure per person, by event type and source of payment, 2019.
+<br>
+[use_race_sex_2016.py](summary_tables_examples/use_race_sex_2016.py): Utilization and expenditures by race and sex, 2016

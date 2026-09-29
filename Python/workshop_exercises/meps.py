@@ -68,7 +68,10 @@ def dl_meps(file: str, ext: str = "dta", dir: str | Path | None = None) -> Path:
     dir = Path(dir) if dir is not None else Path(tempfile.mkdtemp())
 
     # For CLNK and RXLK files (e.g. 'h209if1'), zip is stored under 'h209i'
+    # For Pooled Linkage files (e.g. 'h36u19'), zip is stored under 'h036'
     folder = file.replace("f1", "").replace("f2", "")
+    if file.startswith("h36"):
+        folder = "h036"
 
     for url in (f"{PUFS_URL}/{file}{ext}.zip", f"{PUFS_URL}/{folder}/{file}{ext}.zip"):
         try:
