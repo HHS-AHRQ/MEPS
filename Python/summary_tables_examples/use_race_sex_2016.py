@@ -24,14 +24,13 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
 
 # Load FYC file ---------------------------------------------------------------
 
-FYC, _ = read_xpt(MEPS_DIR / "h192.ssp")
+FYC = svy.read_sas(MEPS_DIR / "h192.ssp")
 
 
 # Define variables ------------------------------------------------------------
@@ -111,11 +110,10 @@ print(
 
 FYCdsgn = svy.Sample(
     data=FYC,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
 
-# Set survey option for lonely psu
-FYCdsgn = FYCdsgn.singleton.center()
 
 has_exp = pl.col("has_exp") == 1
 

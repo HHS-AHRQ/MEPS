@@ -30,7 +30,6 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
@@ -38,12 +37,12 @@ MEPS_DIR = Path("C:/MEPS")
 # Load datasets ---------------------------------------------------------------
 
 # Load FYC file and keep only needed variables
-FYC, _ = read_xpt(MEPS_DIR / "h192.ssp")
+FYC = svy.read_sas(MEPS_DIR / "h192.ssp")
 FYC = FYC.select("DUPERSID", "PERWT16F", "VARSTR", "VARPSU")
 
 # Load event files
-OP, _ = read_xpt(MEPS_DIR / "h188f.ssp")  # outpatient visits
-OB, _ = read_xpt(MEPS_DIR / "h188g.ssp")  # office-based medical visits
+OP = svy.read_sas(MEPS_DIR / "h188f.ssp")  # outpatient visits
+OB = svy.read_sas(MEPS_DIR / "h188g.ssp")  # office-based medical visits
 
 # Aggregate payment sources for each dataset ----------------------------------
 #
@@ -112,17 +111,15 @@ OP_FYC = (
 # Define survey designs -------------------------------------------------------
 OB_dsgn = svy.Sample(
     data=OB_FYC,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
 
 OP_dsgn = svy.Sample(
     data=OP_FYC,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
-
-# Set survey option for lonely psu
-OB_dsgn = OB_dsgn.singleton.center()
-OP_dsgn = OP_dsgn.singleton.center()
 
 
 # Calculate estimates ---------------------------------------------------------
@@ -135,7 +132,6 @@ OP_dsgn = OP_dsgn.singleton.center()
 #  - OZ: Other
 
 # Subset to people in domain (defined previously)
-#  - drop_nulls=True keeps the people added by the merge (no events) out of the domain
 OB_sub = pl.col("domain") == 1
 OP_sub = pl.col("domain") == 1
 
@@ -146,23 +142,23 @@ OPdoc_sub = OP_sub & (pl.col("SEEDOC") == 1)
 
 # Total number of events, by event type
 
-print(OB_dsgn.estimation.total("count", where=OB_sub, drop_nulls=True))  # office-based (OB) visits
-print(OB_dsgn.estimation.total("count", where=OBdoc_sub, drop_nulls=True))  # office-based (OB) physician visits
+print(OB_dsgn.estimation.total("count", where=OB_sub))  # office-based (OB) visits
+print(OB_dsgn.estimation.total("count", where=OBdoc_sub))  # office-based (OB) physician visits
 
-print(OP_dsgn.estimation.total("count", where=OP_sub, drop_nulls=True))  # outpatient (OP) visits
-print(OP_dsgn.estimation.total("count", where=OPdoc_sub, drop_nulls=True))  # outpatient (OP) physician visits
+print(OP_dsgn.estimation.total("count", where=OP_sub))  # outpatient (OP) visits
+print(OP_dsgn.estimation.total("count", where=OPdoc_sub))  # outpatient (OP) physician visits
 
 
 # Mean expenditure per event, by event type and source of payment
 
-for est in OB_dsgn.estimation.mean(["OBSF16X", "PR", "OBMR16X", "OBMD16X", "OZ"], where=OB_sub, drop_nulls=True):  # OB visits
+for est in OB_dsgn.estimation.mean(["OBSF16X", "PR", "OBMR16X", "OBMD16X", "OZ"], where=OB_sub):  # OB visits
     print(est)
-for est in OB_dsgn.estimation.mean(["OBSF16X", "PR", "OBMR16X", "OBMD16X", "OZ"], where=OBdoc_sub, drop_nulls=True):  # OB phys. visits
+for est in OB_dsgn.estimation.mean(["OBSF16X", "PR", "OBMR16X", "OBMD16X", "OZ"], where=OBdoc_sub):  # OB phys. visits
     print(est)
 
-for est in OP_dsgn.estimation.mean(["SF", "PR", "MR", "MD", "OZ"], where=OP_sub, drop_nulls=True):  # OP visits
+for est in OP_dsgn.estimation.mean(["SF", "PR", "MR", "MD", "OZ"], where=OP_sub):  # OP visits
     print(est)
-for est in OP_dsgn.estimation.mean(["SF", "PR", "MR", "MD", "OZ"], where=OPdoc_sub, drop_nulls=True):  # OP phys. visits
+for est in OP_dsgn.estimation.mean(["SF", "PR", "MR", "MD", "OZ"], where=OPdoc_sub):  # OP phys. visits
     print(est)
 
 
@@ -178,11 +174,10 @@ pers_OB = OB_FYC.group_by("DUPERSID", "VARSTR", "VARPSU").agg(
 # Define survey design
 pers_OB_dsgn = svy.Sample(
     data=pers_OB,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
 
-# Set survey option for lonely psu
-pers_OB_dsgn = pers_OB_dsgn.singleton.center()
 
 # Mean events per person
 print(pers_OB_dsgn.estimation.mean("n_events"))  # office-based visits

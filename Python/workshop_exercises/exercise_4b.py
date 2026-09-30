@@ -120,12 +120,9 @@ print(fyc20x["AGELAST"].describe())
 
 meps_dsgn = svy.Sample(
     data=fyc20x,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F", singleton="center"),
 )
-
-# Set option to deal with lonely psu
-meps_dsgn = meps_dsgn.singleton.center()
-
 
 
 # Calculate survey estimates ---------------------------------------------------

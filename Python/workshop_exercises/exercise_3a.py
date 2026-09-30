@@ -26,14 +26,13 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
 
 # Read in data
-h192, _ = read_xpt(MEPS_DIR / "h192.ssp")  # 2016 FYC
-h181, _ = read_xpt(MEPS_DIR / "h181.ssp")  # 2015 FYC
+h192 = svy.read_sas(MEPS_DIR / "h192.ssp")  # 2016 FYC
+h181 = svy.read_sas(MEPS_DIR / "h181.ssp")  # 2015 FYC
 
 # Rename year-specific variables prior to combining
 h192x = h192.rename(
@@ -61,11 +60,9 @@ print(pool.filter(pl.col("subpop")).group_by("AGELAST", "povcat", "inscov").len(
 
 mepsdsgn = svy.Sample(
     data=pool,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="poolwt"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="poolwt", singleton="center"),
 )
-
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 
 # Weighted estimate on totslf for combined data w/age=26-30, uninsured whole year, and high income

@@ -101,11 +101,10 @@ print(narc_fyc.filter(pl.col("any_narc").is_null()))
 
 mepsdsgn = svy.Sample(
     data=narc_fyc,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT18F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT18F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 # Calculate estimates ---------------------------------------------------------
 #  National totals and Per-person Averages for:
@@ -113,19 +112,16 @@ mepsdsgn = mepsdsgn.singleton.center()
 #   - Total expenditures           -- tot
 #   - Out-of-pocket payments       -- oop
 #   - Third-party payments         -- third_payer
-#
-#  (drop_nulls=True: people without a purchase have missing values and are
-#   outside the subset)
 
 # National totals
 for est in mepsdsgn.estimation.total(
-    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1, drop_nulls=True
+    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1
 ):
     print(est)
 
 
 # Average per person
 for est in mepsdsgn.estimation.mean(
-    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1, drop_nulls=True
+    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1
 ):
     print(est)

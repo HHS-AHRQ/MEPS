@@ -25,14 +25,13 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
 
 # Read in data
-h192, _ = read_xpt(MEPS_DIR / "h192.ssp")  # 2016 FYC
-h188a, _ = read_xpt(MEPS_DIR / "h188a.ssp")  # 2016 RX
+h192 = svy.read_sas(MEPS_DIR / "h192.ssp")  # 2016 FYC
+h188a = svy.read_sas(MEPS_DIR / "h188a.ssp")  # 2016 RX
 
 # Identify Narcotic analgesics or Narcotic analgesic combos using therapeutic classification (tc) codes
 
@@ -74,22 +73,19 @@ print(narc_fyc.head())
 
 mepsdsgn = svy.Sample(
     data=narc_fyc,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 # Calculate estimates on expenditures and use
-# (drop_nulls=True: people without a purchase have missing values and are
-#  outside the subset)
 
 for est in mepsdsgn.estimation.mean(
-    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1, drop_nulls=True
+    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1
 ):
     print(est)
 
 for est in mepsdsgn.estimation.total(
-    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1, drop_nulls=True
+    ["n_purchase", "tot", "oop", "third_payer"], where=pl.col("any_narc") == 1
 ):
     print(est)

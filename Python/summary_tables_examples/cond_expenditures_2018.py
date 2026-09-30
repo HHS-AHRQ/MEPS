@@ -125,11 +125,9 @@ all_pers = (
 
 PERSdsgn = svy.Sample(
     data=all_pers,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWTF"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWTF", singleton="center"),
 )
-
-# Set survey option for lonely psu
-PERSdsgn = PERSdsgn.singleton.center()
 
 
 # Totals (people, events, expenditures)

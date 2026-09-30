@@ -200,18 +200,22 @@ print(
 
 meps_dsgn = svy.Sample(
     data=fyc_hl_merged,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F"),
+    # lonely PSUs, also within a domain: R's options(survey.lonely.psu = 'adjust') and
+    # options(survey.adjust.domain.lonely = TRUE)
+    design=svy.Design(
+        psu="VARPSU",
+        stratum="VARSTR",
+        wgt="PERWT20F",
+        singleton=svy.Singleton("center", domains="apply"),
+    ),
 )
 
-# Set survey option for lonely PSUs
-meps_dsgn = meps_dsgn.singleton.center()
 
 # Subset to people with HL PMED purchases (the 'where' argument keeps the full design)
 hl_pmed_sub = pl.col("hl_pmed_flag") == 1
 
 
 # Calculate estimates ---------------------------------------------------------
-#  ('drop_nulls=True' since people without HL PMED purchases have missing values)
 
 # >> National Totals:
 
@@ -219,7 +223,7 @@ for est in meps_dsgn.estimation.total(
     ["hl_pmed_flag",  # Total people w PMED purchase for HL
      "n_hl_fills",    # Total PMED fills for hyperlipidemia
      "hl_drug_exp"],  # Total PMED expenditures for hyperlipidemia
-    where=hl_pmed_sub, drop_nulls=True,
+    where=hl_pmed_sub,
 ):
     print(est)
 
@@ -230,7 +234,7 @@ for est in meps_dsgn.estimation.total(
 for est in meps_dsgn.estimation.mean(
     ["n_hl_fills",    # Avg PMED fills for hyperlipidemia
      "hl_drug_exp"],  # Avg PMED exp for HL per person w/ HL fills
-    where=hl_pmed_sub, drop_nulls=True,
+    where=hl_pmed_sub,
 ):
     print(est)
 
@@ -240,7 +244,7 @@ for est in meps_dsgn.estimation.mean(
 #    2: FEMALE
 
 for est in meps_dsgn.estimation.mean(
-    ["n_hl_fills", "hl_drug_exp"], by="SEX", where=hl_pmed_sub, drop_nulls=True
+    ["n_hl_fills", "hl_drug_exp"], by="SEX", where=hl_pmed_sub
 ):
     print(est)
 
@@ -253,6 +257,6 @@ for est in meps_dsgn.estimation.mean(
 #    5: High income
 
 for est in meps_dsgn.estimation.mean(
-    ["n_hl_fills", "hl_drug_exp"], by="POVCAT20", where=hl_pmed_sub, drop_nulls=True
+    ["n_hl_fills", "hl_drug_exp"], by="POVCAT20", where=hl_pmed_sub
 ):
     print(est)

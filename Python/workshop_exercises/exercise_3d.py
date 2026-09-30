@@ -187,11 +187,9 @@ print(pool_linked.group_by("PANEL").len().sort("PANEL"))
 
 pool_dsgn = svy.Sample(
     data=pool_linked,
-    design=svy.Design(psu="PSU9619", stratum="STRA9619", wgt="poolwt"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="PSU9619", stratum="STRA9619", wgt="poolwt", singleton="center"),
 )
-
-# Set option to deal with lonely psu
-pool_dsgn = pool_dsgn.singleton.center()
 
 
 # Calculate survey estimates ---------------------------------------------------

@@ -22,7 +22,6 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
@@ -33,9 +32,9 @@ varlist = ["DUPERSID", "INSCOVY1", "INSCOVY2",
            "LONGWT",   "VARSTR",   "VARPSU",
            "POVCATY1", "AGEY1X",   "PANEL"]
 
-h183 = read_xpt(MEPS_DIR / "h183.ssp")[0].select(varlist)  # Panel 19
-h172 = read_xpt(MEPS_DIR / "h172.ssp")[0].select(varlist)  # Panel 18
-h164 = read_xpt(MEPS_DIR / "h164.ssp")[0].select(varlist)  # Panel 17
+h183 = svy.read_sas(MEPS_DIR / "h183.ssp").select(varlist)  # Panel 19
+h172 = svy.read_sas(MEPS_DIR / "h172.ssp").select(varlist)  # Panel 18
+h164 = svy.read_sas(MEPS_DIR / "h164.ssp").select(varlist)  # Panel 17
 
 # Stack longitudinal files and define pooled weight variable and subpop of interest
 #  subpop = age 26-30, uninsured, high income
@@ -55,11 +54,9 @@ print(pool.head())
 
 mepsdsgn = svy.Sample(
     data=pool,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="poolwt"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="poolwt", singleton="center"),
 )
-
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 
 # INSURANCE STATUS IN THE SECOND YEAR FOR THOSE W/ AGE=26-30, UNINSURED WHOLE YEAR, AND HIGH INCOME IN THE FIRST YEAR'

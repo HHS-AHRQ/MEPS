@@ -21,7 +21,6 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
@@ -31,7 +30,7 @@ MEPS_DIR = Path("C:/MEPS")
 #  therapeutic class categories and generic drug names
 
 # Load RX file
-RX, _ = read_xpt(MEPS_DIR / "h188a.ssp")
+RX = svy.read_sas(MEPS_DIR / "h188a.ssp")
 
 # Aggregate to person-level ---------------------------------------------------
 
@@ -50,11 +49,10 @@ RX_pers = (
 
 RXdsgn = svy.Sample(
     data=RX_pers,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
 
-# Set survey option for lonely psu
-RXdsgn = RXdsgn.singleton.center()
 
 totals = RXdsgn.estimation.total(["persons", "n_purchases", "pers_RXXP"], by="RXDRGNAM")
 

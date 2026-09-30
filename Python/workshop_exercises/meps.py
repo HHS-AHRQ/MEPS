@@ -18,7 +18,6 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 FILE_NAMES_URL = "https://raw.githubusercontent.com/HHS-AHRQ/MEPS/master/Quick_Reference_Guides/meps_file_names.csv"
 PUFS_URL = "https://meps.ahrq.gov/mepsweb/data_files/pufs"
@@ -98,5 +97,4 @@ def read_meps(file: str | None = None, *, year: int | None = None, type: str | N
     try:
         return svy.read_stata(dl_meps(file, ext="dta"))
     except FileNotFoundError:
-        data, _ = read_xpt(dl_meps(file, ext="ssp"))
-        return data
+        return svy.read_sas(dl_meps(file, ext="ssp"))

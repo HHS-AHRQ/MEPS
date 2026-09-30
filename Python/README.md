@@ -44,7 +44,7 @@ The following table summarizes the recommended functions to load the various fil
 | ---------          | :---:     | :---:        | --------|
 | All types          | `meps`    | `read_meps`  | `read_meps(year=2017, type="DV")` |
 | SAS V9 (.sas7bdat) | `svy`     | `read_sas`   | `svy.read_sas("C:/MEPS/h206b.sas7bdat")` |
-| SAS XPORT (.ssp)   | `svy_io`  | `read_xpt`   | `read_xpt("C:/MEPS/h188b.ssp")` |
+| SAS XPORT (.ssp)   | `svy`     | `read_sas`   | `svy.read_sas("C:/MEPS/h188b.ssp")` |
 | SAS CPORT (.ssp)   | (none)    | N/A          | N/A
 | Stata (.dta)       | `svy`     | `read_stata` | `svy.read_stata("C:/MEPS/h206b.dta")` |
 
@@ -96,12 +96,10 @@ dn2018 = svy.read_sas("C:/MEPS/h206b.sas7bdat")
 
 For data years prior to 2017, ASCII and SAS transport (XPORT) file formats were released for the MEPS public use files. The <b>SAS transport (.ssp)</b> formats are the recommended file type (excluding the 2016 Medical Conditions file).
 
-These files can be read into Python using the `read_xpt` function from the `svy_io` package (installed with `svy`). In the following example, the SAS XPORT format of the 2016 Dental Visits file (<b>h188b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
+These files can be read into Python using the `read_sas` function from the `svy` package, which detects the SAS transport format automatically. In the following example, the SAS XPORT format of the 2016 Dental Visits file (<b>h188b.ssp</b>) has been downloaded from the MEPS website, unzipped, and saved in the local directory <b>C:/MEPS</b>.
 
 ```python
-from svy_io import read_xpt
-
-dn2016, _ = read_xpt("C:/MEPS/h188b.ssp")
+dn2016 = svy.read_sas("C:/MEPS/h188b.ssp")
 ```
 
 
@@ -163,16 +161,14 @@ To analyze MEPS data using Python, the [`svy` package](https://pypi.org/project/
 
 Estimates for subgroups are requested with the `by` argument (e.g. `by="age_cat"`), and for subpopulations with the `where` argument (e.g. `where=pl.col("TOTEXP18") > 0`). Using `where` instead of filtering the data keeps the full survey design, which is needed for correct standard errors.
 
-To use the svy package, `svy.Design` specifies the primary sampling unit, the strata, and the sampling weights, and `svy.Sample` attaches the design to the data. The `singleton.center()` method (equivalent to `survey.lonely.psu='adjust'` in R) ensures accurate standard error estimates if a stratum has only one primary sampling unit. Once the survey sample is defined, population estimates can be calculated using the `estimation` functions. As an example, the following code will estimate total dental expenditures in 2018:
+To use the svy package, `svy.Design` specifies the primary sampling unit, the strata, and the sampling weights, and `svy.Sample` attaches the design to the data. Setting `singleton="center"` on the design (equivalent to `survey.lonely.psu='adjust'` in R) ensures accurate standard error estimates if a stratum has only one primary sampling unit. Using `singleton=svy.Singleton("center", domains="apply")` applies the same adjustment to strata with only one primary sampling unit within a subpopulation (equivalent to also setting `survey.adjust.domain.lonely=TRUE` in R). Once the survey sample is defined, population estimates can be calculated using the `estimation` functions. As an example, the following code will estimate total dental expenditures in 2018:
 ``` python
 import svy
 
 mepsdsgn = svy.Sample(
     data=dn2018,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT18F"),
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT18F", singleton="center"),
 )
-
-mepsdsgn = mepsdsgn.singleton.center()
 
 print(mepsdsgn.estimation.total("DVXP18X"))
 ```

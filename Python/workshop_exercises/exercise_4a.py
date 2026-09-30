@@ -101,11 +101,10 @@ print(fyc18x["AGELAST"].describe())
 
 saq_dsgn = svy.Sample(
     data=fyc18x,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="SAQWT18F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="SAQWT18F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-saq_dsgn = saq_dsgn.singleton.center()
 
 # Subset to people without missing flu shot (the 'where' argument keeps the full design)
 flu_sub = pl.col("subpop")

@@ -31,7 +31,6 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
@@ -40,22 +39,22 @@ MEPS_DIR = Path("C:/MEPS")
 
 # Load and stack event files
 # - For RX, count number of fills per event
-RX, _ = read_xpt(MEPS_DIR / "h178a.ssp")
+RX = svy.read_sas(MEPS_DIR / "h178a.ssp")
 RX = (
     RX.group_by("DUPERSID", "LINKIDX", "VARSTR", "VARPSU", "PERWT15F")
     .agg(XPX=pl.col("RXXP15X").sum(), n_fills=pl.len())
     .rename({"LINKIDX": "EVNTIDX"})
 )
 
-IP, _ = read_xpt(MEPS_DIR / "h178d.ssp")
+IP = svy.read_sas(MEPS_DIR / "h178d.ssp")
 IP = IP.rename({"IPXP15X": "XPX"})
-ER, _ = read_xpt(MEPS_DIR / "h178e.ssp")
+ER = svy.read_sas(MEPS_DIR / "h178e.ssp")
 ER = ER.rename({"ERXP15X": "XPX"})
-OP, _ = read_xpt(MEPS_DIR / "h178f.ssp")
+OP = svy.read_sas(MEPS_DIR / "h178f.ssp")
 OP = OP.rename({"OPXP15X": "XPX"})
-OB, _ = read_xpt(MEPS_DIR / "h178g.ssp")
+OB = svy.read_sas(MEPS_DIR / "h178g.ssp")
 OB = OB.rename({"OBXP15X": "XPX"})
-HH, _ = read_xpt(MEPS_DIR / "h178h.ssp")
+HH = svy.read_sas(MEPS_DIR / "h178h.ssp")
 HH = HH.rename({"HHXP15X": "XPX"})
 
 events = {"RX": RX, "IP": IP, "ER": ER, "OP": OP, "OB": OB, "HH": HH}
@@ -71,11 +70,11 @@ stacked_events = (
 
 
 # Load in event-condition linking file
-clink1, _ = read_xpt(MEPS_DIR / "h178if1.ssp")
+clink1 = svy.read_sas(MEPS_DIR / "h178if1.ssp")
 clink1 = clink1.select("DUPERSID", "CONDIDX", "EVNTIDX")
 
 # Load in conditions file
-conditions, _ = read_xpt(MEPS_DIR / "h180.ssp")
+conditions = svy.read_sas(MEPS_DIR / "h180.ssp")
 conditions = conditions.select("DUPERSID", "CONDIDX", "CCCODEX")
 
 
@@ -188,11 +187,9 @@ all_pers = (
 
 PERSdsgn = svy.Sample(
     data=all_pers,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT15F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT15F", singleton="center"),
 )
-
-# Set survey option for lonely psu
-PERSdsgn = PERSdsgn.singleton.center()
 
 
 # Totals (people, events, expenditures)

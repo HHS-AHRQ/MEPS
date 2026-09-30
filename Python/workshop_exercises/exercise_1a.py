@@ -19,13 +19,12 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
 
 # Read in data from 2016 consolidated data file (hc-192)
-h192, _ = read_xpt(MEPS_DIR / "h192.ssp")
+h192 = svy.read_sas(MEPS_DIR / "h192.ssp")
 
 # Add variables for persons with any expense and persons under 65
 
@@ -53,11 +52,10 @@ print(
 
 mepsdsgn = svy.Sample(
     data=h192,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT16F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 # Overall expenses
 print(mepsdsgn.estimation.mean("TOTEXP16"))

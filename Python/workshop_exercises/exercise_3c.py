@@ -132,11 +132,9 @@ pool = pl.concat([fyc18p, fyc17p], how="diagonal").with_columns(
 
 pool_dsgn = svy.Sample(
     data=pool,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="poolwt"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="poolwt", singleton="center"),
 )
-
-# Set option to deal with lonely psu
-pool_dsgn = pool_dsgn.singleton.center()
 
 
 # Calculate survey estimates ---------------------------------------------------

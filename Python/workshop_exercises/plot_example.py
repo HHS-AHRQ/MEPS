@@ -10,7 +10,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
@@ -18,17 +17,16 @@ MEPS_DIR = Path("C:/MEPS")
 zip_file, _ = urllib.request.urlretrieve("https://meps.ahrq.gov/mepsweb/data_files/pufs/h163ssp.zip")
 with zipfile.ZipFile(zip_file) as z:
     unzipped_file = z.extract(z.namelist()[0])
-h163, _ = read_xpt(unzipped_file)
+h163 = svy.read_sas(unzipped_file)
 Path(zip_file).unlink()  # Unlink to delete temporary file
 
 # After downloading MEPS data define the survey object:
 mepsdsgn = svy.Sample(
     data=h163,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT13F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT13F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 # To get ambulatory (OB+OP) and home health/other expenditures, add variables to the mepsdsgn object.
 mepsdsgn = mepsdsgn.wrangling.mutate({

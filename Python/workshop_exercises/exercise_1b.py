@@ -86,11 +86,9 @@ print(
 
 mepsdsgn = svy.Sample(
     data=fyc18x,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT18F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT18F", singleton="center"),
 )
-
-# Set option to deal with lonely psu
-mepsdsgn = mepsdsgn.singleton.center()
 
 
 # Calculate estimates ---------------------------------------------------------

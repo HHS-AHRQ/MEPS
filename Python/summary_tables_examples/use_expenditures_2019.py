@@ -65,11 +65,10 @@ FYC = FYC.with_columns(
 
 FYCdsgn = svy.Sample(
     data=FYC,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT19F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT19F", singleton="center"),
 )
 
-# Set survey option for lonely psu
-FYCdsgn = FYCdsgn.singleton.center()
 
 # Calculate estimates ---------------------------------------------------------
 #

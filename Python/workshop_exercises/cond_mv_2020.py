@@ -213,20 +213,18 @@ print(ob_mh_fyc.group_by("mh_ob", "mh_ob_visit", "fyc").len())
 # Define survey design
 evntDsgn = svy.Sample(
     data=ob_mh_fyc,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-evntDsgn = evntDsgn.singleton.center()
 
 # Subset to mental health visits (the 'where' argument keeps the full design)
 sub = pl.col("mh_ob") == 1
 
 # Calculate survey estimates
-#  ('drop_nulls=True' since rows from the FYC file only have missing values)
-print(evntDsgn.estimation.total("mh_ob_visit", where=sub, drop_nulls=True))  # Number of visits
-print(evntDsgn.estimation.total("OBXP20X", where=sub, drop_nulls=True))  # Total exp.
-print(evntDsgn.estimation.mean("OBXP20X", where=sub, drop_nulls=True))  # Mean exp. per visit
+print(evntDsgn.estimation.total("mh_ob_visit", where=sub))  # Number of visits
+print(evntDsgn.estimation.total("OBXP20X", where=sub))  # Total exp.
+print(evntDsgn.estimation.mean("OBXP20X", where=sub))  # Mean exp. per visit
 
 
 # A note on Telehealth --------------------------------------------------------
@@ -291,11 +289,10 @@ print(pers_mh.filter(pl.col("DUPERSID") == "2320005101"))
 # Define person-level survey design -----------------
 persDsgn = svy.Sample(
     data=pers_mh,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT20F", singleton="center"),
 )
 
-# Set option to deal with lonely psu
-persDsgn = persDsgn.singleton.center()
 
 # Define subset of people with office-based mental health visits
 sub_OBMH = pl.col("mh_ob_pers") == 1

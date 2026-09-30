@@ -93,11 +93,10 @@ print(FYC.group_by("poverty", "POVCAT17").len().sort(pl.all()))
 
 FYCdsgn = svy.Sample(
     data=FYC,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT17F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="PERWT17F", singleton="center"),
 )
 
-# Set survey option for lonely psu
-FYCdsgn = FYCdsgn.singleton.center()
 
 # Subset to persons eligible to receive the 'access to care' supplement
 #   and who experienced difficulty receiving needed care

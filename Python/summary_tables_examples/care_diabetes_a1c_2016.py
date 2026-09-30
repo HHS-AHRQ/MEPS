@@ -20,14 +20,13 @@ from pathlib import Path
 
 import polars as pl
 import svy
-from svy_io import read_xpt
 
 MEPS_DIR = Path("C:/MEPS")
 
 
 # Load FYC file ---------------------------------------------------------------
 
-FYC, _ = read_xpt(MEPS_DIR / "h192.ssp")
+FYC = svy.read_sas(MEPS_DIR / "h192.ssp")
 
 
 # Define variables ------------------------------------------------------------
@@ -91,11 +90,10 @@ with pl.Config(tbl_rows=-1):
 
 DIABdsgn = svy.Sample(
     data=FYC,
-    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="DIABW16F"),
+    # lonely PSUs: R's options(survey.lonely.psu = 'adjust')
+    design=svy.Design(psu="VARPSU", stratum="VARSTR", wgt="DIABW16F", singleton="center"),
 )
 
-# Set survey option for lonely psu
-DIABdsgn = DIABdsgn.singleton.center()
 
 # Adults with diabetes with hemoglobin A1C measurement in 2016, by race
 print(DIABdsgn.estimation.total("diab_a1c", by="race", as_factor=True))  # number
