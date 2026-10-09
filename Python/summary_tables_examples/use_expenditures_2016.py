@@ -20,7 +20,7 @@
 # Install/load packages -------------------------------------------------------
 
 # Install packages (if needed) -- only need to run once (in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Load packages (need to run every session)
 from pathlib import Path

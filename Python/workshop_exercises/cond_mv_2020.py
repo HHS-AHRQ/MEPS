@@ -34,7 +34,7 @@
 # Install/load packages and set global options --------------------------------
 
 # If packages are not already installed, run in a terminal:
-#   pip install svy   # for survey analysis, also installs polars
+#   pip install svy==0.32.1 "polars>=2"   # for survey analysis, also installs polars
 
 
 # Load packages

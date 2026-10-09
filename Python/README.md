@@ -22,8 +22,10 @@ To load and analyze MEPS data in Python, additional packages are needed. A packa
 The examples in this folder use the [`svy`](https://pypi.org/project/svy/) package for survey analysis and for loading SAS and Stata files. Installing `svy` also installs [`polars`](https://pola.rs), which is used for data manipulation.
 
 ```
-pip install svy
+pip install svy==0.32.1 "polars>=2"
 ```
+
+The examples were checked with `svy` 0.32.1 and `polars` 2. Until `svy` reaches a stable release, later versions may change its interface, so the version is pinned.
 
 ``` python
 # Run these every time you re-start Python:

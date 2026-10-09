@@ -13,7 +13,7 @@
 # Install/load packages -------------------------------------------------------
 
 # Install packages (if needed) -- only need to run once (in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Load packages (need to run every session)
 from pathlib import Path
@@ -46,9 +46,9 @@ FYC = FYC.with_columns(
     afford_PM=((pl.col("PMDLRS42") == 1) | (pl.col("PMUNRS42") == 1)).cast(int),
 
     # ...had insurance problems
-    insure_MD=(pl.col("MDDLRS42").is_in([2, 3]) | pl.col("MDUNRS42").is_in([2, 3])).cast(int),
-    insure_DN=(pl.col("DNDLRS42").is_in([2, 3]) | pl.col("DNUNRS42").is_in([2, 3])).cast(int),
-    insure_PM=(pl.col("PMDLRS42").is_in([2, 3]) | pl.col("PMUNRS42").is_in([2, 3])).cast(int),
+    insure_MD=(pl.col("MDDLRS42").cast(int).is_in([2, 3]) | pl.col("MDUNRS42").cast(int).is_in([2, 3])).cast(int),
+    insure_DN=(pl.col("DNDLRS42").cast(int).is_in([2, 3]) | pl.col("DNUNRS42").cast(int).is_in([2, 3])).cast(int),
+    insure_PM=(pl.col("PMDLRS42").cast(int).is_in([2, 3]) | pl.col("PMUNRS42").cast(int).is_in([2, 3])).cast(int),
 
     # ...other
     other_MD=((pl.col("MDDLRS42") > 3) | (pl.col("MDUNRS42") > 3)).cast(int),

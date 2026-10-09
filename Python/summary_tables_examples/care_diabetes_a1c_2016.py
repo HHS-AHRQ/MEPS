@@ -13,7 +13,7 @@
 # Install/load packages -------------------------------------------------------
 
 # Install packages (if needed) -- only need to run once (in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Load packages (need to run every session)
 from pathlib import Path
@@ -56,8 +56,8 @@ FYC = FYC.with_columns(
     hisp=pl.col("RACETHX") == 1,
     white=pl.col("RACETHX") == 2,
     black=pl.col("RACETHX") == 3,
-    native=(pl.col("RACETHX") > 3) & pl.col("RACEV1X").is_in([3, 6]),
-    asian=(pl.col("RACETHX") > 3) & pl.col("RACEV1X").is_in([4, 5]),
+    native=(pl.col("RACETHX") > 3) & pl.col("RACEV1X").cast(int).is_in([3, 6]),
+    asian=(pl.col("RACETHX") > 3) & pl.col("RACEV1X").cast(int).is_in([4, 5]),
 )
 
 race_labels = {

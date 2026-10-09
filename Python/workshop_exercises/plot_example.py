@@ -1,7 +1,7 @@
 # Example: Reproducing estimates for Figure 1 of Stat brief #491
 
 # Load packages and set options
-#   pip install svy matplotlib  # Only need to run these once (in a terminal)
+#   pip install svy==0.32.1 "polars>=2" matplotlib  # Only need to run these once (in a terminal)
 
 import urllib.request  # Run these every time you re-start Python
 import zipfile

@@ -17,7 +17,7 @@
 # Install and load packages ---------------------------------------------------
 
 # Can skip this part if already installed (run in a terminal)
-#   pip install svy   # for survey analysis, also installs polars
+#   pip install svy==0.32.1 "polars>=2"   # for survey analysis, also installs polars
 
 # Run this part each time you re-start Python
 from pathlib import Path

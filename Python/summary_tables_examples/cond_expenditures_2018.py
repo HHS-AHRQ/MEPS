@@ -24,7 +24,7 @@
 # Install/load packages -------------------------------------------------------
 
 # Install packages (if needed) -- only need to run once (in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Load packages (need to run every session)
 from pathlib import Path
@@ -76,7 +76,7 @@ cond_puf = svy.read_stata(MEPS_DIR / "h207.dta").select(
 # Load crosswalk for CCSR and collapsed conditions codes
 ccsr_url = "https://raw.githubusercontent.com/HHS-AHRQ/MEPS/master/Quick_Reference_Guides/meps_ccsr_conditions.csv"
 
-condition_codes = pl.read_csv(ccsr_url, new_columns=["CCSR", "CCSR_desc", "Condition"])
+condition_codes = pl.read_csv(ccsr_url).select(CCSR=pl.nth(0), CCSR_desc=pl.nth(1), Condition=pl.nth(2))
 
 # Merge datasets --------------------------------------------------------------
 

@@ -15,7 +15,7 @@
 # Install and load libraries
 
 # Can skip this part if already installed (run in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Run this part each time you re-start Python
 from pathlib import Path

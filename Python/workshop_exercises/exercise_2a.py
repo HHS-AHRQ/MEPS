@@ -18,7 +18,7 @@
 # Install and load libraries
 
 # Can skip this part if already installed (run in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Run this part each time you re-start Python
 from pathlib import Path
@@ -35,7 +35,7 @@ h188a = svy.read_sas(MEPS_DIR / "h188a.ssp")  # 2016 RX
 
 # Identify Narcotic analgesics or Narcotic analgesic combos using therapeutic classification (tc) codes
 
-narc = h188a.filter(pl.col("TC1S1_1").is_in([60, 191])).select(
+narc = h188a.filter(pl.col("TC1S1_1").cast(int).is_in([60, 191])).select(
     "DUPERSID", "RXRECIDX", "LINKIDX", "TC1S1_1", "RXXP16X", "RXSF16X"
 )
 

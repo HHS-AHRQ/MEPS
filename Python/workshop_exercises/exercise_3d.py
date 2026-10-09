@@ -30,7 +30,7 @@
 # Install and load packages ---------------------------------------------------
 
 # Can skip this part if already installed (run in a terminal)
-#   pip install svy   # for survey analysis, also installs polars
+#   pip install svy==0.32.1 "polars>=2"   # for survey analysis, also installs polars
 
 
 # Run this part each time you re-start Python
@@ -155,7 +155,7 @@ print(fyc17p.head())
 # Stack data and define pooled weight variable and subpop of interest ---------
 #  - Subpop: AGELAST >= 18 AND any_jtpain not missing
 
-pool = pl.concat([fyc19p, fyc18p, fyc17p], how="diagonal").with_columns(
+pool = pl.concat([fyc19p, fyc18p, fyc17p], how="diagonal_relaxed").with_columns(
     # for poolwt, divide perwt by number of years (3):
     poolwt=pl.col("perwt") / 3,
     subpop=(pl.col("AGELAST") >= 18) & (pl.col("any_jtpain") != "Missing"),

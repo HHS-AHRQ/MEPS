@@ -16,7 +16,7 @@
 # Install and load packages ---------------------------------------------------
 
 # Can skip this part if already installed (run in a terminal)
-#   pip install svy   # for survey analysis, also installs polars
+#   pip install svy==0.32.1 "polars>=2"   # for survey analysis, also installs polars
 
 # Run this part each time you re-start Python
 from pathlib import Path
@@ -57,7 +57,7 @@ fyc18_sub = fyc18.select("DUPERSID", "VARSTR", "VARPSU", "PERWT18F")  # needed f
 # RXSF18X:  AMOUNT PAID, SELF OR FAMILY (IMPUTED)
 
 
-narc = rx18.filter(pl.col("TC1S1_1").is_in([60, 191])).select(
+narc = rx18.filter(pl.col("TC1S1_1").cast(int).is_in([60, 191])).select(
     "DUPERSID", "RXRECIDX", "LINKIDX", "TC1S1_1", "RXXP18X", "RXSF18X"
 )
 

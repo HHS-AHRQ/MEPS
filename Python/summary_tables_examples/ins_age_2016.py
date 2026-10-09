@@ -11,7 +11,7 @@
 # Install/load packages -------------------------------------------------------
 
 # Install packages (if needed) -- only need to run once (in a terminal)
-#   pip install svy
+#   pip install svy==0.32.1 "polars>=2"
 
 # Load packages (need to run every session)
 from pathlib import Path
@@ -31,9 +31,10 @@ FYC = svy.read_sas(MEPS_DIR / "h192.ssp")
 # Age groups
 #  - For 1996-2007, AGELAST must be created from AGEyyX, AGE42X, AGE31X
 FYC = FYC.with_columns(
-    agegrps=pl.col("AGELAST").cut(
+    agegrps=pl.col("AGELAST").bin_intervals(
         [4.5, 17.5, 44.5, 64.5],
         labels=["Under 5", "5-17", "18-44", "45-64", "65+"],
+        right_closed=True,
     )
 )
 
